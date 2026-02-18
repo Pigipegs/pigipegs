@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teilen – Pigipegs</title>
+  <meta name="description" content="Teile dein Pigipegs-Bild – Community Upload (kommt bald)." />
+  <style>
+    body{font-family:system-ui,Arial;margin:0;padding:28px;max-width:820px}
+    .card{border:1px solid #eee;border-radius:14px;padding:18px;margin:14px 0}
+    .muted{color:#6b7280}
+    a{color:inherit}
+    .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid #eee;text-decoration:none;margin-right:8px}
+  </style>
+</head>
+<body>
+
+  <h1>🎨 Teile dein Bild</h1>
+  <p class="muted">Hier kannst du bald dein ausgemaltes Bild einreichen – ohne Namensnennung.</p>
+
+  <div class="card">
+    <h2>Upload kommt als nächstes</h2>
+    <p class="muted">
+      Wir bauen gerade eine Upload-Funktion mit Spam-Schutz, Dateigröße-Limit und DSGVO-Einwilligung.
+    </p>
+  </div>
+
+  <div class="card">
+    <a class="btn" href="/">← Zur Startseite</a>
+    <a class="btn" href="/buch-1">📘 Buch 1</a>
+    <a class="btn" href="/impressum">Impressum</a>
+    <a class="btn" href="/datenschutz">Datenschutz</a>
+  </div>
+
+</body>
+</html>
