@@ -30,6 +30,11 @@
     <a class="btn" href="/buch-1">📘 Buch 1</a>
     <a class="btn" href="/impressum">Impressum</a>
     <a class="btn" href="/datenschutz">Datenschutz</a>
+<p>
+Mit dem Einsenden erklärst du dich mit unseren 
+<a href="/nutzungsbedingungen/">Nutzungsbedingungen</a> einverstanden.
+</p>
+
   </div>
 
 </body>
