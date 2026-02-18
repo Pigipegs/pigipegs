@@ -1,304 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pigipegs – Offizielle Buchseite</title>
-  <meta name="description" content="Pigipegs – Mal- & Vorleseabenteuer. Offizielle Buchseite mit Schnellzugriff." />
-
-  <style>
-    :root{
-      --bg1:#fff7fb;
-      --bg2:#f4fbff;
-      --card:#ffffffcc;
-      --text:#1f2937;
-      --muted:#6b7280;
-      --brand:#ff4fa3;
-      --brand2:#5b8cff;
-      --ok:#10b981;
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
-      --radius: 18px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% 0%, #ffd1ea 0%, transparent 55%),
-        radial-gradient(900px 520px at 90% 10%, #cfe6ff 0%, transparent 50%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      min-height:100vh;
-    }
-    a{color:inherit}
-    .wrap{max-width:980px;margin:0 auto;padding:24px}
-    header{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:14px;padding:10px 0 18px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;
-      font-weight:800;letter-spacing:.2px;
-    }
-    .logo{
-      width:42px;height:42px;border-radius:14px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      display:grid;place-items:center;
-      box-shadow: var(--shadow);
-      color:white;font-size:22px;
-    }
-    .pill{
-      font-size:12px;padding:7px 10px;border-radius:999px;
-      background:#ffffffaa;border:1px solid #ffffff;
-      box-shadow: 0 6px 18px rgba(0,0,0,.05);
-      color:var(--muted);
-      display:flex;align-items:center;gap:8px;
-      white-space:nowrap;
-    }
-    .dot{width:8px;height:8px;border-radius:99px;background:var(--ok);display:inline-block}
-    .hero{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    @media (max-width:860px){
-      .hero{grid-template-columns:1fr}
-    }
-    .card{
-      background: var(--card);
-      border:1px solid #ffffff;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:22px;
-      backdrop-filter: blur(8px);
-    }
-    h1{margin:0 0 10px;font-size:38px;line-height:1.1}
-    @media (max-width:520px){h1{font-size:32px}}
-    .sub{margin:0 0 14px;color:var(--muted);font-size:16px;line-height:1.6}
-    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{
-      appearance:none;border:0;cursor:pointer;text-decoration:none;
-      padding:12px 14px;border-radius:14px;font-weight:700;
-      display:inline-flex;align-items:center;gap:10px;
-      transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
-      box-shadow: 0 10px 24px rgba(0,0,0,.10);
-      user-select:none;
-    }
-    .btn:active{transform: translateY(1px)}
-    .btnPrimary{background: linear-gradient(135deg, var(--brand), #ff7ac2); color:white}
-    .btnGhost{
-      background:#ffffffd0;border:1px solid #ffffff;
-      color:var(--text); box-shadow: 0 8px 18px rgba(0,0,0,.07)
-    }
-    .grid{
-      margin-top:18px;
-      display:grid;gap:14px;
-      grid-template-columns: repeat(2, 1fr);
-    }
-    @media (max-width:720px){.grid{grid-template-columns:1fr}}
-    .tile{
-      display:flex;gap:14px;align-items:flex-start;
-      padding:16px;border-radius:16px;background:#ffffffd6;border:1px solid #ffffff;
-      box-shadow: 0 8px 22px rgba(0,0,0,.06);
-    }
-    .icon{
-      width:40px;height:40px;border-radius:14px;
-      display:grid;place-items:center;
-      background: #fff;
-      border:1px solid #f0f0f0;
-      box-shadow: 0 8px 16px rgba(0,0,0,.05);
-      flex: 0 0 auto;
-      font-size:20px;
-    }
-    .tile h3{margin:2px 0 6px;font-size:16px}
-    .tile p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
-    .side h2{margin:0 0 10px;font-size:18px}
-    .hint{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 12px}
-    .form{
-      display:flex;gap:10px;align-items:center;flex-wrap:wrap;
-      margin-top:10px;
-    }
-    input{
-      width:100%;max-width:320px;
-      padding:12px 12px;border-radius:14px;
-      border:1px solid #e6e6e6;
-      background:#fff;
-      outline:none;
-      font-size:15px;
-    }
-    input:focus{border-color:#c9d6ff; box-shadow:0 0 0 4px rgba(91,140,255,.14)}
-    .small{font-size:12px;color:var(--muted);margin-top:10px}
-    footer{
-      margin:22px 0 0;
-      color:var(--muted);
-      font-size:12px;
-      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
-    }
-    .links{display:flex;gap:12px;flex-wrap:wrap}
-    .links a{color:var(--muted);text-decoration:none}
-    .links a:hover{text-decoration:underline}
-    .badge{
-      font-size:11px;font-weight:800;
-      padding:6px 10px;border-radius:999px;
-      background: #ffffffd0;border:1px solid #ffffff;
-      display:inline-flex;gap:8px;align-items:center;
-    }
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
-      font-size:11px;padding:2px 6px;border-radius:6px;
-      border:1px solid #e5e7eb;background:#fff;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pigipegs – Deine Welt wird bunt</title>
+<meta name="description" content="Die Pigipegs freuen sich auf deine Farben! Entdecke unser erstes Ausmalbuch und werde Teil unserer kreativen Welt.">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo">🐷</div>
-        <div>
-          <div style="font-size:18px">Pigipegs</div>
-          <div style="font-size:12px;color:var(--muted);font-weight:600">Offizielle Buchseite</div>
-        </div>
-      </div>
 
-      <div class="pill" title="Status">
-        <span class="dot"></span>
-        Online · gesichert über HTTPS
-      </div>
-    </header>
+<header>
+  <h1>Pigipegs</h1>
+  <p>Wir sind die Pigipegs – und du kannst unsere Welt bunt machen.</p>
+</header>
 
-    <section class="hero">
-      <div class="card">
-        <h1>Willkommen bei <span style="color:var(--brand)">Pigipegs</span> 🐽</h1>
-        <p class="sub">
-          Hier findest du alle Inhalte zu <strong>Buch 1</strong> – später auch Hörversionen.
-          Scanne einfach den QR-Code im Buch oder gib den Code ein.
-        </p>
+<section class="cta">
+  <a href="/buch-1" class="button">Direkt zu Buch 1</a>
+</section>
 
-        <div class="ctaRow">
-          <a class="btn btnPrimary" href="#buch1">
-            📘 Direkt zu Buch 1
-          </a>
-          <a class="btn btnGhost" href="#hilfe">
-            ❓ So funktioniert’s
-          </a>
-        </div>
+<section>
+  <h2>Zeig uns dein Bild!</h2>
+  <p>Male eine Seite aus dem Buch und teile sie mit uns.</p>
+  <a href="/teilen" class="button-secondary">Bild einreichen</a>
+</section>
 
-        <div class="grid">
-          <div class="tile">
-            <div class="icon">🔎</div>
-            <div>
-              <h3>Schnell finden</h3>
-              <p>QR-Code scannen oder Code eingeben (z.B. <span class="kbd">01-001</span>).</p>
-            </div>
-          </div>
-          <div class="tile">
-            <div class="icon">🧸</div>
-            <div>
-              <h3>Kinderfreundlich</h3>
-              <p>Große Buttons, klarer Aufbau, optimiert für Handy & Tablet.</p>
-            </div>
-          </div>
-          <div class="tile">
-            <div class="icon">🔒</div>
-            <div>
-              <h3>Sicher & günstig</h3>
-              <p>Gehostet über GitHub Pages + Cloudflare (HTTPS, Schutz, schnell).</p>
-            </div>
-          </div>
-          <div class="tile">
-            <div class="icon">🎧</div>
-            <div>
-              <h3>Audio später</h3>
-              <p>Hörversionen lassen sich jederzeit ergänzen – ohne Buch neu zu drucken.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+<section>
+  <h2>🎧 Audio kommt bald</h2>
+  <p>Schon bald kannst du die Pigipegs auch hören.</p>
+</section>
 
-      <aside class="card side" id="buch1">
-        <h2>📘 Buch 1 – Schnellzugriff</h2>
-        <p class="hint">
-          Wenn du aus dem Buch kommst: Code eingeben und öffnen.<br>
-          (QR-Code führt später direkt auf die passende Seite.)
-        </p>
+<footer>
+  <a href="/impressum">Impressum</a> |
+  <a href="/datenschutz">Datenschutz</a>
+</footer>
 
-        <div class="form">
-          <input id="code" type="text" inputmode="latin" autocomplete="off" placeholder="z.B. 01-001" />
-          <button class="btn btnPrimary" type="button" onclick="goToCode()">Öffnen</button>
-        </div>
-
-        <p class="small">
-          Tipp: Du kannst auch direkt Links nutzen wie:
-          <span class="kbd">/01-001</span> oder <span class="kbd">/?c=01-001</span>
-          (bauen wir als nächstes).
-        </p>
-
-        <hr style="border:0;border-top:1px solid #eee;margin:16px 0">
-
-        <div class="badge">🧪 Demo: <span class="kbd">Startseite</span></div>
-        <div style="height:10px"></div>
-
-        <a class="btn btnGhost" href="#hilfe">📖 Anleitung ansehen</a>
-        <div style="height:10px"></div>
-        <a class="btn btnGhost" href="mailto:info@theberlinball.com">✉️ Kontakt</a>
-      </aside>
-    </section>
-
-    <section class="card" id="hilfe" style="margin-top:18px">
-      <h2 style="margin:0 0 10px;font-size:20px">So funktioniert’s</h2>
-      <ol style="margin:0;color:var(--muted);line-height:1.7;padding-left:18px">
-        <li>Im Buch befindet sich auf jeder Textseite ein QR-Code.</li>
-        <li>QR-Code scannen → du landest direkt auf der richtigen Stelle.</li>
-        <li>Alternativ: Code eingeben (z.B. <span class="kbd">01-001</span>).</li>
-        <li>Später ergänzen wir dort optional Audio-Buttons (Vorlesen in mehreren Sprachen).</li>
-      </ol>
-    </section>
-
-    <footer>
-      <div>© <span id="year"></span> The Berlin Ball · Pigipegs</div>
-      <div class="links">
-        <a href="#">Start</a>
-        <a href="#buch1">Buch 1</a>
-        <a href="#hilfe">Hilfe</a>
-      </div>
-    </footer>
-  </div>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    function normalizeCode(v){
-      return (v || "")
-        .trim()
-        .toUpperCase()
-        .replace(/^PIGIPEGs\.COM[-/ ]*/i,"")
-        .replace(/[^0-9A-Z-]/g,"")
-        .replace(/--+/g,"-");
-    }
-
-    function goToCode(){
-      const raw = document.getElementById("code").value;
-      const code = normalizeCode(raw);
-      if(!code){
-        alert("Bitte einen Code eingeben, z.B. 01-001");
-        return;
-      }
-      // Ziel-URL (später bauen wir dafür eine echte Seite / Router)
-      // Für jetzt: wir hängen ihn als Query an, damit du siehst, dass es klappt.
-      window.location.href = "/?c=" + encodeURIComponent(code) + "#buch1";
-    }
-
-    // Wenn jemand mit ?c=01-001 kommt, füllen wir das Feld automatisch
-    (function initFromQuery(){
-      const p = new URLSearchParams(window.location.search);
-      const c = p.get("c");
-      if(c){
-        document.getElementById("code").value = normalizeCode(c);
-      }
-    })();
-  </script>
 </body>
 </html>
+
