@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Impressum – Pigipegs</title>
+  <meta name="description" content="Impressum der Website Pigipegs." />
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;padding:28px;max-width:900px}
+    a{color:inherit}
+    .muted{color:#6b7280}
+    .card{border:1px solid #eee;border-radius:14px;padding:18px;margin:14px 0}
+    .nav a{margin-right:12px;text-decoration:none;border-bottom:1px dotted #bbb}
+    .nav a:hover{border-bottom-style:solid}
+  </style>
+</head>
+<body>
+
+  <div class="nav">
+    <a href="/">Start</a>
+    <a href="/teilen/">Teilen</a>
+    <a href="/datenschutz/">Datenschutz</a>
+  </div>
+
+  <h1>Impressum</h1>
+
+  <div class="card">
+    <p><strong>Angaben gemäß § 5 TMG</strong></p>
+
+    <p>
+      <strong>8kant GmbH</strong><br>
+      Jägerallee 37g<br>
+      14469 Potsdam<br>
+      Deutschland
+    </p>
+
+    <p>
+      Vertreten durch den Geschäftsführer:<br>
+      Peter Trossowski
+    </p>
+
+    <p>
+      Registergericht: Amtsgericht Potsdam<br>
+      Registernummer: HRB 30734 P
+    </p>
+
+    <p>
+      E-Mail: <a href="mailto:fam@pigipegs.com">fam@pigipegs.com</a>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Haftung für Inhalte</h2>
+    <p class="muted">
+      Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt.
+      Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte
+      übernehmen wir jedoch keine Gewähr.
+    </p>
+
+    <h2>Haftung für Links</h2>
+    <p class="muted">
+      Diese Website kann Links zu externen Websites Dritter enthalten.
+      Für deren Inhalte übernehmen wir keine Haftung.
+    </p>
+  </div>
+
+  <p class="muted">Stand: <span id="date"></span></p>
+
+  <script>
+    document.getElementById("date").textContent =
+      new Date().toLocaleDateString("de-DE", { year:"numeric", month:"2-digit", day:"2-digit" });
+  </script>
+
+</body>
+</html>
