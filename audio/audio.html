@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pigipegs Audio</title>
+  <style>
+    :root{
+      --bg:#fff7fb;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 16px;
+    }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap{
+      max-width: 980px;
+      margin: 40px auto;
+      padding: 0 16px 60px;
+    }
+    .page-card{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      margin: 22px 0;
+    }
+    .page-head{
+      display:flex;
+      gap:12px;
+      align-items:baseline;
+      justify-content:space-between;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .page-head h2{
+      margin:0;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+    .hint{
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .page-image{
+      display:flex;
+      justify-content:center;
+      margin: 10px 0 12px;
+    }
+    .page-image img{
+      width: 100%;
+      max-width: 680px;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.10);
+      background: #fff;
+    }
+
+    /* Flags row */
+    .flags{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap: wrap;
+      margin: 12px 0 10px;
+    }
+    .flag-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: #fff;
+      border-radius: 999px;
+      padding: 10px 12px;
+      cursor: pointer;
+      user-select:none;
+      transition: transform .05s ease, box-shadow .2s ease, border-color .2s ease;
+      box-shadow: 0 6px 16px rgba(0,0,0,.06);
+      font-size: 14px;
+    }
+    .flag-btn:active{ transform: translateY(1px); }
+    .flag-btn[aria-pressed="true"]{
+      border-color: rgba(0,0,0,.25);
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+    }
+    .flag-emoji{ font-size: 18px; line-height: 1; }
+    .player{
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 10px 12px 6px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.7);
+    }
+    .player-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    audio{
+      width: 100%;
+    }
+    .sr{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 style="margin:0 0 8px;">Pigipegs – Hörversion</h1>
+    <div class="hint">Wähle eine Seite und tippe auf eine Flagge, um die Sprache zu starten.</div>
+
+    <!-- ======= SEITE TEMPLATE (s01) ======= -->
+    <section class="page-card" data-page="s01">
+      <div class="page-head">
+        <h2>Seite 01 – Die Pigipegs auf dem Berg</h2>
+        <div class="hint">Tippe eine Flagge → Player lädt</div>
+      </div>
+
+      <div class="page-image">
+        <img src="/images/s01.jpg" alt="Pigipegs – Seite 01" loading="lazy">
+      </div>
+
+      <div class="flags" role="group" aria-label="Sprachauswahl Seite 01">
+        <button class="flag-btn" data-lang="de" aria-pressed="false" type="button">
+          <span class="flag-emoji" aria-hidden="true">🇩🇪</span><span>DE</span>
+        </button>
+        <button class="flag-btn" data-lang="en" aria-pressed="false" type="button">
+          <span class="flag-emoji" aria-hidden="true">🇬🇧</span><span>EN</span>
+        </button>
+        <button class="flag-btn" data-lang="fr" aria-pressed="false" type="button">
+          <span class="flag-emoji" aria-hidden="true">🇫🇷</span><span>FR</span>
+        </button>
+        <button class="flag-btn" data-lang="es" aria-pressed="false" type="button">
+          <span class="flag-emoji" aria-hidden="true">🇪🇸</span><span>ES</span>
+        </button>
+      </div>
+
+      <div class="player">
+        <div class="player-top">
+          <div><strong id="label-s01">Noch keine Sprache gewählt</strong></div>
+          <div class="hint">Quelle: <span id="src-s01">—</span></div>
+        </div>
+
+        <audio id="audio-s01" controls preload="none">
+          <!-- src wird per JS gesetzt -->
+          Dein Browser unterstützt kein Audio.
+        </audio>
+        <span class="sr" id="sr-s01" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <!-- ======= Weitere Seiten: kopieren & s02/s03... anpassen ======= -->
+    <!--
+    <section class="page-card" data-page="s02"> ... img /images/s02.jpg ... audio id="audio-s02" ... </section>
+    -->
+
+  </div>
+
+  <script>
+    // Flagge → setzt src → lädt/spielbar
+    const LANG_LABEL = {
+      de: "Deutsch",
+      en: "English",
+      fr: "Français",
+      es: "Español"
+    };
+
+    document.querySelectorAll(".page-card").forEach(card => {
+      const page = card.dataset.page;              // z.B. "s01"
+      const audio = card.querySelector(`#audio-${page}`);
+      const label = card.querySelector(`#label-${page}`);
+      const srcOut = card.querySelector(`#src-${page}`);
+      const live = card.querySelector(`#sr-${page}`);
+      const buttons = Array.from(card.querySelectorAll(".flag-btn"));
+
+      function setPressed(activeBtn){
+        buttons.forEach(btn => btn.setAttribute("aria-pressed", btn === activeBtn ? "true" : "false"));
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const lang = btn.dataset.lang; // de/en/fr/es
+          const src = `/audio/${page}/${lang}.mp3`;
+
+          setPressed(btn);
+
+          // Wenn gerade was anderes spielt: stoppen
+          audio.pause();
+          audio.currentTime = 0;
+
+          // Quelle setzen & laden
+          audio.src = src;
+          audio.load();
+
+          // UI Texte
+          label.textContent = `${LANG_LABEL[lang]} – ${page.toUpperCase()}`;
+          srcOut.textContent = src;
+          live.textContent = `Sprache gewählt: ${LANG_LABEL[lang]}.`;
+
+          // Optional: direkt starten (wenn du willst, Kommentar entfernen)
+          // audio.play().catch(() => {});
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
