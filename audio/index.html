@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pigipegs – Hörversion</title>
+  <meta name="description" content="Pigipegs Hörversion – wähle eine Seite und eine Sprache." />
+
+  <style>
+    :root{
+      --bg1:#fff7fb;
+      --bg2:#f4fbff;
+      --card:#ffffffcc;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --brand:#ff4fa3;
+      --brand2:#5b8cff;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 0%, #ffd1ea 0%, transparent 55%),
+        radial-gradient(900px 520px at 90% 10%, #cfe6ff 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:24px}
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;padding:10px 0 14px;flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      font-weight:800;letter-spacing:.2px;
+    }
+    .logo{
+      width:42px;height:42px;border-radius:14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      display:grid;place-items:center;
+      box-shadow: var(--shadow);
+      color:white;font-size:22px;
+    }
+    .pill{
+      font-size:12px;padding:7px 10px;border-radius:999px;
+      background:#ffffffaa;border:1px solid #ffffff;
+      box-shadow: 0 6px 18px rgba(0,0,0,.05);
+      color:var(--muted);
+      display:flex;align-items:center;gap:8px;
+      white-space:nowrap;
+    }
+    .card{
+      background: var(--card);
+      border:1px solid #ffffff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      backdrop-filter: blur(8px);
+    }
+    h1{margin:0 0 6px;font-size:28px;line-height:1.2}
+    .sub{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+    .topRow{
+      display:flex;gap:10px;flex-wrap:wrap;margin-top:12px
+    }
+    .btn{
+      appearance:none;border:0;cursor:pointer;text-decoration:none;
+      padding:11px 14px;border-radius:14px;font-weight:800;
+      display:inline-flex;align-items:center;gap:10px;
+      transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,.10);
+      user-select:none;
+    }
+    .btn:active{transform: translateY(1px)}
+    .btnPrimary{background: linear-gradient(135deg, var(--brand), #ff7ac2); color:white}
+    .btnGhost{
+      background:#ffffffd0;border:1px solid #ffffff;
+      color:var(--text); box-shadow: 0 8px 18px rgba(0,0,0,.07)
+    }
+
+    .page-card{ margin-top:16px; padding:18px; }
+    .page-head{
+      display:flex;align-items:baseline;justify-content:space-between;
+      gap:10px;flex-wrap:wrap;margin-bottom:10px
+    }
+    .page-head h2{margin:0;font-size:18px}
+    .hint{color:var(--muted);font-size:13px}
+
+    .page-image{display:flex;justify-content:center;margin:12px 0 10px}
+    .page-image img{
+      width:100%;
+      max-width: 720px;
+      height:auto;
+      border-radius: 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.10);
+      background:#fff;
+      border:1px solid rgba(0,0,0,.06);
+    }
+
+    .flags{
+      display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
+      margin: 12px 0 10px;
+    }
+    .flag-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      border: 1px solid rgba(0,0,0,.12);
+      background: #fff;
+      border-radius: 999px;
+      padding: 10px 12px;
+      cursor: pointer;
+      user-select:none;
+      transition: transform .05s ease, box-shadow .2s ease, border-color .2s ease;
+      box-shadow: 0 6px 16px rgba(0,0,0,.06);
+      font-size: 14px;
+      font-weight:800;
+    }
+    .flag-btn:active{ transform: translateY(1px); }
+    .flag-btn[aria-pressed="true"]{
+      border-color: rgba(0,0,0,.28);
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+    }
+    .flag-emoji{font-size:18px;line-height:1}
+
+    .player{
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 12px 12px 8px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.72);
+    }
+    .player-top{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:10px;flex-wrap:wrap;
+      margin-bottom:8px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    audio{width:100%}
+
+    footer{
+      margin:22px 0 0;
+      color:var(--muted);
+      font-size:12px;
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    }
+    .links{display:flex;gap:12px;flex-wrap:wrap}
+    .links a{color:var(--muted);text-decoration:none}
+    .links a:hover{text-decoration:underline}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">🎧</div>
+        <div>
+          <div style="font-size:18px">Pigipegs</div>
+          <div style="font-size:12px;color:var(--muted);font-weight:600">Hörversion</div>
+        </div>
+      </div>
+
+      <div class="pill" title="Status">
+        Bereit · MP3s werden nach und nach ergänzt
+      </div>
+    </header>
+
+    <section class="card">
+      <h1>Hörversion (Beta)</h1>
+      <p class="sub">
+        Wähle eine Seite und tippe auf eine Flagge. Dann wird der Player aktiviert.
+        Sobald die MP3-Dateien hochgeladen sind, funktioniert alles automatisch.
+      </p>
+      <div class="topRow">
+        <a class="btn btnPrimary" href="/">← Zur Startseite</a>
+        <a class="btn btnGhost" href="/buch-1/">📘 Buch 1</a>
+      </div>
+    </section>
+
+    <!-- =========================
+         SEITE 01 (TEST)
+         ========================= -->
+    <section class="card page-card" data-page="s01">
+      <div class="page-head">
+        <h2>Seite 01</h2>
+        <div class="hint">Tippe eine Flagge → Player lädt</div>
+      </div>
+
+      <div class="page-image">
+        <img src="/images/s01.jpg" alt="Pigipegs – Seite 01" loading="lazy">
+      </div>
+
+      <div class="flags" role="group" aria-label="Sprachauswahl Seite 01">
+        <button class="flag-btn" data-lang="de" aria-pressed="false" type="button"><span class="flag-emoji">🇩🇪</span>DE</button>
+        <button class="flag-btn" data-lang="en" aria-pressed="false" type="button"><span class="flag-emoji">🇬🇧</span>EN</button>
+        <button class="flag-btn" data-lang="fr" aria-pressed="false" type="button"><span class="flag-emoji">🇫🇷</span>FR</button>
+        <button class="flag-btn" data-lang="es" aria-pressed="false" type="button"><span class="flag-emoji">🇪🇸</span>ES</button>
+      </div>
+
+      <div class="player">
+        <div class="player-top">
+          <div><strong id="label-s01">Noch keine Sprache gewählt</strong></div>
+          <div class="hint">Quelle: <span id="src-s01">—</span></div>
+        </div>
+        <audio id="audio-s01" controls preload="none"></audio>
+      </div>
+    </section>
+
+    <!-- =========================
+         Weitere Seiten später:
+         Kopiere den Block oben und ändere s02, s04 ...
+         Bilder: /images/s02.jpg
+         MP3:   /audio-files/s02/de.mp3
+         ========================= -->
+
+    <footer>
+      <div>© <span id="year"></span> Pigipegs</div>
+      <div class="links">
+        <a href="/">Start</a>
+        <a href="/buch-1/">Buch 1</a>
+        <a href="/teilen/">Teilen</a>
+        <a href="/impressum/">Impressum</a>
+        <a href="/datenschutz/">Datenschutz</a>
+        <a href="/nutzungsbedingungen/">Nutzungsbedingungen</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const LANG_LABEL = { de:"Deutsch", en:"English", fr:"Français", es:"Español" };
+
+    document.querySelectorAll(".page-card").forEach(card => {
+      const page = card.dataset.page; // "s01"
+      const audio = card.querySelector(`#audio-${page}`);
+      const label = card.querySelector(`#label-${page}`);
+      const srcOut = card.querySelector(`#src-${page}`);
+      const buttons = Array.from(card.querySelectorAll(".flag-btn"));
+
+      function setPressed(activeBtn){
+        buttons.forEach(btn => btn.setAttribute("aria-pressed", btn === activeBtn ? "true" : "false"));
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const lang = btn.dataset.lang;
+
+          // MP3 Pfad (wichtig): MP3s liegen NICHT im /audio/ Ordner der Seite,
+          // sondern in /audio-files/...
+          const src = `/audio-files/${page}/${lang}.mp3`;
+
+          setPressed(btn);
+
+          audio.pause();
+          audio.currentTime = 0;
+          audio.src = src;
+          audio.load();
+
+          label.textContent = `${LANG_LABEL[lang]} – ${page.toUpperCase()}`;
+          srcOut.textContent = src;
+
+          // Optional: Auto-Play (wenn du willst, Kommentar entfernen)
+          // audio.play().catch(() => {});
+        });
+      });
+    });
+  </script>
+</body>
+</html>
