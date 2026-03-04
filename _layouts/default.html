@@ -1,1 +1,20 @@
+<!doctype html>
+<html lang="de">
+  {% include head.html %}
+  <body>
+    {% include header.html %}
 
+    <main class="container">
+      {{ content }}
+    </main>
+
+    {% include footer.html %}
+    <script>
+      // Merkt sich Sprache im Browser
+      (function () {
+        const stored = localStorage.getItem('lang');
+        if (stored) document.documentElement.setAttribute('lang', stored);
+      })();
+    </script>
+  </body>
+</html>
