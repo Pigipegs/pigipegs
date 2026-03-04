@@ -1,1 +1,54 @@
+---
+layout: default
+title: Buch 1 – Audio
+---
 
+{% assign b = site.data.book1 %}
+
+<div class="card">
+  <h1>Vorlesen – {{ b.title }}</h1>
+  <p>Wähle eine Sprache. Danach kannst du die passenden Audios abspielen.</p>
+
+  <div class="lang">
+    <div class="flag" onclick="pick('de')">🇩🇪 <small>Deutsch</small></div>
+    <div class="flag" onclick="pick('en')">🇬🇧 <small>English</small></div>
+    <div class="flag" onclick="pick('es')">🇪🇸 <small>Español</small></div>
+    <div class="flag" onclick="pick('fr')">🇫🇷 <small>Français</small></div>
+  </div>
+
+  <p id="picked" style="margin-top:12px"></p>
+</div>
+
+<div class="grid2" style="margin-top:14px">
+  <div class="card audio-card">
+    <h2>Intro</h2>
+    <audio controls preload="none" id="a1">
+      <source src="{{ site.baseurl }}/assets/audio/intro-de.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="card audio-card">
+    <h2>Kapitel 1</h2>
+    <audio controls preload="none" id="a2">
+      <source src="{{ site.baseurl }}/assets/audio/ch1-de.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+</div>
+
+<script>
+  function pick(lang){
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.getElementById('picked').innerText = "Aktive Sprache: " + lang.toUpperCase();
+
+    // Tauscht Audio-Dateien je nach Sprache (Schema: intro-xx.mp3, ch1-xx.mp3)
+    document.querySelector('#a1 source').src = "{{ site.baseurl }}/assets/audio/intro-" + lang + ".mp3";
+    document.querySelector('#a2 source').src = "{{ site.baseurl }}/assets/audio/ch1-" + lang + ".mp3";
+
+    document.getElementById('a1').load();
+    document.getElementById('a2').load();
+  }
+
+  // Auto: nimmt gespeicherte Sprache, sonst DE
+  pick(localStorage.getItem('lang') || 'de');
+</script>
