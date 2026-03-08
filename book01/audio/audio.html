@@ -7,84 +7,93 @@
 
   <style>
     :root{
-      --bg1:#fff8ef;
-      --bg2:#fdf1ff;
+      --sky-top:#fff4d8;
+      --sky-mid:#ffe8ef;
+      --sky-bottom:#f4ecff;
+
       --card:#ffffff;
-      --text:#2d2433;
-      --muted:#6d6273;
+      --text:#2f2433;
+      --muted:#6e6274;
       --line:#eadff0;
-      --accent:#ff8fa3;
-      --accent2:#8ecae6;
-      --accent3:#cde990;
-      --shadow:0 14px 34px rgba(80, 47, 88, 0.10);
-      --radius:24px;
-      --max:980px;
+
+      --pink:#ff8fa3;
+      --pink-dark:#ff6f91;
+      --blue:#8ecae6;
+      --blue-dark:#5aa9d6;
+      --green:#cde990;
+      --green-dark:#a9d85d;
+      --yellow:#fff0b8;
+
+      --shadow:0 16px 40px rgba(93, 54, 99, 0.10);
+      --radius:26px;
+      --max:1060px;
     }
 
     *{box-sizing:border-box}
 
     body{
       margin:0;
-      font-family:Arial, sans-serif;
+      font-family: Arial, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at top left, #fff3cc 0%, transparent 30%),
-        radial-gradient(circle at top right, #f7d8ff 0%, transparent 28%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.75) 0 8%, transparent 9%),
+        radial-gradient(circle at 85% 12%, rgba(255,255,255,.6) 0 7%, transparent 8%),
+        linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--sky-bottom) 100%);
       min-height:100vh;
     }
 
-    .wrap{
+    .page{
       max-width:var(--max);
       margin:0 auto;
-      padding:20px 16px 40px;
+      padding:18px 16px 44px;
     }
 
     .topbar{
       display:flex;
       justify-content:space-between;
-      align-items:center;
-      gap:14px;
+      align-items:flex-start;
+      gap:16px;
       flex-wrap:wrap;
       margin-bottom:18px;
     }
 
     .brand{
       display:flex;
-      align-items:center;
       gap:14px;
+      align-items:flex-start;
     }
 
-    .pig{
-      width:62px;
-      height:62px;
-      border-radius:18px;
+    .pig-badge{
+      width:72px;
+      height:72px;
+      border-radius:22px;
       display:flex;
       align-items:center;
       justify-content:center;
-      background:linear-gradient(135deg, #ffd4dc, #ffe8c7);
+      font-size:34px;
+      background:linear-gradient(135deg, #ffd6df, #fff1d8);
       box-shadow:var(--shadow);
-      font-size:32px;
+      flex:0 0 auto;
     }
 
     .eyebrow{
       font-size:13px;
       color:var(--muted);
-      margin-bottom:4px;
+      margin:2px 0 6px;
     }
 
     h1{
       margin:0;
-      font-size:clamp(28px, 4vw, 42px);
-      line-height:1.08;
+      font-size:clamp(30px, 4vw, 44px);
+      line-height:1.06;
     }
 
-    .subtitle{
-      margin:8px 0 0;
+    .sub{
+      margin:10px 0 0;
+      max-width:720px;
       color:var(--muted);
+      line-height:1.5;
       font-size:16px;
-      line-height:1.45;
-      max-width:700px;
     }
 
     .nav{
@@ -96,21 +105,64 @@
     .nav a{
       text-decoration:none;
       color:var(--text);
-      background:rgba(255,255,255,0.8);
-      border:1px solid var(--line);
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.75);
       border-radius:999px;
       padding:12px 16px;
       font-weight:bold;
-      box-shadow:0 4px 14px rgba(0,0,0,0.04);
+      box-shadow:0 8px 18px rgba(0,0,0,.04);
     }
 
     .hero{
-      background:rgba(255,255,255,0.75);
-      border:1px solid rgba(255,255,255,0.7);
-      border-radius:30px;
-      padding:24px;
-      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      border-radius:34px;
+      padding:26px 22px 22px;
       margin-bottom:20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.84));
+      border:1px solid rgba(255,255,255,.72);
+      box-shadow:var(--shadow);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      left:-5%;
+      right:-5%;
+      bottom:-38px;
+      height:160px;
+      background:
+        radial-gradient(120px 70px at 20% 100%, #d7efb1 0 60%, transparent 61%),
+        radial-gradient(180px 90px at 42% 100%, #bde19d 0 60%, transparent 61%),
+        radial-gradient(170px 85px at 64% 100%, #cfe9aa 0 60%, transparent 61%),
+        radial-gradient(150px 80px at 86% 100%, #b2db86 0 60%, transparent 61%);
+      pointer-events:none;
+      opacity:.9;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      right:24px;
+      bottom:24px;
+      width:170px;
+      height:120px;
+      background:
+        radial-gradient(circle at 50% 72%, #8c6948 0 18%, transparent 19%),
+        linear-gradient(#9b774f, #9b774f) center 58% / 68px 40px no-repeat,
+        linear-gradient(#fff2cc, #fff2cc) center 40% / 96px 56px no-repeat,
+        linear-gradient(135deg, #d1697d 50%, transparent 51%) 44% 18% / 54px 34px no-repeat,
+        linear-gradient(225deg, #d1697d 50%, transparent 51%) 56% 18% / 54px 34px no-repeat;
+      border-radius:18px;
+      opacity:.92;
+      pointer-events:none;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,.08));
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
     }
 
     .langbar{
@@ -128,14 +180,19 @@
       background:#fff;
       color:var(--text);
       border:1px solid var(--line);
-      box-shadow:0 6px 14px rgba(0,0,0,0.04);
+      box-shadow:0 6px 14px rgba(0,0,0,.04);
       cursor:pointer;
     }
 
     .lang.active{
-      background:var(--accent);
+      background:var(--pink);
       color:#fff;
-      border-color:var(--accent);
+      border-color:var(--pink);
+    }
+
+    .lang[disabled]{
+      opacity:.55;
+      cursor:not-allowed;
     }
 
     .grid{
@@ -146,8 +203,10 @@
     }
 
     .card{
+      position:relative;
+      overflow:hidden;
       background:var(--card);
-      border:1px solid rgba(255,255,255,0.75);
+      border:1px solid rgba(255,255,255,.72);
       border-radius:var(--radius);
       padding:22px;
       box-shadow:var(--shadow);
@@ -155,31 +214,49 @@
 
     .card h2{
       margin:0 0 8px;
-      font-size:24px;
+      font-size:25px;
     }
 
     .card p{
       margin:0;
       color:var(--muted);
-      line-height:1.5;
+      line-height:1.55;
     }
 
-    .card-legend{
-      background:linear-gradient(180deg, #fffaf1, #fff);
+    .legend-card{
+      background:linear-gradient(180deg, #fffaf1, #ffffff);
     }
 
-    .card-book{
-      background:linear-gradient(180deg, #f8fdff, #fff);
+    .legend-card::after{
+      content:"⛰️";
+      position:absolute;
+      right:18px;
+      top:16px;
+      font-size:34px;
+      opacity:.20;
+    }
+
+    .book-card{
+      background:linear-gradient(180deg, #f6fcff, #ffffff);
+    }
+
+    .book-card::after{
+      content:"📖";
+      position:absolute;
+      right:18px;
+      top:16px;
+      font-size:34px;
+      opacity:.20;
     }
 
     .badge{
       display:inline-block;
       font-size:12px;
       font-weight:bold;
-      letter-spacing:0.04em;
+      letter-spacing:.04em;
       text-transform:uppercase;
       color:#7c5f19;
-      background:#fff0b8;
+      background:var(--yellow);
       border-radius:999px;
       padding:8px 10px;
       margin-bottom:14px;
@@ -200,22 +277,37 @@
       font-weight:bold;
       cursor:pointer;
       color:#fff;
-      background:linear-gradient(135deg, #ff8fa3, #ff6f91);
-      box-shadow:0 10px 22px rgba(255,111,145,0.24);
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      box-shadow:0 10px 22px rgba(255,111,145,.24);
     }
 
     .bigbtn.book{
-      background:linear-gradient(135deg, #8ecae6, #5aa9d6);
-      box-shadow:0 10px 22px rgba(90,169,214,0.24);
+      background:linear-gradient(135deg, var(--blue), var(--blue-dark));
+      box-shadow:0 10px 22px rgba(90,169,214,.24);
     }
 
     .playerbox{
-      margin-top:18px;
       display:none;
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.98));
     }
 
     .playerbox.show{
       display:block;
+    }
+
+    .player-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .player-title{
+      font-size:24px;
+      font-weight:bold;
+      margin:0 0 8px;
     }
 
     .nowplaying{
@@ -223,9 +315,9 @@
       border:1px solid #f0e5be;
       border-radius:18px;
       padding:14px 16px;
-      margin-bottom:14px;
       font-size:15px;
       color:#6c5d2a;
+      max-width:520px;
     }
 
     audio{
@@ -237,11 +329,11 @@
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-bottom:12px;
+      margin-bottom:14px;
     }
 
     .ctrl{
-      flex:1 1 160px;
+      flex:1 1 170px;
       border:none;
       border-radius:16px;
       padding:14px 16px;
@@ -254,13 +346,18 @@
     }
 
     .ctrl.primary{
-      background:linear-gradient(135deg, #cde990, #9fd85f);
-      border-color:#b9d87a;
+      background:linear-gradient(135deg, var(--green), var(--green-dark));
+      border-color:#bad781;
+    }
+
+    .ctrl:disabled{
+      opacity:.45;
+      cursor:not-allowed;
     }
 
     .chapters{
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
+      grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
       gap:10px;
     }
 
@@ -277,9 +374,9 @@
     }
 
     .chapter.active{
-      background:#2d2433;
+      background:#2f2433;
       color:#fff;
-      border-color:#2d2433;
+      border-color:#2f2433;
     }
 
     .footer-note{
@@ -289,13 +386,21 @@
       margin-top:18px;
     }
 
-    @media (max-width: 760px){
+    @media (max-width: 820px){
       .grid{
         grid-template-columns:1fr;
       }
 
       .hero{
-        padding:20px;
+        padding:22px 18px 18px;
+      }
+
+      .hero::after{
+        width:120px;
+        height:90px;
+        right:14px;
+        bottom:18px;
+        opacity:.7;
       }
 
       .card{
@@ -305,60 +410,67 @@
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="page">
     <div class="topbar">
       <div class="brand">
-        <div class="pig">🐷</div>
+        <div class="pig-badge">🐷</div>
         <div>
           <div class="eyebrow">Pigipegs Hörwelt</div>
-          <h1>Geschichten zum Anhören</h1>
-          <p class="subtitle">
-            Wähle zuerst eine Sprache und höre dann die Pigipegs-Legende
-            oder die Hörgeschichten aus Buch 01.
+          <h1>Willkommen in der Hörwelt</h1>
+          <p class="sub">
+            Hier kannst du die Pigipegs-Legende hören oder direkt in die
+            Geschichten aus <strong>Buch 01</strong> eintauchen.
           </p>
         </div>
       </div>
 
       <div class="nav">
         <a href="/book01/">Buch 01</a>
-        <a href="/book01/index.html">Start</a>
+        <a href="/index.html">Startseite</a>
       </div>
     </div>
 
     <section class="hero">
-      <div class="langbar">
-        <button class="lang active" type="button">Deutsch</button>
-        <button class="lang" type="button" disabled>English</button>
-        <button class="lang" type="button" disabled>Español</button>
-        <button class="lang" type="button" disabled>Français</button>
+      <div class="hero-content">
+        <div class="eyebrow">Sprache auswählen</div>
+        <div class="langbar">
+          <button class="lang active" type="button">Deutsch</button>
+          <button class="lang" type="button" disabled>English</button>
+          <button class="lang" type="button" disabled>Español</button>
+          <button class="lang" type="button" disabled>Français</button>
+        </div>
       </div>
     </section>
 
     <div class="grid">
-      <section class="card card-legend">
+      <section class="card legend-card">
         <div class="badge">Vor dem Buch</div>
         <h2>Die Pigipegs-Legende</h2>
         <p>
-          Wie die Pigipegs zu ihrem Haus auf dem Berg gekommen sind.
-          Eine kurze Geschichte zum Einstieg in ihre Welt.
+          Eine kurze Geschichte darüber, wie die Pigipegs zu ihrem Haus
+          auf dem Berg gekommen sind.
         </p>
         <button class="bigbtn" type="button" id="legendBtn">▶ Legende anhören</button>
       </section>
 
-      <section class="card card-book">
+      <section class="card book-card">
         <div class="badge book-badge">Buch 01</div>
         <h2>Zuhause ist, wo wir zusammen sind</h2>
         <p>
-          Höre die Geschichten aus dem Buch. Du kannst einzelne Kapitel
-          direkt auswählen oder mit Weiter und Zurück blättern.
+          Höre die Geschichten aus dem Buch und springe direkt zu den
+          einzelnen Kapiteln.
         </p>
         <button class="bigbtn book" type="button" id="bookBtn">▶ Buch 01 öffnen</button>
       </section>
     </div>
 
     <section class="card playerbox" id="playerBox">
-      <div class="nowplaying" id="nowPlaying">
-        Noch nichts ausgewählt.
+      <div class="player-head">
+        <div>
+          <div class="eyebrow">Jetzt anhören</div>
+          <div class="player-title">Pigipegs Audio</div>
+        </div>
+        <div class="nowplaying" id="nowPlaying">Noch nichts ausgewählt.</div>
       </div>
 
       <audio id="player" controls preload="none"></audio>
@@ -373,7 +485,7 @@
     </section>
 
     <div class="footer-note">
-      Hörwelt für Pigipegs · Deutsch
+      Pigipegs · Hörwelt · Deutsch
     </div>
   </div>
 
@@ -439,6 +551,7 @@
 
     function showPlayer() {
       playerBox.classList.add("show");
+      playerBox.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     function loadLegend(autoplay = true) {
