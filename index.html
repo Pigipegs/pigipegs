@@ -599,7 +599,6 @@
 
    const tracks = [
   { id: "00", title: "Die Pigipegs" },
-  { id: "01", title: "Ein ruhiger Abend" },
   { id: "02", title: "Das kleine Haus auf dem Berg" },
   { id: "04", title: "Papa Pigipeg erzählt" },
   { id: "06", title: "Mama Pigipegs Gute-Nacht-Geschichten" },
@@ -700,12 +699,9 @@
     player.addEventListener("pause", updatePlayPauseText);
 
     player.addEventListener("ended", () => {
-      if (mode === "book" && currentIndex < tracks.length - 1) {
-        loadBookTrack(currentIndex + 1, true);
-      } else {
-        updatePlayPauseText();
-      }
-    });
+  player.pause();
+  updatePlayPauseText();
+});
 
     renderChapters();
     updateNavButtons();
