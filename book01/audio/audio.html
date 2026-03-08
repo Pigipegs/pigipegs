@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pigipegs Hörwelt</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#fafafa;
+margin:0;
+padding:20px;
+text-align:center;
+}
+
+h1{
+font-size:32px;
+margin-bottom:30px;
+}
+
+.card{
+background:white;
+border-radius:16px;
+padding:25px;
+margin:20px auto;
+max-width:500px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+button{
+font-size:18px;
+padding:14px 24px;
+border:none;
+border-radius:12px;
+background:#222;
+color:white;
+cursor:pointer;
+margin-top:15px;
+}
+
+button:hover{
+background:#444;
+}
+
+.chapter{
+margin:8px;
+padding:10px 16px;
+border-radius:10px;
+border:1px solid #ddd;
+background:white;
+cursor:pointer;
+}
+
+audio{
+margin-top:20px;
+width:100%;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🐷 Pigipegs Hörwelt</h1>
+
+<div class="card">
+<h2>Die Pigipegs Legende</h2>
+<p>Wie die Pigipegs zu ihrem Haus auf dem Berg gekommen sind.</p>
+
+<button onclick="playLegend()">▶ Legende anhören</button>
+</div>
+
+<div class="card">
+<h2>Buch 01</h2>
+
+<div id="chapters"></div>
+
+<audio id="player" controls></audio>
+
+</div>
+
+<script>
+
+const player = document.getElementById("player")
+
+function playLegend(){
+player.src = "/book01/legende/de.mp3"
+player.play()
+}
+
+const chapters = [
+"00","01","02","04","06","08","10","12",
+"14","16","18","20","22","24","26","28","30","32"
+]
+
+const container = document.getElementById("chapters")
+
+chapters.forEach(ch => {
+
+const btn = document.createElement("button")
+btn.className="chapter"
+
+btn.innerText="Kapitel "+ch
+
+btn.onclick=()=>{
+player.src="/book01/audio/de/"+ch+".mp3"
+player.play()
+}
+
+container.appendChild(btn)
+
+})
+
+</script>
+
+</body>
+</html>
