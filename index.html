@@ -1,376 +1,789 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pigipegs – Offizielle Buchseite</title>
-  <meta name="description" content="Pigipegs – Mal- & Vorleseabenteuer. Offizielle Buchseite mit Schnellzugriff." />
-
-  <meta property="og:title" content="Pigipegs – Offizielle Buchseite" />
-  <meta property="og:description" content="Mal- & Vorleseabenteuer. Schnellzugriff auf Buch 1 – später auch Audio." />
-  <meta property="og:type" content="website" />
 
   <style>
     :root{
-      --bg1:#fff7fb;
-      --bg2:#f4fbff;
-      --card:#ffffffcc;
-      --text:#1f2937;
-      --muted:#6b7280;
-      --brand:#ff4fa3;
-      --brand2:#5b8cff;
-      --ok:#10b981;
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
-      --radius: 18px;
+      --sky-top:#fff7dc;
+      --sky-mid:#ffe8ef;
+      --sky-bottom:#f3ecff;
+
+      --card:#ffffff;
+      --text:#34283a;
+      --muted:#726677;
+      --line:#eadff0;
+
+      --pink:#ff93ad;
+      --pink-dark:#ff7094;
+      --blue:#98d3ee;
+      --blue-dark:#66b5dc;
+      --green:#d2eca0;
+      --green-dark:#a8d76d;
+      --yellow:#fff0bc;
+
+      --shadow:0 18px 44px rgba(91, 56, 97, 0.11);
+      --radius:28px;
+      --max:1120px;
     }
+
     *{box-sizing:border-box}
+
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: Arial, sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% 0%, #ffd1ea 0%, transparent 55%),
-        radial-gradient(900px 520px at 90% 10%, #cfe6ff 0%, transparent 50%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
       min-height:100vh;
+      background:
+        radial-gradient(circle at 14% 12%, rgba(255,255,255,.7) 0 7%, transparent 8%),
+        radial-gradient(circle at 82% 10%, rgba(255,255,255,.55) 0 6%, transparent 7%),
+        linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 46%, var(--sky-bottom) 100%);
     }
-    a{color:inherit}
-    .wrap{max-width:980px;margin:0 auto;padding:24px}
-    header{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:14px;padding:10px 0 18px;
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:20px 16px 48px;
     }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+
     .brand{
-      display:flex;align-items:center;gap:12px;
-      font-weight:800;letter-spacing:.2px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
     }
-    .logo{
-      width:42px;height:42px;border-radius:14px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      display:grid;place-items:center;
-      box-shadow: var(--shadow);
-      color:white;font-size:22px;
+
+    .pig-badge{
+      width:76px;
+      height:76px;
+      border-radius:24px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:36px;
+      background:linear-gradient(135deg, #ffd8e1, #fff1d8);
+      box-shadow:var(--shadow);
+      flex:0 0 auto;
     }
-    .pill{
-      font-size:12px;padding:7px 10px;border-radius:999px;
-      background:#ffffffaa;border:1px solid #ffffff;
-      box-shadow: 0 6px 18px rgba(0,0,0,.05);
+
+    .eyebrow{
+      font-size:13px;
       color:var(--muted);
-      display:flex;align-items:center;gap:8px;
-      white-space:nowrap;
+      margin:2px 0 6px;
     }
-    .dot{width:8px;height:8px;border-radius:99px;background:var(--ok);display:inline-block}
+
+    h1{
+      margin:0;
+      font-size:clamp(30px, 4vw, 48px);
+      line-height:1.05;
+    }
+
+    .sub{
+      margin:10px 0 0;
+      max-width:740px;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:16px;
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color:var(--text);
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(255,255,255,.72);
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      box-shadow:0 8px 18px rgba(0,0,0,.04);
+    }
+
     .hero{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:18px;
-      align-items:stretch;
+      position:relative;
+      overflow:hidden;
+      border-radius:36px;
+      padding:28px 24px 180px;
+      margin-bottom:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.74), rgba(255,255,255,.88));
+      border:1px solid rgba(255,255,255,.75);
+      box-shadow:var(--shadow);
     }
-    @media (max-width:860px){ .hero{grid-template-columns:1fr} }
-    .card{
-      background: var(--card);
-      border:1px solid #ffffff;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:22px;
-      backdrop-filter: blur(8px);
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      left:-8%;
+      right:-8%;
+      bottom:-38px;
+      height:180px;
+      background:
+        radial-gradient(150px 80px at 18% 100%, #d7efb1 0 60%, transparent 61%),
+        radial-gradient(220px 100px at 40% 100%, #bde19d 0 60%, transparent 61%),
+        radial-gradient(200px 92px at 63% 100%, #cfe9aa 0 60%, transparent 61%),
+        radial-gradient(180px 88px at 86% 100%, #b2db86 0 60%, transparent 61%);
+      pointer-events:none;
+      opacity:.95;
     }
-    h1{margin:0 0 10px;font-size:38px;line-height:1.1}
-    @media (max-width:520px){h1{font-size:32px}}
-    .sub{margin:0 0 14px;color:var(--muted);font-size:16px;line-height:1.6}
-    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{
-      appearance:none;border:0;cursor:pointer;text-decoration:none;
-      padding:12px 14px;border-radius:14px;font-weight:700;
-      display:inline-flex;align-items:center;gap:10px;
-      transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
-      box-shadow: 0 10px 24px rgba(0,0,0,.10);
-      user-select:none;
+
+    .mountain{
+      position:absolute;
+      bottom:72px;
+      width:0;height:0;
+      border-left:110px solid transparent;
+      border-right:110px solid transparent;
+      border-bottom:160px solid #c8b5de;
+      opacity:.55;
     }
-    .btn:active{transform: translateY(1px)}
-    .btnPrimary{background: linear-gradient(135deg, var(--brand), #ff7ac2); color:white}
-    .btnGhost{
-      background:#ffffffd0;border:1px solid #ffffff;
-      color:var(--text); box-shadow: 0 8px 18px rgba(0,0,0,.07)
+
+    .mountain.one{ left:8%; }
+    .mountain.two{
+      left:28%;
+      border-left-width:140px;
+      border-right-width:140px;
+      border-bottom-width:200px;
+      border-bottom-color:#b79ccf;
+      opacity:.45;
     }
-    .grid{
-      margin-top:18px;
-      display:grid;gap:14px;
-      grid-template-columns: repeat(2, 1fr);
+    .mountain.three{
+      right:12%;
+      border-left-width:95px;
+      border-right-width:95px;
+      border-bottom-width:140px;
+      border-bottom-color:#d3c2e4;
+      opacity:.48;
     }
-    @media (max-width:720px){.grid{grid-template-columns:1fr}}
-    .tile{
-      display:flex;gap:14px;align-items:flex-start;
-      padding:16px;border-radius:16px;background:#ffffffd6;border:1px solid #ffffff;
-      box-shadow: 0 8px 22px rgba(0,0,0,.06);
+
+    .house{
+      position:absolute;
+      right:7%;
+      bottom:58px;
+      width:180px;
+      height:128px;
+      pointer-events:none;
+      filter:drop-shadow(0 12px 18px rgba(0,0,0,.08));
     }
-    .icon{
-      width:40px;height:40px;border-radius:14px;
-      display:grid;place-items:center;
-      background: #fff;
-      border:1px solid #f0f0f0;
-      box-shadow: 0 8px 16px rgba(0,0,0,.05);
-      flex: 0 0 auto;
-      font-size:20px;
+
+    .house-base{
+      position:absolute;
+      left:42px;
+      bottom:0;
+      width:100px;
+      height:62px;
+      background:#fff2cc;
+      border-radius:8px;
+      border:3px solid rgba(120,85,55,.15);
     }
-    .tile h3{margin:2px 0 6px;font-size:16px}
-    .tile p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
-    .side h2{margin:0 0 10px;font-size:18px}
-    .hint{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 12px}
-    .form{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
-    input{
-      width:100%;max-width:320px;
-      padding:12px 12px;border-radius:14px;
-      border:1px solid #e6e6e6;
-      background:#fff;
-      outline:none;
-      font-size:15px;
+
+    .house-roof-left,
+    .house-roof-right{
+      position:absolute;
+      top:18px;
+      width:78px;
+      height:44px;
+      background:#d57286;
     }
-    input:focus{border-color:#c9d6ff; box-shadow:0 0 0 4px rgba(91,140,255,.14)}
-    .small{font-size:12px;color:var(--muted);margin-top:10px}
-    footer{
-      margin:22px 0 0;
+
+    .house-roof-left{
+      left:28px;
+      clip-path:polygon(100% 100%, 0 100%, 100% 0);
+    }
+
+    .house-roof-right{
+      right:28px;
+      clip-path:polygon(0 100%, 0 0, 100% 100%);
+    }
+
+    .house-door{
+      position:absolute;
+      left:78px;
+      bottom:0;
+      width:28px;
+      height:34px;
+      background:#a1774f;
+      border-radius:12px 12px 0 0;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:660px;
+    }
+
+    .hero h2{
+      margin:0 0 10px;
+      font-size:clamp(30px, 4vw, 50px);
+      line-height:1.04;
+    }
+
+    .hero-text{
+      font-size:17px;
       color:var(--muted);
-      font-size:12px;
-      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      line-height:1.65;
+      margin:0 0 18px;
+      max-width:620px;
     }
-    .links{display:flex;gap:12px;flex-wrap:wrap}
-    .links a{color:var(--muted);text-decoration:none}
-    .links a:hover{text-decoration:underline}
+
+    .hero-buttons{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .cta{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:15px 20px;
+      border-radius:18px;
+      font-weight:bold;
+      font-size:17px;
+      box-shadow:0 10px 22px rgba(0,0,0,.08);
+    }
+
+    .cta.primary{
+      color:#fff;
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+    }
+
+    .cta.secondary{
+      color:var(--text);
+      background:#fff;
+      border:1px solid var(--line);
+    }
+
+    .langbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:22px 0 24px;
+    }
+
+    .lang{
+      border:none;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      background:#fff;
+      color:var(--text);
+      border:1px solid var(--line);
+      box-shadow:0 6px 14px rgba(0,0,0,.04);
+      cursor:pointer;
+    }
+
+    .lang.active{
+      background:var(--pink);
+      color:#fff;
+      border-color:var(--pink);
+    }
+
+    .lang[disabled]{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.05fr 1.05fr .9fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .card{
+      position:relative;
+      overflow:hidden;
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.72);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .card h3{
+      margin:0 0 8px;
+      font-size:24px;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .legend-card{
+      background:linear-gradient(180deg, #fffaf1, #ffffff);
+    }
+
+    .legend-card::after{
+      content:"⛰️";
+      position:absolute;
+      right:18px;
+      top:16px;
+      font-size:34px;
+      opacity:.18;
+    }
+
+    .book-card{
+      background:linear-gradient(180deg, #f6fcff, #ffffff);
+    }
+
+    .book-card::after{
+      content:"📖";
+      position:absolute;
+      right:18px;
+      top:16px;
+      font-size:34px;
+      opacity:.18;
+    }
+
+    .how-card{
+      background:linear-gradient(180deg, #fbfff4, #ffffff);
+    }
+
+    .how-card::after{
+      content:"✨";
+      position:absolute;
+      right:18px;
+      top:16px;
+      font-size:34px;
+      opacity:.18;
+    }
+
     .badge{
-      font-size:11px;font-weight:800;
-      padding:6px 10px;border-radius:999px;
-      background: #ffffffd0;border:1px solid #ffffff;
-      display:inline-flex;gap:8px;align-items:center;
+      display:inline-block;
+      font-size:12px;
+      font-weight:bold;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:#7c5f19;
+      background:var(--yellow);
+      border-radius:999px;
+      padding:8px 10px;
+      margin-bottom:14px;
     }
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
-      font-size:11px;padding:2px 6px;border-radius:6px;
-      border:1px solid #e5e7eb;background:#fff;
+
+    .book-badge{
+      color:#30556a;
+      background:#dff4ff;
     }
-    .divider{border:0;border-top:1px solid #eee;margin:16px 0}
+
+    .how-badge{
+      color:#4b6a2f;
+      background:#e9f7c9;
+    }
+
+    .bigbtn{
+      margin-top:18px;
+      width:100%;
+      border:none;
+      border-radius:18px;
+      padding:16px 18px;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      color:#fff;
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      box-shadow:0 10px 22px rgba(255,111,145,.24);
+      text-decoration:none;
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .bigbtn.book{
+      background:linear-gradient(135deg, var(--blue), var(--blue-dark));
+      box-shadow:0 10px 22px rgba(90,169,214,.24);
+    }
+
+    .bigbtn.how{
+      background:linear-gradient(135deg, var(--green), var(--green-dark));
+      box-shadow:0 10px 22px rgba(166,212,104,.24);
+    }
+
+    .playerbox{
+      display:none;
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.98));
+    }
+
+    .playerbox.show{
+      display:block;
+    }
+
+    .player-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .player-title{
+      font-size:24px;
+      font-weight:bold;
+      margin:0 0 8px;
+    }
+
+    .nowplaying{
+      background:#fffdf7;
+      border:1px solid #f0e5be;
+      border-radius:18px;
+      padding:14px 16px;
+      font-size:15px;
+      color:#6c5d2a;
+      max-width:520px;
+    }
+
+    audio{
+      width:100%;
+      margin-bottom:16px;
+    }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .ctrl{
+      flex:1 1 170px;
+      border:none;
+      border-radius:16px;
+      padding:14px 16px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      background:#f7f1fa;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+
+    .ctrl.primary{
+      background:linear-gradient(135deg, var(--green), var(--green-dark));
+      border-color:#bad781;
+    }
+
+    .ctrl:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    .chapters{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+      gap:10px;
+    }
+
+    .chapter{
+      border:none;
+      border-radius:16px;
+      padding:14px 10px;
+      cursor:pointer;
+      font-size:15px;
+      font-weight:bold;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+
+    .chapter.active{
+      background:#2f2433;
+      color:#fff;
+      border-color:#2f2433;
+    }
+
+    .footer-note{
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      margin-top:18px;
+    }
+
+    @media (max-width: 980px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 820px){
+      .hero{
+        padding:22px 18px 150px;
+      }
+
+      .house{
+        transform:scale(.78);
+        right:-4px;
+        bottom:50px;
+      }
+
+      .mountain.one{ left:-6%; }
+      .mountain.two{ left:18%; }
+      .mountain.three{ right:-6%; }
+
+      .card{
+        padding:18px;
+      }
+    }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <header>
+  <div class="page">
+    <div class="topbar">
       <div class="brand">
-        <div class="logo">🐷</div>
+        <div class="pig-badge">🐷</div>
         <div>
-          <div style="font-size:18px">Pigipegs</div>
-          <div style="font-size:12px;color:var(--muted);font-weight:600">Offizielle Buchseite</div>
+          <div class="eyebrow">Pigipegs</div>
+          <h1>Willkommen bei den Pigipegs</h1>
+          <p class="sub">
+            Eine warme Kinderwelt voller kleiner Geschichten, Farben und
+            liebevoller Abenteuer für die ganze Familie.
+          </p>
         </div>
       </div>
 
-      <div class="pill" title="Status">
-        <span class="dot"></span>
-        Online · gesichert über HTTPS
+      <div class="nav">
+        <a href="/book01/">Buch 01</a>
+        <a href="/book01/so-gehts/">So geht’s</a>
+        <a href="/impressum/">Impressum</a>
       </div>
-    </header>
-
-    <section class="hero">
-      <div class="card">
-        <h1>Willkommen bei <span style="color:var(--brand)">Pigipegs</span> 🐽</h1>
-        <p class="sub">
-          Hier findest du alles zu <strong>Buch 1</strong> – später auch Hörversionen.
-          Scanne den QR-Code im Buch oder gib den Code ein.
-        </p>
-
-        <div class="ctaRow">
-  <a class="btn btnPrimary" href="/buch-1">📘 Direkt zu Buch 1</a>
-  <a class="btn btnGhost" href="/audio/">🎧 Hörversion (Beta)</a>
-  <a class="btn btnGhost" href="/teilen/">🎨 Bild einreichen</a>
-  <a class="btn btnGhost" href="#hilfe">❓ So funktioniert’s</a>
-</div>
-
-        <div class="grid">
-          <div class="tile">
-            <div class="icon">🔎</div>
-            <div>
-              <h3>Schnell finden</h3>
-              <p>QR-Code scannen oder Code eingeben (z.B. <span class="kbd">01-001</span>).</p>
-            </div>
-          </div>
-          <div class="tile">
-            <div class="icon">🧸</div>
-            <div>
-              <h3>Kinderfreundlich</h3>
-              <p>Große Buttons, klarer Aufbau, optimiert für Handy & Tablet.</p>
-            </div>
-          </div>
-          <div class="tile">
-            <div class="icon">🔒</div>
-            <div>
-              <h3>Sicher & schnell</h3>
-              <p>GitHub Pages + Cloudflare (HTTPS, Schutz, Performance).</p>
-            </div>
-          </div>
-         <div class="tile">
-  <div class="icon">🎧</div>
-  <div>
-    <h3>Hörversion</h3>
-    <p>Die Audio-Seite ist vorbereitet. Sobald MP3s da sind, sind sie direkt abrufbar.</p>
-  </div>
-</div>
-        </div>
-      </div>
-
-      <aside class="card side">
-        <h2>📘 Buch 1 – Schnellzugriff</h2>
-        <p class="hint">
-          Wenn du aus dem Buch kommst: Code eingeben und öffnen.<br>
-          (QR-Code führt später direkt auf die passende Seite.)
-        </p>
-
-        <div class="form">
-          <input id="code" type="text" inputmode="latin" autocomplete="off" placeholder="z.B. 01-001" />
-          <button class="btn btnPrimary" type="button" onclick="goToCode()">Öffnen</button>
-        </div>
-
-        <p class="small">
-          Tipp: Später kannst du auch Links nutzen wie <span class="kbd">/01-001</span>.
-          Aktuell führen wir dich zu Buch 1 und übernehmen den Code.
-        </p>
-
-        <hr class="divider">
-
-        <div class="badge">🧪 Demo: <span class="kbd">Code → Buch 1</span></div>
-        <div style="height:10px"></div>
-
-        <a class="btn btnGhost" href="/buch-1">📘 Buch 1 ansehen</a>
-        <div style="height:10px"></div>
-        <a class="btn btnGhost" href="/teilen">🎨 Bild einreichen</a>
-      </aside>
-    </section>
-
-    <section class="card" id="hilfe" style="margin-top:18px">
-      <h2 style="margin:0 0 10px;font-size:20px">So funktioniert’s</h2>
-      <ol style="margin:0;color:var(--muted);line-height:1.7;padding-left:18px">
-        <li>Im Buch findest du QR-Codes oder kurze Codes.</li>
-        <li>QR-Code scannen → du landest (später) direkt auf der passenden Seite.</li>
-        <li>Alternativ: Code eingeben (z.B. <span class="kbd">01-001</span>).</li>
-        <li>Audio kommt später – hier wird dann ein Vorlese-Button erscheinen.</li>
-      </ol>
-    </section>
-
-    <footer>
-      <div>© <span id="year"></span> Pigipegs</div>
-      <div class="links">
-  <a href="/">Start</a>
-  <a href="/buch-1">Buch 1</a>
-  <a href="/teilen/">Teilen</a>
-  <a href="/impressum/">Impressum</a>
-  <a href="/datenschutz/">Datenschutz</a>
-  <a href="/nutzungsbedingungen/">Nutzungsbedingungen</a>
-      </div>
-    </footer>
-  </div>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    function normalizeCode(v){
-      return (v || "")
-        .trim()
-        .toUpperCase()
-        .replace(/^PIGIPEGS\.COM[-/ ]*/i,"")
-        .replace(/[^0-9A-Z-]/g,"")
-        .replace(/--+/g,"-");
-    }
-
-    function goToCode(){
-      const raw = document.getElementById("code").value;
-      const code = normalizeCode(raw);
-      if(!code){
-        alert("Bitte einen Code eingeben, z.B. 01-001");
-        return;
-      }
-      // Wir leiten nach Buch 1 weiter und übergeben den Code
-      window.location.href = "/buch-1/?c=" + encodeURIComponent(code);
-    }
-
-    // Wenn jemand mit ?c=01-001 kommt, füllen wir das Feld automatisch
-    (function initFromQuery(){
-      const p = new URLSearchParams(window.location.search);
-      const c = p.get("c");
-      if(c){
-        document.getElementById("code").value = normalizeCode(c);
-      }
-    })();
-  </script>
-</body>
-</html>
-2) /buch-1/index.html (Basis-Seite Buch 1)
-(Platzhalter – später Amazon-Link / Inhaltsübersicht / QR-Routing)
-
-html
-Code kopieren
-<!doctype html>
-<html lang="de">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Buch 1 – Pigipegs</title>
-  <meta name="description" content="Pigipegs Buch 1 – Infos, Schnellzugriff und Inhalte." />
-  <style>
-    body{font-family:system-ui,Arial;margin:0;padding:28px;max-width:820px}
-    a{color:inherit}
-    .card{border:1px solid #eee;border-radius:14px;padding:18px;margin:14px 0}
-    .muted{color:#6b7280}
-    .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid #eee;text-decoration:none;margin-right:8px}
-    input{padding:10px 12px;border-radius:12px;border:1px solid #e6e6e6;min-width:220px}
-  </style>
-</head>
-<body>
-
-  <h1>📘 Buch 1</h1>
-  <p class="muted">Hier sammeln wir alle Inhalte zu Buch 1. Audio kommt später.</p>
-
-  <div class="card">
-    <h2>Schnellzugriff per Code</h2>
-    <p class="muted">Wenn du von der Startseite kommst, wurde dein Code übernommen.</p>
-
-    <div>
-      <input id="code" placeholder="z.B. 01-001" />
-      <button class="btn" onclick="openCode()">Öffnen</button>
     </div>
 
-    <p class="muted" style="margin-top:10px">
-      Aktuell ist das Routing noch ein Platzhalter. Als nächstes bauen wir echte Seiten pro Code.
-    </p>
-  </div>
+    <section class="hero">
+      <div class="mountain one"></div>
+      <div class="mountain two"></div>
+      <div class="mountain three"></div>
 
-  <div class="card">
-    <h2>Teilen</h2>
-    <p class="muted">Du willst dein Bild zeigen? Reiche es hier ein (ohne Name).</p>
-    <a class="btn" href="/teilen">🎨 Bild einreichen</a>
-  </div>
+      <div class="house">
+        <div class="house-roof-left"></div>
+        <div class="house-roof-right"></div>
+        <div class="house-base"></div>
+        <div class="house-door"></div>
+      </div>
 
-  <div class="card">
-    <a class="btn" href="/">← Zur Startseite</a>
-    <a class="btn" href="/impressum">Impressum</a>
-    <a class="btn" href="/datenschutz">Datenschutz</a>
+      <div class="hero-content">
+        <div class="eyebrow">Die Pigipegs-Welt</div>
+        <h2>Zuhause ist, wo wir zusammen sind</h2>
+        <p class="hero-text">
+          Auf einem ruhigen Berg leben die Pigipegs in ihrem kleinen Haus.
+          Hier entstehen Geschichten zum Vorlesen, Anhören, Ausmalen und
+          gemeinsamen Entdecken.
+        </p>
+
+        <div class="hero-buttons">
+          <a class="cta primary" href="/book01/audio.html">🎧 Zur Hörwelt</a>
+          <a class="cta secondary" href="/book01/">📖 Buch 01 entdecken</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Sprache auswählen</div>
+      <div class="langbar">
+        <button class="lang active" type="button">Deutsch</button>
+        <button class="lang" type="button" disabled>English</button>
+        <button class="lang" type="button" disabled>Español</button>
+        <button class="lang" type="button" disabled>Français</button>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card legend-card">
+        <div class="badge">Vor dem Buch</div>
+        <h3>Die Pigipegs-Legende</h3>
+        <p>
+          Höre zuerst die kleine Vorgeschichte und erfahre, wie die
+          Pigipegs zu ihrem Haus auf dem Berg gekommen sind.
+        </p>
+        <button class="bigbtn" type="button" id="legendBtn">▶ Legende anhören</button>
+      </section>
+
+      <section class="card book-card">
+        <div class="badge book-badge">Buch 01</div>
+        <h3>Die Geschichten aus Buch 01</h3>
+        <p>
+          Öffne die Hörwelt von Buch 01 und springe direkt zu den
+          einzelnen Kapiteln.
+        </p>
+        <a class="bigbtn book" href="/book01/audio.html">🎧 Hörwelt öffnen</a>
+      </section>
+
+      <section class="card how-card">
+        <div class="badge how-badge">Einfach erklärt</div>
+        <h3>So geht’s</h3>
+        <p>
+          Scanne den QR-Code im Buch, wähle eine Sprache und höre dir die
+          passende Geschichte an.
+        </p>
+        <a class="bigbtn how" href="/book01/so-gehts/">✨ Anleitung ansehen</a>
+      </section>
+    </div>
+
+    <section class="card playerbox" id="playerBox">
+      <div class="player-head">
+        <div>
+          <div class="eyebrow">Jetzt anhören</div>
+          <div class="player-title">Pigipegs Audio</div>
+        </div>
+        <div class="nowplaying" id="nowPlaying">Noch nichts ausgewählt.</div>
+      </div>
+
+      <audio id="player" controls preload="none"></audio>
+
+      <div class="controls">
+        <button class="ctrl" type="button" id="prevBtn">⟵ Zurück</button>
+        <button class="ctrl primary" type="button" id="playPauseBtn">▶ Abspielen</button>
+        <button class="ctrl" type="button" id="nextBtn">Weiter ⟶</button>
+      </div>
+
+      <div class="chapters" id="chapters"></div>
+    </section>
+
+    <div class="footer-note">
+      Pigipegs · Kleine Geschichten mit großem Herzen
+    </div>
   </div>
 
   <script>
-    function normalizeCode(v){
-      return (v || "").trim().toUpperCase().replace(/[^0-9A-Z-]/g,"").replace(/--+/g,"-");
+    const player = document.getElementById("player");
+    const playerBox = document.getElementById("playerBox");
+    const nowPlaying = document.getElementById("nowPlaying");
+    const chaptersContainer = document.getElementById("chapters");
+    const legendBtn = document.getElementById("legendBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+
+    const legendPath = "/book01/legende/de.mp3";
+
+    const tracks = [
+      { id: "00", title: "00 · Intro" },
+      { id: "01", title: "01 · Start" },
+      { id: "02", title: "02 · Seite 2" },
+      { id: "04", title: "04 · Seite 4" },
+      { id: "06", title: "06 · Seite 6" },
+      { id: "08", title: "08 · Seite 8" },
+      { id: "10", title: "10 · Seite 10" },
+      { id: "12", title: "12 · Seite 12" },
+      { id: "14", title: "14 · Seite 14" },
+      { id: "16", title: "16 · Seite 16" },
+      { id: "18", title: "18 · Seite 18" },
+      { id: "20", title: "20 · Seite 20" },
+      { id: "22", title: "22 · Seite 22" },
+      { id: "24", title: "24 · Seite 24" },
+      { id: "26", title: "26 · Seite 26" },
+      { id: "28", title: "28 · Seite 28" },
+      { id: "30", title: "30 · Seite 30" },
+      { id: "32", title: "32 · Seite 32" }
+    ];
+
+    let currentIndex = 0;
+    let mode = "legend";
+
+    function updatePlayPauseText() {
+      playPauseBtn.textContent = player.paused ? "▶ Abspielen" : "⏸ Pause";
     }
 
-    function openCode(){
-      const code = normalizeCode(document.getElementById("code").value);
-      if(!code){ alert("Bitte einen Code eingeben, z.B. 01-001"); return; }
-      // Platzhalter: später /01-001 oder /buch-1/01-001
-      alert("Code erkannt: " + code + " (Routing kommt als nächstes)");
+    function renderChapters() {
+      chaptersContainer.innerHTML = "";
+
+      tracks.forEach((track, index) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chapter" + (index === currentIndex && mode === "book" ? " active" : "");
+        btn.textContent = track.title;
+        btn.onclick = () => loadBookTrack(index, true);
+        chaptersContainer.appendChild(btn);
+      });
     }
 
-    (function init(){
-      const p = new URLSearchParams(window.location.search);
-      const c = p.get("c");
-      if(c) document.getElementById("code").value = normalizeCode(c);
-    })();
+    function updateNavButtons() {
+      const isLegend = mode === "legend";
+      prevBtn.disabled = isLegend || currentIndex === 0;
+      nextBtn.disabled = isLegend || currentIndex === tracks.length - 1;
+    }
+
+    function showPlayer() {
+      playerBox.classList.add("show");
+      playerBox.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function loadLegend(autoplay = true) {
+      mode = "legend";
+      showPlayer();
+      player.src = legendPath;
+      nowPlaying.textContent = "Jetzt läuft: Die Pigipegs-Legende";
+      renderChapters();
+      updateNavButtons();
+      updatePlayPauseText();
+      if (autoplay) player.play().catch(() => {});
+    }
+
+    function loadBookTrack(index, autoplay = true) {
+      mode = "book";
+      currentIndex = index;
+      const track = tracks[index];
+      showPlayer();
+      player.src = "/book01/audio/de/" + track.id + ".mp3";
+      nowPlaying.textContent = "Jetzt läuft: " + track.title;
+      renderChapters();
+      updateNavButtons();
+      updatePlayPauseText();
+      if (autoplay) player.play().catch(() => {});
+    }
+
+    legendBtn.addEventListener("click", () => loadLegend(true));
+
+    prevBtn.addEventListener("click", () => {
+      if (mode === "book" && currentIndex > 0) {
+        loadBookTrack(currentIndex - 1, true);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (mode === "book" && currentIndex < tracks.length - 1) {
+        loadBookTrack(currentIndex + 1, true);
+      }
+    });
+
+    playPauseBtn.addEventListener("click", () => {
+      if (!player.src) return;
+      if (player.paused) {
+        player.play().catch(() => {});
+      } else {
+        player.pause();
+      }
+    });
+
+    player.addEventListener("play", updatePlayPauseText);
+    player.addEventListener("pause", updatePlayPauseText);
+
+    player.addEventListener("ended", () => {
+      if (mode === "book" && currentIndex < tracks.length - 1) {
+        loadBookTrack(currentIndex + 1, true);
+      } else {
+        updatePlayPauseText();
+      }
+    });
+
+    renderChapters();
+    updateNavButtons();
+    updatePlayPauseText();
   </script>
-
 </body>
 </html>
