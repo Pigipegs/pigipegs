@@ -1,120 +1,508 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pigipegs Hörwelt</title>
 
-<title>Pigipegs Hörwelt</title>
+  <style>
+    :root{
+      --bg1:#fff8ef;
+      --bg2:#fdf1ff;
+      --card:#ffffff;
+      --text:#2d2433;
+      --muted:#6d6273;
+      --line:#eadff0;
+      --accent:#ff8fa3;
+      --accent2:#8ecae6;
+      --accent3:#cde990;
+      --shadow:0 14px 34px rgba(80, 47, 88, 0.10);
+      --radius:24px;
+      --max:980px;
+    }
 
-<style>
+    *{box-sizing:border-box}
 
-body{
-font-family: Arial, sans-serif;
-background:#fafafa;
-margin:0;
-padding:20px;
-text-align:center;
-}
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, #fff3cc 0%, transparent 30%),
+        radial-gradient(circle at top right, #f7d8ff 0%, transparent 28%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
 
-h1{
-font-size:32px;
-margin-bottom:30px;
-}
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:20px 16px 40px;
+    }
 
-.card{
-background:white;
-border-radius:16px;
-padding:25px;
-margin:20px auto;
-max-width:500px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
 
-button{
-font-size:18px;
-padding:14px 24px;
-border:none;
-border-radius:12px;
-background:#222;
-color:white;
-cursor:pointer;
-margin-top:15px;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
 
-button:hover{
-background:#444;
-}
+    .pig{
+      width:62px;
+      height:62px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg, #ffd4dc, #ffe8c7);
+      box-shadow:var(--shadow);
+      font-size:32px;
+    }
 
-.chapter{
-margin:8px;
-padding:10px 16px;
-border-radius:10px;
-border:1px solid #ddd;
-background:white;
-cursor:pointer;
-}
+    .eyebrow{
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:4px;
+    }
 
-audio{
-margin-top:20px;
-width:100%;
-}
+    h1{
+      margin:0;
+      font-size:clamp(28px, 4vw, 42px);
+      line-height:1.08;
+    }
 
-</style>
+    .subtitle{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.45;
+      max-width:700px;
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color:var(--text);
+      background:rgba(255,255,255,0.8);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      box-shadow:0 4px 14px rgba(0,0,0,0.04);
+    }
+
+    .hero{
+      background:rgba(255,255,255,0.75);
+      border:1px solid rgba(255,255,255,0.7);
+      border-radius:30px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      margin-bottom:20px;
+    }
+
+    .langbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .lang{
+      border:none;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      background:#fff;
+      color:var(--text);
+      border:1px solid var(--line);
+      box-shadow:0 6px 14px rgba(0,0,0,0.04);
+      cursor:pointer;
+    }
+
+    .lang.active{
+      background:var(--accent);
+      color:#fff;
+      border-color:var(--accent);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.75);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .card h2{
+      margin:0 0 8px;
+      font-size:24px;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .card-legend{
+      background:linear-gradient(180deg, #fffaf1, #fff);
+    }
+
+    .card-book{
+      background:linear-gradient(180deg, #f8fdff, #fff);
+    }
+
+    .badge{
+      display:inline-block;
+      font-size:12px;
+      font-weight:bold;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+      color:#7c5f19;
+      background:#fff0b8;
+      border-radius:999px;
+      padding:8px 10px;
+      margin-bottom:14px;
+    }
+
+    .book-badge{
+      color:#30556a;
+      background:#dff4ff;
+    }
+
+    .bigbtn{
+      margin-top:18px;
+      width:100%;
+      border:none;
+      border-radius:18px;
+      padding:16px 18px;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      color:#fff;
+      background:linear-gradient(135deg, #ff8fa3, #ff6f91);
+      box-shadow:0 10px 22px rgba(255,111,145,0.24);
+    }
+
+    .bigbtn.book{
+      background:linear-gradient(135deg, #8ecae6, #5aa9d6);
+      box-shadow:0 10px 22px rgba(90,169,214,0.24);
+    }
+
+    .playerbox{
+      margin-top:18px;
+      display:none;
+    }
+
+    .playerbox.show{
+      display:block;
+    }
+
+    .nowplaying{
+      background:#fffdf7;
+      border:1px solid #f0e5be;
+      border-radius:18px;
+      padding:14px 16px;
+      margin-bottom:14px;
+      font-size:15px;
+      color:#6c5d2a;
+    }
+
+    audio{
+      width:100%;
+      margin-bottom:16px;
+    }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .ctrl{
+      flex:1 1 160px;
+      border:none;
+      border-radius:16px;
+      padding:14px 16px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      background:#f7f1fa;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+
+    .ctrl.primary{
+      background:linear-gradient(135deg, #cde990, #9fd85f);
+      border-color:#b9d87a;
+    }
+
+    .chapters{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
+      gap:10px;
+    }
+
+    .chapter{
+      border:none;
+      border-radius:16px;
+      padding:14px 10px;
+      cursor:pointer;
+      font-size:15px;
+      font-weight:bold;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+
+    .chapter.active{
+      background:#2d2433;
+      color:#fff;
+      border-color:#2d2433;
+    }
+
+    .footer-note{
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      margin-top:18px;
+    }
+
+    @media (max-width: 760px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        padding:20px;
+      }
+
+      .card{
+        padding:18px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="pig">🐷</div>
+        <div>
+          <div class="eyebrow">Pigipegs Hörwelt</div>
+          <h1>Geschichten zum Anhören</h1>
+          <p class="subtitle">
+            Wähle zuerst eine Sprache und höre dann die Pigipegs-Legende
+            oder die Hörgeschichten aus Buch 01.
+          </p>
+        </div>
+      </div>
 
-<h1>🐷 Pigipegs Hörwelt</h1>
+      <div class="nav">
+        <a href="/book01/">Buch 01</a>
+        <a href="/book01/index.html">Start</a>
+      </div>
+    </div>
 
-<div class="card">
-<h2>Die Pigipegs Legende</h2>
-<p>Wie die Pigipegs zu ihrem Haus auf dem Berg gekommen sind.</p>
+    <section class="hero">
+      <div class="langbar">
+        <button class="lang active" type="button">Deutsch</button>
+        <button class="lang" type="button" disabled>English</button>
+        <button class="lang" type="button" disabled>Español</button>
+        <button class="lang" type="button" disabled>Français</button>
+      </div>
+    </section>
 
-<button onclick="playLegend()">▶ Legende anhören</button>
-</div>
+    <div class="grid">
+      <section class="card card-legend">
+        <div class="badge">Vor dem Buch</div>
+        <h2>Die Pigipegs-Legende</h2>
+        <p>
+          Wie die Pigipegs zu ihrem Haus auf dem Berg gekommen sind.
+          Eine kurze Geschichte zum Einstieg in ihre Welt.
+        </p>
+        <button class="bigbtn" type="button" id="legendBtn">▶ Legende anhören</button>
+      </section>
 
-<div class="card">
-<h2>Buch 01</h2>
+      <section class="card card-book">
+        <div class="badge book-badge">Buch 01</div>
+        <h2>Zuhause ist, wo wir zusammen sind</h2>
+        <p>
+          Höre die Geschichten aus dem Buch. Du kannst einzelne Kapitel
+          direkt auswählen oder mit Weiter und Zurück blättern.
+        </p>
+        <button class="bigbtn book" type="button" id="bookBtn">▶ Buch 01 öffnen</button>
+      </section>
+    </div>
 
-<div id="chapters"></div>
+    <section class="card playerbox" id="playerBox">
+      <div class="nowplaying" id="nowPlaying">
+        Noch nichts ausgewählt.
+      </div>
 
-<audio id="player" controls></audio>
+      <audio id="player" controls preload="none"></audio>
 
-</div>
+      <div class="controls">
+        <button class="ctrl" type="button" id="prevBtn">⟵ Zurück</button>
+        <button class="ctrl primary" type="button" id="playPauseBtn">▶ Abspielen</button>
+        <button class="ctrl" type="button" id="nextBtn">Weiter ⟶</button>
+      </div>
 
-<script>
+      <div class="chapters" id="chapters"></div>
+    </section>
 
-const player = document.getElementById("player")
+    <div class="footer-note">
+      Hörwelt für Pigipegs · Deutsch
+    </div>
+  </div>
 
-function playLegend(){
-player.src = "/book01/legende/de.mp3"
-player.play()
-}
+  <script>
+    const player = document.getElementById("player");
+    const playerBox = document.getElementById("playerBox");
+    const nowPlaying = document.getElementById("nowPlaying");
+    const chaptersContainer = document.getElementById("chapters");
+    const legendBtn = document.getElementById("legendBtn");
+    const bookBtn = document.getElementById("bookBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const playPauseBtn = document.getElementById("playPauseBtn");
 
-const chapters = [
-"00","01","02","04","06","08","10","12",
-"14","16","18","20","22","24","26","28","30","32"
-]
+    const legendPath = "/book01/legende/de.mp3";
 
-const container = document.getElementById("chapters")
+    const tracks = [
+      { id: "00", title: "00 · Intro" },
+      { id: "01", title: "01 · Start" },
+      { id: "02", title: "02 · Seite 2" },
+      { id: "04", title: "04 · Seite 4" },
+      { id: "06", title: "06 · Seite 6" },
+      { id: "08", title: "08 · Seite 8" },
+      { id: "10", title: "10 · Seite 10" },
+      { id: "12", title: "12 · Seite 12" },
+      { id: "14", title: "14 · Seite 14" },
+      { id: "16", title: "16 · Seite 16" },
+      { id: "18", title: "18 · Seite 18" },
+      { id: "20", title: "20 · Seite 20" },
+      { id: "22", title: "22 · Seite 22" },
+      { id: "24", title: "24 · Seite 24" },
+      { id: "26", title: "26 · Seite 26" },
+      { id: "28", title: "28 · Seite 28" },
+      { id: "30", title: "30 · Seite 30" },
+      { id: "32", title: "32 · Seite 32" }
+    ];
 
-chapters.forEach(ch => {
+    let currentIndex = 0;
+    let mode = "book";
 
-const btn = document.createElement("button")
-btn.className="chapter"
+    function updatePlayPauseText() {
+      playPauseBtn.textContent = player.paused ? "▶ Abspielen" : "⏸ Pause";
+    }
 
-btn.innerText="Kapitel "+ch
+    function renderChapters() {
+      chaptersContainer.innerHTML = "";
 
-btn.onclick=()=>{
-player.src="/book01/audio/de/"+ch+".mp3"
-player.play()
-}
+      tracks.forEach((track, index) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chapter" + (index === currentIndex && mode === "book" ? " active" : "");
+        btn.textContent = track.title;
+        btn.onclick = () => loadBookTrack(index, true);
+        chaptersContainer.appendChild(btn);
+      });
+    }
 
-container.appendChild(btn)
+    function updateNavButtons() {
+      const isLegend = mode === "legend";
+      prevBtn.disabled = isLegend || currentIndex === 0;
+      nextBtn.disabled = isLegend || currentIndex === tracks.length - 1;
+    }
 
-})
+    function showPlayer() {
+      playerBox.classList.add("show");
+    }
 
-</script>
+    function loadLegend(autoplay = true) {
+      mode = "legend";
+      showPlayer();
+      player.src = legendPath;
+      nowPlaying.textContent = "Jetzt läuft: Die Pigipegs-Legende";
+      renderChapters();
+      updateNavButtons();
+      updatePlayPauseText();
+      if (autoplay) player.play().catch(() => {});
+    }
 
+    function loadBookTrack(index, autoplay = true) {
+      mode = "book";
+      currentIndex = index;
+      const track = tracks[index];
+      showPlayer();
+      player.src = "/book01/audio/de/" + track.id + ".mp3";
+      nowPlaying.textContent = "Jetzt läuft: " + track.title;
+      renderChapters();
+      updateNavButtons();
+      updatePlayPauseText();
+      if (autoplay) player.play().catch(() => {});
+    }
+
+    legendBtn.addEventListener("click", () => loadLegend(true));
+    bookBtn.addEventListener("click", () => loadBookTrack(0, true));
+
+    prevBtn.addEventListener("click", () => {
+      if (mode === "book" && currentIndex > 0) {
+        loadBookTrack(currentIndex - 1, true);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (mode === "book" && currentIndex < tracks.length - 1) {
+        loadBookTrack(currentIndex + 1, true);
+      }
+    });
+
+    playPauseBtn.addEventListener("click", () => {
+      if (!player.src) return;
+      if (player.paused) {
+        player.play().catch(() => {});
+      } else {
+        player.pause();
+      }
+    });
+
+    player.addEventListener("play", updatePlayPauseText);
+    player.addEventListener("pause", updatePlayPauseText);
+
+    player.addEventListener("ended", () => {
+      if (mode === "book" && currentIndex < tracks.length - 1) {
+        loadBookTrack(currentIndex + 1, true);
+      } else {
+        updatePlayPauseText();
+      }
+    });
+
+    renderChapters();
+    updateNavButtons();
+    updatePlayPauseText();
+  </script>
 </body>
 </html>
