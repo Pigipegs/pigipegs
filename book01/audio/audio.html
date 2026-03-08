@@ -769,22 +769,40 @@
       nextBtn.disabled = isLegend || currentIndex === tracks.length - 1;
     }
 
-    function renderChapters() {
-      chapterGrid.innerHTML = "";
+   function renderChapters() {
+  chapterGrid.innerHTML = "";
 
-      tracks.forEach((track, index) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.textContent = track.title;
-        if (mode === "book" && index === currentIndex) {
-          btn.classList.add("active");
-        }
-        btn.addEventListener("click", () => {
-          loadBookTrack(index, true);
-        });
-        chapterGrid.appendChild(btn);
-      });
+  tracks.forEach((track, index) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chapter-card";
+
+    if (mode === "book" && index === currentIndex) {
+      btn.classList.add("active");
     }
+
+    const parts = track.title.split(" - ");
+    const code = parts[0] || track.id;
+    const name = parts.slice(1).join(" - ") || track.title;
+
+    const codeEl = document.createElement("span");
+    codeEl.className = "chapter-code";
+    codeEl.textContent = code;
+
+    const nameEl = document.createElement("span");
+    nameEl.className = "chapter-name";
+    nameEl.textContent = name;
+
+    btn.appendChild(codeEl);
+    btn.appendChild(nameEl);
+
+    btn.addEventListener("click", () => {
+      loadBookTrack(index, true);
+    });
+
+    chapterGrid.appendChild(btn);
+  });
+}
 
     function loadLegend(autoplay = true) {
       mode = "legend";
