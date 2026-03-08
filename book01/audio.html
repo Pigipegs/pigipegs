@@ -1,54 +1,881 @@
----
-layout: default
-title: Buch 1 – Audio
----
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pigipegs Hörwelt</title>
 
-{% assign b = site.data.book1 %}
+  <style>
+    :root{
+      --night-1:#1f2559;
+      --night-2:#3a3f88;
+      --night-3:#6f66b8;
+      --night-4:#f1bfd0;
 
-<div class="card">
-  <h1>Vorlesen – {{ b.title }}</h1>
-  <p>Wähle eine Sprache. Danach kannst du die passenden Audios abspielen.</p>
+      --text:#fffaf7;
+      --muted:#efe7ff;
+      --soft:#d9d0f3;
 
-  <div class="lang">
-    <div class="flag" onclick="pick('de')">🇩🇪 <small>Deutsch</small></div>
-    <div class="flag" onclick="pick('en')">🇬🇧 <small>English</small></div>
-    <div class="flag" onclick="pick('es')">🇪🇸 <small>Español</small></div>
-    <div class="flag" onclick="pick('fr')">🇫🇷 <small>Français</small></div>
-  </div>
+      --panel:rgba(255,255,255,0.12);
+      --panel-strong:rgba(255,255,255,0.18);
+      --border:rgba(255,255,255,0.20);
 
-  <p id="picked" style="margin-top:12px"></p>
-</div>
+      --pink:#ff8faa;
+      --pink-dark:#ff6f94;
+      --blue:#8fd0ef;
+      --blue-dark:#5eb2de;
+      --green:#cfe89d;
+      --green-dark:#a8d76a;
+      --gold:#ffe59c;
 
-<div class="grid2" style="margin-top:14px">
-  <div class="card audio-card">
-    <h2>Intro</h2>
-    <audio controls preload="none" id="a1">
-      <source src="{{ site.baseurl }}/assets/audio/intro-de.mp3" type="audio/mpeg">
-    </audio>
-  </div>
+      --shadow:0 16px 40px rgba(20, 18, 48, 0.28);
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --max:1120px;
+    }
 
-  <div class="card audio-card">
-    <h2>Kapitel 1</h2>
-    <audio controls preload="none" id="a2">
-      <source src="{{ site.baseurl }}/assets/audio/ch1-de.mp3" type="audio/mpeg">
-    </audio>
-  </div>
-</div>
+    *{
+      box-sizing:border-box;
+    }
 
-<script>
-  function pick(lang){
-    localStorage.setItem('lang', lang);
-    document.documentElement.setAttribute('lang', lang);
-    document.getElementById('picked').innerText = "Aktive Sprache: " + lang.toUpperCase();
+    html,body{
+      margin:0;
+      padding:0;
+    }
 
-    // Tauscht Audio-Dateien je nach Sprache (Schema: intro-xx.mp3, ch1-xx.mp3)
-    document.querySelector('#a1 source').src = "{{ site.baseurl }}/assets/audio/intro-" + lang + ".mp3";
-    document.querySelector('#a2 source').src = "{{ site.baseurl }}/assets/audio/ch1-" + lang + ".mp3";
+    body{
+      font-family: Arial, sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 10% 14%, rgba(255,255,255,0.95) 0 1.5px, transparent 2px),
+        radial-gradient(circle at 18% 30%, rgba(255,255,255,0.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle at 25% 8%, rgba(255,255,255,0.85) 0 1.4px, transparent 2px),
+        radial-gradient(circle at 34% 22%, rgba(255,240,190,0.9) 0 1.7px, transparent 2.3px),
+        radial-gradient(circle at 44% 12%, rgba(255,255,255,0.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle at 52% 28%, rgba(255,255,255,0.85) 0 1.3px, transparent 2px),
+        radial-gradient(circle at 60% 10%, rgba(255,240,190,0.95) 0 1.8px, transparent 2.5px),
+        radial-gradient(circle at 68% 22%, rgba(255,255,255,0.9) 0 1.2px, transparent 1.9px),
+        radial-gradient(circle at 77% 8%, rgba(255,255,255,0.85) 0 1.4px, transparent 2px),
+        radial-gradient(circle at 86% 18%, rgba(255,240,190,0.95) 0 1.8px, transparent 2.5px),
+        radial-gradient(circle at 92% 32%, rgba(255,255,255,0.75) 0 1.1px, transparent 1.8px),
+        linear-gradient(180deg, var(--night-1) 0%, var(--night-2) 38%, var(--night-3) 72%, var(--night-4) 100%);
+      overflow-x:hidden;
+    }
 
-    document.getElementById('a1').load();
-    document.getElementById('a2').load();
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:20px 16px 48px;
+      position:relative;
+    }
+
+    .moon{
+      position:absolute;
+      top:30px;
+      right:24px;
+      width:74px;
+      height:74px;
+      border-radius:50%;
+      background:#fff0b0;
+      box-shadow:0 0 30px rgba(255,240,176,0.55);
+      opacity:0.95;
+    }
+
+    .moon::after{
+      content:"";
+      position:absolute;
+      top:8px;
+      left:22px;
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      background:linear-gradient(180deg, var(--night-2), var(--night-3));
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+      position:relative;
+      z-index:2;
+    }
+
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+
+    .pig{
+      width:78px;
+      height:78px;
+      border-radius:24px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:38px;
+      background:linear-gradient(135deg, rgba(255,224,232,0.95), rgba(255,244,215,0.95));
+      box-shadow:var(--shadow);
+      flex:0 0 auto;
+    }
+
+    .eyebrow{
+      font-size:13px;
+      color:var(--soft);
+      margin:4px 0 8px;
+      letter-spacing:.03em;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(30px, 4vw, 52px);
+      line-height:1.04;
+    }
+
+    .sub{
+      margin:12px 0 0;
+      max-width:740px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:16px;
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color:var(--text);
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      backdrop-filter:blur(8px);
+    }
+
+    .hero{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:20px;
+      margin-bottom:22px;
+      align-items:stretch;
+    }
+
+    .hero-panel{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      padding:26px 24px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+    }
+
+    .hero-panel h2{
+      margin:0 0 10px;
+      font-size:clamp(30px, 4vw, 48px);
+      line-height:1.05;
+    }
+
+    .hero-text{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.65;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .cta{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:15px 20px;
+      border-radius:18px;
+      font-weight:bold;
+      font-size:17px;
+      box-shadow:0 10px 22px rgba(0,0,0,0.14);
+      border:none;
+      cursor:pointer;
+    }
+
+    .cta-primary{
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+    }
+
+    .cta-secondary{
+      background:rgba(255,255,255,0.14);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.16);
+    }
+
+    .cover-box{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      padding:16px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+    }
+
+    .cover-box img{
+      display:block;
+      width:100%;
+      height:auto;
+      border-radius:24px;
+      box-shadow:0 12px 26px rgba(0,0,0,0.16);
+    }
+
+    .cover-note{
+      margin:12px 6px 2px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .language{
+      position:relative;
+      z-index:2;
+      margin-bottom:22px;
+    }
+
+    .language-bar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .language-bar button{
+      border:none;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      font-size:15px;
+      background:rgba(255,255,255,0.14);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.16);
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+    }
+
+    .language-bar .active{
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .language-bar button[disabled]{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+
+    .entry-grid{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:18px;
+      margin-bottom:22px;
+    }
+
+    .entry{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius-lg);
+      padding:22px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .entry::after{
+      position:absolute;
+      top:16px;
+      right:18px;
+      font-size:30px;
+      opacity:.18;
+    }
+
+    .entry-legend::after{ content:"🌙"; }
+    .entry-book::after{ content:"📖"; }
+    .entry-help::after{ content:"✨"; }
+
+    .tag{
+      display:inline-block;
+      margin-bottom:14px;
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:bold;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      background:rgba(255,229,156,0.95);
+      color:#6f5311;
+    }
+
+    .tag-blue{
+      background:rgba(196,235,255,0.95);
+      color:#244f63;
+    }
+
+    .tag-green{
+      background:rgba(219,245,181,0.95);
+      color:#466227;
+    }
+
+    .entry h3{
+      margin:0 0 8px;
+      font-size:24px;
+    }
+
+    .entry p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      min-height:96px;
+    }
+
+    .entry .btn{
+      margin-top:18px;
+      width:100%;
+      border:none;
+      border-radius:18px;
+      padding:16px 18px;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      color:#fff;
+      text-decoration:none;
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      box-shadow:0 10px 22px rgba(0,0,0,0.14);
+    }
+
+    .btn-pink{
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+    }
+
+    .btn-blue{
+      background:linear-gradient(135deg, var(--blue), var(--blue-dark));
+    }
+
+    .btn-green{
+      background:linear-gradient(135deg, var(--green), var(--green-dark));
+      color:#2c3818;
+    }
+
+    .player-section{
+      display:none;
+      position:relative;
+      z-index:2;
+      background:rgba(255,255,255,0.16);
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:var(--radius-xl);
+      padding:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+    }
+
+    .player-section.show{
+      display:block;
+    }
+
+    .player-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .player-title{
+      margin:0;
+      font-size:26px;
+    }
+
+    .status{
+      background:rgba(255,248,220,0.92);
+      color:#634f18;
+      border:1px solid rgba(255,235,170,0.9);
+      border-radius:18px;
+      padding:14px 16px;
+      max-width:540px;
+      line-height:1.5;
+      font-size:15px;
+    }
+
+    audio{
+      width:100%;
+      margin-bottom:16px;
+      border-radius:14px;
+    }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .controls button{
+      flex:1 1 170px;
+      border:none;
+      border-radius:16px;
+      padding:14px 16px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      background:rgba(255,255,255,0.16);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.18);
+    }
+
+    .controls .main{
+      background:linear-gradient(135deg, var(--green), var(--green-dark));
+      color:#2b3815;
+      border-color:transparent;
+    }
+
+    .controls button:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    .chapter-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(190px, 1fr));
+  gap:14px;
+}
+
+.chapter-card{
+  position:relative;
+  border:none;
+  border-radius:20px;
+  padding:16px 14px 15px;
+  cursor:pointer;
+  text-align:left;
+  min-height:96px;
+  color:var(--text);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10));
+  border:1px solid rgba(255,255,255,0.18);
+  box-shadow:0 10px 20px rgba(0,0,0,0.12);
+  transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  backdrop-filter:blur(8px);
+}
+
+.chapter-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 26px rgba(0,0,0,0.16);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.20), rgba(255,255,255,0.12));
+}
+
+.chapter-card:active{
+  transform:translateY(0);
+}
+
+.chapter-card.active{
+  background:
+    linear-gradient(180deg, rgba(255,245,200,0.98), rgba(255,232,166,0.94));
+  color:#342b15;
+  border-color:rgba(255,236,176,0.95);
+  box-shadow:0 14px 30px rgba(255,220,120,0.20);
+}
+
+.chapter-card::before{
+  content:"⭐";
+  position:absolute;
+  top:12px;
+  right:12px;
+  font-size:18px;
+  opacity:0.28;
+}
+
+.chapter-card.active::before{
+  opacity:0.9;
+}
+
+.chapter-code{
+  display:inline-block;
+  margin-bottom:8px;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:0.04em;
+  background:rgba(255,255,255,0.18);
+  border:1px solid rgba(255,255,255,0.18);
+  color:var(--soft);
+}
+
+.chapter-card.active .chapter-code{
+  background:rgba(255,255,255,0.55);
+  color:#5f4a10;
+  border-color:rgba(255,255,255,0.55);
+}
+
+.chapter-name{
+  display:block;
+  font-size:15px;
+  line-height:1.35;
+  font-weight:bold;
+}
+
+@media (max-width: 720px){
+  .chapter-grid{
+    grid-template-columns:1fr;
   }
 
-  // Auto: nimmt gespeicherte Sprache, sonst DE
-  pick(localStorage.getItem('lang') || 'de');
-</script>
+  .chapter-card{
+    min-height:84px;
+  }
+}
+
+    .footer-note{
+      position:relative;
+      z-index:2;
+      margin-top:18px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    @media (max-width: 980px){
+      .hero{
+        grid-template-columns:1fr;
+      }
+
+      .entry-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 720px){
+      .hero-panel,
+      .cover-box,
+      .entry,
+      .player-section{
+        padding:18px;
+      }
+
+      .pig{
+        width:68px;
+        height:68px;
+        font-size:34px;
+      }
+
+      .moon{
+        width:58px;
+        height:58px;
+        top:18px;
+        right:16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="moon"></div>
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="pig">🐷</div>
+        <div>
+          <div class="eyebrow">Pigipegs Hörwelt</div>
+          <h1>Geschichten unter dem Sternenhimmel</h1>
+          <p class="sub">
+            Höre die Pigipegs-Legende oder tauche direkt in die Geschichten aus
+            <strong>Buch 01</strong> ein. Alles in ruhiger Atmosphäre zum Anhören
+            und Ausmalen.
+          </p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="/index.html">Start</a>
+        <a href="/book01/">Buch 01</a>
+        <a href="/book01/so-gehts/">So geht’s</a>
+        <a href="/impressum/">Impressum</a>
+      </nav>
+    </div>
+
+    <section class="hero">
+      <div class="hero-panel">
+        <div class="eyebrow">Willkommen bei den Pigipegs</div>
+        <h2>Zuhause ist, wo wir zusammen sind</h2>
+        <p class="hero-text">
+          In der Hörwelt kannst du erst die kleine Vorgeschichte hören und danach
+          in die warmen, liebevollen Kapitel aus dem Buch wechseln. Jedes Kapitel
+          stoppt nach dem Abspielen, damit genug Zeit zum Ausmalen bleibt.
+        </p>
+
+        <div class="hero-actions">
+          <button class="cta cta-primary" type="button" id="heroLegendBtn">🌙 Legende anhören</button>
+          <a class="cta cta-secondary" href="/book01/">📖 Buch 01 entdecken</a>
+        </div>
+      </div>
+
+      <div class="cover-box">
+        <img
+          src="/assets/img/pigipegs-cover-stars.png"
+          alt="Pigipegs-Familie unter dem Sternenhimmel vor ihrem Haus"
+        />
+        <div class="cover-note">
+          Eine kleine Welt voller Sterne, Wärme, Geschichten und Geborgenheit.
+        </div>
+      </div>
+    </section>
+
+    <section class="language">
+      <div class="eyebrow">Sprache auswählen</div>
+      <div class="language-bar">
+        <button class="active" type="button">Deutsch</button>
+        <button type="button" disabled>English</button>
+        <button type="button" disabled>Español</button>
+        <button type="button" disabled>Français</button>
+      </div>
+    </section>
+
+    <section class="entry-grid">
+      <section class="entry entry-legend">
+        <div class="tag">Vor dem Buch</div>
+        <h3>Die Pigipegs-Legende</h3>
+        <p>
+          Erfahre, wie die Pigipegs zu ihrem Haus auf dem Berg gekommen sind
+          und wie ihre kleine Welt begonnen hat.
+        </p>
+        <button class="btn btn-pink" type="button" id="legendBtn">▶ Legende anhören</button>
+      </section>
+
+      <section class="entry entry-book">
+        <div class="tag tag-blue">Buch 01</div>
+        <h3>Die Hörgeschichten</h3>
+        <p>
+          Öffne die Kapitel aus Buch 01 und höre jede Geschichte in deinem
+          eigenen Tempo an.
+        </p>
+        <button class="btn btn-blue" type="button" id="bookBtn">🎧 Kapitel öffnen</button>
+      </section>
+
+      <section class="entry entry-help">
+        <div class="tag tag-green">Einfach erklärt</div>
+        <h3>So geht’s</h3>
+        <p>
+          Scanne den QR-Code im Buch, wähle eine Sprache und höre dir danach
+          die passende Geschichte an.
+        </p>
+        <a class="btn btn-green" href="/book01/so-gehts/">✨ Anleitung ansehen</a>
+      </section>
+    </section>
+
+    <section class="player-section" id="playerSection">
+      <div class="player-header">
+        <div>
+          <div class="eyebrow">Jetzt anhören</div>
+          <h3 class="player-title">Pigipegs Audio</h3>
+        </div>
+        <div class="status" id="statusBox">Noch nichts ausgewählt.</div>
+      </div>
+
+      <audio id="player" controls preload="none"></audio>
+
+      <div class="controls">
+        <button type="button" id="prevBtn">⟵ Zurück</button>
+        <button type="button" class="main" id="playPauseBtn">▶ Abspielen</button>
+        <button type="button" id="nextBtn">Weiter ⟶</button>
+      </div>
+
+      <div class="chapter-grid" id="chapterGrid"></div>
+    </section>
+
+    <div class="footer-note">
+      Pigipegs · Hörwelt · Deutsch
+    </div>
+  </div>
+
+  <script>
+    const player = document.getElementById("player");
+    const playerSection = document.getElementById("playerSection");
+    const statusBox = document.getElementById("statusBox");
+    const chapterGrid = document.getElementById("chapterGrid");
+
+    const legendBtn = document.getElementById("legendBtn");
+    const heroLegendBtn = document.getElementById("heroLegendBtn");
+    const bookBtn = document.getElementById("bookBtn");
+
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+
+    const legendPath = "/book01/legende/de.mp3";
+
+    const tracks = [
+  { id: "00", title: "Intro - Die Pigipegs" },
+  { id: "02", title: "S02 - Das kleine Haus auf dem Berg" },
+  { id: "04", title: "S04 - Papa Pigipeg erzählt" },
+  { id: "06", title: "S06 - Mama Pigipegs Gute-Nacht-Geschichten" },
+  { id: "08", title: "S08 - Peet hat eine Idee" },
+  { id: "10", title: "S10 - Amy findet einen Schatz" },
+  { id: "12", title: "S12 - Baby Leo wird müde" },
+  { id: "14", title: "S14 - Die Sterne leuchten hell" },
+  { id: "16", title: "S16 - Ein kleiner Wunsch" },
+  { id: "18", title: "S18 - Die Familie rückt zusammen" },
+  { id: "20", title: "S20 - Das Licht im Fenster" },
+  { id: "22", title: "S22 - Der Mond steigt höher" },
+  { id: "24", title: "S24 - Zeit für eine Geschichte" },
+  { id: "26", title: "S26 - Ein warmes Lachen" },
+  { id: "28", title: "S28 - Der Himmel voller Sterne" },
+  { id: "30", title: "S30 - Langsam wird es still" },
+  { id: "32", title: "S32 - Zuhause ist, wo wir zusammen sind" }
+];
+
+    let currentIndex = 0;
+    let mode = "legend";
+
+    function showPlayer() {
+      playerSection.classList.add("show");
+      playerSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function updatePlayPauseText() {
+      playPauseBtn.textContent = player.paused ? "▶ Abspielen" : "⏸ Pause";
+    }
+
+    function updateNavButtons() {
+      const isLegend = mode === "legend";
+      prevBtn.disabled = isLegend || currentIndex === 0;
+      nextBtn.disabled = isLegend || currentIndex === tracks.length - 1;
+    }
+
+   function renderChapters() {
+  chapterGrid.innerHTML = "";
+
+  tracks.forEach((track, index) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chapter-card";
+
+    if (mode === "book" && index === currentIndex) {
+      btn.classList.add("active");
+    }
+
+    const parts = track.title.split(" - ");
+    const code = parts[0] || track.id;
+    const name = parts.slice(1).join(" - ") || track.title;
+
+    const codeEl = document.createElement("span");
+    codeEl.className = "chapter-code";
+    codeEl.textContent = code;
+
+    const nameEl = document.createElement("span");
+    nameEl.className = "chapter-name";
+    nameEl.textContent = name;
+
+    btn.appendChild(codeEl);
+    btn.appendChild(nameEl);
+
+    btn.addEventListener("click", () => {
+      loadBookTrack(index, true);
+    });
+
+    chapterGrid.appendChild(btn);
+  });
+}
+
+    function loadLegend(autoplay = true) {
+      mode = "legend";
+      showPlayer();
+      player.src = legendPath;
+      statusBox.textContent = "Jetzt läuft: Die Pigipegs-Legende";
+      renderChapters();
+      updateNavButtons();
+      updatePlayPauseText();
+      if (autoplay) {
+        player.play().catch(() => {});
+      }
+    }
+
+    function loadBookTrack(index, autoplay = true) {
+      mode = "book";
+      currentIndex = index;
+      const track = tracks[index];
+      showPlayer();
+      player.src = "/book01/audio/de/" + track.id + ".mp3";
+      statusBox.textContent = "Jetzt läuft: " + track.title;
+      renderChapters();
+      updateNavButtons();
+      updatePlayPauseText();
+      if (autoplay) {
+        player.play().catch(() => {});
+      }
+    }
+
+    function togglePlayback() {
+      if (!player.src) return;
+      if (player.paused) {
+        player.play().catch(() => {});
+      } else {
+        player.pause();
+      }
+    }
+
+    legendBtn.addEventListener("click", () => loadLegend(true));
+    heroLegendBtn.addEventListener("click", () => loadLegend(true));
+    bookBtn.addEventListener("click", () => loadBookTrack(0, true));
+
+    prevBtn.addEventListener("click", () => {
+      if (mode === "book" && currentIndex > 0) {
+        loadBookTrack(currentIndex - 1, true);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (mode === "book" && currentIndex < tracks.length - 1) {
+        loadBookTrack(currentIndex + 1, true);
+      }
+    });
+
+    playPauseBtn.addEventListener("click", togglePlayback);
+
+    player.addEventListener("play", updatePlayPauseText);
+    player.addEventListener("pause", updatePlayPauseText);
+
+    player.addEventListener("ended", () => {
+      player.pause();
+      updatePlayPauseText();
+
+      if (mode === "book") {
+        statusBox.textContent = "Kapitel beendet – Zeit zum Ausmalen 🎨";
+      } else {
+        statusBox.textContent = "Die Legende ist zu Ende. Du kannst jetzt in Buch 01 wechseln.";
+      }
+    });
+
+    renderChapters();
+    updateNavButtons();
+    updatePlayPauseText();
+  </script>
+</body>
+</html>
