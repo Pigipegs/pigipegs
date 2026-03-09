@@ -872,7 +872,17 @@
         statusBox.textContent = "Die Legende ist zu Ende. Du kannst jetzt in Buch 01 wechseln.";
       }
     });
+const params = new URLSearchParams(window.location.search);
+const startChapter = params.get("s");
 
+if (startChapter) {
+  const normalized = startChapter.padStart(2, "0");
+  const foundIndex = tracks.findIndex(track => track.id === normalized);
+
+  if (foundIndex !== -1) {
+    loadBookTrack(foundIndex, false);
+  }
+}
     renderChapters();
     updateNavButtons();
     updatePlayPauseText();
