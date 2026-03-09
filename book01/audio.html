@@ -457,20 +457,20 @@
     }
 
     .chapter-card{
-      position:relative;
-      border:none;
-      border-radius:20px;
-      padding:16px 14px 15px;
-      cursor:pointer;
-      text-align:left;
-      min-height:96px;
-      color:var(--text);
-      background:linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10));
-      border:1px solid rgba(255,255,255,0.18);
-      box-shadow:0 10px 20px rgba(0,0,0,0.12);
-      transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-      backdrop-filter:blur(8px);
-    }
+  position:relative;
+  border:none;
+  border-radius:20px;
+  padding:16px 14px 15px;
+  cursor:pointer;
+  text-align:left;
+  min-height:96px;
+  color:#ffffff;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+  border:1px solid rgba(255,255,255,0.16);
+  box-shadow:0 10px 20px rgba(0,0,0,0.12);
+  transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  backdrop-filter:blur(8px);
+}
 
     .chapter-card:hover{
       transform:translateY(-2px);
@@ -503,17 +503,17 @@
     }
 
     .chapter-code{
-      display:inline-block;
-      margin-bottom:8px;
-      padding:5px 9px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:bold;
-      letter-spacing:0.04em;
-      background:rgba(255,255,255,0.18);
-      border:1px solid rgba(255,255,255,0.18);
-      color:var(--soft);
-    }
+  display:inline-block;
+  margin-bottom:8px;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:0.04em;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.18);
+  color:#f8f3ff;
+}
 
     .chapter-card.active .chapter-code{
       background:rgba(255,255,255,0.55);
@@ -522,11 +522,13 @@
     }
 
     .chapter-name{
-      display:block;
-      font-size:15px;
-      line-height:1.35;
-      font-weight:bold;
-    }
+  display:block;
+  font-size:15px;
+  line-height:1.35;
+  font-weight:bold;
+  color:#ffffff;
+  text-shadow:0 1px 1px rgba(0,0,0,0.15);
+}
 
     .footer-note{
       position:relative;
@@ -554,7 +556,17 @@
       .player-section{
         padding:18px;
       }
+.chapter-card{
+  background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+}
 
+.chapter-code{
+  background:rgba(255,255,255,0.10);
+}
+
+.chapter-name{
+  font-size:16px;
+}
       .pig{
         width:68px;
         height:68px;
