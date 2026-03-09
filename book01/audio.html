@@ -880,8 +880,10 @@ if (startChapter) {
   const foundIndex = tracks.findIndex(track => track.id === normalized);
 
   if (foundIndex !== -1) {
-    loadBookTrack(foundIndex, false);
-  }
+  loadBookTrack(foundIndex, false);
+  setTimeout(() => {
+    playerSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 300);
 }
     renderChapters();
     updateNavButtons();
