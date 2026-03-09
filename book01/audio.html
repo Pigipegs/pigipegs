@@ -71,17 +71,19 @@
       position:relative;
     }
 
-    .moon{
-      position:absolute;
-      top:30px;
-      right:24px;
-      width:74px;
-      height:74px;
-      border-radius:50%;
-      background:#fff0b0;
-      box-shadow:0 0 30px rgba(255,240,176,0.55);
-      opacity:0.95;
-    }
+   .moon{
+  position:fixed;
+  top:26px;
+  right:34px;
+  width:74px;
+  height:74px;
+  border-radius:50%;
+  background:#fff0b0;
+  box-shadow:0 0 30px rgba(255,240,176,0.55);
+  opacity:0.95;
+  z-index:1;
+  pointer-events:none;
+}
 
     .moon::after{
       content:"";
