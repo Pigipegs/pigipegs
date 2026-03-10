@@ -300,8 +300,9 @@
 
     .book-grid{
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
+      grid-template-columns:repeat(3, minmax(0, 1fr));
       gap:18px;
+      align-items:stretch;
     }
 
     .book-tile{
@@ -310,6 +311,10 @@
       border-radius:22px;
       padding:20px;
       box-shadow:0 10px 22px rgba(0,0,0,0.12);
+      min-height:260px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
 
     .book-tile h3{
@@ -321,6 +326,7 @@
       margin:0 0 18px;
       color:var(--muted);
       line-height:1.6;
+      flex:1;
     }
 
     .book-tile-active{
@@ -348,6 +354,7 @@
     .btn{
       margin-top:18px;
       width:100%;
+      margin-bottom:0;
       border:none;
       border-radius:18px;
       padding:16px 18px;
@@ -362,17 +369,8 @@
       box-shadow:0 10px 22px rgba(0,0,0,0.14);
     }
 
-    .btn-pink{
-      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
-    }
-
     .btn-blue{
       background:linear-gradient(135deg, var(--blue), var(--blue-dark));
-    }
-
-    .btn-green{
-      background:linear-gradient(135deg, var(--green), var(--green-dark));
-      color:#2c3818;
     }
 
     .btn-soft{
@@ -553,7 +551,9 @@
       .hero{
         grid-template-columns:1fr;
       }
+    }
 
+    @media (max-width: 700px){
       .book-grid{
         grid-template-columns:1fr;
       }
