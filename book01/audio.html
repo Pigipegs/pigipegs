@@ -653,23 +653,44 @@
     <section class="language">
       <div class="eyebrow">Sprache auswählen</div>
       <div class="language-bar">
-        <button class="active" type="button" data-lang="de">Deutsch</button>
-        <button type="button" data-lang="en">English</button>
-        <button type="button" data-lang="es">Español</button>
-        <button type="button" data-lang="fr">Français</button>
-      </div>
+  <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
+  <button type="button" data-lang="en">🇬🇧 English</button>
+  <button type="button" data-lang="es">🇪🇸 Español</button>
+  <button type="button" data-lang="fr">🇫🇷 Français</button>
+</div>
     </section>
 
-    <section class="entry-grid">
-      <section class="entry entry-legend">
-        <div class="tag">Vor dem Buch</div>
-        <h3>Die Pigipegs-Legende</h3>
-        <p>
-          Erfahre, wie die Pigipegs zu ihrem Haus auf dem Berg gekommen sind
-          und wie ihre kleine Welt begonnen hat.
-        </p>
-        <button class="btn btn-pink" type="button" id="legendBtn">▶ Legende anhören</button>
-      </section>
+   <section class="library-section">
+  <div class="eyebrow">Hörgeschichten</div>
+  <h2 class="library-title">Wähle ein Buch</h2>
+  <p class="library-text">
+    Die Legende und die Kapitel aus Buch 1 kannst du direkt anhören.
+    Weitere Bücher folgen nach und nach.
+  </p>
+
+  <div class="book-grid">
+    <section class="book-tile book-tile-active">
+      <div class="book-tag">Jetzt hörbar</div>
+      <h3>Buch 1</h3>
+      <p><strong>Zuhause ist, wo wir zusammen sind</strong></p>
+      <button class="btn btn-blue" type="button" id="bookBtn">🎧 Buch 1 anhören</button>
+    </section>
+
+    <section class="book-tile">
+      <div class="book-tag book-tag-soft">Folgt bald</div>
+      <h3>Buch 2</h3>
+      <p><strong>Folgt in Kürze</strong></p>
+      <button class="btn btn-soft" type="button" disabled>⏳ Bald verfügbar</button>
+    </section>
+
+    <section class="book-tile">
+      <div class="book-tag book-tag-soft">Folgt bald</div>
+      <h3>Buch 3</h3>
+      <p><strong>Folgt in Kürze</strong></p>
+      <button class="btn btn-soft" type="button" disabled>⏳ Bald verfügbar</button>
+    </section>
+  </div>
+</section>
 
       <section class="entry entry-book">
         <div class="tag tag-blue">Buch 01</div>
