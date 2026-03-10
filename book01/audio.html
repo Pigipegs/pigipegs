@@ -105,21 +105,21 @@
     }
 
     .brand-figure{
-  width:126px;
-  flex:0 0 126px;
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-}
+      width:126px;
+      flex:0 0 126px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
 
-.brand-figure img{
-  display:block;
-  width:100%;
-  height:auto;
-  max-height:150px;
-  object-fit:contain;
-  filter:drop-shadow(0 10px 18px rgba(0,0,0,0.18));
-}
+    .brand-figure img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height:150px;
+      object-fit:contain;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,0.18));
+    }
 
     .eyebrow{
       font-size:13px;
@@ -335,6 +335,34 @@
 
     .book-tile-active{
       background:rgba(255,255,255,0.14);
+    }
+
+    .book-cover{
+      width:100%;
+      aspect-ratio:4 / 3;
+      border-radius:18px;
+      overflow:hidden;
+      margin-bottom:14px;
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.14);
+      box-shadow:0 8px 18px rgba(0,0,0,0.14);
+    }
+
+    .book-cover img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .book-cover-placeholder{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,0.10);
+      color:var(--soft);
+      font-weight:bold;
+      font-size:20px;
     }
 
     .book-tag{
@@ -564,53 +592,53 @@
     }
 
     @media (max-width: 720px){
-  .hero-panel,
-  .cover-box,
-  .library-section,
-  .player-section,
-  .book-tile{
-    padding:18px;
-  }
+      .hero-panel,
+      .cover-box,
+      .library-section,
+      .player-section,
+      .book-tile{
+        padding:18px;
+      }
 
-  .chapter-card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-  }
+      .chapter-card{
+        background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      }
 
-  .chapter-code{
-    background:rgba(255,255,255,0.10);
-  }
+      .chapter-code{
+        background:rgba(255,255,255,0.10);
+      }
 
-  .chapter-name{
-    font-size:16px;
-  }
+      .chapter-name{
+        font-size:16px;
+      }
 
-  .brand-figure{
-    width:88px;
-    flex:0 0 88px;
-  }
+      .brand-figure{
+        width:88px;
+        flex:0 0 88px;
+      }
 
-  .moon{
-    width:58px;
-    height:58px;
-    top:18px;
-    right:16px;
-  }
+      .moon{
+        width:58px;
+        height:58px;
+        top:18px;
+        right:16px;
+      }
 
-  .moon::after{
-    top:6px;
-    left:18px;
-    width:50px;
-    height:50px;
-  }
+      .moon::after{
+        top:6px;
+        left:18px;
+        width:50px;
+        height:50px;
+      }
 
-  .chapter-grid{
-    grid-template-columns:1fr;
-  }
+      .chapter-grid{
+        grid-template-columns:1fr;
+      }
 
-  .chapter-card{
-    min-height:84px;
-  }
-}
+      .chapter-card{
+        min-height:84px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -620,8 +648,8 @@
     <div class="topbar">
       <div class="brand">
         <div class="brand-figure">
-  <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs" />
-</div>
+          <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs" />
+        </div>
         <div>
           <div class="eyebrow">Pigipegs Hörwelt</div>
           <h1>Geschichten unterm Sternenhimmel</h1>
@@ -685,37 +713,37 @@
         Weitere Bücher folgen nach und nach.
       </p>
 
-<div class="book-grid">
-  <section class="book-tile book-tile-active">
-    <div class="book-cover">
-      <img src="/assets/img/pigipegs-cover-stars.png" alt="Cover Buch 1" />
-    </div>
-    <div class="book-tag">Jetzt hörbar</div>
-    <h3>Buch 1</h3>
-    <p><strong>Zuhause ist, wo wir zusammen sind</strong></p>
-    <button class="btn btn-blue" type="button" id="bookBtn">🎧 Buch 1 anhören</button>
-  </section>
+      <div class="book-grid">
+        <section class="book-tile book-tile-active">
+          <div class="book-cover">
+            <img src="/assets/img/pigipegs-cover-stars.png" alt="Cover Buch 1" />
+          </div>
+          <div class="book-tag">Jetzt hörbar</div>
+          <h3>Buch 1</h3>
+          <p><strong>Zuhause ist, wo wir zusammen sind</strong></p>
+          <button class="btn btn-blue" type="button" id="bookBtn">🎧 Buch 1 anhören</button>
+        </section>
 
-  <section class="book-tile">
-    <div class="book-cover book-cover-placeholder">
-      <span>Buch 2</span>
-    </div>
-    <div class="book-tag book-tag-soft">Folgt bald</div>
-    <h3>Buch 2</h3>
-    <p><strong>Folgt in Kürze</strong></p>
-    <button class="btn btn-soft" type="button" disabled>⏳ Bald verfügbar</button>
-  </section>
+        <section class="book-tile">
+          <div class="book-cover book-cover-placeholder">
+            <span>Buch 2</span>
+          </div>
+          <div class="book-tag book-tag-soft">Folgt bald</div>
+          <h3>Buch 2</h3>
+          <p><strong>Folgt in Kürze</strong></p>
+          <button class="btn btn-soft" type="button" disabled>⏳ Bald verfügbar</button>
+        </section>
 
-  <section class="book-tile">
-    <div class="book-cover book-cover-placeholder">
-      <span>Buch 3</span>
-    </div>
-    <div class="book-tag book-tag-soft">Folgt bald</div>
-    <h3>Buch 3</h3>
-    <p><strong>Folgt in Kürze</strong></p>
-    <button class="btn btn-soft" type="button" disabled>⏳ Bald verfügbar</button>
-  </section>
-</div>
+        <section class="book-tile">
+          <div class="book-cover book-cover-placeholder">
+            <span>Buch 3</span>
+          </div>
+          <div class="book-tag book-tag-soft">Folgt bald</div>
+          <h3>Buch 3</h3>
+          <p><strong>Folgt in Kürze</strong></p>
+          <button class="btn btn-soft" type="button" disabled>⏳ Bald verfügbar</button>
+        </section>
+      </div>
     </section>
 
     <section class="player-section" id="playerSection">
@@ -975,4 +1003,4 @@
     updatePlayPauseText();
   </script>
 </body>
-</html>
+</html> super?
