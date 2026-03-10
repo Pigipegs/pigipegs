@@ -275,74 +275,77 @@
       border-color:transparent;
     }
 
-    .entry-grid{
+    .library-section{
       position:relative;
       z-index:2;
-      display:grid;
-      grid-template-columns:1fr 1fr 1fr;
-      gap:18px;
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:var(--radius-xl);
+      padding:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
       margin-bottom:22px;
     }
 
-    .entry{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:var(--radius-lg);
-      padding:22px;
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(10px);
-      position:relative;
-      overflow:hidden;
+    .library-title{
+      margin:0 0 8px;
+      font-size:32px;
     }
 
-    .entry::after{
-      position:absolute;
-      top:16px;
-      right:18px;
-      font-size:30px;
-      opacity:.18;
+    .library-text{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.6;
     }
 
-    .entry-legend::after{ content:"🌙"; }
-    .entry-book::after{ content:"📖"; }
-    .entry-help::after{ content:"✨"; }
+    .book-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
 
-    .tag{
+    .book-tile{
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:22px;
+      padding:20px;
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+    }
+
+    .book-tile h3{
+      margin:0 0 8px;
+      font-size:24px;
+    }
+
+    .book-tile p{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .book-tile-active{
+      background:rgba(255,255,255,0.14);
+    }
+
+    .book-tag{
       display:inline-block;
-      margin-bottom:14px;
-      padding:8px 10px;
+      margin-bottom:12px;
+      padding:7px 10px;
       border-radius:999px;
       font-size:12px;
       font-weight:bold;
       text-transform:uppercase;
       letter-spacing:.04em;
-      background:rgba(255,229,156,0.95);
-      color:#6f5311;
-    }
-
-    .tag-blue{
       background:rgba(196,235,255,0.95);
       color:#244f63;
     }
 
-    .tag-green{
-      background:rgba(219,245,181,0.95);
-      color:#466227;
+    .book-tag-soft{
+      background:rgba(255,255,255,0.18);
+      color:#fff;
     }
 
-    .entry h3{
-      margin:0 0 8px;
-      font-size:24px;
-    }
-
-    .entry p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      min-height:96px;
-    }
-
-    .entry .btn{
+    .btn{
       margin-top:18px;
       width:100%;
       border:none;
@@ -370,6 +373,13 @@
     .btn-green{
       background:linear-gradient(135deg, var(--green), var(--green-dark));
       color:#2c3818;
+    }
+
+    .btn-soft{
+      background:rgba(255,255,255,0.18);
+      color:#fff;
+      cursor:not-allowed;
+      opacity:.85;
     }
 
     .player-section{
@@ -457,20 +467,20 @@
     }
 
     .chapter-card{
-  position:relative;
-  border:none;
-  border-radius:20px;
-  padding:16px 14px 15px;
-  cursor:pointer;
-  text-align:left;
-  min-height:96px;
-  color:#ffffff;
-  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
-  border:1px solid rgba(255,255,255,0.16);
-  box-shadow:0 10px 20px rgba(0,0,0,0.12);
-  transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-  backdrop-filter:blur(8px);
-}
+      position:relative;
+      border:none;
+      border-radius:20px;
+      padding:16px 14px 15px;
+      cursor:pointer;
+      text-align:left;
+      min-height:96px;
+      color:#ffffff;
+      background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+      border:1px solid rgba(255,255,255,0.16);
+      box-shadow:0 10px 20px rgba(0,0,0,0.12);
+      transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      backdrop-filter:blur(8px);
+    }
 
     .chapter-card:hover{
       transform:translateY(-2px);
@@ -503,17 +513,17 @@
     }
 
     .chapter-code{
-  display:inline-block;
-  margin-bottom:8px;
-  padding:5px 9px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:bold;
-  letter-spacing:0.04em;
-  background:rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.18);
-  color:#f8f3ff;
-}
+      display:inline-block;
+      margin-bottom:8px;
+      padding:5px 9px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:bold;
+      letter-spacing:0.04em;
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.18);
+      color:#f8f3ff;
+    }
 
     .chapter-card.active .chapter-code{
       background:rgba(255,255,255,0.55);
@@ -522,13 +532,13 @@
     }
 
     .chapter-name{
-  display:block;
-  font-size:15px;
-  line-height:1.35;
-  font-weight:bold;
-  color:#ffffff;
-  text-shadow:0 1px 1px rgba(0,0,0,0.15);
-}
+      display:block;
+      font-size:15px;
+      line-height:1.35;
+      font-weight:bold;
+      color:#ffffff;
+      text-shadow:0 1px 1px rgba(0,0,0,0.15);
+    }
 
     .footer-note{
       position:relative;
@@ -544,7 +554,7 @@
         grid-template-columns:1fr;
       }
 
-      .entry-grid{
+      .book-grid{
         grid-template-columns:1fr;
       }
     }
@@ -552,21 +562,24 @@
     @media (max-width: 720px){
       .hero-panel,
       .cover-box,
-      .entry,
-      .player-section{
+      .library-section,
+      .player-section,
+      .book-tile{
         padding:18px;
       }
-.chapter-card{
-  background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-}
 
-.chapter-code{
-  background:rgba(255,255,255,0.10);
-}
+      .chapter-card{
+        background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      }
 
-.chapter-name{
-  font-size:16px;
-}
+      .chapter-code{
+        background:rgba(255,255,255,0.10);
+      }
+
+      .chapter-name{
+        font-size:16px;
+      }
+
       .pig{
         width:68px;
         height:68px;
@@ -608,16 +621,15 @@
           <div class="eyebrow">Pigipegs Hörwelt</div>
           <h1>Geschichten unterm Sternenhimmel</h1>
           <p class="sub">
-            Höre die Pigipegs-Legende oder tauche direkt in die Geschichten aus
-            <strong>Buch 01</strong> ein. Alles in ruhiger Atmosphäre zum Anhören
-            und Ausmalen.
+            Hier kannst du die Pigipegs-Legende hören und danach die Kapitel aus
+            <strong>Buch 01</strong> in deinem eigenen Tempo anhören.
           </p>
         </div>
       </div>
 
       <nav class="nav">
         <a href="/index.html">Start</a>
-        <a href="/book01/audio.html">Buch 01</a>
+        <a href="/book01/">Buch 01</a>
         <a href="/book01/so-gehts/">So geht’s</a>
         <a href="/impressum/">Impressum</a>
       </nav>
@@ -628,14 +640,14 @@
         <div class="eyebrow">Willkommen bei den Pigipegs</div>
         <h2>Zuhause ist, wo wir zusammen sind</h2>
         <p class="hero-text">
-          In der Hörwelt kannst du erst die kleine Vorgeschichte hören und danach
-          in die warmen, liebevollen Kapitel aus dem Buch wechseln. Jedes Kapitel
-          stoppt nach dem Abspielen, damit genug Zeit zum Ausmalen bleibt.
+          Höre zuerst die Legende und tauche danach in die Geschichten aus
+          Buch 1 ein. Jedes Kapitel stoppt nach dem Abspielen, damit genug
+          Zeit zum Ausmalen bleibt.
         </p>
 
         <div class="hero-actions">
           <button class="cta cta-primary" type="button" id="heroLegendBtn">🌙 Legende anhören</button>
-          <a class="cta cta-secondary" href="/book01/audio.html">🎧 Direkt zur Hörwelt</a>
+          <button class="cta cta-secondary" type="button" id="bookBtnTop">🎧 Buch 1 anhören</button>
         </div>
       </div>
 
@@ -653,64 +665,43 @@
     <section class="language">
       <div class="eyebrow">Sprache auswählen</div>
       <div class="language-bar">
-  <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
-  <button type="button" data-lang="en">🇬🇧 English</button>
-  <button type="button" data-lang="es">🇪🇸 Español</button>
-  <button type="button" data-lang="fr">🇫🇷 Français</button>
-</div>
+        <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
+        <button type="button" data-lang="en">🇬🇧 English</button>
+        <button type="button" data-lang="es">🇪🇸 Español</button>
+        <button type="button" data-lang="fr">🇫🇷 Français</button>
+      </div>
     </section>
 
-   <section class="library-section">
-  <div class="eyebrow">Hörgeschichten</div>
-  <h2 class="library-title">Wähle ein Buch</h2>
-  <p class="library-text">
-    Die Legende und die Kapitel aus Buch 1 kannst du direkt anhören.
-    Weitere Bücher folgen nach und nach.
-  </p>
+    <section class="library-section">
+      <div class="eyebrow">Hörgeschichten</div>
+      <h2 class="library-title">Wähle ein Buch</h2>
+      <p class="library-text">
+        Die Legende und die Kapitel aus Buch 1 kannst du direkt anhören.
+        Weitere Bücher folgen nach und nach.
+      </p>
 
-  <div class="book-grid">
-    <section class="book-tile book-tile-active">
-      <div class="book-tag">Jetzt hörbar</div>
-      <h3>Buch 1</h3>
-      <p><strong>Zuhause ist, wo wir zusammen sind</strong></p>
-      <button class="btn btn-blue" type="button" id="bookBtn">🎧 Buch 1 anhören</button>
-    </section>
+      <div class="book-grid">
+        <section class="book-tile book-tile-active">
+          <div class="book-tag">Jetzt hörbar</div>
+          <h3>Buch 1</h3>
+          <p><strong>Zuhause ist, wo wir zusammen sind</strong></p>
+          <button class="btn btn-blue" type="button" id="bookBtn">🎧 Buch 1 anhören</button>
+        </section>
 
-    <section class="book-tile">
-      <div class="book-tag book-tag-soft">Folgt bald</div>
-      <h3>Buch 2</h3>
-      <p><strong>Folgt in Kürze</strong></p>
-      <button class="btn btn-soft" type="button" disabled>⏳ Bald verfügbar</button>
-    </section>
+        <section class="book-tile">
+          <div class="book-tag book-tag-soft">Folgt bald</div>
+          <h3>Buch 2</h3>
+          <p><strong>Folgt in Kürze</strong></p>
+          <button class="btn btn-soft" type="button" disabled>⏳ Bald verfügbar</button>
+        </section>
 
-    <section class="book-tile">
-      <div class="book-tag book-tag-soft">Folgt bald</div>
-      <h3>Buch 3</h3>
-      <p><strong>Folgt in Kürze</strong></p>
-      <button class="btn btn-soft" type="button" disabled>⏳ Bald verfügbar</button>
-    </section>
-  </div>
-</section>
-
-      <section class="entry entry-book">
-        <div class="tag tag-blue">Buch 01</div>
-        <h3>Die Hörgeschichten</h3>
-        <p>
-          Öffne die Kapitel aus Buch 01 und höre jede Geschichte in deinem
-          eigenen Tempo an.
-        </p>
-        <button class="btn btn-blue" type="button" id="bookBtn">🎧 Kapitel öffnen</button>
-      </section>
-
-      <section class="entry entry-help">
-        <div class="tag tag-green">Einfach erklärt</div>
-        <h3>So geht’s</h3>
-        <p>
-          Scanne den QR-Code im Buch, wähle eine Sprache und höre dir danach
-          die passende Geschichte an.
-        </p>
-        <a class="btn btn-green" href="/book01/so-gehts/">✨ Anleitung ansehen</a>
-      </section>
+        <section class="book-tile">
+          <div class="book-tag book-tag-soft">Folgt bald</div>
+          <h3>Buch 3</h3>
+          <p><strong>Folgt in Kürze</strong></p>
+          <button class="btn btn-soft" type="button" disabled>⏳ Bald verfügbar</button>
+        </section>
+      </div>
     </section>
 
     <section class="player-section" id="playerSection">
@@ -745,9 +736,9 @@
     const chapterGrid = document.getElementById("chapterGrid");
     const footerNote = document.getElementById("footerNote");
 
-    const legendBtn = document.getElementById("legendBtn");
     const heroLegendBtn = document.getElementById("heroLegendBtn");
     const bookBtn = document.getElementById("bookBtn");
+    const bookBtnTop = document.getElementById("bookBtnTop");
 
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
@@ -801,7 +792,7 @@
     }
 
     function getTrackPath(trackId) {
-      return "/book01/audio.html" + currentLang + "/" + trackId + ".mp3";
+      return "/book01/audio/" + currentLang + "/" + trackId + ".mp3";
     }
 
     function showPlayer() {
@@ -911,9 +902,9 @@
       updatePlayPauseText();
     }
 
-    legendBtn.addEventListener("click", () => loadLegend(true));
     heroLegendBtn.addEventListener("click", () => loadLegend(true));
     bookBtn.addEventListener("click", () => loadBookTrack(0, true));
+    bookBtnTop.addEventListener("click", () => loadBookTrack(0, true));
 
     prevBtn.addEventListener("click", () => {
       if (mode === "book" && currentIndex > 0) {
