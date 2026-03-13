@@ -359,58 +359,68 @@
       line-height:1.6;
     }
 
-    .drum-wrap{
-      position:relative;
-      height:420px;
-      perspective:1400px;
-      perspective-origin:center center;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      user-select:none;
-      touch-action:none;
-      overflow:hidden;
-      border-radius:24px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-      border:1px solid rgba(255,255,255,0.14);
-    }
-
+   .drum-wrap{
+  position:relative;
+  height:560px;
+  perspective:1600px;
+  perspective-origin:center center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  user-select:none;
+  touch-action:none;
+  overflow:hidden;
+  border-radius:28px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  border:1px solid rgba(255,255,255,0.14);
+}
     .drum-wrap::before,
-    .drum-wrap::after{
-      content:"";
-      position:absolute;
-      left:0;
-      right:0;
-      height:74px;
-      z-index:3;
-      pointer-events:none;
-    }
+.drum-wrap::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:150px;
+  z-index:3;
+  pointer-events:none;
+}
+   .drum-wrap::before{
+  top:0;
+  background:linear-gradient(
+    180deg,
+    rgba(58,63,136,0.98) 0%,
+    rgba(58,63,136,0.94) 30%,
+    rgba(58,63,136,0.45) 72%,
+    rgba(58,63,136,0) 100%
+  );
+}
 
-    .drum-wrap::before{
-      top:0;
-      background:linear-gradient(180deg, rgba(58,63,136,0.90), rgba(58,63,136,0));
-    }
-
-    .drum-wrap::after{
-      bottom:0;
-      background:linear-gradient(0deg, rgba(111,102,184,0.92), rgba(111,102,184,0));
-    }
-
+.drum-wrap::after{
+  bottom:0;
+  background:linear-gradient(
+    0deg,
+    rgba(111,102,184,0.98) 0%,
+    rgba(111,102,184,0.94) 30%,
+    rgba(111,102,184,0.45) 72%,
+    rgba(111,102,184,0) 100%
+  );
+}
     .drum-center-line{
-      position:absolute;
-      left:18px;
-      right:18px;
-      top:50%;
-      transform:translateY(-50%);
-      height:170px;
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,0.30);
-      background:rgba(255,255,255,0.05);
-      box-shadow:0 0 0 1px rgba(255,255,255,0.08) inset;
-      pointer-events:none;
-      z-index:2;
-    }
+  position:absolute;
+  left:24px;
+  right:24px;
+  top:50%;
+  transform:translateY(-50%);
+  height:210px;
+  border-radius:26px;
+  border:1px solid rgba(255,255,255,0.34);
+  background:rgba(255,255,255,0.05);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08) inset,
+    0 0 30px rgba(255,255,255,0.06);
+  pointer-events:none;
+  z-index:2;
+}
 
     .drum-cylinder{
       position:relative;
@@ -421,23 +431,23 @@
     }
 
     .drum-item{
-      position:absolute;
-      left:50%;
-      top:50%;
-      width:min(540px, 82%);
-      height:150px;
-      transform-style:preserve-3d;
-      border-radius:22px;
-      overflow:hidden;
-      background:linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10));
-      border:1px solid rgba(255,255,255,0.18);
-      box-shadow:0 10px 20px rgba(0,0,0,0.12);
-      cursor:pointer;
-      display:grid;
-      grid-template-columns:150px 1fr;
-      opacity:0.94;
-      will-change:transform, opacity;
-    }
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:min(760px, 88%);
+  height:200px;
+  transform-style:preserve-3d;
+  border-radius:26px;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10));
+  border:1px solid rgba(255,255,255,0.18);
+  box-shadow:0 10px 20px rgba(0,0,0,0.12);
+  cursor:pointer;
+  display:grid;
+  grid-template-columns:220px 1fr;
+  opacity:0.96;
+  will-change:transform, opacity;
+}
 
     .drum-item.active{
       box-shadow:0 16px 32px rgba(255,229,156,0.18);
@@ -652,14 +662,18 @@
       }
 
       .drum-wrap{
-        height:360px;
-      }
+  height:460px;
+}
 
-      .drum-item{
-        width:min(92%, 92%);
-        height:132px;
-        grid-template-columns:112px 1fr;
-      }
+.drum-item{
+  width:min(94%, 94%);
+  height:170px;
+  grid-template-columns:140px 1fr;
+}
+
+.drum-center-line{
+  height:180px;
+}
 
       .drum-name{
         font-size:20px;
@@ -901,7 +915,7 @@
     let isDragging = false;
 
     const stepAngle = 360 / tracks.length;
-    const drumRadius = 210;
+    const drumRadius = 320;
     /* =========================================================
        END: STATUS / EINSTELLUNGEN
        ========================================================= */
