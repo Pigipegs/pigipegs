@@ -361,7 +361,7 @@
 
    .drum-wrap{
   position:relative;
-  height:430px;
+  height:900px;
   perspective:1800px;
   perspective-origin:center center;
   display:flex;
@@ -434,8 +434,8 @@
   position:absolute;
   left:50%;
   top:50%;
-  width:min(820px, 90%);
-  height:120px;
+  width:min(920px, 90%);
+  height:240px;
   transform-style:preserve-3d;
   border-radius:24px;
   overflow:hidden;
@@ -444,7 +444,7 @@
   box-shadow:0 10px 20px rgba(0,0,0,0.12);
   cursor:pointer;
   display:grid;
-  grid-template-columns:110px 1fr;
+  grid-template-columns:240px 1fr;
   opacity:1;
   will-change:transform, opacity;
 }
@@ -462,7 +462,7 @@
   align-items:center;
   justify-content:center;
   overflow:hidden;
-  padding:15px;
+  padding:16px;
 }
     
 .drum-thumb img{
@@ -961,7 +961,7 @@
     let isDragging = false;
 
     const stepAngle = 360 / tracks.length;
-    const drumRadius = 360;
+    const drumRadius = 500;
     /* =========================================================
        END: STATUS / EINSTELLUNGEN
        ========================================================= */
