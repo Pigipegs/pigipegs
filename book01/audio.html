@@ -672,56 +672,108 @@
     }
 
     @media (max-width: 720px){
-      .hero-panel,
-      .cover-box,
-      .language,
-      .modes-panel,
-      .drum-section,
-      .player-section{
-        padding:18px;
-      }
+  .hero-panel,
+  .cover-box,
+  .language,
+  .modes-panel,
+  .drum-section,
+  .player-section{
+    padding:18px;
+  }
 
-      .brand-figure{
-        width:88px;
-        flex:0 0 88px;
-      }
+  .brand-figure{
+    width:88px;
+    flex:0 0 88px;
+  }
 
-      .moon{
-        width:58px;
-        height:58px;
-        top:18px;
-        right:16px;
-      }
+  .moon{
+    width:58px;
+    height:58px;
+    top:18px;
+    right:16px;
+  }
 
-      .moon::after{
-        top:6px;
-        left:18px;
-        width:50px;
-        height:50px;
-      }
+  .moon::after{
+    top:6px;
+    left:18px;
+    width:50px;
+    height:50px;
+  }
 
-      .drum-wrap{
-  height:500px;
+  .drum-controls{
+    grid-template-columns:52px 1fr 52px;
+    gap:10px;
+  }
+
+  .drum-arrow{
+    height:52px;
+    font-size:22px;
+    border-radius:14px;
+  }
+
+  .drum-wrap{
+    height:320px;
+    border-radius:24px;
+  }
+
+  .drum-wrap::before,
+  .drum-wrap::after{
+    height:105px;
+  }
+
+  .drum-center-line{
+    left:12px;
+    right:12px;
+    height:110px;
+    border-radius:18px;
+  }
+
+  .drum-item{
+    width:92%;
+    height:96px;
+    grid-template-columns:84px 1fr;
+    border-radius:18px;
+  }
+
+  .drum-thumb{
+    padding:6px;
+  }
+
+  .drum-thumb img{
+    object-fit:contain;
+    object-position:center;
+  }
+
+  .drum-content{
+    padding:10px 12px;
+    gap:6px;
+  }
+
+  .drum-code{
+    padding:4px 8px;
+    font-size:11px;
+  }
+
+  .drum-name{
+    font-size:13px;
+    line-height:1.2;
+  }
+
+  .drum-sub{
+    font-size:11px;
+    line-height:1.2;
+  }
+
+  .drum-hint{
+    font-size:12px;
+    line-height:1.4;
+    margin-top:12px;
+  }
+
+  .controls{
+    gap:8px;
+  }
 }
-
-.drum-item{
-  width:min(94%, 94%);
-  height:150px;
-  grid-template-columns:120px 1fr;
-}
-
-.drum-center-line{
-  height:180px;
-}
-
-      .drum-name{
-        font-size:20px;
-      }
-
-      .controls{
-        gap:8px;
-      }
-    }
     /* =========================================================
        END: RESPONSIVE
        ========================================================= */
