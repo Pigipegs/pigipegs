@@ -361,7 +361,7 @@
 
    .drum-wrap{
   position:relative;
-  height:900px;
+  height:520px;
   perspective:1800px;
   perspective-origin:center center;
   display:flex;
@@ -380,7 +380,7 @@
   position:absolute;
   left:0;
   right:0;
-  height:165px;
+  height:190px;
   z-index:4;
   pointer-events:none;
 }
@@ -411,7 +411,7 @@
   right:34px;
   top:50%;
   transform:translateY(-50%);
-  height:220px;
+  height:180px;
   border-radius:24px;
   border:1px solid rgba(255,255,255,0.34);
   background:rgba(255,255,255,0.08);
@@ -1219,7 +1219,7 @@
       const deltaY = currentY - dragStartY;
 
       // Feiner Widerstand: 4 Pixel = 1 Grad
-      drumAngle = dragStartAngle + (deltaY / 4);
+      drumAngle = dragStartAngle - (deltaY / 4);
       applyDrumRotation();
     }
 
