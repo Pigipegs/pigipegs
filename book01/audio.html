@@ -445,7 +445,7 @@
   cursor:pointer;
   display:grid;
   grid-template-columns:110px 1fr;
-  opacity:0.95;
+  opacity:1;
   will-change:transform, opacity;
 }
 
@@ -1069,9 +1069,6 @@
         sub.className = "drum-sub";
         sub.textContent = "Antippen zum Auswählen";
         
-        const drumUpBtn = document.getElementById("drumUpBtn");
-        const drumDownBtn = document.getElementById("drumDownBtn");
-
         content.appendChild(code);
         content.appendChild(name);
         content.appendChild(sub);
