@@ -414,7 +414,7 @@
   height:160px;
   border-radius:24px;
   border:1px solid rgba(255,255,255,0.34);
-  background:rgba(255,255,255,0.04);
+  background:rgba(255,255,255,0.08);
   box-shadow:
     0 0 0 1px rgba(255,255,255,0.08) inset,
     0 0 22px rgba(255,255,255,0.04);
@@ -439,8 +439,8 @@
   transform-style:preserve-3d;
   border-radius:22px;
   overflow:hidden;
-  background:linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.09));
-  border:1px solid rgba(255,255,255,0.16);
+  background:linear-gradient(180deg, rgba(120,116,190,0.92), rgba(98,92,170,0.90));
+  border:1px solid rgba(255,255,255,0.10);
   box-shadow:0 10px 20px rgba(0,0,0,0.12);
   cursor:pointer;
   display:grid;
@@ -450,20 +450,21 @@
 }
 
     .drum-item.active{
-      box-shadow:0 16px 32px rgba(255,229,156,0.18);
-      border-color:rgba(255,240,190,0.45);
-    }
+  background:linear-gradient(180deg, rgba(156,146,235,0.98), rgba(126,116,210,0.96));
+  box-shadow:0 16px 32px rgba(255,229,156,0.18);
+  border-color:rgba(255,240,190,0.42);
+}
 
     .drum-thumb{
-  background:rgba(255,255,255,0.06);
-  border-right:1px solid rgba(255,255,255,0.10);
+  background:rgba(255,255,255,0.12);
+  border-right:1px solid rgba(255,255,255,0.08);
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
   padding:8px;
 }
-
+    
 .drum-thumb img{
   width:100%;
   height:100%;
