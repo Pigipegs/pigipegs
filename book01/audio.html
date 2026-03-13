@@ -361,8 +361,8 @@
 
    .drum-wrap{
   position:relative;
-  height:560px;
-  perspective:1600px;
+  height:430px;
+  perspective:1800px;
   perspective-origin:center center;
   display:flex;
   align-items:center;
@@ -371,7 +371,7 @@
   touch-action:none;
   overflow:hidden;
   border-radius:28px;
-  background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
   border:1px solid rgba(255,255,255,0.14);
 }
     .drum-wrap::before,
@@ -380,18 +380,18 @@
   position:absolute;
   left:0;
   right:0;
-  height:150px;
-  z-index:3;
+  height:165px;
+  z-index:4;
   pointer-events:none;
 }
    .drum-wrap::before{
   top:0;
   background:linear-gradient(
     180deg,
-    rgba(58,63,136,0.98) 0%,
-    rgba(58,63,136,0.94) 30%,
-    rgba(58,63,136,0.45) 72%,
-    rgba(58,63,136,0) 100%
+    rgba(58,63,136,1) 0%,
+    rgba(58,63,136,0.98) 45%,
+    rgba(58,63,136,0.82) 72%,
+    rgba(58,63,136,0.16) 100%
   );
 }
 
@@ -399,27 +399,27 @@
   bottom:0;
   background:linear-gradient(
     0deg,
-    rgba(111,102,184,0.98) 0%,
-    rgba(111,102,184,0.94) 30%,
-    rgba(111,102,184,0.45) 72%,
-    rgba(111,102,184,0) 100%
+    rgba(111,102,184,1) 0%,
+    rgba(111,102,184,0.98) 45%,
+    rgba(111,102,184,0.82) 72%,
+    rgba(111,102,184,0.16) 100%
   );
 }
     .drum-center-line{
   position:absolute;
-  left:24px;
-  right:24px;
+  left:34px;
+  right:34px;
   top:50%;
   transform:translateY(-50%);
-  height:210px;
-  border-radius:26px;
+  height:160px;
+  border-radius:24px;
   border:1px solid rgba(255,255,255,0.34);
-  background:rgba(255,255,255,0.05);
+  background:rgba(255,255,255,0.04);
   box-shadow:
     0 0 0 1px rgba(255,255,255,0.08) inset,
-    0 0 30px rgba(255,255,255,0.06);
+    0 0 22px rgba(255,255,255,0.04);
   pointer-events:none;
-  z-index:2;
+  z-index:3;
 }
 
     .drum-cylinder{
@@ -434,18 +434,18 @@
   position:absolute;
   left:50%;
   top:50%;
-  width:min(760px, 88%);
-  height:200px;
+  width:min(700px, 82%);
+  height:120px;
   transform-style:preserve-3d;
-  border-radius:26px;
+  border-radius:22px;
   overflow:hidden;
-  background:linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10));
-  border:1px solid rgba(255,255,255,0.18);
+  background:linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.09));
+  border:1px solid rgba(255,255,255,0.16);
   box-shadow:0 10px 20px rgba(0,0,0,0.12);
   cursor:pointer;
   display:grid;
-  grid-template-columns:220px 1fr;
-  opacity:0.96;
+  grid-template-columns:110px 1fr;
+  opacity:0.95;
   will-change:transform, opacity;
 }
 
@@ -455,21 +455,23 @@
     }
 
     .drum-thumb{
-      background:rgba(255,255,255,0.08);
-      border-right:1px solid rgba(255,255,255,0.12);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-    }
+  background:rgba(255,255,255,0.06);
+  border-right:1px solid rgba(255,255,255,0.10);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:8px;
+}
 
-    .drum-thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:center;
-      display:block;
-    }
+.drum-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  display:block;
+  border-radius:12px;
+}
 
     .drum-thumb.placeholder{
       color:var(--soft);
@@ -507,18 +509,17 @@
     }
 
     .drum-name{
-      font-size:24px;
-      font-weight:bold;
-      line-height:1.2;
-      color:#fff;
-      text-shadow:0 1px 1px rgba(0,0,0,0.18);
-    }
-
+  font-size:18px;
+  font-weight:bold;
+  line-height:1.25;
+  color:#fff;
+  text-shadow:0 1px 1px rgba(0,0,0,0.18);
+}
     .drum-sub{
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.45;
-    }
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.35;
+}
 
     .drum-hint{
       margin-top:16px;
@@ -527,6 +528,43 @@
       font-size:14px;
       line-height:1.5;
     }
+
+    .drum-controls{
+  display:grid;
+  grid-template-columns:64px 1fr 64px;
+  gap:14px;
+  align-items:center;
+}
+
+.drum-arrow{
+  height:64px;
+  border:none;
+  border-radius:18px;
+  font-size:28px;
+  font-weight:bold;
+  cursor:pointer;
+  color:var(--text);
+  background:rgba(255,255,255,0.14);
+  border:1px solid rgba(255,255,255,0.18);
+  box-shadow:0 10px 22px rgba(0,0,0,0.12);
+}
+
+.drum-arrow:hover{
+  background:rgba(255,255,255,0.20);
+}
+
+@media (max-width: 720px){
+  .drum-controls{
+    grid-template-columns:52px 1fr 52px;
+    gap:10px;
+  }
+
+  .drum-arrow{
+    height:52px;
+    font-size:22px;
+    border-radius:14px;
+  }
+}
     /* =========================================================
        END: TROMMEL / DRUM-SECTION
        ========================================================= */
@@ -798,11 +836,16 @@
         Fläche ist die aktuell ausgewählte Geschichte.
       </p>
 
-      <div class="drum-wrap" id="drumWrap">
-        <div class="drum-center-line"></div>
-        <div class="drum-cylinder" id="drumCylinder"></div>
-      </div>
+      <div class="drum-controls">
+  <button class="drum-arrow" type="button" id="drumUpBtn">▲</button>
 
+  <div class="drum-wrap" id="drumWrap">
+    <div class="drum-center-line"></div>
+    <div class="drum-cylinder" id="drumCylinder"></div>
+  </div>
+
+  <button class="drum-arrow" type="button" id="drumDownBtn">▼</button>
+</div>
       <div class="drum-hint" id="drumHint">
         Tipp: Ziehen = drehen · Tippen = diese Seite auswählen
       </div>
@@ -864,6 +907,8 @@
     const drumWrap = document.getElementById("drumWrap");
     const drumCylinder = document.getElementById("drumCylinder");
     const drumHint = document.getElementById("drumHint");
+    const drumUpBtn = document.getElementById("drumUpBtn");
+    const drumDownBtn = document.getElementById("drumDownBtn");
     /* =========================================================
        END: ELEMENTE
        ========================================================= */
@@ -915,7 +960,7 @@
     let isDragging = false;
 
     const stepAngle = 360 / tracks.length;
-    const drumRadius = 320;
+    const drumRadius = 220;
     /* =========================================================
        END: STATUS / EINSTELLUNGEN
        ========================================================= */
@@ -1023,6 +1068,9 @@
         const sub = document.createElement("div");
         sub.className = "drum-sub";
         sub.textContent = "Antippen zum Auswählen";
+        
+        const drumUpBtn = document.getElementById("drumUpBtn");
+        const drumDownBtn = document.getElementById("drumDownBtn");
 
         content.appendChild(code);
         content.appendChild(name);
@@ -1228,6 +1276,17 @@
       button.addEventListener("click", () => {
         setMode(button.dataset.mode);
       });
+    });
+    drumUpBtn.addEventListener("click", () => {
+    const nextIndex = clampIndex(currentIndex - 1);
+      snapToIndex(nextIndex);
+      loadBookTrack(nextIndex, false);
+    });
+
+    drumDownBtn.addEventListener("click", () => {
+      const nextIndex = clampIndex(currentIndex + 1);
+      snapToIndex(nextIndex);
+      loadBookTrack(nextIndex, false);
     });
     /* =========================================================
        END: BUTTON-EVENTS
