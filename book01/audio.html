@@ -380,7 +380,7 @@
   position:absolute;
   left:0;
   right:0;
-  height:190px;
+  height:115px;
   z-index:4;
   pointer-events:none;
 }
@@ -712,19 +712,19 @@
   }
 
   .drum-wrap{
-    height:320px;
+    height:260px;
     border-radius:24px;
   }
 
   .drum-wrap::before,
   .drum-wrap::after{
-    height:105px;
+    height:82px;
   }
 
   .drum-center-line{
     left:12px;
     right:12px;
-    height:110px;
+    height:90px;
     border-radius:18px;
   }
 
@@ -1144,7 +1144,7 @@
     }
 
     function snapToIndex(index) {
-  currentIndex = clampIndex(index);
+  currentIndex = wrapIndex(index);
   drumAngle = -(currentIndex * stepAngle);
   renderDrum();
   updateNavButtons();
@@ -1302,9 +1302,8 @@
     heroBookBtn.addEventListener("click", () => loadBookTrack(currentIndex, true));
 
     prevBtn.addEventListener("click", () => {
-      cloadBookTrack(wrapIndex(currentIndex - 1), true);
-  });
-
+  loadBookTrack(wrapIndex(currentIndex - 1), true);
+});
    nextBtn.addEventListener("click", () => {
      loadBookTrack(wrapIndex(currentIndex + 1), true);
    });
@@ -1366,12 +1365,8 @@ drumDownBtn.addEventListener("click", () => {
       }
 
       if (playMode === "continue") {
-        if (currentIndex < tracks.length - 1) {
-          loadBookTrack(currentIndex + 1, true);
-        } else {
-          statusBox.textContent = "Das Buch ist zu Ende. Schön, dass du zugehört hast ✨";
-        }
-      }
+  loadBookTrack(wrapIndex(currentIndex + 1), true);
+}
     });
     /* =========================================================
        END: PLAYER-EVENTS
