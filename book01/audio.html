@@ -6,9 +6,6 @@
   <title>Pigipegs Hörwelt</title>
 
   <style>
-    /* =========================================================
-       START: FARBEN / BASIS
-       ========================================================= */
     :root{
       --night-1:#1f2559;
       --night-2:#3a3f88;
@@ -20,7 +17,6 @@
       --soft:#d9d0f3;
 
       --panel:rgba(255,255,255,0.12);
-      --panel-strong:rgba(255,255,255,0.18);
       --border:rgba(255,255,255,0.20);
 
       --pink:#ff8faa;
@@ -29,12 +25,10 @@
       --blue-dark:#5eb2de;
       --green:#cfe89d;
       --green-dark:#a8d76a;
-      --gold:#ffe59c;
 
-      --shadow:0 16px 40px rgba(20, 18, 48, 0.28);
+      --shadow:0 16px 40px rgba(20,18,48,0.28);
       --radius-xl:30px;
       --radius-lg:22px;
-      --radius-md:16px;
       --max:1120px;
     }
 
@@ -42,7 +36,7 @@
     html,body{ margin:0; padding:0; }
 
     body{
-      font-family: Arial, sans-serif;
+      font-family:Arial,sans-serif;
       color:var(--text);
       min-height:100vh;
       background:
@@ -77,7 +71,7 @@
       border-radius:50%;
       background:#fff0b0;
       box-shadow:0 0 30px rgba(255,240,176,0.55);
-      opacity:0.95;
+      opacity:.95;
       z-index:1;
       pointer-events:none;
     }
@@ -92,14 +86,7 @@
       border-radius:50%;
       background:linear-gradient(180deg, var(--night-2), var(--night-3));
     }
-    /* =========================================================
-       END: FARBEN / BASIS
-       ========================================================= */
 
-
-    /* =========================================================
-       START: HEADER / TOPBAR
-       ========================================================= */
     .topbar{
       display:flex;
       justify-content:space-between;
@@ -143,7 +130,7 @@
 
     h1{
       margin:0;
-      font-size:clamp(30px, 4vw, 52px);
+      font-size:clamp(30px,4vw,52px);
       line-height:1.04;
     }
 
@@ -171,14 +158,7 @@
       font-weight:bold;
       backdrop-filter:blur(8px);
     }
-    /* =========================================================
-       END: HEADER / TOPBAR
-       ========================================================= */
 
-
-    /* =========================================================
-       START: HERO-BEREICH
-       ========================================================= */
     .hero{
       position:relative;
       z-index:2;
@@ -189,18 +169,23 @@
       align-items:stretch;
     }
 
-    .hero-panel{
+    .hero-panel,
+    .cover-box,
+    .language,
+    .modes-panel,
+    .drum-section,
+    .player-section{
       background:var(--panel);
       border:1px solid var(--border);
       border-radius:var(--radius-xl);
-      padding:26px 24px;
+      padding:24px;
       box-shadow:var(--shadow);
       backdrop-filter:blur(10px);
     }
 
     .hero-panel h2{
       margin:0 0 10px;
-      font-size:clamp(30px, 4vw, 48px);
+      font-size:clamp(30px,4vw,48px);
       line-height:1.05;
     }
 
@@ -242,15 +227,6 @@
       border:1px solid rgba(255,255,255,0.16);
     }
 
-    .cover-box{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:var(--radius-xl);
-      padding:16px;
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(10px);
-    }
-
     .cover-box img{
       display:block;
       width:100%;
@@ -266,14 +242,7 @@
       font-size:14px;
       line-height:1.5;
     }
-    /* =========================================================
-       END: HERO-BEREICH
-       ========================================================= */
 
-
-    /* =========================================================
-       START: SPRACHEN + MODI
-       ========================================================= */
     .toolbar-grid{
       position:relative;
       z-index:2;
@@ -285,12 +254,8 @@
 
     .language,
     .modes-panel{
-      background:rgba(255,255,255,0.10);
-      border:1px solid rgba(255,255,255,0.16);
       border-radius:var(--radius-lg);
       padding:18px 18px 16px;
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(10px);
     }
 
     .language-bar,
@@ -328,23 +293,10 @@
       font-size:14px;
       line-height:1.5;
     }
-    /* =========================================================
-       END: SPRACHEN + MODI
-       ========================================================= */
 
-
-    /* =========================================================
-       START: TROMMEL / DRUM-SECTION
-       ========================================================= */
     .drum-section{
       position:relative;
       z-index:2;
-      background:rgba(255,255,255,0.10);
-      border:1px solid rgba(255,255,255,0.16);
-      border-radius:var(--radius-xl);
-      padding:24px;
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(10px);
       margin-bottom:22px;
     }
 
@@ -359,68 +311,91 @@
       line-height:1.6;
     }
 
-   .drum-wrap{
-  position:relative;
-  height:350px;
-  perspective:1800px;
-  perspective-origin:center center;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  user-select:none;
-  touch-action:none;
-  overflow:hidden;
-  border-radius:28px;
-  background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-  border:1px solid rgba(255,255,255,0.14);
-}
-    .drum-wrap::before,
-.drum-wrap::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  height:115px;
-  z-index:4;
-  pointer-events:none;
-}
-   .drum-wrap::before{
-  top:0;
-  background:linear-gradient(
-    180deg,
-    rgba(58,63,136,1) 0%,
-    rgba(58,63,136,0.98) 45%,
-    rgba(58,63,136,0.82) 72%,
-    rgba(58,63,136,0.16) 100%
-  );
-}
+    .drum-controls{
+      display:grid;
+      grid-template-columns:64px 1fr 64px;
+      gap:14px;
+      align-items:center;
+    }
 
-.drum-wrap::after{
-  bottom:0;
-  background:linear-gradient(
-    0deg,
-    rgba(111,102,184,1) 0%,
-    rgba(111,102,184,0.98) 45%,
-    rgba(111,102,184,0.82) 72%,
-    rgba(111,102,184,0.16) 100%
-  );
-}
+    .drum-arrow{
+      height:64px;
+      border:none;
+      border-radius:18px;
+      font-size:28px;
+      font-weight:bold;
+      cursor:pointer;
+      color:var(--text);
+      background:rgba(255,255,255,0.14);
+      border:1px solid rgba(255,255,255,0.18);
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+    }
+
+    .drum-arrow:hover{
+      background:rgba(255,255,255,0.20);
+    }
+
+    .drum-wrap{
+      position:relative;
+      height:350px;
+      perspective:1800px;
+      perspective-origin:center center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      user-select:none;
+      touch-action:none;
+      overflow:hidden;
+      border-radius:28px;
+      background:linear-gradient(180deg, #424aa0 0%, #5a62b8 100%);
+      border:1px solid rgba(255,255,255,0.14);
+    }
+
+    .drum-wrap::before,
+    .drum-wrap::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      height:115px;
+      z-index:4;
+      pointer-events:none;
+    }
+
+    .drum-wrap::before{
+      top:0;
+      background:linear-gradient(
+        180deg,
+        rgba(49,55,126,1) 0%,
+        rgba(49,55,126,0.96) 48%,
+        rgba(49,55,126,0.18) 100%
+      );
+    }
+
+    .drum-wrap::after{
+      bottom:0;
+      background:linear-gradient(
+        0deg,
+        rgba(85,92,173,1) 0%,
+        rgba(85,92,173,0.96) 48%,
+        rgba(85,92,173,0.18) 100%
+      );
+    }
+
     .drum-center-line{
-  position:absolute;
-  left:34px;
-  right:34px;
-  top:50%;
-  transform:translateY(-50%);
-  height:140px;
-  border-radius:24px;
-  border:1px solid rgba(255,255,255,0.34);
-  background:rgba(255,255,255,0.08);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.08) inset,
-    0 0 22px rgba(255,255,255,0.04);
-  pointer-events:none;
-  z-index:3;
-}
+      position:absolute;
+      left:34px;
+      right:34px;
+      top:50%;
+      transform:translateY(-50%);
+      height:140px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,0.28);
+      background:rgba(255,255,255,0.08);
+      box-shadow:0 0 0 1px rgba(255,255,255,0.07) inset;
+      pointer-events:none;
+      z-index:3;
+    }
 
     .drum-cylinder{
       position:relative;
@@ -431,53 +406,47 @@
     }
 
     .drum-item{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:min(920px, 90%);
-  height:240px;
-  transform-style:preserve-3d;
-  border-radius:24px;
-  overflow:hidden;
-  background:linear-gradient(180deg, rgba(120,116,190,0.92), rgba(98,92,170,0.90));
-  border:1px solid rgba(255,255,255,0.10);
-  box-shadow:0 10px 20px rgba(0,0,0,0.12);
-  cursor:pointer;
-  display:grid;
-  grid-template-columns:240px 1fr;
-  opacity:1;
-  will-change:transform, opacity;
-}
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:min(920px, 90%);
+      height:240px;
+      transform-style:preserve-3d;
+      border-radius:24px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(118,112,196,1), rgba(94,88,168,1));
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:0 10px 20px rgba(0,0,0,0.12);
+      cursor:pointer;
+      display:grid;
+      grid-template-columns:240px 1fr;
+      opacity:1;
+      will-change:transform, opacity;
+    }
 
     .drum-item.active{
-  background:linear-gradient(180deg, rgba(156,146,235,0.98), rgba(126,116,210,0.96));
-  box-shadow:0 16px 32px rgba(255,229,156,0.18);
-  border-color:rgba(255,240,190,0.42);
-}
+      background:linear-gradient(180deg, rgba(156,146,235,1), rgba(126,116,210,1));
+      box-shadow:0 16px 32px rgba(255,229,156,0.18);
+      border-color:rgba(255,240,190,0.42);
+    }
 
     .drum-thumb{
-  background:rgba(255,255,255,0.12);
-  border-right:1px solid rgba(255,255,255,0.08);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  padding:16px;
-}
-    
-.drum-thumb img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center;
-  display:block;
-  border-radius:12px;
-}
+      background:rgba(255,255,255,0.10);
+      border-right:1px solid rgba(255,255,255,0.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:16px;
+    }
 
-    .drum-thumb.placeholder{
-      color:var(--soft);
-      font-weight:bold;
-      font-size:22px;
+    .drum-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      display:block;
+      border-radius:12px;
     }
 
     .drum-content{
@@ -504,23 +473,24 @@
     }
 
     .drum-item.active .drum-code{
-      background:rgba(255,245,200,0.92);
+      background:rgba(255,245,200,0.96);
       color:#5f4a10;
-      border-color:rgba(255,245,200,0.92);
+      border-color:rgba(255,245,200,0.96);
     }
 
     .drum-name{
-  font-size:18px;
-  font-weight:bold;
-  line-height:1.25;
-  color:#fff;
-  text-shadow:0 1px 1px rgba(0,0,0,0.18);
-}
+      font-size:18px;
+      font-weight:bold;
+      line-height:1.25;
+      color:#fff;
+      text-shadow:0 1px 1px rgba(0,0,0,0.18);
+    }
+
     .drum-sub{
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.35;
-}
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.35;
+    }
 
     .drum-hint{
       margin-top:16px;
@@ -530,60 +500,10 @@
       line-height:1.5;
     }
 
-    .drum-controls{
-  display:grid;
-  grid-template-columns:64px 1fr 64px;
-  gap:14px;
-  align-items:center;
-}
-
-.drum-arrow{
-  height:64px;
-  border:none;
-  border-radius:18px;
-  font-size:28px;
-  font-weight:bold;
-  cursor:pointer;
-  color:var(--text);
-  background:rgba(255,255,255,0.14);
-  border:1px solid rgba(255,255,255,0.18);
-  box-shadow:0 10px 22px rgba(0,0,0,0.12);
-}
-
-.drum-arrow:hover{
-  background:rgba(255,255,255,0.20);
-}
-
-@media (max-width: 720px){
-  .drum-controls{
-    grid-template-columns:52px 1fr 52px;
-    gap:10px;
-  }
-
-  .drum-arrow{
-    height:52px;
-    font-size:22px;
-    border-radius:14px;
-  }
-}
-    /* =========================================================
-       END: TROMMEL / DRUM-SECTION
-       ========================================================= */
-
-
-    /* =========================================================
-       START: PLAYER
-       ========================================================= */
     .player-section{
       display:block;
       position:relative;
       z-index:2;
-      background:rgba(255,255,255,0.16);
-      border:1px solid rgba(255,255,255,0.18);
-      border-radius:var(--radius-xl);
-      padding:24px;
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(10px);
     }
 
     .player-header{
@@ -656,14 +576,7 @@
       color:var(--muted);
       font-size:14px;
     }
-    /* =========================================================
-       END: PLAYER
-       ========================================================= */
 
-
-    /* =========================================================
-       START: RESPONSIVE
-       ========================================================= */
     @media (max-width: 980px){
       .hero,
       .toolbar-grid{
@@ -672,120 +585,113 @@
     }
 
     @media (max-width: 720px){
-  .hero-panel,
-  .cover-box,
-  .language,
-  .modes-panel,
-  .drum-section,
-  .player-section{
-    padding:18px;
-  }
+      .hero-panel,
+      .cover-box,
+      .language,
+      .modes-panel,
+      .drum-section,
+      .player-section{
+        padding:18px;
+      }
 
-  .brand-figure{
-    width:88px;
-    flex:0 0 88px;
-  }
+      .brand-figure{
+        width:88px;
+        flex:0 0 88px;
+      }
 
-  .moon{
-    width:58px;
-    height:58px;
-    top:18px;
-    right:16px;
-  }
+      .moon{
+        width:58px;
+        height:58px;
+        top:18px;
+        right:16px;
+      }
 
-  .moon::after{
-    top:6px;
-    left:18px;
-    width:50px;
-    height:50px;
-  }
+      .moon::after{
+        top:6px;
+        left:18px;
+        width:50px;
+        height:50px;
+      }
 
-  .drum-controls{
-    grid-template-columns:52px 1fr 52px;
-    gap:10px;
-  }
+      .drum-controls{
+        grid-template-columns:1fr;
+        gap:0;
+      }
 
-  .drum-arrow{
-    height:52px;
-    font-size:22px;
-    border-radius:14px;
-  }
+      .drum-arrow{
+        display:none;
+      }
 
-  .drum-wrap{
-    height:260px;
-    border-radius:24px;
-  }
+      .drum-wrap{
+        height:270px;
+        border-radius:24px;
+        background:linear-gradient(180deg, #434aa0 0%, #5f67be 100%);
+      }
 
-  .drum-wrap::before,
-  .drum-wrap::after{
-    height:82px;
-  }
+      .drum-wrap::before,
+      .drum-wrap::after{
+        height:82px;
+      }
 
-  .drum-center-line{
-    left:12px;
-    right:12px;
-    height:90px;
-    border-radius:18px;
-  }
+      .drum-center-line{
+        left:10px;
+        right:10px;
+        height:94px;
+        border-radius:18px;
+      }
 
-  .drum-item{
-    width:92%;
-    height:96px;
-    grid-template-columns:84px 1fr;
-    border-radius:18px;
-  }
+      .drum-item{
+        width:96%;
+        height:104px;
+        grid-template-columns:88px 1fr;
+        border-radius:18px;
+      }
 
-  .drum-thumb{
-    padding:6px;
-  }
+      .drum-thumb{
+        padding:6px;
+      }
 
-  .drum-thumb img{
-    object-fit:contain;
-    object-position:center;
-  }
+      .drum-thumb img{
+        object-fit:contain;
+        object-position:center;
+      }
 
-  .drum-content{
-    padding:10px 12px;
-    gap:6px;
-  }
+      .drum-content{
+        padding:10px 12px;
+        gap:6px;
+      }
 
-  .drum-code{
-    padding:4px 8px;
-    font-size:11px;
-  }
+      .drum-code{
+        padding:4px 8px;
+        font-size:11px;
+      }
 
-  .drum-name{
-    font-size:13px;
-    line-height:1.2;
-  }
+      .drum-name{
+        font-size:13px;
+        line-height:1.2;
+      }
 
-  .drum-sub{
-    font-size:11px;
-    line-height:1.2;
-  }
+      .drum-sub{
+        font-size:11px;
+        line-height:1.2;
+      }
 
-  .drum-hint{
-    font-size:12px;
-    line-height:1.4;
-    margin-top:12px;
-  }
+      .drum-hint{
+        font-size:12px;
+        line-height:1.4;
+        margin-top:12px;
+      }
 
-  .controls{
-    gap:8px;
-  }
-}
-    /* =========================================================
-       END: RESPONSIVE
-       ========================================================= */
+      .controls{
+        gap:8px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="page">
     <div class="moon"></div>
 
-    <!-- =======================================================
-         START: HEADER
-         ======================================================= -->
     <div class="topbar">
       <div class="brand">
         <div class="brand-figure">
@@ -808,14 +714,7 @@
         <a href="/impressum/">Impressum</a>
       </nav>
     </div>
-    <!-- =======================================================
-         END: HEADER
-         ======================================================= -->
 
-
-    <!-- =======================================================
-         START: HERO
-         ======================================================= -->
     <section class="hero">
       <div class="hero-panel">
         <div class="eyebrow">Willkommen bei den Pigipegs</div>
@@ -842,14 +741,7 @@
         </div>
       </div>
     </section>
-    <!-- =======================================================
-         END: HERO
-         ======================================================= -->
 
-
-    <!-- =======================================================
-         START: SPRACHEN + MODI
-         ======================================================= -->
     <section class="toolbar-grid">
       <div class="language">
         <div class="eyebrow">Sprache auswählen</div>
@@ -873,14 +765,7 @@
         </div>
       </div>
     </section>
-    <!-- =======================================================
-         END: SPRACHEN + MODI
-         ======================================================= -->
 
-
-    <!-- =======================================================
-         START: KAPITEL-TROMMEL
-         ======================================================= -->
     <section class="drum-section">
       <div class="eyebrow">Kapitel-Auswahl</div>
       <h2 class="drum-title">Drehe die Trommel</h2>
@@ -890,27 +775,21 @@
       </p>
 
       <div class="drum-controls">
-  <button class="drum-arrow" type="button" id="drumUpBtn">▲</button>
+        <button class="drum-arrow" type="button" id="drumUpBtn">▲</button>
 
-  <div class="drum-wrap" id="drumWrap">
-    <div class="drum-center-line"></div>
-    <div class="drum-cylinder" id="drumCylinder"></div>
-  </div>
+        <div class="drum-wrap" id="drumWrap">
+          <div class="drum-center-line"></div>
+          <div class="drum-cylinder" id="drumCylinder"></div>
+        </div>
 
-  <button class="drum-arrow" type="button" id="drumDownBtn">▼</button>
-</div>
+        <button class="drum-arrow" type="button" id="drumDownBtn">▼</button>
+      </div>
+
       <div class="drum-hint" id="drumHint">
         Tipp: Ziehen = drehen · Tippen = diese Seite auswählen
       </div>
     </section>
-    <!-- =======================================================
-         END: KAPITEL-TROMMEL
-         ======================================================= -->
 
-
-    <!-- =======================================================
-         START: PLAYER
-         ======================================================= -->
     <section class="player-section" id="playerSection">
       <div class="player-header">
         <div>
@@ -932,15 +811,9 @@
     <div class="footer-note" id="footerNote">
       Pigipegs · Hörwelt · Deutsch
     </div>
-    <!-- =======================================================
-         END: PLAYER
-         ======================================================= -->
   </div>
 
   <script>
-    /* =========================================================
-       START: ELEMENTE
-       ========================================================= */
     const player = document.getElementById("player");
     const playerSection = document.getElementById("playerSection");
     const statusBox = document.getElementById("statusBox");
@@ -962,18 +835,7 @@
     const drumHint = document.getElementById("drumHint");
     const drumUpBtn = document.getElementById("drumUpBtn");
     const drumDownBtn = document.getElementById("drumDownBtn");
-    /* =========================================================
-       END: ELEMENTE
-       ========================================================= */
 
-
-    /* =========================================================
-       START: DATEN / TRACKS
-       Hinweise:
-       - id = Audio-Datei, z.B. /book01/audio/de/02.mp3
-       - image = Bilddatei aus /assets/img/
-       - Du kannst das Mapping später leicht ändern
-       ========================================================= */
     const tracks = [
       { id: "00", code: "S00", title: "Die Pigipegs", subtitle: "Intro", image: "/assets/img/S00.jpg" },
       { id: "02", code: "S02", title: "Das kleine Haus auf dem Berg", subtitle: "Kapitel", image: "/assets/img/S03.jpg" },
@@ -993,35 +855,20 @@
       { id: "30", code: "S30", title: "Langsam wird es still", subtitle: "Kapitel", image: "/assets/img/S31.jpg" },
       { id: "32", code: "S32", title: "Zuhause ist, wo wir zusammen sind", subtitle: "Kapitel", image: "/assets/img/Die_Pigipegs_B01-Cover800x600.jpg" }
     ];
-    /* =========================================================
-       END: DATEN / TRACKS
-       ========================================================= */
 
-
-    /* =========================================================
-       START: STATUS / EINSTELLUNGEN
-       ========================================================= */
     let currentIndex = 0;
     let currentLang = localStorage.getItem("pigipegs_lang") || "de";
     let playMode = localStorage.getItem("pigipegs_mode") || "paint";
-    let mode = "book"; // book | legend
+    let mode = "book";
 
-    // Trommel
     let drumAngle = 0;
     let dragStartY = 0;
     let dragStartAngle = 0;
     let isDragging = false;
 
     const stepAngle = 360 / tracks.length;
-    const drumRadius = 500;
-    /* =========================================================
-       END: STATUS / EINSTELLUNGEN
-       ========================================================= */
+    const drumRadius = 430;
 
-
-    /* =========================================================
-       START: HILFSFUNKTIONEN
-       ========================================================= */
     function getLanguageLabel(lang) {
       switch (lang) {
         case "de": return "Deutsch";
@@ -1041,12 +888,8 @@
     }
 
     function wrapIndex(index) {
-  const total = tracks.length;
-  return ((index % total) + total) % total;
-}
-
-    function showPlayer() {
-      playerSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      const total = tracks.length;
+      return ((index % total) + total) % total;
     }
 
     function updatePlayPauseText() {
@@ -1054,9 +897,9 @@
     }
 
     function updateNavButtons() {
-  prevBtn.disabled = false;
-  nextBtn.disabled = false;
-}
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+    }
 
     function updateLanguageButtons() {
       languageButtons.forEach(button => {
@@ -1074,25 +917,30 @@
         modeHelp.textContent = "Malen: stoppt nach jeder Seite, damit genug Zeit zum Ausmalen bleibt.";
       } else if (playMode === "continue") {
         modeHelp.textContent = "Durchlesen: spielt Seite für Seite automatisch weiter.";
-      } else if (playMode === "loop") {
+      } else {
         modeHelp.textContent = "Schleife: wiederholt das aktuelle Kapitel immer wieder.";
       }
     }
-    /* =========================================================
-       END: HILFSFUNKTIONEN
-       ========================================================= */
 
+    function updateStatusPreview() {
+      const track = tracks[currentIndex];
+      if (mode === "legend") {
+        statusBox.textContent = "Jetzt ausgewählt: Die Pigipegs-Legende (" + getLanguageLabel(currentLang) + ")";
+      } else {
+        statusBox.textContent = "Jetzt ausgewählt: " + track.code + " · " + track.title + " (" + getLanguageLabel(currentLang) + ")";
+      }
+    }
 
-    /* =========================================================
-       START: TROMMEL RENDERN
-       ========================================================= */
+    function applyDrumRotation() {
+      drumCylinder.style.transform = `rotateX(${drumAngle}deg)`;
+    }
+
     function renderDrum() {
       drumCylinder.innerHTML = "";
 
       tracks.forEach((track, index) => {
         const item = document.createElement("div");
         item.className = "drum-item" + (index === currentIndex ? " active" : "");
-
         const angle = index * stepAngle;
         item.style.transform =
           `translate(-50%, -50%) rotateX(${angle}deg) translateZ(${drumRadius}px)`;
@@ -1120,7 +968,7 @@
         const sub = document.createElement("div");
         sub.className = "drum-sub";
         sub.textContent = "Antippen zum Auswählen";
-        
+
         content.appendChild(code);
         content.appendChild(name);
         content.appendChild(sub);
@@ -1129,8 +977,7 @@
         item.appendChild(content);
 
         item.addEventListener("click", () => {
-          snapToIndex(index);
-          loadBookTrack(index, true);
+          loadBookTrack(index, true, true);
         });
 
         drumCylinder.appendChild(item);
@@ -1139,39 +986,19 @@
       applyDrumRotation();
     }
 
-    function applyDrumRotation() {
-      drumCylinder.style.transform = `rotateX(${drumAngle}deg)`;
-    }
-
     function snapToIndex(index) {
-  currentIndex = wrapIndex(index);
-  drumAngle = -(currentIndex * stepAngle);
-  renderDrum();
-  updateNavButtons();
-  updateStatusPreview();
-}
+      currentIndex = wrapIndex(index);
+      drumAngle = -(currentIndex * stepAngle);
+      renderDrum();
+      updateNavButtons();
+      updateStatusPreview();
+    }
 
     function getNearestIndexFromAngle() {
-  const raw = Math.round((-drumAngle) / stepAngle);
-  return wrapIndex(raw);
-}
-
-    function updateStatusPreview() {
-      const track = tracks[currentIndex];
-      if (mode === "legend") {
-        statusBox.textContent = "Jetzt ausgewählt: Die Pigipegs-Legende (" + getLanguageLabel(currentLang) + ")";
-      } else {
-        statusBox.textContent = "Jetzt ausgewählt: " + track.code + " · " + track.title + " (" + getLanguageLabel(currentLang) + ")";
-      }
+      const raw = Math.round((-drumAngle) / stepAngle);
+      return wrapIndex(raw);
     }
-    /* =========================================================
-       END: TROMMEL RENDERN
-       ========================================================= */
 
-
-    /* =========================================================
-       START: AUDIO-STEUERUNG
-       ========================================================= */
     function loadLegend(autoplay = true) {
       mode = "legend";
       player.src = getLegendPath();
@@ -1180,10 +1007,10 @@
       if (autoplay) {
         player.play().catch(() => {});
       }
-      showPlayer();
+      playerSection.scrollIntoView({ behavior:"smooth", block:"start" });
     }
 
-    function loadBookTrack(index, autoplay = true) {
+    function loadBookTrack(index, autoplay = true, scrollToPlayer = false) {
       mode = "book";
       currentIndex = wrapIndex(index);
       const track = tracks[currentIndex];
@@ -1197,12 +1024,15 @@
       if (autoplay) {
         player.play().catch(() => {});
       }
-      showPlayer();
+
+      if (scrollToPlayer) {
+        playerSection.scrollIntoView({ behavior:"smooth", block:"start" });
+      }
     }
 
     function togglePlayback() {
       if (!player.src) {
-        loadBookTrack(currentIndex, true);
+        loadBookTrack(currentIndex, true, true);
         return;
       }
 
@@ -1242,14 +1072,7 @@
       updateModeButtons();
       updateStatusPreview();
     }
-    /* =========================================================
-       END: AUDIO-STEUERUNG
-       ========================================================= */
 
-
-    /* =========================================================
-       START: DRAG / TOUCH-STEUERUNG DER TROMMEL
-       ========================================================= */
     function getClientY(event) {
       if (event.touches && event.touches.length) return event.touches[0].clientY;
       if (event.changedTouches && event.changedTouches.length) return event.changedTouches[0].clientY;
@@ -1268,8 +1091,6 @@
       if (!isDragging) return;
       const currentY = getClientY(event);
       const deltaY = currentY - dragStartY;
-
-      // Feiner Widerstand: 4 Pixel = 1 Grad
       drumAngle = dragStartAngle - (deltaY / 4);
       applyDrumRotation();
     }
@@ -1287,59 +1108,43 @@
     window.addEventListener("mousemove", moveDrag);
     window.addEventListener("mouseup", endDrag);
 
-    drumWrap.addEventListener("touchstart", startDrag, { passive: true });
-    drumWrap.addEventListener("touchmove", moveDrag, { passive: true });
+    drumWrap.addEventListener("touchstart", startDrag, { passive:true });
+    drumWrap.addEventListener("touchmove", moveDrag, { passive:true });
     drumWrap.addEventListener("touchend", endDrag);
-    /* =========================================================
-       END: DRAG / TOUCH-STEUERUNG DER TROMMEL
-       ========================================================= */
 
-
-    /* =========================================================
-       START: BUTTON-EVENTS
-       ========================================================= */
     heroLegendBtn.addEventListener("click", () => loadLegend(true));
-    heroBookBtn.addEventListener("click", () => loadBookTrack(currentIndex, true));
+    heroBookBtn.addEventListener("click", () => loadBookTrack(currentIndex, true, true));
 
     prevBtn.addEventListener("click", () => {
-  loadBookTrack(wrapIndex(currentIndex - 1), true);
-});
-   nextBtn.addEventListener("click", () => {
-     loadBookTrack(wrapIndex(currentIndex + 1), true);
-   });
+      loadBookTrack(wrapIndex(currentIndex - 1), true, false);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      loadBookTrack(wrapIndex(currentIndex + 1), true, false);
+    });
 
     playPauseBtn.addEventListener("click", togglePlayback);
 
     languageButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        setLanguage(button.dataset.lang);
-      });
+      button.addEventListener("click", () => setLanguage(button.dataset.lang));
     });
 
     modeButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        setMode(button.dataset.mode);
-      });
+      button.addEventListener("click", () => setMode(button.dataset.mode));
     });
-    drumUpBtn.addEventListener("click", () => {
-  const nextIndex = wrapIndex(currentIndex - 1);
-  snapToIndex(nextIndex);
-  loadBookTrack(nextIndex, false);
-});
 
-drumDownBtn.addEventListener("click", () => {
-  const nextIndex = wrapIndex(currentIndex + 1);
-  snapToIndex(nextIndex);
-  loadBookTrack(nextIndex, false);
-});
-    /* =========================================================
-       END: BUTTON-EVENTS
-       ========================================================= */
+    if (drumUpBtn) {
+      drumUpBtn.addEventListener("click", () => {
+        loadBookTrack(wrapIndex(currentIndex - 1), false, false);
+      });
+    }
 
+    if (drumDownBtn) {
+      drumDownBtn.addEventListener("click", () => {
+        loadBookTrack(wrapIndex(currentIndex + 1), false, false);
+      });
+    }
 
-    /* =========================================================
-       START: PLAYER-EVENTS
-       ========================================================= */
     player.addEventListener("play", updatePlayPauseText);
     player.addEventListener("pause", updatePlayPauseText);
 
@@ -1365,21 +1170,12 @@ drumDownBtn.addEventListener("click", () => {
       }
 
       if (playMode === "continue") {
-  loadBookTrack(wrapIndex(currentIndex + 1), true);
-}
+        loadBookTrack(wrapIndex(currentIndex + 1), true, false);
+      }
     });
-    /* =========================================================
-       END: PLAYER-EVENTS
-       ========================================================= */
 
-
-    /* =========================================================
-       START: URL-STARTSEITE
-       Wenn ?s=28 gesetzt ist, springt die Trommel auf S28
-       ========================================================= */
     const params = new URLSearchParams(window.location.search);
     const startChapter = params.get("s");
-
     if (startChapter) {
       const normalized = startChapter.padStart(2, "0");
       const foundIndex = tracks.findIndex(track => track.id === normalized);
@@ -1387,14 +1183,7 @@ drumDownBtn.addEventListener("click", () => {
         currentIndex = foundIndex;
       }
     }
-    /* =========================================================
-       END: URL-STARTSEITE
-       ========================================================= */
 
-
-    /* =========================================================
-       START: INITIALISIERUNG
-       ========================================================= */
     updateLanguageButtons();
     updateModeButtons();
     snapToIndex(currentIndex);
@@ -1402,9 +1191,6 @@ drumDownBtn.addEventListener("click", () => {
     renderDrum();
     updateNavButtons();
     updateStatusPreview();
-    /* =========================================================
-       END: INITIALISIERUNG
-       ========================================================= */
   </script>
 </body>
 </html>
