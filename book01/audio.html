@@ -361,7 +361,7 @@
 
    .drum-wrap{
   position:relative;
-  height:520px;
+  height:350px;
   perspective:1800px;
   perspective-origin:center center;
   display:flex;
@@ -411,7 +411,7 @@
   right:34px;
   top:50%;
   transform:translateY(-50%);
-  height:180px;
+  height:140px;
   border-radius:24px;
   border:1px solid rgba(255,255,255,0.34);
   background:rgba(255,255,255,0.08);
@@ -1040,11 +1040,10 @@
       return "/book01/audio/" + currentLang + "/" + trackId + ".mp3";
     }
 
-    function clampIndex(index) {
-      if (index < 0) return 0;
-      if (index > tracks.length - 1) return tracks.length - 1;
-      return index;
-    }
+    function wrapIndex(index) {
+  const total = tracks.length;
+  return ((index % total) + total) % total;
+}
 
     function showPlayer() {
       playerSection.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1055,9 +1054,9 @@
     }
 
     function updateNavButtons() {
-      prevBtn.disabled = currentIndex === 0;
-      nextBtn.disabled = currentIndex === tracks.length - 1 && playMode !== "loop";
-    }
+  prevBtn.disabled = false;
+  nextBtn.disabled = false;
+}
 
     function updateLanguageButtons() {
       languageButtons.forEach(button => {
@@ -1145,17 +1144,17 @@
     }
 
     function snapToIndex(index) {
-      currentIndex = clampIndex(index);
-      drumAngle = -(currentIndex * stepAngle);
-      renderDrum();
-      updateNavButtons();
-      updateStatusPreview();
-    }
+  currentIndex = clampIndex(index);
+  drumAngle = -(currentIndex * stepAngle);
+  renderDrum();
+  updateNavButtons();
+  updateStatusPreview();
+}
 
     function getNearestIndexFromAngle() {
-      const raw = Math.round((-drumAngle) / stepAngle);
-      return clampIndex(raw);
-    }
+  const raw = Math.round((-drumAngle) / stepAngle);
+  return wrapIndex(raw);
+}
 
     function updateStatusPreview() {
       const track = tracks[currentIndex];
@@ -1186,7 +1185,7 @@
 
     function loadBookTrack(index, autoplay = true) {
       mode = "book";
-      currentIndex = clampIndex(index);
+      currentIndex = wrapIndex(index);
       const track = tracks[currentIndex];
       player.src = getTrackPath(track.id);
       drumAngle = -(currentIndex * stepAngle);
@@ -1303,16 +1302,12 @@
     heroBookBtn.addEventListener("click", () => loadBookTrack(currentIndex, true));
 
     prevBtn.addEventListener("click", () => {
-      loadBookTrack(currentIndex - 1, true);
-    });
+      cloadBookTrack(wrapIndex(currentIndex - 1), true);
+  });
 
-    nextBtn.addEventListener("click", () => {
-      if (currentIndex < tracks.length - 1) {
-        loadBookTrack(currentIndex + 1, true);
-      } else if (playMode === "loop") {
-        loadBookTrack(0, true);
-      }
-    });
+   nextBtn.addEventListener("click", () => {
+     loadBookTrack(wrapIndex(currentIndex + 1), true);
+   });
 
     playPauseBtn.addEventListener("click", togglePlayback);
 
@@ -1328,16 +1323,16 @@
       });
     });
     drumUpBtn.addEventListener("click", () => {
-    const nextIndex = clampIndex(currentIndex - 1);
-      snapToIndex(nextIndex);
-      loadBookTrack(nextIndex, false);
-    });
+  const nextIndex = wrapIndex(currentIndex - 1);
+  snapToIndex(nextIndex);
+  loadBookTrack(nextIndex, false);
+});
 
-    drumDownBtn.addEventListener("click", () => {
-      const nextIndex = clampIndex(currentIndex + 1);
-      snapToIndex(nextIndex);
-      loadBookTrack(nextIndex, false);
-    });
+drumDownBtn.addEventListener("click", () => {
+  const nextIndex = wrapIndex(currentIndex + 1);
+  snapToIndex(nextIndex);
+  loadBookTrack(nextIndex, false);
+});
     /* =========================================================
        END: BUTTON-EVENTS
        ========================================================= */
