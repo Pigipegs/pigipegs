@@ -223,6 +223,53 @@
       color:var(--text);
       border:1px solid rgba(255,255,255,0.16);
     }
+    .sound-icon{
+  display:inline-block;
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  vertical-align:middle;
+  margin-right:8px;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,0.18));
+}
+
+.sound-icon-lg{
+  width:44px;
+  height:44px;
+  margin-right:10px;
+}
+
+.player-audio-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.player-audio-head img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  flex:0 0 auto;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,0.16));
+}
+
+.player-audio-head-text{
+  display:flex;
+  flex-direction:column;
+}
+
+@media (max-width: 720px){
+  .sound-icon{
+    width:24px;
+    height:24px;
+    margin-right:6px;
+  }
+
+  .player-audio-head img{
+    width:36px;
+    height:36px;
+  }
+}
 
     .cover-box img{
       display:block;
@@ -783,7 +830,9 @@
 
         <div class="hero-actions">
           <button class="cta cta-primary" type="button" id="heroLegendBtn">🌙 Legende anhören</button>
-          <button class="cta cta-secondary" type="button" id="heroBookBtn">🎧 Buch 1 starten</button>
+          <button class="cta cta-secondary" type="button" id="heroBookBtn">
+          <img src="/assets/img/Pigipegs Sound-350x350.png" alt="" class="sound-icon" /> Buch 1 starten
+      button>
         </div>
       </div>
 
@@ -825,9 +874,13 @@
       <div class="player-area">
         <div class="player-header">
           <div>
-            <div class="eyebrow" id="playerEyebrow">Jetzt anhören</div>
-            <h3 class="player-title" id="playerTitle">Pigipegs Audio</h3>
-          </div>
+            <div class="player-audio-head">
+  <img src="/assets/img/Pigipegs Sound-350x350.png" alt="Pigipegs Audio" />
+  <div class="player-audio-head-text">
+    <div class="eyebrow" id="playerEyebrow">Jetzt anhören</div>
+    <h3 class="player-title" id="playerTitle">Pigipegs Audio</h3>
+  </div>
+</div>
           <div class="status" id="statusBox">Noch nichts ausgewählt.</div>
         </div>
 
