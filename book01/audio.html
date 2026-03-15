@@ -503,6 +503,10 @@
       padding:14px 14px 12px;
     }
 
+    .player-tool-box.right{
+      text-align:right;
+    }
+
     .player-language-label,
     .player-mode-label{
       color:var(--muted);
@@ -511,11 +515,17 @@
       margin-bottom:8px;
     }
 
-    .player-language-bar,
+    .player-language-bar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
     .player-mode-bar{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
+      justify-content:flex-end;
     }
 
     .player-language-bar button,
@@ -544,6 +554,7 @@
       color:var(--muted);
       font-size:14px;
       line-height:1.5;
+      text-align:right;
     }
 
     audio{
@@ -596,6 +607,18 @@
       .hero,
       .player-top-tools{
         grid-template-columns:1fr;
+      }
+
+      .player-tool-box.right{
+        text-align:left;
+      }
+
+      .player-mode-bar{
+        justify-content:flex-start;
+      }
+
+      .mode-help{
+        text-align:left;
       }
     }
 
@@ -808,7 +831,7 @@
             </div>
           </div>
 
-          <div class="player-tool-box">
+          <div class="player-tool-box right">
             <div class="player-mode-label" id="modeTitle">Hörmodus</div>
             <div class="player-mode-bar">
               <button type="button" class="active" data-mode="paint" id="modePaint">🎨 Malen</button>
@@ -1206,6 +1229,11 @@
       drumAngle = -(currentStep * stepAngle);
     }
 
+    function setPlayerSourceForCurrentTrack() {
+      const track = tracks[currentIndex];
+      player.src = getTrackPath(track.id);
+    }
+
     function renderDrum() {
       drumCylinder.innerHTML = "";
 
@@ -1269,18 +1297,12 @@
           currentStep = best;
           mode = "book";
           syncFromStep();
-
-          const selectedTrack = tracks[currentIndex];
-          player.src = getTrackPath(selectedTrack.id);
-
+          setPlayerSourceForCurrentTrack();
           renderDrum();
           updateStatusPreview();
           updateNavButtons();
           updatePlayPauseText();
-
-          try {
-            await player.play();
-          } catch (e) {}
+          await safePlay();
         });
 
         drumCylinder.appendChild(item);
@@ -1294,23 +1316,24 @@
       player.src = getLegendPath();
       updateStatusPreview();
       updatePlayPauseText();
-      if (autoplay) safePlay();
+      if (autoplay) {
+        safePlay();
+      }
     }
 
     function loadBookTrackByStep(step, autoplay = true) {
       mode = "book";
       currentStep = step;
       syncFromStep();
-
-      const track = tracks[currentIndex];
-      player.src = getTrackPath(track.id);
-
+      setPlayerSourceForCurrentTrack();
       renderDrum();
       updateStatusPreview();
       updateNavButtons();
       updatePlayPauseText();
 
-      if (autoplay) safePlay();
+      if (autoplay) {
+        safePlay();
+      }
     }
 
     function togglePlayback() {
@@ -1341,8 +1364,8 @@
           lang: getLanguageLabel(lang)
         });
       } else {
+        setPlayerSourceForCurrentTrack();
         const track = tracks[currentIndex];
-        player.src = getTrackPath(track.id);
         statusBox.textContent = replaceVars(t("switched"), {
           lang: getLanguageLabel(lang),
           code: track.code,
@@ -1410,12 +1433,14 @@
     heroLegendBtn.addEventListener("click", () => loadLegend(true));
     heroBookBtn.addEventListener("click", () => loadBookTrackByStep(currentStep, true));
 
-    prevBtn.addEventListener("click", () => {
-      loadBookTrackByStep(currentStep - 1, true);
+    prevBtn.addEventListener("click", async () => {
+      loadBookTrackByStep(currentStep - 1, false);
+      await safePlay();
     });
 
-    nextBtn.addEventListener("click", () => {
-      loadBookTrackByStep(currentStep + 1, true);
+    nextBtn.addEventListener("click", async () => {
+      loadBookTrackByStep(currentStep + 1, false);
+      await safePlay();
     });
 
     playPauseBtn.addEventListener("click", togglePlayback);
