@@ -448,16 +448,19 @@
       align-items:center;
       justify-content:center;
       overflow:hidden;
-      padding:10px;
+      padding:10px 14px;
     }
 
     .drum-thumb img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      object-position:center;
       display:block;
+      width:auto;
+      height:auto;
+      max-width:100%;
+      max-height:100%;
+      object-fit:contain;
+      object-position:center center;
       border-radius:10px;
+      margin:auto;
     }
 
     .drum-content{
@@ -661,7 +664,7 @@
       }
 
       .drum-thumb{
-        padding:6px;
+        padding:6px 8px;
       }
 
       .drum-content{
@@ -866,23 +869,193 @@
     const drumDownBtn = document.getElementById("drumDownBtn");
 
     const tracks = [
-      { id: "00", code: "S00", title: "Die Pigipegs", image: "/assets/img/S00.jpg" },
-      { id: "02", code: "S02", title: "Das kleine Haus auf dem Berg", image: "/assets/img/S03.jpg" },
-      { id: "04", code: "S04", title: "Papa Pigipeg erzählt", image: "/assets/img/S05.jpg" },
-      { id: "06", code: "S06", title: "Mama Pigipegs Gute-Nacht-Geschichten", image: "/assets/img/S07.jpg" },
-      { id: "08", code: "S08", title: "Peet hat eine Idee", image: "/assets/img/S09.jpg" },
-      { id: "10", code: "S10", title: "Amy findet einen Schatz", image: "/assets/img/S11.jpg" },
-      { id: "12", code: "S12", title: "Baby Leo wird müde", image: "/assets/img/S13.jpg" },
-      { id: "14", code: "S14", title: "Die Sterne leuchten hell", image: "/assets/img/S15.jpg" },
-      { id: "16", code: "S16", title: "Ein kleiner Wunsch", image: "/assets/img/S17.jpg" },
-      { id: "18", code: "S18", title: "Die Familie rückt zusammen", image: "/assets/img/S19.jpg" },
-      { id: "20", code: "S20", title: "Das Licht im Fenster", image: "/assets/img/S21.jpg" },
-      { id: "22", code: "S22", title: "Der Mond steigt höher", image: "/assets/img/S23.jpg" },
-      { id: "24", code: "S24", title: "Zeit für eine Geschichte", image: "/assets/img/S25.jpg" },
-      { id: "26", code: "S26", title: "Ein warmes Lachen", image: "/assets/img/S27.jpg" },
-      { id: "28", code: "S28", title: "Der Himmel voller Sterne", image: "/assets/img/S29.jpg" },
-      { id: "30", code: "S30", title: "Langsam wird es still", image: "/assets/img/S31.jpg" },
-      { id: "32", code: "S32", title: "Zuhause ist, wo wir zusammen sind", image: "/assets/img/Die_Pigipegs_B01-Cover800x600.jpg" }
+      {
+        id: "00",
+        code: "S00",
+        image: "/assets/img/S00.jpg",
+        titles: {
+          de: "Die Pigipegs",
+          en: "The Pigipegs",
+          es: "Los Pigipegs",
+          fr: "Les Pigipegs"
+        }
+      },
+      {
+        id: "02",
+        code: "S02",
+        image: "/assets/img/S03.jpg",
+        titles: {
+          de: "Das kleine Haus auf dem Berg",
+          en: "The Little House on the Hill",
+          es: "La pequeña casa en la colina",
+          fr: "La petite maison sur la colline"
+        }
+      },
+      {
+        id: "04",
+        code: "S04",
+        image: "/assets/img/S05.jpg",
+        titles: {
+          de: "Papa Pigipeg erzählt",
+          en: "Papa Pigipeg Tells a Story",
+          es: "Papá Pigipeg cuenta una historia",
+          fr: "Papa Pigipeg raconte"
+        }
+      },
+      {
+        id: "06",
+        code: "S06",
+        image: "/assets/img/S07.jpg",
+        titles: {
+          de: "Mama Pigipegs Gute-Nacht-Geschichten",
+          en: "Mama Pigipeg's Bedtime Stories",
+          es: "Los cuentos de buenas noches de Mamá Pigipeg",
+          fr: "Les histoires du soir de Maman Pigipeg"
+        }
+      },
+      {
+        id: "08",
+        code: "S08",
+        image: "/assets/img/S09.jpg",
+        titles: {
+          de: "Peet hat eine Idee",
+          en: "Peet Has an Idea",
+          es: "Peet tiene una idea",
+          fr: "Peet a une idée"
+        }
+      },
+      {
+        id: "10",
+        code: "S10",
+        image: "/assets/img/S11.jpg",
+        titles: {
+          de: "Amy findet einen Schatz",
+          en: "Amy Finds a Treasure",
+          es: "Amy encuentra un tesoro",
+          fr: "Amy trouve un trésor"
+        }
+      },
+      {
+        id: "12",
+        code: "S12",
+        image: "/assets/img/S13.jpg",
+        titles: {
+          de: "Baby Leo wird müde",
+          en: "Baby Leo Gets Sleepy",
+          es: "El bebé Leo tiene sueño",
+          fr: "Bébé Leo est fatigué"
+        }
+      },
+      {
+        id: "14",
+        code: "S14",
+        image: "/assets/img/S15.jpg",
+        titles: {
+          de: "Die Sterne leuchten hell",
+          en: "The Stars Shine Bright",
+          es: "Las estrellas brillan intensamente",
+          fr: "Les étoiles brillent fort"
+        }
+      },
+      {
+        id: "16",
+        code: "S16",
+        image: "/assets/img/S17.jpg",
+        titles: {
+          de: "Ein kleiner Wunsch",
+          en: "A Little Wish",
+          es: "Un pequeño deseo",
+          fr: "Un petit souhait"
+        }
+      },
+      {
+        id: "18",
+        code: "S18",
+        image: "/assets/img/S19.jpg",
+        titles: {
+          de: "Die Familie rückt zusammen",
+          en: "The Family Snuggles Close",
+          es: "La familia se acurruca junta",
+          fr: "La famille se rapproche"
+        }
+      },
+      {
+        id: "20",
+        code: "S20",
+        image: "/assets/img/S21.jpg",
+        titles: {
+          de: "Das Licht im Fenster",
+          en: "The Light in the Window",
+          es: "La luz en la ventana",
+          fr: "La lumière à la fenêtre"
+        }
+      },
+      {
+        id: "22",
+        code: "S22",
+        image: "/assets/img/S23.jpg",
+        titles: {
+          de: "Der Mond steigt höher",
+          en: "The Moon Climbs Higher",
+          es: "La luna sube más alto",
+          fr: "La lune monte plus haut"
+        }
+      },
+      {
+        id: "24",
+        code: "S24",
+        image: "/assets/img/S25.jpg",
+        titles: {
+          de: "Zeit für eine Geschichte",
+          en: "Time for a Story",
+          es: "Hora de un cuento",
+          fr: "L'heure d'une histoire"
+        }
+      },
+      {
+        id: "26",
+        code: "S26",
+        image: "/assets/img/S27.jpg",
+        titles: {
+          de: "Ein warmes Lachen",
+          en: "A Warm Laugh",
+          es: "Una risa cálida",
+          fr: "Un rire chaleureux"
+        }
+      },
+      {
+        id: "28",
+        code: "S28",
+        image: "/assets/img/S29.jpg",
+        titles: {
+          de: "Der Himmel voller Sterne",
+          en: "A Sky Full of Stars",
+          es: "Un cielo lleno de estrellas",
+          fr: "Un ciel plein d'étoiles"
+        }
+      },
+      {
+        id: "30",
+        code: "S30",
+        image: "/assets/img/S31.jpg",
+        titles: {
+          de: "Langsam wird es still",
+          en: "Slowly It Becomes Quiet",
+          es: "Poco a poco todo se calma",
+          fr: "Peu à peu, tout devient calme"
+        }
+      },
+      {
+        id: "32",
+        code: "S32",
+        image: "/assets/img/Die_Pigipegs_B01-Cover800x600.jpg",
+        titles: {
+          de: "Zuhause ist, wo wir zusammen sind",
+          en: "Home Is Where We Are Together",
+          es: "El hogar está donde estamos juntos",
+          fr: "La maison, c'est là où nous sommes ensemble"
+        }
+      }
     ];
 
     let currentLang = localStorage.getItem("pigipegs_lang") || "de";
@@ -908,6 +1081,10 @@
         case "fr": return "Français";
         default: return lang.toUpperCase();
       }
+    }
+
+    function getTrackTitle(track) {
+      return track.titles[currentLang] || track.titles.de || track.code;
     }
 
     function wrapIndex(index) {
@@ -964,7 +1141,7 @@
       if (mode === "legend") {
         statusBox.textContent = "Jetzt ausgewählt: Die Pigipegs-Legende (" + getLanguageLabel(currentLang) + ")";
       } else {
-        statusBox.textContent = "Jetzt ausgewählt: " + track.code + " · " + track.title + " (" + getLanguageLabel(currentLang) + ")";
+        statusBox.textContent = "Jetzt ausgewählt: " + track.code + " · " + getTrackTitle(track) + " (" + getLanguageLabel(currentLang) + ")";
       }
     }
 
@@ -996,7 +1173,7 @@
 
         const img = document.createElement("img");
         img.src = track.image;
-        img.alt = track.title;
+        img.alt = getTrackTitle(track);
         img.loading = "lazy";
         thumb.appendChild(img);
 
@@ -1009,11 +1186,17 @@
 
         const name = document.createElement("div");
         name.className = "drum-name";
-        name.textContent = track.title;
+        name.textContent = getTrackTitle(track);
 
         const sub = document.createElement("div");
         sub.className = "drum-sub";
-        sub.textContent = "Antippen zum Auswählen";
+        sub.textContent = currentLang === "de"
+          ? "Antippen zum Auswählen"
+          : currentLang === "en"
+          ? "Tap to select"
+          : currentLang === "es"
+          ? "Toca para seleccionar"
+          : "Touchez pour sélectionner";
 
         content.appendChild(code);
         content.appendChild(name);
@@ -1091,6 +1274,7 @@
       currentLang = lang;
       localStorage.setItem("pigipegs_lang", lang);
       updateLanguageButtons();
+      renderDrum();
 
       if (mode === "legend") {
         player.src = getLegendPath();
@@ -1098,7 +1282,7 @@
       } else {
         const track = tracks[currentIndex];
         player.src = getTrackPath(track.id);
-        statusBox.textContent = "Sprache gewechselt: " + getLanguageLabel(lang) + " · " + track.code + " · " + track.title;
+        statusBox.textContent = "Sprache gewechselt: " + getLanguageLabel(lang) + " · " + track.code + " · " + getTrackTitle(track);
       }
 
       player.currentTime = 0;
@@ -1124,7 +1308,11 @@
       dragStartY = getClientY(event);
       dragStartAngle = drumAngle;
       drumCylinder.style.transition = "none";
-      drumHint.textContent = "Ziehe weiter nach oben oder unten, um die Trommel zu drehen";
+      drumHint.textContent =
+        currentLang === "de" ? "Ziehe weiter nach oben oder unten, um die Trommel zu drehen" :
+        currentLang === "en" ? "Keep dragging up or down to rotate the wheel" :
+        currentLang === "es" ? "Sigue arrastrando hacia arriba o abajo para girar el tambor" :
+        "Continue à faire glisser vers le haut ou le bas pour tourner le tambour";
     }
 
     function moveDrag(event) {
@@ -1147,7 +1335,11 @@
       updateNavButtons();
       updateStatusPreview();
 
-      drumHint.textContent = "Tipp: Ziehen = drehen · Tippen = diese Seite auswählen";
+      drumHint.textContent =
+        currentLang === "de" ? "Tipp: Ziehen = drehen · Tippen = diese Seite auswählen" :
+        currentLang === "en" ? "Tip: Drag = rotate · Tap = select this page" :
+        currentLang === "es" ? "Consejo: arrastrar = girar · tocar = seleccionar esta página" :
+        "Astuce : glisser = tourner · toucher = sélectionner cette page";
     }
 
     drumWrap.addEventListener("mousedown", startDrag);
@@ -1199,19 +1391,32 @@
       updatePlayPauseText();
 
       if (mode === "legend") {
-        statusBox.textContent = "Die Legende ist zu Ende. Jetzt kannst du eine Buchseite auswählen.";
+        statusBox.textContent =
+          currentLang === "de" ? "Die Legende ist zu Ende. Jetzt kannst du eine Buchseite auswählen." :
+          currentLang === "en" ? "The legend has ended. Now you can choose a book page." :
+          currentLang === "es" ? "La leyenda ha terminado. Ahora puedes elegir una página del libro." :
+          "La légende est terminée. Tu peux maintenant choisir une page du livre.";
         return;
       }
 
       if (playMode === "paint") {
-        statusBox.textContent = "Kapitel beendet – Zeit zum Ausmalen 🎨";
+        statusBox.textContent =
+          currentLang === "de" ? "Kapitel beendet – Zeit zum Ausmalen 🎨" :
+          currentLang === "en" ? "Chapter finished – time for coloring 🎨" :
+          currentLang === "es" ? "Capítulo terminado – hora de colorear 🎨" :
+          "Chapitre terminé – place au coloriage 🎨";
         return;
       }
 
       if (playMode === "loop") {
         player.currentTime = 0;
         safePlay();
-        statusBox.textContent = "Schleife aktiv – " + tracks[currentIndex].title + " wiederholt sich.";
+        statusBox.textContent =
+          (currentLang === "de" ? "Schleife aktiv – " :
+           currentLang === "en" ? "Loop active – " :
+           currentLang === "es" ? "Bucle activo – " :
+           "Boucle active – ")
+          + getTrackTitle(tracks[currentIndex]);
         return;
       }
 
