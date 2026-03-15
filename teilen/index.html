@@ -160,7 +160,8 @@
     .hero,
     .upload-box,
     .rules,
-    .parents{
+    .parents,
+    .tech{
       position:relative;
       z-index:2;
       background:var(--panel);
@@ -175,7 +176,8 @@
     .hero h2,
     .upload-box h2,
     .rules h2,
-    .parents h2{
+    .parents h2,
+    .tech h2{
       margin:0 0 12px;
       font-size:clamp(28px,4vw,42px);
       line-height:1.1;
@@ -183,7 +185,8 @@
 
     .hero p,
     .upload-box p,
-    .parents p{
+    .parents p,
+    .tech p{
       margin:0;
       color:var(--muted);
       line-height:1.7;
@@ -313,7 +316,8 @@
       .hero,
       .upload-box,
       .rules,
-      .parents{
+      .parents,
+      .tech{
         padding:18px;
       }
 
@@ -356,9 +360,8 @@
           <div class="eyebrow">Pigipegs Bildbereich</div>
           <h1>Teile dein Bild</h1>
           <p class="sub">
-            Hier kann ein selbst gemaltes Pigipegs-Bild aus Buch 1 sicher eingesendet werden.
-            Bitte lade nur das eigene Bild hoch und nutze den Bildbereich nur mit Zustimmung
-            eines Elternteils oder einer erziehungsberechtigten Person.
+            Hier kann ein selbst gemaltes Pigipegs-Bild aus Buch 1 eingesendet werden. Bitte nutze
+            den Bildbereich nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person.
           </p>
         </div>
       </div>
@@ -389,14 +392,21 @@
       <div class="eyebrow">Bild einsenden</div>
       <h2>Per E-Mail senden</h2>
       <p>
-        Zurzeit kannst du das Bild per E-Mail einsenden. Bitte nutze dafür nur das selbst gemalte
-        Pigipegs-Bild aus Buch 1 und sende es nur mit Zustimmung eines Elternteils oder einer
+        Zurzeit kann das Bild per E-Mail eingesendet werden. Bitte sende nur das selbst gemalte
+        Pigipegs-Bild aus Buch 1 ein und nur mit Zustimmung eines Elternteils oder einer
         erziehungsberechtigten Person.
       </p>
 
       <div class="mail-box">
         <strong>E-Mail-Adresse</strong>
         <a href="mailto:fam@pigipegs.com">fam@pigipegs.com</a>
+      </div>
+
+      <div class="notice">
+        Mit dem Einsenden bestätigt das absendende Elternteil bzw. die erziehungsberechtigte Person,
+        dass das hochgeladene Bild selbst erstellt wurde oder die nötige Freigabe dafür vorliegt,
+        und dass Pigipegs das Bild prüfen und im freigegebenen Rahmen verwenden darf. Eine einmal
+        erteilte Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden.
       </div>
 
       <div class="actions">
@@ -444,14 +454,37 @@
       <div class="eyebrow">Für Eltern und Erziehungsberechtigte</div>
       <h2>Transparenz und Kontrolle</h2>
       <p>
-        Wenn ein Bild eingesendet wird, sollte klar sein, wofür es verwendet werden darf.
-        Eine Einwilligung kann jederzeit widerrufen werden. Dann kann die Löschung des Bildes
-        und der dazugehörigen Angaben verlangt werden. Auch Auskunft und Korrektur müssen möglich sein.
+        Wenn ein Bild eingesendet wird, sollte klar sein, wofür es verwendet werden darf. Eltern oder
+        Erziehungsberechtigte können eine Einwilligung jederzeit widerrufen und die Löschung des Bildes
+        sowie der dazugehörigen Angaben verlangen. Auch Auskunft und Korrektur sollten möglich sein.
       </p>
 
       <div class="notice">
         Bitte ergänzt zusätzlich eine klare Einwilligung, eure Datenschutzhinweise und die Kontaktdaten
         des Verantwortlichen, damit Eltern genau wissen, was mit einem eingesendeten Bild geschieht.
+      </div>
+    </section>
+
+    <section class="tech">
+      <div class="eyebrow">Technischer Betrieb</div>
+      <h2>Hosting, Sicherheit und Datenschutz</h2>
+      <p>
+        Diese Website wird technisch über GitHub Pages bereitgestellt und über Cloudflare ausgeliefert
+        und geschützt. Dabei können technisch notwendige Verbindungs- und Logdaten verarbeitet werden,
+        zum Beispiel die IP-Adresse, Datum und Uhrzeit eines Aufrufs sowie weitere Informationen, die
+        für den sicheren Betrieb, die Stabilität und den Schutz der Website erforderlich sind.
+      </p>
+
+      <div class="notice">
+        In eurer Datenschutzerklärung sollte deshalb klar erklärt werden, dass GitHub Pages als Hosting-Dienst
+        und Cloudflare als Sicherheits- und Auslieferungsdienst eingesetzt werden. Außerdem sollte beschrieben
+        werden, welche technisch notwendigen Daten verarbeitet werden, zu welchem Zweck dies geschieht, welche
+        Rechtsgrundlage ihr dafür annehmt und welche Rechte Eltern und Betroffene haben.
+      </div>
+
+      <div class="notice">
+        Wenn keine zusätzlichen Tracking-, Analyse- oder Marketing-Tools eingesetzt werden, geht es hier in
+        erster Linie um technisch notwendige Verarbeitung für den Betrieb und die Sicherheit der Website.
       </div>
     </section>
 
