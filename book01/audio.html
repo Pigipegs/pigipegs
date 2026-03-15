@@ -165,13 +165,12 @@
       display:grid;
       grid-template-columns:1.05fr .95fr;
       gap:20px;
-      margin-bottom:22px;
+      margin-bottom:18px;
       align-items:stretch;
     }
 
     .hero-panel,
     .cover-box,
-    .language,
     .modes-panel,
     .audio-stage{
       background:var(--panel);
@@ -242,22 +241,20 @@
       line-height:1.5;
     }
 
-    .toolbar-grid{
+    .top-mode-row{
       position:relative;
       z-index:2;
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:1fr;
       gap:18px;
-      margin-bottom:22px;
+      margin-bottom:18px;
     }
 
-    .language,
     .modes-panel{
       border-radius:var(--radius-lg);
       padding:18px 18px 16px;
     }
 
-    .language-bar,
     .mode-bar,
     .player-language-bar{
       display:flex;
@@ -266,7 +263,6 @@
       margin-top:10px;
     }
 
-    .language-bar button,
     .mode-bar button,
     .player-language-bar button{
       border:none;
@@ -281,7 +277,6 @@
       backdrop-filter:blur(8px);
     }
 
-    .language-bar .active,
     .mode-bar .active,
     .player-language-bar .active{
       background:linear-gradient(135deg, var(--pink), var(--pink-dark));
@@ -593,8 +588,7 @@
     }
 
     @media (max-width: 980px){
-      .hero,
-      .toolbar-grid{
+      .hero{
         grid-template-columns:1fr;
       }
     }
@@ -602,7 +596,6 @@
     @media (max-width: 720px){
       .hero-panel,
       .cover-box,
-      .language,
       .modes-panel,
       .audio-stage{
         padding:18px;
@@ -726,8 +719,7 @@
           <div class="eyebrow" id="brandEyebrow">Pigipegs Hörwelt</div>
           <h1 id="mainTitle">Geschichten unterm Sternenhimmel</h1>
           <p class="sub" id="mainSub">
-            Wähle eine Sprache, drehe die Kapitel-Trommel und höre die
-            Geschichten aus <strong>Buch 1</strong> so, wie es für euch am besten passt.
+            Wähle eine Sprache, drehe die Kapitel-Trommel und höre die Geschichten aus <strong>Buch 1</strong> so, wie es für euch am besten passt.
           </p>
         </div>
       </div>
@@ -745,9 +737,7 @@
         <div class="eyebrow" id="heroEyebrow">Willkommen bei den Pigipegs</div>
         <h2 id="heroTitle">Zuhause ist, wo wir zusammen sind</h2>
         <p class="hero-text" id="heroText">
-          Höre zuerst die Legende oder drehe direkt die Kapitel-Trommel.
-          Du kannst jede Seite einzeln anhören, alles nacheinander abspielen
-          oder ein Kapitel in Schleife wiederholen.
+          Höre zuerst die Legende oder drehe direkt die Kapitel-Trommel. Du kannst jede Seite einzeln anhören, alles nacheinander abspielen oder ein Kapitel in Schleife wiederholen.
         </p>
 
         <div class="hero-actions">
@@ -767,17 +757,7 @@
       </div>
     </section>
 
-    <section class="toolbar-grid">
-      <div class="language">
-        <div class="eyebrow" id="languageTitle">Sprache auswählen</div>
-        <div class="language-bar">
-          <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
-          <button type="button" data-lang="en">🇬🇧 English</button>
-          <button type="button" data-lang="es">🇪🇸 Español</button>
-          <button type="button" data-lang="fr">🇫🇷 Français</button>
-        </div>
-      </div>
-
+    <section class="top-mode-row">
       <div class="modes-panel">
         <div class="eyebrow" id="modeTitle">Hörmodus</div>
         <div class="mode-bar">
@@ -795,8 +775,7 @@
       <div class="eyebrow" id="stageEyebrow">Kapitel-Auswahl</div>
       <h2 class="stage-title" id="stageTitle">Drehe die Trommel</h2>
       <p class="stage-text" id="stageText">
-        Ziehe mit dem Finger oder der Maus nach oben oder unten. Die mittlere
-        Fläche ist die aktuell ausgewählte Geschichte.
+        Ziehe mit dem Finger oder der Maus nach oben oder unten. Die mittlere Fläche ist die aktuell ausgewählte Geschichte.
       </p>
 
       <div class="wheel-shell">
@@ -866,7 +845,6 @@
         heroLegendBtn: "🌙 Legende anhören",
         heroBookBtn: "🎧 Buch 1 starten",
         coverNote: "Eine kleine Welt voller Sterne, Wärme, Geschichten und Geborgenheit.",
-        languageTitle: "Sprache auswählen",
         modeTitle: "Hörmodus",
         modePaint: "🎨 Malen",
         modeContinue: "📖 Durchlesen",
@@ -909,7 +887,6 @@
         heroLegendBtn: "🌙 Listen to the legend",
         heroBookBtn: "🎧 Start Book 1",
         coverNote: "A little world full of stars, warmth, stories, and comfort.",
-        languageTitle: "Choose a language",
         modeTitle: "Listening mode",
         modePaint: "🎨 Coloring",
         modeContinue: "📖 Read through",
@@ -952,7 +929,6 @@
         heroLegendBtn: "🌙 Escuchar la leyenda",
         heroBookBtn: "🎧 Empezar Libro 1",
         coverNote: "Un pequeño mundo lleno de estrellas, calidez, historias y cariño.",
-        languageTitle: "Elegir idioma",
         modeTitle: "Modo de escucha",
         modePaint: "🎨 Colorear",
         modeContinue: "📖 Continuo",
@@ -995,7 +971,6 @@
         heroLegendBtn: "🌙 Écouter la légende",
         heroBookBtn: "🎧 Démarrer le Livre 1",
         coverNote: "Un petit monde rempli d’étoiles, de chaleur, d’histoires et de tendresse.",
-        languageTitle: "Choisir une langue",
         modeTitle: "Mode d’écoute",
         modePaint: "🎨 Coloriage",
         modeContinue: "📖 Lecture continue",
@@ -1038,7 +1013,6 @@
     const nextBtn = document.getElementById("nextBtn");
     const playPauseBtn = document.getElementById("playPauseBtn");
 
-    const languageButtons = document.querySelectorAll(".language-bar button");
     const playerLanguageButtons = document.querySelectorAll(".player-language-bar button");
     const modeButtons = document.querySelectorAll(".mode-bar button");
 
@@ -1115,6 +1089,7 @@
     }
 
     async function safePlay() {
+      if (!player.src) return;
       try {
         await player.play();
       } catch (e) {}
@@ -1148,7 +1123,6 @@
       document.getElementById("heroBookBtn").textContent = t("heroBookBtn");
       document.getElementById("coverNote").textContent = t("coverNote");
 
-      document.getElementById("languageTitle").textContent = t("languageTitle");
       document.getElementById("modeTitle").textContent = t("modeTitle");
       document.getElementById("modePaint").textContent = t("modePaint");
       document.getElementById("modeContinue").textContent = t("modeContinue");
@@ -1177,7 +1151,7 @@
     }
 
     function updateLanguageButtons() {
-      [...languageButtons, ...playerLanguageButtons].forEach(button => {
+      playerLanguageButtons.forEach(button => {
         button.classList.toggle("active", button.dataset.lang === currentLang);
       });
       footerNote.textContent = "Pigipegs · Hörwelt · " + getLanguageLabel(currentLang);
@@ -1266,7 +1240,7 @@
         item.appendChild(thumb);
         item.appendChild(content);
 
-        item.addEventListener("click", () => {
+        item.addEventListener("click", async () => {
           const base = Math.round(currentStep / tracks.length) * tracks.length;
           const candidates = [
             base + index,
@@ -1286,11 +1260,20 @@
           });
 
           currentStep = best;
+          mode = "book";
           syncFromStep();
+
+          const selectedTrack = tracks[currentIndex];
+          player.src = getTrackPath(selectedTrack.id);
+
           renderDrum();
           updateStatusPreview();
           updateNavButtons();
-          loadBookTrackByStep(currentStep, true);
+          updatePlayPauseText();
+
+          try {
+            await player.play();
+          } catch (e) {}
         });
 
         drumCylinder.appendChild(item);
@@ -1429,10 +1412,6 @@
     });
 
     playPauseBtn.addEventListener("click", togglePlayback);
-
-    languageButtons.forEach(button => {
-      button.addEventListener("click", () => setLanguage(button.dataset.lang));
-    });
 
     playerLanguageButtons.forEach(button => {
       button.addEventListener("click", () => setLanguage(button.dataset.lang));
