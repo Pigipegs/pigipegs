@@ -21,6 +21,1584 @@
 
       --pink:#ff8faa;
       --pink-dark:#ff6f94;
+      --green:#cfe89d;
+      --green-dark:#a8d76a;
+
+      --shadow:0 16px 40px rgba(20,18,48,0.28);
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --max:1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; }
+
+    body{
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 10% 14%, rgba(255,255,255,0.95) 0 1.5px, transparent 2px),
+        radial-gradient(circle at 18% 30%, rgba(255,255,255,0.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle at 25% 8%, rgba(255,255,255,0.85) 0 1.4px, transparent 2px),
+        radial-gradient(circle at 34% 22%, rgba(255,240,190,0.9) 0 1.7px, transparent 2.3px),
+        radial-gradient(circle at 44% 12%, rgba(255,255,255,0.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle at 52% 28%, rgba(255,255,255,0.85) 0 1.3px, transparent 2px),
+        radial-gradient(circle at 60% 10%, rgba(255,240,190,0.95) 0 1.8px, transparent 2.5px),
+        radial-gradient(circle at 68% 22%, rgba(255,255,255,0.9) 0 1.2px, transparent 1.9px),
+        radial-gradient(circle at 77% 8%, rgba(255,255,255,0.85) 0 1.4px, transparent 2px),
+        radial-gradient(circle at 86% 18%, rgba(255,240,190,0.95) 0 1.8px, transparent 2.5px),
+        radial-gradient(circle at 92% 32%, rgba(255,255,255,0.75) 0 1.1px, transparent 1.8px),
+        linear-gradient(180deg, var(--night-1) 0%, var(--night-2) 38%, var(--night-3) 72%, var(--night-4) 100%);
+      overflow-x:hidden;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:20px 16px 28px;
+      position:relative;
+    }
+
+    .moon{
+      position:fixed;
+      top:26px;
+      right:34px;
+      width:74px;
+      height:74px;
+      border-radius:50%;
+      background:#fff0b0;
+      box-shadow:0 0 30px rgba(255,240,176,0.55);
+      opacity:.95;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .moon::after{
+      content:"";
+      position:absolute;
+      top:8px;
+      left:22px;
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      background:linear-gradient(180deg, var(--night-2), var(--night-3));
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+      position:relative;
+      z-index:2;
+    }
+
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+
+    .brand-figure{
+      width:126px;
+      flex:0 0 126px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
+
+    .brand-figure img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height:150px;
+      object-fit:contain;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,0.18));
+    }
+
+    .eyebrow{
+      font-size:13px;
+      color:var(--soft);
+      margin:4px 0 8px;
+      letter-spacing:.03em;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(30px,4vw,52px);
+      line-height:1.04;
+    }
+
+    .sub{
+      margin:12px 0 0;
+      max-width:760px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:16px;
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color:var(--text);
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      backdrop-filter:blur(8px);
+    }
+
+    .hero{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:20px;
+      margin-bottom:18px;
+      align-items:stretch;
+    }
+
+    .hero-panel,
+    .cover-box,
+    .toolbar-box,
+    .wheel-section,
+    .player-section{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      padding:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+    }
+
+    .hero-panel h2{
+      margin:0 0 10px;
+      font-size:clamp(30px,4vw,48px);
+      line-height:1.05;
+    }
+
+    .hero-text{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.65;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .cta{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:15px 20px;
+      border-radius:18px;
+      font-weight:bold;
+      font-size:17px;
+      box-shadow:0 10px 22px rgba(0,0,0,0.14);
+      border:none;
+      cursor:pointer;
+    }
+
+    .cta-primary{
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+    }
+
+    .cta-secondary{
+      background:rgba(255,255,255,0.14);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.16);
+    }
+
+    .cover-box img{
+      display:block;
+      width:100%;
+      height:auto;
+      border-radius:24px;
+      box-shadow:0 12px 26px rgba(0,0,0,0.16);
+    }
+
+    .cover-note{
+      margin:12px 6px 2px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .toolbar-row{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .toolbar-buttons{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .toolbar-buttons button{
+      border:none;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      font-size:15px;
+      background:rgba(255,255,255,0.14);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.16);
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+    }
+
+    .toolbar-buttons .active{
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .toolbar-box.right{
+      text-align:right;
+    }
+
+    .toolbar-box.right .toolbar-buttons{
+      justify-content:flex-end;
+    }
+
+    .toolbar-help{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .toolbar-box.right .toolbar-help{
+      text-align:right;
+    }
+
+    .wheel-section{
+      position:relative;
+      z-index:2;
+      margin-bottom:18px;
+    }
+
+    .stage-title{
+      margin:0 0 8px;
+      font-size:32px;
+    }
+
+    .stage-text{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .wheel-shell{
+      background:rgba(126,118,196,0.38);
+      border:1px solid rgba(255,255,255,0.14);
+      border-radius:26px;
+      padding:18px;
+    }
+
+    .drum-controls{
+      display:grid;
+      grid-template-columns:64px 1fr 64px;
+      gap:14px;
+      align-items:center;
+    }
+
+    .drum-arrow{
+      height:64px;
+      border:none;
+      border-radius:18px;
+      font-size:28px;
+      font-weight:bold;
+      cursor:pointer;
+      color:var(--text);
+      background:rgba(255,255,255,0.14);
+      border:1px solid rgba(255,255,255,0.18);
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+    }
+
+    .drum-wrap{
+      position:relative;
+      height:280px;
+      perspective:1800px;
+      perspective-origin:center center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      user-select:none;
+      touch-action:none;
+      overflow:hidden;
+      border-radius:26px;
+      background:linear-gradient(180deg, #434aa0 0%, #5f67be 100%);
+      border:1px solid rgba(255,255,255,0.14);
+    }
+
+    .drum-wrap::before,
+    .drum-wrap::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      height:82px;
+      z-index:4;
+      pointer-events:none;
+    }
+
+    .drum-wrap::before{
+      top:0;
+      background:linear-gradient(
+        180deg,
+        rgba(49,55,126,1) 0%,
+        rgba(49,55,126,0.95) 46%,
+        rgba(49,55,126,0.10) 100%
+      );
+    }
+
+    .drum-wrap::after{
+      bottom:0;
+      background:linear-gradient(
+        0deg,
+        rgba(85,92,173,1) 0%,
+        rgba(85,92,173,0.95) 46%,
+        rgba(85,92,173,0.10) 100%
+      );
+    }
+
+    .drum-center-line{
+      position:absolute;
+      left:18px;
+      right:18px;
+      top:50%;
+      transform:translateY(-50%);
+      height:96px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.28);
+      background:rgba(170,160,245,0.26);
+      box-shadow:0 0 0 1px rgba(255,255,255,0.08) inset;
+      pointer-events:none;
+      z-index:3;
+    }
+
+    .drum-cylinder{
+      position:relative;
+      width:100%;
+      height:100%;
+      transform-style:preserve-3d;
+      transition:transform 0.25s ease-out;
+    }
+
+    .drum-item{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:min(880px, 92%);
+      height:150px;
+      transform-style:preserve-3d;
+      border-radius:22px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgb(138,130,222), rgb(111,103,196));
+      border:1px solid rgba(255,255,255,0.16);
+      box-shadow:0 10px 20px rgba(0,0,0,0.14);
+      cursor:pointer;
+      display:grid;
+      grid-template-columns:170px 1fr;
+      opacity:1;
+      will-change:transform, opacity;
+    }
+
+    .drum-item.active{
+      background:linear-gradient(180deg, rgba(156,146,235,1), rgba(126,116,210,1));
+      box-shadow:0 16px 32px rgba(255,229,156,0.18);
+      border-color:rgba(255,240,190,0.42);
+    }
+
+    .drum-thumb{
+      background:rgba(255,255,255,0.16);
+      border-right:1px solid rgba(255,255,255,0.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:12px 10px 12px 26px;
+    }
+
+    .drum-thumb img{
+      display:block;
+      width:auto;
+      height:auto;
+      max-width:100%;
+      max-height:100%;
+      object-fit:contain;
+      object-position:center center;
+      border-radius:10px;
+      margin:auto;
+      transform:translateX(8px);
+      pointer-events:none;
+    }
+
+    .drum-content{
+      padding:14px 16px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:7px;
+      pointer-events:none;
+    }
+
+    .drum-code{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:max-content;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:bold;
+      letter-spacing:.04em;
+      background:rgba(255,255,255,0.16);
+      color:var(--soft);
+      border:1px solid rgba(255,255,255,0.18);
+    }
+
+    .drum-item.active .drum-code{
+      background:rgba(255,245,200,0.96);
+      color:#5f4a10;
+      border-color:rgba(255,245,200,0.96);
+    }
+
+    .drum-name{
+      font-size:16px;
+      font-weight:bold;
+      line-height:1.25;
+      color:#fff;
+      text-shadow:0 1px 1px rgba(0,0,0,0.18);
+    }
+
+    .drum-sub{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.35;
+    }
+
+    .drum-hint{
+      margin-top:12px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .player-section{
+      position:relative;
+      z-index:2;
+      margin-bottom:18px;
+    }
+
+    .player-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .player-head-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .player-icon{
+      width:38px;
+      height:38px;
+      object-fit:contain;
+      border-radius:12px;
+      flex:0 0 auto;
+    }
+
+    .player-title{
+      margin:0;
+      font-size:26px;
+      line-height:1.1;
+    }
+
+    .status{
+      background:rgba(255,248,220,0.92);
+      color:#634f18;
+      border:1px solid rgba(255,235,170,0.9);
+      border-radius:18px;
+      padding:14px 16px;
+      max-width:520px;
+      line-height:1.5;
+      font-size:15px;
+    }
+
+    audio{
+      width:100%;
+      margin:8px 0 16px;
+      border-radius:14px;
+    }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:0;
+    }
+
+    .controls button{
+      flex:1 1 170px;
+      border:none;
+      border-radius:16px;
+      padding:14px 16px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      background:rgba(255,255,255,0.16);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.18);
+    }
+
+    .controls .main{
+      background:linear-gradient(135deg, var(--green), var(--green-dark));
+      color:#2b3815;
+      border-color:transparent;
+    }
+
+    .controls button:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    .footer-note{
+      position:relative;
+      z-index:2;
+      margin-top:18px;
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,0.10);
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .footer-note a{
+      color:var(--muted);
+      text-decoration:none;
+    }
+
+    @media (max-width: 980px){
+      .hero,
+      .toolbar-row{
+        grid-template-columns:1fr;
+      }
+
+      .toolbar-box.right{
+        text-align:left;
+      }
+
+      .toolbar-box.right .toolbar-buttons{
+        justify-content:flex-start;
+      }
+
+      .toolbar-box.right .toolbar-help{
+        text-align:left;
+      }
+    }
+
+    @media (max-width: 720px){
+      .hero-panel,
+      .cover-box,
+      .toolbar-box,
+      .wheel-section,
+      .player-section{
+        padding:18px;
+      }
+
+      .brand-figure{
+        width:88px;
+        flex:0 0 88px;
+      }
+
+      .moon{
+        width:58px;
+        height:58px;
+        top:18px;
+        right:16px;
+      }
+
+      .moon::after{
+        top:6px;
+        left:18px;
+        width:50px;
+        height:50px;
+      }
+
+      .wheel-shell{
+        padding:10px;
+      }
+
+      .drum-controls{
+        grid-template-columns:1fr;
+        gap:0;
+      }
+
+      .drum-arrow{
+        display:none;
+      }
+
+      .drum-wrap{
+        height:235px;
+        border-radius:22px;
+      }
+
+      .drum-wrap::before,
+      .drum-wrap::after{
+        height:66px;
+      }
+
+      .drum-center-line{
+        left:8px;
+        right:8px;
+        height:86px;
+        border-radius:16px;
+      }
+
+      .drum-item{
+        width:98%;
+        height:92px;
+        grid-template-columns:92px 1fr;
+        border-radius:16px;
+      }
+
+      .drum-thumb{
+        padding:6px 6px 6px 16px;
+      }
+
+      .drum-thumb img{
+        transform:translateX(8px);
+      }
+
+      .drum-content{
+        padding:9px 10px;
+        gap:4px;
+      }
+
+      .drum-code{
+        padding:4px 8px;
+        font-size:11px;
+      }
+
+      .drum-name{
+        font-size:13px;
+        line-height:1.2;
+      }
+
+      .drum-sub{
+        font-size:10px;
+        line-height:1.2;
+      }
+
+      .drum-hint{
+        font-size:12px;
+        line-height:1.4;
+        margin-top:10px;
+      }
+
+      .toolbar-buttons{
+        gap:8px;
+      }
+
+      .toolbar-buttons button{
+        padding:9px 12px;
+        font-size:13px;
+      }
+
+      .controls{
+        gap:8px;
+      }
+
+      .footer-note{
+        gap:8px;
+        font-size:13px;
+      }
+
+      .player-title{
+        font-size:22px;
+      }
+
+      .player-header{
+        align-items:flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="moon"></div>
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-figure">
+          <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs" />
+        </div>
+        <div>
+          <div class="eyebrow" id="brandEyebrow">Pigipegs Hörwelt</div>
+          <h1 id="mainTitle">Geschichten unterm Sternenhimmel</h1>
+          <p class="sub" id="mainSub">
+            Wähle eine Sprache, drehe die Kapitel-Trommel und höre die Geschichten aus <strong>Buch 1</strong> so, wie es für euch am besten passt.
+          </p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="/index.html" id="navStart">Start</a>
+        <a href="/book01/" id="navBook">Buch 01</a>
+        <a href="/book01/so-gehts/" id="navHow">So geht’s</a>
+      </nav>
+    </div>
+
+    <section class="hero">
+      <div class="hero-panel">
+        <div class="eyebrow" id="heroEyebrow">Willkommen bei den Pigipegs</div>
+        <h2 id="heroTitle">Zuhause ist, wo wir zusammen sind</h2>
+        <p class="hero-text" id="heroText">
+          Höre zuerst die Legende oder drehe direkt die Kapitel-Trommel. Du kannst jede Seite einzeln anhören, alles nacheinander abspielen oder ein Kapitel in Schleife wiederholen.
+        </p>
+
+        <div class="hero-actions">
+          <button class="cta cta-primary" type="button" id="heroLegendBtn">🌙 Legende anhören</button>
+          <button class="cta cta-secondary" type="button" id="heroBookBtn">Buch 1 starten</button>
+        </div>
+      </div>
+
+      <div class="cover-box">
+        <img
+          src="/assets/img/pigipegs-cover-stars.png"
+          alt="Pigipegs-Familie unter dem Sternenhimmel vor ihrem Haus"
+        />
+        <div class="cover-note" id="coverNote">
+          Eine kleine Welt voller Sterne, Wärme, Geschichten und Geborgenheit.
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar-row">
+      <div class="toolbar-box">
+        <div class="eyebrow" id="languageEyebrow">Sprache direkt wechseln</div>
+        <div class="toolbar-buttons language-bar">
+          <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
+          <button type="button" data-lang="en">🇬🇧 English</button>
+          <button type="button" data-lang="es">🇪🇸 Español</button>
+          <button type="button" data-lang="fr">🇫🇷 Français</button>
+        </div>
+      </div>
+
+      <div class="toolbar-box right">
+        <div class="eyebrow" id="modeTitle">Hörmodus</div>
+        <div class="toolbar-buttons mode-bar">
+          <button type="button" class="active" data-mode="paint" id="modePaint">🎨 Malen</button>
+          <button type="button" data-mode="continue" id="modeContinue">📖 Durchlesen</button>
+          <button type="button" data-mode="loop" id="modeLoop">🔁 Schleife</button>
+        </div>
+        <div class="toolbar-help" id="modeHelp">
+          Malen: stoppt nach jeder Seite, damit genug Zeit zum Ausmalen bleibt.
+        </div>
+      </div>
+    </section>
+
+    <section class="wheel-section">
+      <div class="eyebrow" id="stageEyebrow">Kapitel-Auswahl</div>
+      <h2 class="stage-title" id="stageTitle">Drehe die Trommel</h2>
+      <p class="stage-text" id="stageText">
+        Ziehe mit dem Finger oder der Maus nach oben oder unten. Die mittlere Fläche ist die aktuell ausgewählte Geschichte.
+      </p>
+
+      <div class="wheel-shell">
+        <div class="drum-controls">
+          <button class="drum-arrow" type="button" id="drumUpBtn">▲</button>
+
+          <div class="drum-wrap" id="drumWrap">
+            <div class="drum-center-line"></div>
+            <div class="drum-cylinder" id="drumCylinder"></div>
+          </div>
+
+          <button class="drum-arrow" type="button" id="drumDownBtn">▼</button>
+        </div>
+
+        <div class="drum-hint" id="drumHint">
+          Ziehen = drehen · Tippen = abspielen
+        </div>
+      </div>
+    </section>
+
+    <section class="player-section">
+      <div class="player-header">
+        <div class="player-head-left">
+          <img src="/assets/img/Pigipegs%20Sound-350x350.png" alt="Pigipegs Sound" class="player-icon" />
+          <div>
+            <div class="eyebrow" id="playerEyebrow">Jetzt anhören</div>
+            <h3 class="player-title" id="playerTitle">Pigipegs Audio</h3>
+          </div>
+        </div>
+
+        <div class="status" id="statusBox">Noch nichts ausgewählt.</div>
+      </div>
+
+      <audio id="player" controls preload="none"></audio>
+
+      <div class="controls">
+        <button type="button" id="prevBtn">⟵ Zurück</button>
+        <button type="button" class="main" id="playPauseBtn">▶ Abspielen</button>
+        <button type="button" id="nextBtn">Weiter ⟶</button>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      <span id="footerText">Pigipegs · Hörwelt · Deutsch</span>
+      <span>·</span>
+      <a href="/impressum/" id="footerImprint">Impressum</a>
+    </div>
+  </div>
+
+  <script>
+    const UI = {
+      de: {
+        brandEyebrow: "Pigipegs Hörwelt",
+        mainTitle: "Geschichten unterm Sternenhimmel",
+        mainSub: 'Wähle eine Sprache, drehe die Kapitel-Trommel und höre die Geschichten aus <strong>Buch 1</strong> so, wie es für euch am besten passt.',
+        navStart: "Start",
+        navBook: "Buch 01",
+        navHow: "So geht’s",
+        heroEyebrow: "Willkommen bei den Pigipegs",
+        heroTitle: "Zuhause ist, wo wir zusammen sind",
+        heroText: "Höre zuerst die Legende oder drehe direkt die Kapitel-Trommel. Du kannst jede Seite einzeln anhören, alles nacheinander abspielen oder ein Kapitel in Schleife wiederholen.",
+        heroLegendBtn: "🌙 Legende anhören",
+        heroBookBtn: "Buch 1 starten",
+        coverNote: "Eine kleine Welt voller Sterne, Wärme, Geschichten und Geborgenheit.",
+        languageEyebrow: "Sprache direkt wechseln",
+        modeTitle: "Hörmodus",
+        modePaint: "🎨 Malen",
+        modeContinue: "📖 Durchlesen",
+        modeLoop: "🔁 Schleife",
+        stageEyebrow: "Kapitel-Auswahl",
+        stageTitle: "Drehe die Trommel",
+        stageText: "Ziehe mit dem Finger oder der Maus nach oben oder unten. Die mittlere Fläche ist die aktuell ausgewählte Geschichte.",
+        playerEyebrow: "Jetzt anhören",
+        playerTitle: "Pigipegs Audio",
+        prevBtn: "⟵ Zurück",
+        playBtn: "▶ Abspielen",
+        pauseBtn: "⏸ Pause",
+        nextBtn: "Weiter ⟶",
+        modeHelpPaint: "Malen: stoppt nach jeder Seite, damit genug Zeit zum Ausmalen bleibt.",
+        modeHelpContinue: "Durchlesen: spielt Seite für Seite automatisch weiter.",
+        modeHelpLoop: "Schleife: wiederholt das aktuelle Kapitel immer wieder.",
+        drumHint: "Ziehen = drehen · Tippen = abspielen",
+        drumDrag: "Ziehe weiter nach oben oder unten, um die Trommel zu drehen",
+        selectTap: "Antippen zum Abspielen",
+        legendSelected: "Jetzt ausgewählt: Die Pigipegs-Legende",
+        legendSwitched: "Sprache gewechselt: {lang} · Die Pigipegs-Legende",
+        selected: "Jetzt ausgewählt: {code} · {title} ({lang})",
+        switched: "Sprache gewechselt: {lang} · {code} · {title}",
+        legendEnded: "Die Legende ist zu Ende. Jetzt kannst du eine Buchseite auswählen.",
+        chapterEnded: "Kapitel beendet – Zeit zum Ausmalen 🎨",
+        loopActive: "Schleife aktiv – {title}",
+        imprint: "Impressum"
+      },
+      en: {
+        brandEyebrow: "Pigipegs Audio World",
+        mainTitle: "Stories Under the Starlit Sky",
+        mainSub: 'Choose a language, spin the story drum, and listen to the stories from <strong>Book 1</strong> in the way that suits you best.',
+        navStart: "Home",
+        navBook: "Book 01",
+        navHow: "How it works",
+        heroEyebrow: "Welcome to the Pigipegs",
+        heroTitle: "Home Is Where We Are Together",
+        heroText: "Listen to the legend first or go straight to the story drum. You can listen to each page one by one, play everything in sequence, or loop a chapter.",
+        heroLegendBtn: "🌙 Listen to the legend",
+        heroBookBtn: "Start Book 1",
+        coverNote: "A little world full of stars, warmth, stories, and comfort.",
+        languageEyebrow: "Switch language directly",
+        modeTitle: "Listening mode",
+        modePaint: "🎨 Coloring",
+        modeContinue: "📖 Read through",
+        modeLoop: "🔁 Loop",
+        stageEyebrow: "Chapter selection",
+        stageTitle: "Spin the drum",
+        stageText: "Drag up or down with your finger or mouse. The middle area is the currently selected story.",
+        playerEyebrow: "Listen now",
+        playerTitle: "Pigipegs Audio",
+        prevBtn: "⟵ Previous",
+        playBtn: "▶ Play",
+        pauseBtn: "⏸ Pause",
+        nextBtn: "Next ⟶",
+        modeHelpPaint: "Coloring: stops after each page so there is enough time to color.",
+        modeHelpContinue: "Read through: automatically continues page by page.",
+        modeHelpLoop: "Loop: repeats the current chapter again and again.",
+        drumHint: "Drag = rotate · Tap = play",
+        drumDrag: "Keep dragging up or down to rotate the drum",
+        selectTap: "Tap to play",
+        legendSelected: "Selected: The Pigipegs Legend",
+        legendSwitched: "Language changed: {lang} · The Pigipegs Legend",
+        selected: "Selected: {code} · {title} ({lang})",
+        switched: "Language changed: {lang} · {code} · {title}",
+        legendEnded: "The legend has ended. Now you can choose a book page.",
+        chapterEnded: "Chapter finished – time for coloring 🎨",
+        loopActive: "Loop active – {title}",
+        imprint: "Imprint"
+      },
+      es: {
+        brandEyebrow: "Mundo de audio Pigipegs",
+        mainTitle: "Historias bajo el cielo estrellado",
+        mainSub: 'Elige un idioma, gira el tambor de historias y escucha las historias del <strong>Libro 1</strong> de la manera que mejor te convenga.',
+        navStart: "Inicio",
+        navBook: "Libro 01",
+        navHow: "Cómo funciona",
+        heroEyebrow: "Bienvenido a los Pigipegs",
+        heroTitle: "El hogar está donde estamos juntos",
+        heroText: "Escucha primero la leyenda o ve directamente al tambor de historias. Puedes escuchar cada página por separado, reproducir todo seguido o repetir un capítulo en bucle.",
+        heroLegendBtn: "🌙 Escuchar la leyenda",
+        heroBookBtn: "Empezar Libro 1",
+        coverNote: "Un pequeño mundo lleno de estrellas, calidez, historias y cariño.",
+        languageEyebrow: "Cambiar idioma directamente",
+        modeTitle: "Modo de escucha",
+        modePaint: "🎨 Colorear",
+        modeContinue: "📖 Continuo",
+        modeLoop: "🔁 Bucle",
+        stageEyebrow: "Selección de capítulo",
+        stageTitle: "Gira el tambor",
+        stageText: "Arrastra hacia arriba o hacia abajo con el dedo o el ratón. La zona central es la historia actualmente seleccionada.",
+        playerEyebrow: "Escuchar ahora",
+        playerTitle: "Audio Pigipegs",
+        prevBtn: "⟵ Anterior",
+        playBtn: "▶ Reproducir",
+        pauseBtn: "⏸ Pausa",
+        nextBtn: "Siguiente ⟶",
+        modeHelpPaint: "Colorear: se detiene después de cada página para que haya tiempo suficiente para colorear.",
+        modeHelpContinue: "Continuo: sigue automáticamente página por página.",
+        modeHelpLoop: "Bucle: repite el capítulo actual una y otra vez.",
+        drumHint: "Arrastrar = girar · tocar = reproducir",
+        drumDrag: "Sigue arrastrando hacia arriba o abajo para girar el tambor",
+        selectTap: "Toca para reproducir",
+        legendSelected: "Seleccionado: La leyenda de los Pigipegs",
+        legendSwitched: "Idioma cambiado: {lang} · La leyenda de los Pigipegs",
+        selected: "Seleccionado: {code} · {title} ({lang})",
+        switched: "Idioma cambiado: {lang} · {code} · {title}",
+        legendEnded: "La leyenda ha terminado. Ahora puedes elegir una página del libro.",
+        chapterEnded: "Capítulo terminado – hora de colorear 🎨",
+        loopActive: "Bucle activo – {title}",
+        imprint: "Aviso legal"
+      },
+      fr: {
+        brandEyebrow: "Univers audio Pigipegs",
+        mainTitle: "Histoires sous le ciel étoilé",
+        mainSub: 'Choisis une langue, fais tourner le tambour des histoires et écoute les histoires du <strong>Livre 1</strong> comme tu le préfères.',
+        navStart: "Accueil",
+        navBook: "Livre 01",
+        navHow: "Comment ça marche",
+        heroEyebrow: "Bienvenue chez les Pigipegs",
+        heroTitle: "La maison, c’est là où nous sommes ensemble",
+        heroText: "Écoute d’abord la légende ou passe directement au tambour des histoires. Tu peux écouter chaque page séparément, tout écouter à la suite ou répéter un chapitre en boucle.",
+        heroLegendBtn: "🌙 Écouter la légende",
+        heroBookBtn: "Démarrer le Livre 1",
+        coverNote: "Un petit monde rempli d’étoiles, de chaleur, d’histoires et de tendresse.",
+        languageEyebrow: "Changer directement de langue",
+        modeTitle: "Mode d’écoute",
+        modePaint: "🎨 Coloriage",
+        modeContinue: "📖 Lecture continue",
+        modeLoop: "🔁 Boucle",
+        stageEyebrow: "Choix du chapitre",
+        stageTitle: "Fais tourner le tambour",
+        stageText: "Fais glisser vers le haut ou le bas avec le doigt ou la souris. La zone centrale correspond à l’histoire actuellement sélectionnée.",
+        playerEyebrow: "Écouter maintenant",
+        playerTitle: "Pigipegs Audio",
+        prevBtn: "⟵ Précédent",
+        playBtn: "▶ Lecture",
+        pauseBtn: "⏸ Pause",
+        nextBtn: "Suivant ⟶",
+        modeHelpPaint: "Coloriage : s’arrête après chaque page pour laisser le temps de colorier.",
+        modeHelpContinue: "Lecture continue : passe automatiquement d’une page à l’autre.",
+        modeHelpLoop: "Boucle : répète le chapitre actuel encore et encore.",
+        drumHint: "Glisser = tourner · toucher = lire",
+        drumDrag: "Continue à faire glisser vers le haut ou le bas pour tourner le tambour",
+        selectTap: "Touchez pour lire",
+        legendSelected: "Sélectionné : La légende des Pigipegs",
+        legendSwitched: "Langue changée : {lang} · La légende des Pigipegs",
+        selected: "Sélectionné : {code} · {title} ({lang})",
+        switched: "Langue changée : {lang} · {code} · {title}",
+        legendEnded: "La légende est terminée. Tu peux maintenant choisir une page du livre.",
+        chapterEnded: "Chapitre terminé – place au coloriage 🎨",
+        loopActive: "Boucle active – {title}",
+        imprint: "Mentions légales"
+      }
+    };
+
+    const player = document.getElementById("player");
+    const statusBox = document.getElementById("statusBox");
+    const modeHelp = document.getElementById("modeHelp");
+
+    const heroLegendBtn = document.getElementById("heroLegendBtn");
+    const heroBookBtn = document.getElementById("heroBookBtn");
+
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+
+    const languageButtons = document.querySelectorAll(".language-bar button");
+    const modeButtons = document.querySelectorAll(".mode-bar button");
+
+    const drumWrap = document.getElementById("drumWrap");
+    const drumCylinder = document.getElementById("drumCylinder");
+    const drumHint = document.getElementById("drumHint");
+    const drumUpBtn = document.getElementById("drumUpBtn");
+    const drumDownBtn = document.getElementById("drumDownBtn");
+
+    const footerText = document.getElementById("footerText");
+    const footerImprint = document.getElementById("footerImprint");
+
+    const tracks = [
+      { id: "00", code: "S00", image: "/assets/img/S00.jpg", titles: { de: "Die Pigipegs", en: "The Pigipegs", es: "Los Pigipegs", fr: "Les Pigipegs" } },
+      { id: "02", code: "S02", image: "/assets/img/S03.jpg", titles: { de: "Das kleine Haus auf dem Berg", en: "The Little House on the Hill", es: "La pequeña casa en la colina", fr: "La petite maison sur la colline" } },
+      { id: "04", code: "S04", image: "/assets/img/S05.jpg", titles: { de: "Papa Pigipeg erzählt", en: "Papa Pigipeg Tells a Story", es: "Papá Pigipeg cuenta una historia", fr: "Papa Pigipeg raconte" } },
+      { id: "06", code: "S06", image: "/assets/img/S07.jpg", titles: { de: "Mama Pigipegs Gute-Nacht-Geschichten", en: "Mama Pigipeg's Bedtime Stories", es: "Los cuentos de buenas noches de Mamá Pigipeg", fr: "Les histoires du soir de Maman Pigipeg" } },
+      { id: "08", code: "S08", image: "/assets/img/S09.jpg", titles: { de: "Peet hat eine Idee", en: "Peet Has an Idea", es: "Peet tiene una idea", fr: "Peet a une idée" } },
+      { id: "10", code: "S10", image: "/assets/img/S11.jpg", titles: { de: "Amy findet einen Schatz", en: "Amy Finds a Treasure", es: "Amy encuentra un tesoro", fr: "Amy trouve un trésor" } },
+      { id: "12", code: "S12", image: "/assets/img/S13.jpg", titles: { de: "Baby Leo wird müde", en: "Baby Leo Gets Sleepy", es: "El bebé Leo tiene sueño", fr: "Bébé Leo est fatigué" } },
+      { id: "14", code: "S14", image: "/assets/img/S15.jpg", titles: { de: "Die Sterne leuchten hell", en: "The Stars Shine Bright", es: "Las estrellas brillan intensamente", fr: "Les étoiles brillent fort" } },
+      { id: "16", code: "S16", image: "/assets/img/S17.jpg", titles: { de: "Ein kleiner Wunsch", en: "A Little Wish", es: "Un pequeño deseo", fr: "Un petit souhait" } },
+      { id: "18", code: "S18", image: "/assets/img/S19.jpg", titles: { de: "Die Familie rückt zusammen", en: "The Family Snuggles Close", es: "La familia se acurruca junta", fr: "La famille se rapproche" } },
+      { id: "20", code: "S20", image: "/assets/img/S21.jpg", titles: { de: "Das Licht im Fenster", en: "The Light in the Window", es: "La luz en la ventana", fr: "La lumière à la fenêtre" } },
+      { id: "22", code: "S22", image: "/assets/img/S23.jpg", titles: { de: "Der Mond steigt höher", en: "The Moon Climbs Higher", es: "La luna sube más alto", fr: "La lune monte plus haut" } },
+      { id: "24", code: "S24", image: "/assets/img/S25.jpg", titles: { de: "Zeit für eine Geschichte", en: "Time for a Story", es: "Hora de un cuento", fr: "L'heure d'une histoire" } },
+      { id: "26", code: "S26", image: "/assets/img/S27.jpg", titles: { de: "Ein warmes Lachen", en: "A Warm Laugh", es: "Una risa cálida", fr: "Un rire chaleureux" } },
+      { id: "28", code: "S28", image: "/assets/img/S29.jpg", titles: { de: "Der Himmel voller Sterne", en: "A Sky Full of Stars", es: "Un cielo lleno de estrellas", fr: "Un ciel plein d'étoiles" } },
+      { id: "30", code: "S30", image: "/assets/img/S31.jpg", titles: { de: "Langsam wird es still", en: "Slowly It Becomes Quiet", es: "Poco a poco todo se calma", fr: "Peu à peu, tout devient calme" } },
+      { id: "32", code: "S32", image: "/assets/img/Die_Pigipegs_B01-Cover800x600.jpg", titles: { de: "Zuhause ist, wo wir zusammen sind", en: "Home Is Where We Are Together", es: "El hogar está donde estamos juntos", fr: "La maison, c'est là où nous sommes ensemble" } }
+    ];
+
+    let currentLang = localStorage.getItem("pigipegs_lang") || "de";
+    let playMode = localStorage.getItem("pigipegs_mode") || "paint";
+    let mode = "book";
+
+    let currentStep = 0;
+    let currentIndex = 0;
+
+    let drumAngle = 0;
+    let dragStartY = 0;
+    let dragStartAngle = 0;
+    let isDragging = false;
+    let dragMoved = false;
+    let pointerStartX = 0;
+    let pointerStartY = 0;
+
+    const stepAngle = 360 / tracks.length;
+    const drumRadius = 360;
+
+    function t(key) {
+      return UI[currentLang][key] || UI.de[key] || key;
+    }
+
+    function getLanguageLabel(lang) {
+      switch (lang) {
+        case "de": return "Deutsch";
+        case "en": return "English";
+        case "es": return "Español";
+        case "fr": return "Français";
+        default: return lang.toUpperCase();
+      }
+    }
+
+    function getTrackTitle(track) {
+      return track.titles[currentLang] || track.titles.de || track.code;
+    }
+
+    function wrapIndex(index) {
+      const total = tracks.length;
+      return ((index % total) + total) % total;
+    }
+
+    function getLegendPath() {
+      return "/book01/legende/" + currentLang + ".mp3";
+    }
+
+    function getTrackPath(trackId) {
+      return "/book01/audio/" + currentLang + "/" + trackId + ".mp3";
+    }
+
+    async function safePlay() {
+      if (!player.src) return;
+      try {
+        await player.play();
+      } catch (e) {}
+    }
+
+    function replaceVars(str, vars = {}) {
+      let out = str;
+      Object.keys(vars).forEach(key => {
+        out = out.replaceAll(`{${key}}`, vars[key]);
+      });
+      return out;
+    }
+
+    function updateStaticTexts() {
+      document.documentElement.lang = currentLang;
+      document.title = t("brandEyebrow");
+
+      document.getElementById("brandEyebrow").textContent = t("brandEyebrow");
+      document.getElementById("mainTitle").textContent = t("mainTitle");
+      document.getElementById("mainSub").innerHTML = t("mainSub");
+
+      document.getElementById("navStart").textContent = t("navStart");
+      document.getElementById("navBook").textContent = t("navBook");
+      document.getElementById("navHow").textContent = t("navHow");
+
+      document.getElementById("heroEyebrow").textContent = t("heroEyebrow");
+      document.getElementById("heroTitle").textContent = t("heroTitle");
+      document.getElementById("heroText").textContent = t("heroText");
+      document.getElementById("heroLegendBtn").textContent = t("heroLegendBtn");
+      document.getElementById("heroBookBtn").textContent = t("heroBookBtn");
+      document.getElementById("coverNote").textContent = t("coverNote");
+
+      document.getElementById("languageEyebrow").textContent = t("languageEyebrow");
+
+      document.getElementById("modeTitle").textContent = t("modeTitle");
+      document.getElementById("modePaint").textContent = t("modePaint");
+      document.getElementById("modeContinue").textContent = t("modeContinue");
+      document.getElementById("modeLoop").textContent = t("modeLoop");
+
+      document.getElementById("stageEyebrow").textContent = t("stageEyebrow");
+      document.getElementById("stageTitle").textContent = t("stageTitle");
+      document.getElementById("stageText").textContent = t("stageText");
+      document.getElementById("drumHint").textContent = t("drumHint");
+
+      document.getElementById("playerEyebrow").textContent = t("playerEyebrow");
+      document.getElementById("playerTitle").textContent = t("playerTitle");
+
+      prevBtn.textContent = t("prevBtn");
+      nextBtn.textContent = t("nextBtn");
+      footerText.textContent = "Pigipegs · Hörwelt · " + getLanguageLabel(currentLang);
+      footerImprint.textContent = t("imprint");
+    }
+
+    function updatePlayPauseText() {
+      playPauseBtn.textContent = player.paused ? t("playBtn") : t("pauseBtn");
+    }
+
+    function updateNavButtons() {
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+    }
+
+    function updateLanguageButtons() {
+      languageButtons.forEach(button => {
+        button.classList.toggle("active", button.dataset.lang === currentLang);
+      });
+    }
+
+    function updateModeButtons() {
+      modeButtons.forEach(button => {
+        button.classList.toggle("active", button.dataset.mode === playMode);
+      });
+
+      if (playMode === "paint") {
+        modeHelp.textContent = t("modeHelpPaint");
+      } else if (playMode === "continue") {
+        modeHelp.textContent = t("modeHelpContinue");
+      } else {
+        modeHelp.textContent = t("modeHelpLoop");
+      }
+    }
+
+    function updateStatusPreview() {
+      const track = tracks[currentIndex];
+      if (mode === "legend") {
+        statusBox.textContent = replaceVars(t("legendSelected"), {
+          lang: getLanguageLabel(currentLang)
+        }) + " (" + getLanguageLabel(currentLang) + ")";
+      } else {
+        statusBox.textContent = replaceVars(t("selected"), {
+          code: track.code,
+          title: getTrackTitle(track),
+          lang: getLanguageLabel(currentLang)
+        });
+      }
+    }
+
+    function applyDrumRotation() {
+      drumCylinder.style.transform = `rotateX(${drumAngle}deg)`;
+    }
+
+    function getNearestStepFromAngle() {
+      return Math.round((-drumAngle) / stepAngle);
+    }
+
+    function syncFromStep() {
+      currentIndex = wrapIndex(currentStep);
+      drumAngle = -(currentStep * stepAngle);
+    }
+
+    function setPlayerSourceForCurrentTrack() {
+      const track = tracks[currentIndex];
+      player.src = getTrackPath(track.id);
+      player.load();
+    }
+
+    async function selectTrackAndPlay(step) {
+      mode = "book";
+      currentStep = step;
+      syncFromStep();
+      setPlayerSourceForCurrentTrack();
+      renderDrum();
+      updateStatusPreview();
+      updateNavButtons();
+      updatePlayPauseText();
+      await safePlay();
+    }
+
+    function renderDrum() {
+      drumCylinder.innerHTML = "";
+
+      tracks.forEach((track, index) => {
+        const item = document.createElement("div");
+        item.className = "drum-item" + (index === currentIndex ? " active" : "");
+
+        const angle = index * stepAngle;
+        item.style.transform = `translate(-50%, -50%) rotateX(${angle}deg) translateZ(${drumRadius}px)`;
+
+        const thumb = document.createElement("div");
+        thumb.className = "drum-thumb";
+
+        const img = document.createElement("img");
+        img.src = track.image;
+        img.alt = getTrackTitle(track);
+        img.loading = "lazy";
+        thumb.appendChild(img);
+
+        const content = document.createElement("div");
+        content.className = "drum-content";
+
+        const code = document.createElement("div");
+        code.className = "drum-code";
+        code.textContent = track.code;
+
+        const name = document.createElement("div");
+        name.className = "drum-name";
+        name.textContent = getTrackTitle(track);
+
+        const sub = document.createElement("div");
+        sub.className = "drum-sub";
+        sub.textContent = t("selectTap");
+
+        content.appendChild(code);
+        content.appendChild(name);
+        content.appendChild(sub);
+
+        item.appendChild(thumb);
+        item.appendChild(content);
+
+        item.addEventListener("click", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          if (dragMoved) return;
+
+          const base = Math.round(currentStep / tracks.length) * tracks.length;
+          const candidates = [
+            base + index,
+            base + index + tracks.length,
+            base + index - tracks.length
+          ];
+
+          let best = candidates[0];
+          let bestDist = Math.abs(candidates[0] - currentStep);
+
+          candidates.forEach(candidate => {
+            const dist = Math.abs(candidate - currentStep);
+            if (dist < bestDist) {
+              best = candidate;
+              bestDist = dist;
+            }
+          });
+
+          await selectTrackAndPlay(best);
+        });
+
+        drumCylinder.appendChild(item);
+      });
+
+      applyDrumRotation();
+    }
+
+    function loadLegend(autoplay = true) {
+      mode = "legend";
+      player.src = getLegendPath();
+      player.load();
+      updateStatusPreview();
+      updatePlayPauseText();
+      if (autoplay) safePlay();
+    }
+
+    function loadBookTrackByStep(step, autoplay = true) {
+      mode = "book";
+      currentStep = step;
+      syncFromStep();
+      setPlayerSourceForCurrentTrack();
+      renderDrum();
+      updateStatusPreview();
+      updateNavButtons();
+      updatePlayPauseText();
+      if (autoplay) safePlay();
+    }
+
+    function togglePlayback() {
+      if (!player.src) {
+        loadBookTrackByStep(currentStep, true);
+        return;
+      }
+
+      if (player.paused) {
+        safePlay();
+      } else {
+        player.pause();
+      }
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("pigipegs_lang", lang);
+
+      updateStaticTexts();
+      updateLanguageButtons();
+      updateModeButtons();
+      renderDrum();
+
+      if (mode === "legend") {
+        player.src = getLegendPath();
+        player.load();
+        statusBox.textContent = replaceVars(t("legendSwitched"), {
+          lang: getLanguageLabel(lang)
+        });
+      } else {
+        setPlayerSourceForCurrentTrack();
+        const track = tracks[currentIndex];
+        statusBox.textContent = replaceVars(t("switched"), {
+          lang: getLanguageLabel(lang),
+          code: track.code,
+          title: getTrackTitle(track)
+        });
+      }
+
+      player.currentTime = 0;
+      player.pause();
+      updatePlayPauseText();
+    }
+
+    function setMode(newMode) {
+      playMode = newMode;
+      localStorage.setItem("pigipegs_mode", newMode);
+      updateModeButtons();
+      updateStatusPreview();
+    }
+
+    function getClientY(event) {
+      if (event.touches && event.touches.length) return event.touches[0].clientY;
+      if (event.changedTouches && event.changedTouches.length) return event.changedTouches[0].clientY;
+      return event.clientY;
+    }
+
+    function getClientX(event) {
+      if (event.touches && event.touches.length) return event.touches[0].clientX;
+      if (event.changedTouches && event.changedTouches.length) return event.changedTouches[0].clientX;
+      return event.clientX;
+    }
+
+    function startDrag(event) {
+      isDragging = true;
+      dragMoved = false;
+      dragStartY = getClientY(event);
+      dragStartAngle = drumAngle;
+      pointerStartX = getClientX(event);
+      pointerStartY = getClientY(event);
+      drumCylinder.style.transition = "none";
+      drumHint.textContent = t("drumDrag");
+    }
+
+    function moveDrag(event) {
+      if (!isDragging) return;
+
+      const currentY = getClientY(event);
+      const currentX = getClientX(event);
+      const deltaY = currentY - dragStartY;
+
+      if (
+        Math.abs(currentY - pointerStartY) > 10 ||
+        Math.abs(currentX - pointerStartX) > 10
+      ) {
+        dragMoved = true;
+      }
+
+      drumAngle = dragStartAngle - (deltaY / 4);
+      applyDrumRotation();
+    }
+
+    function endDrag() {
+      if (!isDragging) return;
+
+      isDragging = false;
+      drumCylinder.style.transition = "transform 0.25s ease-out";
+
+      if (dragMoved) {
+        currentStep = getNearestStepFromAngle();
+        syncFromStep();
+        renderDrum();
+        updateStatusPreview();
+        updateNavButtons();
+      }
+
+      drumHint.textContent = t("drumHint");
+
+      setTimeout(() => {
+        dragMoved = false;
+      }, 80);
+    }
+
+    drumWrap.addEventListener("mousedown", startDrag);
+    window.addEventListener("mousemove", moveDrag);
+    window.addEventListener("mouseup", endDrag);
+
+    drumWrap.addEventListener("touchstart", startDrag, { passive:true });
+    window.addEventListener("touchmove", moveDrag, { passive:true });
+    window.addEventListener("touchend", endDrag);
+
+    heroLegendBtn.addEventListener("click", () => loadLegend(true));
+    heroBookBtn.addEventListener("click", () => loadBookTrackByStep(currentStep, true));
+
+    prevBtn.addEventListener("click", async () => {
+      await selectTrackAndPlay(currentStep - 1);
+    });
+
+    nextBtn.addEventListener("click", async () => {
+      await selectTrackAndPlay(currentStep + 1);
+    });
+
+    playPauseBtn.addEventListener("click", togglePlayback);
+
+    languageButtons.forEach(button => {
+      button.addEventListener("click", () => setLanguage(button.dataset.lang));
+    });
+
+    modeButtons.forEach(button => {
+      button.addEventListener("click", () => setMode(button.dataset.mode));
+    });
+
+    drumUpBtn.addEventListener("click", () => {
+      loadBookTrackByStep(currentStep - 1, false);
+    });
+
+    drumDownBtn.addEventListener("click", () => {
+      loadBookTrackByStep(currentStep + 1, false);
+    });
+
+    player.addEventListener("play", updatePlayPauseText);
+    player.addEventListener("pause", updatePlayPauseText);
+
+    player.addEventListener("ended", () => {
+      player.pause();
+      updatePlayPauseText();
+
+      if (mode === "legend") {
+        statusBox.textContent = t("legendEnded");
+        return;
+      }
+
+      if (playMode === "paint") {
+        statusBox.textContent = t("chapterEnded");
+        return;
+      }
+
+      if (playMode === "loop") {
+        player.currentTime = 0;
+        safePlay();
+        statusBox.textContent = replaceVars(t("loopActive"), {
+          title: getTrackTitle(tracks[currentIndex])
+        });
+        return;
+      }
+
+      if (playMode === "continue") {
+        loadBookTrackByStep(currentStep + 1, true);
+      }
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const startChapter = params.get("s");
+    if (startChapter) {
+      const normalized = startChapter.padStart(2, "0");
+      const foundIndex = tracks.findIndex(track => track.id === normalized);
+      if (foundIndex !== -1) {
+        currentStep = foundIndex;
+      }
+    }
+
+    syncFromStep();
+    updateStaticTexts();
+    updateLanguageButtons();
+    updateModeButtons();
+    updatePlayPauseText();
+    renderDrum();
+    updateNavButtons();
+    updateStatusPreview();
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pigipegs Hörwelt</title>
+
+  <style>
+    :root{
+      --night-1:#1f2559;
+      --night-2:#3a3f88;
+      --night-3:#6f66b8;
+      --night-4:#f1bfd0;
+
+      --text:#fffaf7;
+      --muted:#efe7ff;
+      --soft:#d9d0f3;
+
+      --panel:rgba(255,255,255,0.12);
+      --border:rgba(255,255,255,0.20);
+
+      --pink:#ff8faa;
+      --pink-dark:#ff6f94;
       --blue:#8fd0ef;
       --blue-dark:#5eb2de;
       --green:#cfe89d;
