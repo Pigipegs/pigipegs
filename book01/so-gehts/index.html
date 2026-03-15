@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pigipegs – So geht’s</title>
+  <title>Pigipegs – Bild hochladen</title>
 
   <style>
     :root{
@@ -158,7 +158,8 @@
 
     .hero,
     .steps,
-    .tips{
+    .rules,
+    .parents{
       position:relative;
       z-index:2;
       background:var(--panel);
@@ -172,58 +173,19 @@
 
     .hero h2,
     .steps h2,
-    .tips h2{
+    .rules h2,
+    .parents h2{
       margin:0 0 12px;
       font-size:clamp(28px,4vw,42px);
       line-height:1.1;
     }
 
     .hero p,
-    .tips p{
+    .parents p{
       margin:0;
       color:var(--muted);
       line-height:1.7;
       font-size:17px;
-    }
-
-    .step-grid{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0, 1fr));
-      gap:16px;
-      margin-top:16px;
-    }
-
-    .step-card{
-      background:rgba(255,255,255,0.10);
-      border:1px solid rgba(255,255,255,0.16);
-      border-radius:22px;
-      padding:18px;
-      box-shadow:0 10px 22px rgba(0,0,0,0.12);
-    }
-
-    .step-card .num{
-      display:inline-flex;
-      width:38px;
-      height:38px;
-      border-radius:50%;
-      align-items:center;
-      justify-content:center;
-      font-weight:bold;
-      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
-      color:#fff;
-      margin-bottom:12px;
-    }
-
-    .step-card h3{
-      margin:0 0 8px;
-      font-size:22px;
-    }
-
-    .step-card p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:15px;
     }
 
     .actions{
@@ -258,6 +220,58 @@
       border:1px solid rgba(255,255,255,0.16);
     }
 
+    .step-grid,
+    .rule-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+    }
+
+    .num{
+      display:inline-flex;
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+      margin-bottom:12px;
+    }
+
+    .card h3{
+      margin:0 0 8px;
+      font-size:22px;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    .notice{
+      margin-top:16px;
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,248,220,0.92);
+      color:#5f4a10;
+      border:1px solid rgba(255,235,170,0.92);
+      line-height:1.6;
+      font-size:15px;
+    }
+
     .footer-note{
       position:relative;
       z-index:2;
@@ -279,7 +293,8 @@
     }
 
     @media (max-width: 900px){
-      .step-grid{
+      .step-grid,
+      .rule-grid{
         grid-template-columns:1fr;
       }
     }
@@ -287,7 +302,8 @@
     @media (max-width: 720px){
       .hero,
       .steps,
-      .tips{
+      .rules,
+      .parents{
         padding:18px;
       }
 
@@ -323,9 +339,9 @@
         </div>
         <div>
           <div class="eyebrow">Pigipegs Hörwelt</div>
-          <h1>So geht’s</h1>
+          <h1>Bild hochladen – so geht’s</h1>
           <p class="sub">
-            Hier zeigen wir dir Schritt für Schritt, wie du mit den Pigipegs-Geschichten startest.
+            Hier erfährst du, wie ein selbst gemaltes Pigipegs-Bild hochgeladen werden kann und was dabei zum Schutz von Kindern und Familien wichtig ist.
           </p>
         </div>
       </div>
@@ -338,63 +354,121 @@
     </div>
 
     <section class="hero">
-      <div class="eyebrow">Einfach starten</div>
-      <h2>In wenigen Schritten zur Geschichte</h2>
+      <div class="eyebrow">Sicher und verständlich</div>
+      <h2>So kommt ein Bild zu uns</h2>
       <p>
-        Du kannst entweder zuerst das passende Buch auswählen oder direkt in den Hörbereich gehen.
-        Wenn du einen QR-Code im Buch hast, kannst du damit später noch gezielter zur richtigen Geschichte springen.
+        In Buch 1 gibt es eine Seite, auf der Kinder ihre eigenen Pigipegs malen können.
+        Genau dieses selbst gemalte Bild kann hier später hochgeladen werden. Vor einer möglichen
+        Veröffentlichung wird alles geprüft. Es findet keine automatische öffentliche Anzeige statt.
       </p>
 
       <div class="actions">
-        <a class="button button-primary" href="/book01/">Zu Buch 1</a>
-        <a class="button button-secondary" href="/book01/audio.html">Zur Hörwelt</a>
+        <a class="button button-primary" href="/teilen/">Bild hochladen</a>
+        <a class="button button-secondary" href="/book01/">Zu Buch 1</a>
+      </div>
+
+      <div class="notice">
+        Es darf nur das eigene selbst gemalte Pigipegs-Bild hochgeladen werden. Bitte keine fremden Bilder,
+        keine Fotos anderer Personen und keine privaten Daten direkt in das Bild schreiben.
       </div>
     </section>
 
     <section class="steps">
       <div class="eyebrow">Schritt für Schritt</div>
-      <h2>So benutzt du die Hörwelt</h2>
+      <h2>So funktioniert der Upload</h2>
 
       <div class="step-grid">
-        <div class="step-card">
+        <div class="card">
           <div class="num">1</div>
-          <h3>Buch auswählen</h3>
+          <h3>Bild malen</h3>
           <p>
-            Öffne zuerst die Buchseite und wähle das passende Buch aus. Im Moment ist Buch 1 bereits hörbar.
+            Das Kind malt sein eigenes Pigipegs-Bild auf der vorgesehenen Seite in Buch 1 aus oder gestaltet es selbst.
           </p>
         </div>
 
-        <div class="step-card">
+        <div class="card">
           <div class="num">2</div>
-          <h3>Geschichte wählen</h3>
+          <h3>Foto machen</h3>
           <p>
-            In der Hörwelt kannst du die Trommel drehen und die gewünschte Geschichte oder Seite auswählen.
+            Ein Elternteil oder eine erziehungsberechtigte Person fotografiert das Bild oder wählt eine Bilddatei aus.
           </p>
         </div>
 
-        <div class="step-card">
+        <div class="card">
           <div class="num">3</div>
-          <h3>Audio starten</h3>
+          <h3>Bild hochladen</h3>
           <p>
-            Tippe auf die ausgewählte Geschichte oder nutze den großen Abspiel-Button im Player darunter.
+            Das Bild wird über die Upload-Seite an uns gesendet. Dabei sollten nur die wirklich nötigen Angaben gemacht werden.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="num">4</div>
+          <h3>Prüfung vor Anzeige</h3>
+          <p>
+            Das Bild wird zuerst geprüft. Eine Veröffentlichung erfolgt nicht automatisch und nur im freigegebenen Rahmen.
           </p>
         </div>
       </div>
     </section>
 
-    <section class="tips">
-      <div class="eyebrow">Hinweise</div>
-      <h2>Gut zu wissen</h2>
+    <section class="rules">
+      <div class="eyebrow">Wichtige Hinweise</div>
+      <h2>Zum Schutz von Kindern und Familien</h2>
+
+      <div class="rule-grid">
+        <div class="card">
+          <h3>Nur mit Zustimmung</h3>
+          <p>
+            Der Upload darf nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person erfolgen.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Nur eigene Bilder</h3>
+          <p>
+            Hochgeladen werden dürfen nur selbst gemalte Pigipegs-Bilder aus dem Buch, keine fremden Inhalte.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Keine automatische Veröffentlichung</h3>
+          <p>
+            Bilder werden vor einer möglichen Anzeige geprüft. Ohne passende Freigabe werden sie nicht öffentlich gezeigt.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Wenig Daten, mehr Schutz</h3>
+          <p>
+            Bitte möglichst sparsam mit Angaben sein. Ein Klarname des Kindes sollte nur genutzt werden, wenn das ausdrücklich gewünscht und freigegeben ist.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="parents">
+      <div class="eyebrow">Für Eltern und Erziehungsberechtigte</div>
+      <h2>Transparenz und Rechte</h2>
       <p>
-        Du kannst die Sprache wechseln, einzelne Geschichten anhören, alles nacheinander abspielen
-        oder eine Geschichte in Schleife wiederholen. So passt sich die Hörwelt an euer Tempo an.
+        Wenn ein Bild hochgeladen wird, sollte klar sein, wofür es verwendet werden darf.
+        Eltern oder Erziehungsberechtigte können eine Einwilligung jederzeit widerrufen und die
+        Löschung des Bildes sowie der dazugehörigen Angaben verlangen. Außerdem können sie Auskunft
+        über gespeicherte Daten verlangen und unrichtige Angaben korrigieren lassen.
       </p>
+
+      <div class="notice">
+        Bitte ergänzt diese Seite zusätzlich mit eurer Datenschutzerklärung, den genauen Kontaktdaten
+        des Verantwortlichen und einer klaren Einwilligung vor dem Upload.
+      </div>
     </section>
 
     <div class="footer-note">
-      <span>Pigipegs · Hörwelt</span>
+      <span>Pigipegs · Bild hochladen</span>
       <span>·</span>
       <a href="/impressum/">Impressum</a>
+      <span>·</span>
+      <a href="/datenschutz/">Datenschutz</a>
     </div>
   </div>
 </body>
