@@ -223,53 +223,17 @@
       color:var(--text);
       border:1px solid rgba(255,255,255,0.16);
     }
+
     .sound-icon{
-  display:inline-block;
-  width:28px;
-  height:28px;
-  object-fit:contain;
-  vertical-align:middle;
-  margin-right:8px;
-  filter:drop-shadow(0 4px 8px rgba(0,0,0,0.18));
-}
-
-.sound-icon-lg{
-  width:44px;
-  height:44px;
-  margin-right:10px;
-}
-
-.player-audio-head{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.player-audio-head img{
-  width:42px;
-  height:42px;
-  object-fit:contain;
-  flex:0 0 auto;
-  filter:drop-shadow(0 6px 10px rgba(0,0,0,0.16));
-}
-
-.player-audio-head-text{
-  display:flex;
-  flex-direction:column;
-}
-
-@media (max-width: 720px){
-  .sound-icon{
-    width:24px;
-    height:24px;
-    margin-right:6px;
-  }
-
-  .player-audio-head img{
-    width:36px;
-    height:36px;
-  }
-}
+      display:inline-block;
+      width:26px;
+      height:26px;
+      object-fit:contain;
+      vertical-align:middle;
+      margin-right:8px;
+      filter:drop-shadow(0 4px 8px rgba(0,0,0,0.18));
+      flex:0 0 auto;
+    }
 
     .cover-box img{
       display:block;
@@ -448,6 +412,7 @@
       border-radius:10px;
       margin:auto;
       transform:translateX(14px);
+      pointer-events:none;
     }
 
     .drum-content{
@@ -456,6 +421,7 @@
       flex-direction:column;
       justify-content:center;
       gap:7px;
+      pointer-events:none;
     }
 
     .drum-code{
@@ -519,6 +485,7 @@
     .player-title{
       margin:0;
       font-size:26px;
+      line-height:1.15;
     }
 
     .status{
@@ -792,6 +759,16 @@
         gap:8px;
         font-size:13px;
       }
+
+      .sound-icon{
+        width:22px;
+        height:22px;
+        margin-right:6px;
+      }
+
+      .player-title{
+        font-size:22px;
+      }
     }
   </style>
 </head>
@@ -831,8 +808,9 @@
         <div class="hero-actions">
           <button class="cta cta-primary" type="button" id="heroLegendBtn">🌙 Legende anhören</button>
           <button class="cta cta-secondary" type="button" id="heroBookBtn">
-          <img src="/assets/img/Pigipegs Sound-350x350.png" alt="" class="sound-icon" /> Buch 1 starten
-      button>
+            <img src="/assets/img/Pigipegs-Sound-350x350.png" alt="" class="sound-icon" />
+            Buch 1 starten
+          </button>
         </div>
       </div>
 
@@ -874,13 +852,9 @@
       <div class="player-area">
         <div class="player-header">
           <div>
-            <div class="player-audio-head">
-  <img src="/assets/img/Pigipegs Sound-350x350.png" alt="Pigipegs Audio" />
-  <div class="player-audio-head-text">
-    <div class="eyebrow" id="playerEyebrow">Jetzt anhören</div>
-    <h3 class="player-title" id="playerTitle">Pigipegs Audio</h3>
-  </div>
-</div>
+            <div class="eyebrow" id="playerEyebrow">Jetzt anhören</div>
+            <h3 class="player-title" id="playerTitle">Pigipegs Audio</h3>
+          </div>
           <div class="status" id="statusBox">Noch nichts ausgewählt.</div>
         </div>
 
@@ -938,7 +912,7 @@
         heroTitle: "Zuhause ist, wo wir zusammen sind",
         heroText: "Höre zuerst die Legende oder drehe direkt die Kapitel-Trommel. Du kannst jede Seite einzeln anhören, alles nacheinander abspielen oder ein Kapitel in Schleife wiederholen.",
         heroLegendBtn: "🌙 Legende anhören",
-        heroBookBtn: "🎧 Buch 1 starten",
+        heroBookBtn: "Buch 1 starten",
         coverNote: "Eine kleine Welt voller Sterne, Wärme, Geschichten und Geborgenheit.",
         modeTitle: "Hörmodus",
         modePaint: "🎨 Malen",
@@ -980,7 +954,7 @@
         heroTitle: "Home Is Where We Are Together",
         heroText: "Listen to the legend first or go straight to the story drum. You can listen to each page one by one, play everything in sequence, or loop a chapter.",
         heroLegendBtn: "🌙 Listen to the legend",
-        heroBookBtn: "🎧 Start Book 1",
+        heroBookBtn: "Start Book 1",
         coverNote: "A little world full of stars, warmth, stories, and comfort.",
         modeTitle: "Listening mode",
         modePaint: "🎨 Coloring",
@@ -1022,7 +996,7 @@
         heroTitle: "El hogar está donde estamos juntos",
         heroText: "Escucha primero la leyenda o ve directamente al tambor de historias. Puedes escuchar cada página por separado, reproducir todo seguido o repetir un capítulo en bucle.",
         heroLegendBtn: "🌙 Escuchar la leyenda",
-        heroBookBtn: "🎧 Empezar Libro 1",
+        heroBookBtn: "Empezar Libro 1",
         coverNote: "Un pequeño mundo lleno de estrellas, calidez, historias y cariño.",
         modeTitle: "Modo de escucha",
         modePaint: "🎨 Colorear",
@@ -1064,7 +1038,7 @@
         heroTitle: "La maison, c’est là où nous sommes ensemble",
         heroText: "Écoute d’abord la légende ou passe directement au tambour des histoires. Tu peux écouter chaque page séparément, tout écouter à la suite ou répéter un chapitre en boucle.",
         heroLegendBtn: "🌙 Écouter la légende",
-        heroBookBtn: "🎧 Démarrer le Livre 1",
+        heroBookBtn: "Démarrer le Livre 1",
         coverNote: "Un petit monde rempli d’étoiles, de chaleur, d’histoires et de tendresse.",
         modeTitle: "Mode d’écoute",
         modePaint: "🎨 Coloriage",
@@ -1220,7 +1194,6 @@
       document.getElementById("heroTitle").textContent = t("heroTitle");
       document.getElementById("heroText").textContent = t("heroText");
       document.getElementById("heroLegendBtn").textContent = t("heroLegendBtn");
-      document.getElementById("heroBookBtn").textContent = t("heroBookBtn");
       document.getElementById("coverNote").textContent = t("coverNote");
 
       document.getElementById("modeTitle").textContent = t("modeTitle");
@@ -1239,9 +1212,9 @@
 
       prevBtn.textContent = t("prevBtn");
       nextBtn.textContent = t("nextBtn");
-
       footerText.textContent = "Pigipegs · Hörwelt · " + getLanguageLabel(currentLang);
       footerImprint.textContent = t("imprint");
+      heroBookBtn.lastChild.textContent = " " + t("heroBookBtn");
     }
 
     function updatePlayPauseText() {
@@ -1411,10 +1384,7 @@
       updateStatusPreview();
       updateNavButtons();
       updatePlayPauseText();
-
-      if (autoplay) {
-        safePlay();
-      }
+      if (autoplay) safePlay();
     }
 
     function togglePlayback() {
@@ -1492,13 +1462,14 @@
 
     function moveDrag(event) {
       if (!isDragging) return;
+
       const currentY = getClientY(event);
       const currentX = getClientX(event);
       const deltaY = currentY - dragStartY;
 
       if (
-        Math.abs(currentY - pointerStartY) > 8 ||
-        Math.abs(currentX - pointerStartX) > 8
+        Math.abs(currentY - pointerStartY) > 10 ||
+        Math.abs(currentX - pointerStartX) > 10
       ) {
         dragMoved = true;
       }
@@ -1509,20 +1480,23 @@
 
     function endDrag() {
       if (!isDragging) return;
+
       isDragging = false;
       drumCylinder.style.transition = "transform 0.25s ease-out";
 
-      currentStep = getNearestStepFromAngle();
-      syncFromStep();
-      renderDrum();
-      updateNavButtons();
-      updateStatusPreview();
+      if (dragMoved) {
+        currentStep = getNearestStepFromAngle();
+        syncFromStep();
+        renderDrum();
+        updateStatusPreview();
+        updateNavButtons();
+      }
 
       drumHint.textContent = t("drumHint");
 
       setTimeout(() => {
         dragMoved = false;
-      }, 60);
+      }, 80);
     }
 
     drumWrap.addEventListener("mousedown", startDrag);
