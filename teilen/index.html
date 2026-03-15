@@ -28,6 +28,7 @@
       --shadow:0 16px 40px rgba(20,18,48,0.28);
       --radius-xl:30px;
       --radius-lg:22px;
+      --radius-md:16px;
       --max:1120px;
     }
 
@@ -208,12 +209,11 @@
       color:#fff;
     }
 
-    .mail-box a{
-      color:#fff;
-      font-weight:bold;
-      font-size:24px;
-      text-decoration:none;
-      word-break:break-word;
+    .mail-note{
+      margin-top:10px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
     }
 
     .notice{
@@ -254,6 +254,31 @@
       font-size:15px;
     }
 
+    .consent-box{
+      margin-top:18px;
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+    }
+
+    .consent-box label{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      cursor:pointer;
+      line-height:1.6;
+      color:var(--text);
+      font-size:15px;
+    }
+
+    .consent-box input[type="checkbox"]{
+      margin-top:3px;
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+    }
+
     .actions{
       display:flex;
       gap:12px;
@@ -261,7 +286,8 @@
       margin-top:20px;
     }
 
-    .button{
+    .button,
+    .button-disabled{
       text-decoration:none;
       display:inline-flex;
       align-items:center;
@@ -272,18 +298,28 @@
       font-size:17px;
       box-shadow:0 10px 22px rgba(0,0,0,0.14);
       border:none;
-      cursor:pointer;
+      min-height:54px;
     }
 
     .button-primary{
       background:linear-gradient(135deg, var(--pink), var(--pink-dark));
       color:#fff;
+      cursor:pointer;
     }
 
     .button-secondary{
       background:rgba(255,255,255,0.14);
       color:var(--text);
       border:1px solid rgba(255,255,255,0.16);
+      cursor:pointer;
+    }
+
+    .button-disabled{
+      background:rgba(255,255,255,0.10);
+      color:rgba(255,255,255,0.6);
+      border:1px solid rgba(255,255,255,0.12);
+      cursor:not-allowed;
+      box-shadow:none;
     }
 
     .footer-note{
@@ -340,9 +376,12 @@
         height:50px;
       }
 
-      .mail-box strong,
-      .mail-box a{
+      .mail-box strong{
         font-size:20px;
+      }
+
+      .actions{
+        flex-direction:column;
       }
     }
   </style>
@@ -399,19 +438,49 @@
 
       <div class="mail-box">
         <strong>E-Mail-Adresse</strong>
-        <a href="mailto:fam@pigipegs.com">fam@pigipegs.com</a>
+        <div class="mail-note">
+          Die E-Mail-Adresse wird erst nach Bestätigung der Hinweise freigeschaltet.
+        </div>
       </div>
 
       <div class="notice">
-        Mit dem Einsenden bestätigt das absendende Elternteil bzw. die erziehungsberechtigte Person,
-        dass das hochgeladene Bild selbst erstellt wurde oder die nötige Freigabe dafür vorliegt,
-        und dass Pigipegs das Bild prüfen und im freigegebenen Rahmen verwenden darf. Eine einmal
-        erteilte Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden.
+        Mit dem Einsenden des Bildes bestätigt das absendende Elternteil bzw. die erziehungsberechtigte Person,
+        dass das eingereichte Bild vom Kind selbst gemalt oder rechtmäßig freigegeben ist, dass es keine Fotos
+        von Personen und keine sensiblen oder unnötigen persönlichen Daten enthält und dass Pigipegs das Bild
+        speichern, prüfen und – soweit ausdrücklich freigegeben – auf der Pigipegs-Website und gegebenenfalls
+        in weiteren Pigipegs-Materialien veröffentlichen darf. Die Einwilligung kann jederzeit mit Wirkung für
+        die Zukunft widerrufen werden. Im Fall eines Widerrufs werden wir das Bild und dazugehörige Angaben
+        löschen, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Nähere Informationen finden Sie
+        in unserer Datenschutzerklärung.
+      </div>
+
+      <div class="consent-box">
+        <label for="consentCheck">
+          <input type="checkbox" id="consentCheck" />
+          <span>
+            Ich bin Elternteil bzw. erziehungsberechtigte Person, habe die Hinweise gelesen und bin damit
+            einverstanden, dass das Bild im beschriebenen Rahmen eingesendet, geprüft, gespeichert und – soweit
+            ausdrücklich freigegeben – verwendet werden darf.
+          </span>
+        </label>
       </div>
 
       <div class="actions">
-        <a class="button button-secondary" href="/book01/so-gehts/">Bild hochladen – so geht’s</a>
-        <a class="button button-secondary" href="/book01/">Zu Buch 1</a>
+        <a
+          id="mailButton"
+          class="button-disabled"
+          aria-disabled="true"
+        >
+          E-Mail öffnen
+        </a>
+
+        <a class="button button-secondary" href="/book01/so-gehts/">
+          Bild hochladen – so geht’s
+        </a>
+
+        <a class="button button-secondary" href="/book01/">
+          Zu Buch 1
+        </a>
       </div>
     </section>
 
@@ -421,30 +490,39 @@
 
       <div class="rule-grid">
         <div class="card">
-          <h3>Nur mit Zustimmung</h3>
+          <h3>a) Kein Kinder-Account, keine Pflichtangaben</h3>
           <p>
-            Das Bild darf nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person eingesendet werden.
+            Für das Einsenden eines Bildes ist kein eigenes Nutzerkonto des Kindes erforderlich.
+            Bitte geben Sie nur so wenige personenbezogene Daten wie möglich an. Name oder Alter
+            des Kindes sollten nur dann genannt werden, wenn dies ausdrücklich gewünscht ist.
           </p>
         </div>
 
         <div class="card">
-          <h3>Nur das eigene Bild</h3>
+          <h3>b) Klare Zweckbindung</h3>
           <p>
-            Bitte sende nur das selbst gemalte Pigipegs-Bild aus dem Buch ein, keine fremden Inhalte.
+            Soweit Sie der Veröffentlichung zustimmen, darf Pigipegs das Bild ausschließlich im
+            Zusammenhang mit Pigipegs verwenden, zum Beispiel auf dieser Website, in begleitenden
+            Materialien zum Buch und in Pigipegs-Kommunikationskanälen. Eine Weitergabe an Dritte
+            zu anderen Zwecken erfolgt nicht.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>c) Widerruf, Löschung, Auskunft</h3>
+          <p>
+            Eltern und Erziehungsberechtigte können jederzeit Auskunft über gespeicherte Bilder und
+            Angaben verlangen, deren Berichtigung verlangen oder die Einwilligung mit Wirkung für
+            die Zukunft widerrufen. In diesen Fällen löschen wir das betroffene Bild und dazugehörige
+            Daten, soweit keine gesetzlichen Pflichten entgegenstehen.
           </p>
         </div>
 
         <div class="card">
           <h3>Keine automatische Veröffentlichung</h3>
           <p>
-            Jedes Bild wird vor einer möglichen Anzeige geprüft. Ohne passende Freigabe wird es nicht öffentlich gezeigt.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>So wenig Daten wie möglich</h3>
-          <p>
-            Bitte möglichst keine unnötigen persönlichen Angaben machen. Ein Name sollte nur genannt werden, wenn dies ausdrücklich gewünscht ist.
+            Jedes Bild wird vor einer möglichen Anzeige geprüft. Ohne passende Freigabe wird es nicht
+            öffentlich gezeigt. Es besteht kein Anspruch auf Veröffentlichung.
           </p>
         </div>
       </div>
@@ -457,11 +535,13 @@
         Wenn ein Bild eingesendet wird, sollte klar sein, wofür es verwendet werden darf. Eltern oder
         Erziehungsberechtigte können eine Einwilligung jederzeit widerrufen und die Löschung des Bildes
         sowie der dazugehörigen Angaben verlangen. Auch Auskunft und Korrektur sollten möglich sein.
+        Sie können uns dazu jederzeit unter <strong>fam@pigipegs.com</strong> oder über die im Impressum
+        genannten Kontaktdaten erreichen.
       </p>
 
       <div class="notice">
-        Bitte ergänzt zusätzlich eine klare Einwilligung, eure Datenschutzhinweise und die Kontaktdaten
-        des Verantwortlichen, damit Eltern genau wissen, was mit einem eingesendeten Bild geschieht.
+        Bitte stellen Sie sicher, dass die Datenschutzerklärung, die Nutzungsbedingungen und die
+        Kontaktdaten des Verantwortlichen vollständig und leicht auffindbar sind.
       </div>
     </section>
 
@@ -471,20 +551,21 @@
       <p>
         Diese Website wird technisch über GitHub Pages bereitgestellt und über Cloudflare ausgeliefert
         und geschützt. Dabei können technisch notwendige Verbindungs- und Logdaten verarbeitet werden,
-        zum Beispiel die IP-Adresse, Datum und Uhrzeit eines Aufrufs sowie weitere Informationen, die
-        für den sicheren Betrieb, die Stabilität und den Schutz der Website erforderlich sind.
+        zum Beispiel IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seiten sowie weitere
+        Informationen, die für den sicheren Betrieb, die Stabilität und die Sicherheit der Website
+        erforderlich sind.
       </p>
 
       <div class="notice">
-        In eurer Datenschutzerklärung sollte deshalb klar erklärt werden, dass GitHub Pages als Hosting-Dienst
+        In der Datenschutzerklärung sollte deshalb klar erklärt werden, dass GitHub Pages als Hosting-Dienst
         und Cloudflare als Sicherheits- und Auslieferungsdienst eingesetzt werden. Außerdem sollte beschrieben
-        werden, welche technisch notwendigen Daten verarbeitet werden, zu welchem Zweck dies geschieht, welche
-        Rechtsgrundlage ihr dafür annehmt und welche Rechte Eltern und Betroffene haben.
+        werden, welche technisch notwendigen Daten verarbeitet werden, zu welchem Zweck dies geschieht,
+        welche Rechtsgrundlage zugrunde gelegt wird und welche Rechte Eltern und Betroffene haben.
       </div>
 
       <div class="notice">
-        Wenn keine zusätzlichen Tracking-, Analyse- oder Marketing-Tools eingesetzt werden, geht es hier in
-        erster Linie um technisch notwendige Verarbeitung für den Betrieb und die Sicherheit der Website.
+        Wenn keine zusätzlichen Tracking-, Analyse- oder Marketing-Tools eingesetzt werden, geht es hier
+        in erster Linie um technisch notwendige Verarbeitung für den Betrieb und die Sicherheit der Website.
       </div>
     </section>
 
@@ -498,5 +579,44 @@
       <a href="/nutzungsbedingungen/">Nutzungsbedingungen</a>
     </div>
   </div>
+
+  <script>
+    const consentCheck = document.getElementById("consentCheck");
+    const mailButton = document.getElementById("mailButton");
+
+    const subject = "Pigipegs Bild Einsendung";
+    const body =
+`Ich bin Elternteil bzw. erziehungsberechtigte Person und stimme der Prüfung, Speicherung und – soweit ausdrücklich freigegeben – Veröffentlichung des eingesendeten Bildes im beschriebenen Rahmen zu.
+
+Angaben zum Bild:
+- Buch / Seite:
+- Optionaler Name oder Künstlername:
+- Veröffentlichung gewünscht: Ja / Nein
+
+Hinweis:
+Ich bestätige, dass das eingereichte Bild vom Kind selbst gemalt wurde oder rechtmäßig freigegeben ist und keine Fotos von Personen sowie keine sensiblen oder unnötigen persönlichen Daten enthält.
+
+Bitte Bild als Anhang beifügen.`;
+
+    const mailtoHref =
+      "mailto:fam@pigipegs.com" +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+
+    function updateMailButton() {
+      if (consentCheck.checked) {
+        mailButton.className = "button button-primary";
+        mailButton.setAttribute("href", mailtoHref);
+        mailButton.removeAttribute("aria-disabled");
+      } else {
+        mailButton.className = "button-disabled";
+        mailButton.removeAttribute("href");
+        mailButton.setAttribute("aria-disabled", "true");
+      }
+    }
+
+    consentCheck.addEventListener("change", updateMailButton);
+    updateMailButton();
+  </script>
 </body>
 </html>
