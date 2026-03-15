@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pigipegs – So geht’s</title>
+
+  <style>
+    :root{
+      --night-1:#1f2559;
+      --night-2:#3a3f88;
+      --night-3:#6f66b8;
+      --night-4:#f1bfd0;
+
+      --text:#fffaf7;
+      --muted:#efe7ff;
+      --soft:#d9d0f3;
+
+      --panel:rgba(255,255,255,0.12);
+      --border:rgba(255,255,255,0.20);
+
+      --pink:#ff8faa;
+      --pink-dark:#ff6f94;
+      --green:#cfe89d;
+      --green-dark:#a8d76a;
+
+      --shadow:0 16px 40px rgba(20,18,48,0.28);
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --max:1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; }
+
+    body{
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 10% 14%, rgba(255,255,255,0.95) 0 1.5px, transparent 2px),
+        radial-gradient(circle at 18% 30%, rgba(255,255,255,0.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle at 25% 8%, rgba(255,255,255,0.85) 0 1.4px, transparent 2px),
+        radial-gradient(circle at 34% 22%, rgba(255,240,190,0.9) 0 1.7px, transparent 2.3px),
+        radial-gradient(circle at 44% 12%, rgba(255,255,255,0.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle at 52% 28%, rgba(255,255,255,0.85) 0 1.3px, transparent 2px),
+        radial-gradient(circle at 60% 10%, rgba(255,240,190,0.95) 0 1.8px, transparent 2.5px),
+        radial-gradient(circle at 68% 22%, rgba(255,255,255,0.9) 0 1.2px, transparent 1.9px),
+        radial-gradient(circle at 77% 8%, rgba(255,255,255,0.85) 0 1.4px, transparent 2px),
+        radial-gradient(circle at 86% 18%, rgba(255,240,190,0.95) 0 1.8px, transparent 2.5px),
+        linear-gradient(180deg, var(--night-1) 0%, var(--night-2) 38%, var(--night-3) 72%, var(--night-4) 100%);
+      overflow-x:hidden;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:20px 16px 40px;
+      position:relative;
+    }
+
+    .moon{
+      position:fixed;
+      top:26px;
+      right:34px;
+      width:74px;
+      height:74px;
+      border-radius:50%;
+      background:#fff0b0;
+      box-shadow:0 0 30px rgba(255,240,176,0.55);
+      opacity:.95;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .moon::after{
+      content:"";
+      position:absolute;
+      top:8px;
+      left:22px;
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      background:linear-gradient(180deg, var(--night-2), var(--night-3));
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+      position:relative;
+      z-index:2;
+    }
+
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+
+    .brand-figure{
+      width:126px;
+      flex:0 0 126px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
+
+    .brand-figure img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height:150px;
+      object-fit:contain;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,0.18));
+    }
+
+    .eyebrow{
+      font-size:13px;
+      color:var(--soft);
+      margin:4px 0 8px;
+      letter-spacing:.03em;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(30px,4vw,52px);
+      line-height:1.04;
+    }
+
+    .sub{
+      margin:12px 0 0;
+      max-width:760px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:16px;
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color:var(--text);
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      backdrop-filter:blur(8px);
+    }
+
+    .hero,
+    .steps,
+    .tips{
+      position:relative;
+      z-index:2;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      padding:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+      margin-bottom:18px;
+    }
+
+    .hero h2,
+    .steps h2,
+    .tips h2{
+      margin:0 0 12px;
+      font-size:clamp(28px,4vw,42px);
+      line-height:1.1;
+    }
+
+    .hero p,
+    .tips p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:17px;
+    }
+
+    .step-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+
+    .step-card{
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+    }
+
+    .step-card .num{
+      display:inline-flex;
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+      margin-bottom:12px;
+    }
+
+    .step-card h3{
+      margin:0 0 8px;
+      font-size:22px;
+    }
+
+    .step-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+
+    .button{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:15px 20px;
+      border-radius:18px;
+      font-weight:bold;
+      font-size:17px;
+      box-shadow:0 10px 22px rgba(0,0,0,0.14);
+      border:none;
+      cursor:pointer;
+    }
+
+    .button-primary{
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+    }
+
+    .button-secondary{
+      background:rgba(255,255,255,0.14);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.16);
+    }
+
+    .footer-note{
+      position:relative;
+      z-index:2;
+      margin-top:18px;
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,0.10);
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .footer-note a{
+      color:var(--muted);
+      text-decoration:none;
+    }
+
+    @media (max-width: 900px){
+      .step-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 720px){
+      .hero,
+      .steps,
+      .tips{
+        padding:18px;
+      }
+
+      .brand-figure{
+        width:88px;
+        flex:0 0 88px;
+      }
+
+      .moon{
+        width:58px;
+        height:58px;
+        top:18px;
+        right:16px;
+      }
+
+      .moon::after{
+        top:6px;
+        left:18px;
+        width:50px;
+        height:50px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="moon"></div>
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-figure">
+          <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs" />
+        </div>
+        <div>
+          <div class="eyebrow">Pigipegs Hörwelt</div>
+          <h1>So geht’s</h1>
+          <p class="sub">
+            Hier zeigen wir dir Schritt für Schritt, wie du mit den Pigipegs-Geschichten startest.
+          </p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="/index.html">Start</a>
+        <a href="/book01/">Buch 01</a>
+        <a href="/book01/audio.html">Hörwelt</a>
+      </nav>
+    </div>
+
+    <section class="hero">
+      <div class="eyebrow">Einfach starten</div>
+      <h2>In wenigen Schritten zur Geschichte</h2>
+      <p>
+        Du kannst entweder zuerst das passende Buch auswählen oder direkt in den Hörbereich gehen.
+        Wenn du einen QR-Code im Buch hast, kannst du damit später noch gezielter zur richtigen Geschichte springen.
+      </p>
+
+      <div class="actions">
+        <a class="button button-primary" href="/book01/">Zu Buch 1</a>
+        <a class="button button-secondary" href="/book01/audio.html">Zur Hörwelt</a>
+      </div>
+    </section>
+
+    <section class="steps">
+      <div class="eyebrow">Schritt für Schritt</div>
+      <h2>So benutzt du die Hörwelt</h2>
+
+      <div class="step-grid">
+        <div class="step-card">
+          <div class="num">1</div>
+          <h3>Buch auswählen</h3>
+          <p>
+            Öffne zuerst die Buchseite und wähle das passende Buch aus. Im Moment ist Buch 1 bereits hörbar.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="num">2</div>
+          <h3>Geschichte wählen</h3>
+          <p>
+            In der Hörwelt kannst du die Trommel drehen und die gewünschte Geschichte oder Seite auswählen.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="num">3</div>
+          <h3>Audio starten</h3>
+          <p>
+            Tippe auf die ausgewählte Geschichte oder nutze den großen Abspiel-Button im Player darunter.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tips">
+      <div class="eyebrow">Hinweise</div>
+      <h2>Gut zu wissen</h2>
+      <p>
+        Du kannst die Sprache wechseln, einzelne Geschichten anhören, alles nacheinander abspielen
+        oder eine Geschichte in Schleife wiederholen. So passt sich die Hörwelt an euer Tempo an.
+      </p>
+    </section>
+
+    <div class="footer-note">
+      <span>Pigipegs · Hörwelt</span>
+      <span>·</span>
+      <a href="/impressum/">Impressum</a>
+    </div>
+  </div>
+</body>
+</html>
