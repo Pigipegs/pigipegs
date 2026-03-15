@@ -1,87 +1,474 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Datenschutz – Pigipegs</title>
-  <meta name="description" content="Datenschutzerklärung der Website Pigipegs." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pigipegs – Datenschutzerklärung</title>
+
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;padding:28px;max-width:900px}
-    a{color:inherit}
-    .muted{color:#6b7280}
-    .card{border:1px solid #eee;border-radius:14px;padding:18px;margin:14px 0}
-    .nav a{margin-right:12px;text-decoration:none;border-bottom:1px dotted #bbb}
-    .nav a:hover{border-bottom-style:solid}
-    ul{margin-left:18px}
+    :root{
+      --night-1:#1f2559;
+      --night-2:#3a3f88;
+      --night-3:#6f66b8;
+      --night-4:#f1bfd0;
+
+      --text:#fffaf7;
+      --muted:#efe7ff;
+      --soft:#d9d0f3;
+
+      --panel:rgba(255,255,255,0.12);
+      --border:rgba(255,255,255,0.20);
+
+      --pink:#ff8faa;
+      --pink-dark:#ff6f94;
+
+      --shadow:0 16px 40px rgba(20,18,48,0.28);
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --max:1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; }
+
+    body{
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 10% 14%, rgba(255,255,255,0.95) 0 1.5px, transparent 2px),
+        radial-gradient(circle at 18% 30%, rgba(255,255,255,0.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle at 25% 8%, rgba(255,255,255,0.85) 0 1.4px, transparent 2px),
+        radial-gradient(circle at 34% 22%, rgba(255,240,190,0.9) 0 1.7px, transparent 2.3px),
+        radial-gradient(circle at 44% 12%, rgba(255,255,255,0.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle at 52% 28%, rgba(255,255,255,0.85) 0 1.3px, transparent 2px),
+        radial-gradient(circle at 60% 10%, rgba(255,240,190,0.95) 0 1.8px, transparent 2.5px),
+        radial-gradient(circle at 68% 22%, rgba(255,255,255,0.9) 0 1.2px, transparent 1.9px),
+        radial-gradient(circle at 77% 8%, rgba(255,255,255,0.85) 0 1.4px, transparent 2px),
+        radial-gradient(circle at 86% 18%, rgba(255,240,190,0.95) 0 1.8px, transparent 2.5px),
+        linear-gradient(180deg, var(--night-1) 0%, var(--night-2) 38%, var(--night-3) 72%, var(--night-4) 100%);
+      overflow-x:hidden;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:20px 16px 40px;
+      position:relative;
+    }
+
+    .moon{
+      position:fixed;
+      top:26px;
+      right:34px;
+      width:74px;
+      height:74px;
+      border-radius:50%;
+      background:#fff0b0;
+      box-shadow:0 0 30px rgba(255,240,176,0.55);
+      opacity:.95;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .moon::after{
+      content:"";
+      position:absolute;
+      top:8px;
+      left:22px;
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      background:linear-gradient(180deg, var(--night-2), var(--night-3));
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+      position:relative;
+      z-index:2;
+    }
+
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+
+    .brand-figure{
+      width:126px;
+      flex:0 0 126px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
+
+    .brand-figure img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height:150px;
+      object-fit:contain;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,0.18));
+    }
+
+    .eyebrow{
+      font-size:13px;
+      color:var(--soft);
+      margin:4px 0 8px;
+      letter-spacing:.03em;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(30px,4vw,52px);
+      line-height:1.04;
+    }
+
+    .sub{
+      margin:12px 0 0;
+      max-width:780px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:16px;
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color:var(--text);
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      backdrop-filter:blur(8px);
+    }
+
+    .content{
+      position:relative;
+      z-index:2;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      padding:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+      margin-bottom:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:22px;
+      padding:18px;
+      margin-top:16px;
+    }
+
+    .section h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.2;
+    }
+
+    .section p{
+      margin:0 0 12px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:16px;
+    }
+
+    .section p:last-child{
+      margin-bottom:0;
+    }
+
+    .notice{
+      margin-top:18px;
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,248,220,0.92);
+      color:#5f4a10;
+      border:1px solid rgba(255,235,170,0.92);
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    .footer-note{
+      position:relative;
+      z-index:2;
+      margin-top:18px;
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,0.10);
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .footer-note a{
+      color:var(--muted);
+      text-decoration:none;
+    }
+
+    @media (max-width: 720px){
+      .content{
+        padding:18px;
+      }
+
+      .brand-figure{
+        width:88px;
+        flex:0 0 88px;
+      }
+
+      .moon{
+        width:58px;
+        height:58px;
+        top:18px;
+        right:16px;
+      }
+
+      .moon::after{
+        top:6px;
+        left:18px;
+        width:50px;
+        height:50px;
+      }
+
+      .section h2{
+        font-size:22px;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="page">
+    <div class="moon"></div>
 
-  <div class="nav">
-    <a href="/">Start</a>
-    <a href="/teilen/">Teilen</a>
-    <a href="/impressum/">Impressum</a>
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-figure">
+          <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs" />
+        </div>
+        <div>
+          <div class="eyebrow">Pigipegs Datenschutz</div>
+          <h1>Datenschutzerklärung</h1>
+          <p class="sub">
+            Hier informieren wir darüber, welche personenbezogenen Daten auf unserer Website verarbeitet werden,
+            zu welchen Zwecken dies geschieht und welche Rechte betroffene Personen haben.
+          </p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="/index.html">Start</a>
+        <a href="/book01/">Buch 01</a>
+        <a href="/teilen/">Bild teilen</a>
+      </nav>
+    </div>
+
+    <section class="content">
+      <div class="section">
+        <h2>1. Verantwortlicher</h2>
+        <p>
+          Verantwortlich für die Datenverarbeitung auf dieser Website ist:
+        </p>
+        <p>
+          <strong>8kant GmbH</strong><br>
+          [Straße und Hausnummer]<br>
+          [PLZ Ort]<br>
+          Deutschland
+        </p>
+        <p>
+          E-Mail: <strong>fam@pigipegs.com</strong><br>
+          Weitere Kontaktdaten finden Sie im Impressum.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>2. Allgemeine Hinweise zur Datenverarbeitung</h2>
+        <p>
+          Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung unserer Website,
+          zur Kommunikation mit Ihnen, zur Bearbeitung von Einsendungen oder zur Wahrung berechtigter
+          Interessen erforderlich ist.
+        </p>
+        <p>
+          Personenbezogene Daten sind alle Informationen, die sich auf eine identifizierte oder
+          identifizierbare natürliche Person beziehen.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>3. Hosting und Auslieferung der Website</h2>
+        <p>
+          Unsere Website wird über <strong>GitHub Pages</strong> bereitgestellt und mit Unterstützung
+          von <strong>Cloudflare</strong> ausgeliefert und geschützt.
+        </p>
+        <p>
+          Beim Aufruf der Website können technisch notwendige Daten verarbeitet werden, insbesondere
+          IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene URL, Referrer-URL, Browsertyp,
+          Betriebssystem und weitere technisch erforderliche Header-Informationen.
+        </p>
+        <p>
+          Die Verarbeitung erfolgt, um die Website zuverlässig, sicher und performant bereitzustellen,
+          Missbrauch zu verhindern und die Stabilität des Angebots zu gewährleisten.
+        </p>
+        <p>
+          Rechtsgrundlage ist unser berechtigtes Interesse gemäß Art. 6 Abs. 1 lit. f DSGVO an einem
+          sicheren und funktionsfähigen Online-Angebot.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>4. GitHub Pages</h2>
+        <p>
+          Für das Hosting nutzen wir GitHub Pages, einen Dienst von GitHub, Inc.
+        </p>
+        <p>
+          Nach Angaben von GitHub wird beim Besuch einer GitHub-Pages-Website die IP-Adresse des
+          Besuchers zu Sicherheitszwecken protokolliert.
+        </p>
+        <p>
+          Weitere Informationen finden Sie in den Datenschutzhinweisen von GitHub.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>5. Cloudflare</h2>
+        <p>
+          Für die Auslieferung und den Schutz der Website nutzen wir Dienste von Cloudflare, Inc.
+          Cloudflare kann technisch notwendige Verbindungs- und Metadaten verarbeiten, um Inhalte
+          schneller und sicherer auszuliefern und Angriffe auf die Website abzuwehren.
+        </p>
+        <p>
+          Nach Angaben von Cloudflare hängt der Umfang der verarbeiteten personenbezogenen Daten
+          von den jeweils eingesetzten Diensten ab. Für zentrale Auslieferungs- und Sicherheitsdienste
+          verarbeitet Cloudflare Metadaten im Auftrag des Kunden in Rechenzentren in den USA und Europa.
+        </p>
+        <p>
+          Soweit personenbezogene Daten außerhalb der Europäischen Union verarbeitet werden, erfolgt
+          dies nach den Angaben des Anbieters auf Grundlage geeigneter Garantien, etwa Standardvertragsklauseln
+          und/oder weiterer datenschutzrechtlicher Mechanismen des Anbieters.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>6. Einsenden von Bildern per E-Mail</h2>
+        <p>
+          Eltern oder erziehungsberechtigte Personen können freiwillig selbst gemalte Pigipegs-Bilder
+          per E-Mail an uns senden.
+        </p>
+        <p>
+          Dabei verarbeiten wir insbesondere das eingesandte Bild, die E-Mail-Adresse des Absenders,
+          Datum und Uhrzeit der Einsendung, gegebenenfalls freiwillig mitgeteilte Angaben wie Name
+          oder Künstlername sowie technische Metadaten der E-Mail.
+        </p>
+        <p>
+          Die Verarbeitung erfolgt zum Zweck der Entgegennahme, Sichtung und gegebenenfalls Veröffentlichung
+          des Bildes im freigegebenen Rahmen, zur Kommunikation mit dem absendenden Elternteil bzw.
+          der erziehungsberechtigten Person sowie zur Bearbeitung von Widerrufs-, Löschungs- oder Rückfragen.
+        </p>
+        <p>
+          Rechtsgrundlage ist die erteilte Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.
+          Soweit es um die Sicherheit unserer Systeme und die Abwehr von Missbrauch geht, stützen wir uns
+          zusätzlich auf Art. 6 Abs. 1 lit. f DSGVO.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>7. Kinderbilder und Zustimmung der Eltern</h2>
+        <p>
+          Bilder von Kindern werden nur verarbeitet, wenn die Einsendung durch ein Elternteil oder
+          eine erziehungsberechtigte Person erfolgt oder von einer solchen Person freigegeben wurde.
+        </p>
+        <p>
+          Wir bitten darum, nur so wenige personenbezogenen Daten wie möglich mitzuteilen. Name oder
+          Alter des Kindes sollten nur dann angegeben werden, wenn dies ausdrücklich gewünscht ist.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>8. Zwecke der möglichen Veröffentlichung</h2>
+        <p>
+          Soweit eine ausdrückliche Freigabe erteilt wurde, können eingesandte Bilder im Zusammenhang
+          mit Pigipegs veröffentlicht werden, zum Beispiel auf dieser Website, in begleitenden Materialien
+          zum Buch oder in Pigipegs-Kommunikationskanälen.
+        </p>
+        <p>
+          Eine Nutzung zu anderen, nicht beschriebenen Zwecken erfolgt nicht.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>9. Speicherdauer</h2>
+        <p>
+          Wir speichern personenbezogene Daten nur so lange, wie dies für die jeweiligen Zwecke
+          erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen.
+        </p>
+        <p>
+          Eingesandte Bilder und dazugehörige Angaben werden gelöscht, wenn der Zweck entfällt,
+          eine Einwilligung widerrufen wird oder keine weitere rechtliche Grundlage für die Speicherung besteht,
+          soweit keine gesetzlichen Pflichten entgegenstehen.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>10. Ihre Rechte</h2>
+        <p>
+          Betroffene Personen haben im Rahmen der gesetzlichen Voraussetzungen insbesondere das Recht
+          auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie das Recht,
+          eine erteilte Einwilligung mit Wirkung für die Zukunft zu widerrufen.
+        </p>
+        <p>
+          Außerdem besteht das Recht, sich bei einer zuständigen Datenschutzaufsichtsbehörde zu beschweren.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>11. Keine zusätzlichen Tracking- oder Marketing-Tools</h2>
+        <p>
+          Soweit auf dieser Website keine zusätzlichen Tracking-, Analyse- oder Marketing-Tools eingesetzt
+          werden, erfolgt die Datenverarbeitung im Wesentlichen nur im Rahmen der technisch notwendigen
+          Bereitstellung der Website sowie der von Ihnen veranlassten Kommunikation oder Einsendung.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>12. Externe Links</h2>
+        <p>
+          Unsere Website kann Links zu externen Websites enthalten. Für Inhalte und Datenverarbeitung
+          auf externen Seiten sind ausschließlich deren jeweilige Betreiber verantwortlich.
+        </p>
+      </div>
+
+      <div class="notice">
+        Bitte ergänzen Sie diese Datenschutzerklärung noch mit Ihrer vollständigen Anschrift und prüfen Sie,
+        ob weitere Dienste, Formulare oder eingebundene Inhalte genutzt werden, die hier zusätzlich erwähnt
+        werden müssen.
+      </div>
+    </section>
+
+    <div class="footer-note">
+      <span>Pigipegs · Datenschutz</span>
+      <span>·</span>
+      <a href="/impressum/">Impressum</a>
+      <span>·</span>
+      <a href="/nutzungsbedingungen/">Nutzungsbedingungen</a>
+    </div>
   </div>
-
-  <h1>Datenschutzerklärung</h1>
-
-  <div class="card">
-    <h2>1. Verantwortlicher</h2>
-    <p>
-      8kant GmbH<br>
-      Jägerallee 37g<br>
-      14469 Potsdam<br>
-      Deutschland<br>
-      E-Mail: <a href="mailto:fam@pigipegs.com">fam@pigipegs.com</a><br>
-      Vertreten durch: Geschäftsführer Peter Trossowski
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>2. Hosting und Auslieferung</h2>
-    <p class="muted">
-      Diese Website wird über GitHub Pages bereitgestellt und zusätzlich über
-      Cloudflare als Content Delivery Network (CDN) ausgeliefert.
-    </p>
-
-    <p class="muted">
-      Dabei können technische Daten wie IP-Adresse, Datum und Uhrzeit
-      des Zugriffs, Browsertyp und Betriebssystem verarbeitet werden.
-    </p>
-
-    <p class="muted">
-      Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO
-      (berechtigtes Interesse an sicherem und performantem Betrieb der Website).
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>3. Kontaktaufnahme</h2>
-    <p class="muted">
-      Wenn Sie uns per E-Mail kontaktieren, werden Ihre Angaben zur Bearbeitung
-      der Anfrage verarbeitet.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>4. Rechte der betroffenen Personen</h2>
-    <ul class="muted">
-      <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
-      <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
-      <li>Recht auf Löschung (Art. 17 DSGVO)</li>
-      <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-      <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
-      <li>Recht auf Widerspruch (Art. 21 DSGVO)</li>
-      <li>Beschwerderecht bei einer Aufsichtsbehörde (Art. 77 DSGVO)</li>
-    </ul>
-  </div>
-
-  <p class="muted">Stand: <span id="date"></span></p>
-
-  <script>
-    document.getElementById("date").textContent =
-      new Date().toLocaleDateString("de-DE", { year:"numeric", month:"2-digit", day:"2-digit" });
-  </script>
+</body>
+</html>
 
 </body>
 </html>
