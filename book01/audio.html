@@ -442,14 +442,14 @@
     }
 
     .drum-thumb{
-  background:rgba(255,255,255,0.10);
-  border-right:1px solid rgba(255,255,255,0.08);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  padding:10px 14px 10px 28px;
-}
+      background:rgba(255,255,255,0.10);
+      border-right:1px solid rgba(255,255,255,0.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:12px 16px 12px 22px;
+    }
 
     .drum-thumb img{
       display:block;
@@ -461,6 +461,7 @@
       object-position:center center;
       border-radius:10px;
       margin:auto;
+      transform:translateX(6px);
     }
 
     .drum-content{
@@ -659,12 +660,16 @@
       .drum-item{
         width:98%;
         height:92px;
-        grid-template-columns:84px 1fr;
+        grid-template-columns:92px 1fr;
         border-radius:16px;
       }
 
       .drum-thumb{
-        padding:6px 8px;
+        padding:6px 8px 6px 14px;
+      }
+
+      .drum-thumb img{
+        transform:translateX(4px);
       }
 
       .drum-content{
@@ -718,9 +723,9 @@
           <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs" />
         </div>
         <div>
-          <div class="eyebrow">Pigipegs Hörwelt</div>
-          <h1>Geschichten unterm Sternenhimmel</h1>
-          <p class="sub">
+          <div class="eyebrow" id="brandEyebrow">Pigipegs Hörwelt</div>
+          <h1 id="mainTitle">Geschichten unterm Sternenhimmel</h1>
+          <p class="sub" id="mainSub">
             Wähle eine Sprache, drehe die Kapitel-Trommel und höre die
             Geschichten aus <strong>Buch 1</strong> so, wie es für euch am besten passt.
           </p>
@@ -728,18 +733,18 @@
       </div>
 
       <nav class="nav">
-        <a href="/index.html">Start</a>
-        <a href="/book01/">Buch 01</a>
-        <a href="/book01/so-gehts/">So geht’s</a>
-        <a href="/impressum/">Impressum</a>
+        <a href="/index.html" id="navStart">Start</a>
+        <a href="/book01/" id="navBook">Buch 01</a>
+        <a href="/book01/so-gehts/" id="navHow">So geht’s</a>
+        <a href="/impressum/" id="navImprint">Impressum</a>
       </nav>
     </div>
 
     <section class="hero">
       <div class="hero-panel">
-        <div class="eyebrow">Willkommen bei den Pigipegs</div>
-        <h2>Zuhause ist, wo wir zusammen sind</h2>
-        <p class="hero-text">
+        <div class="eyebrow" id="heroEyebrow">Willkommen bei den Pigipegs</div>
+        <h2 id="heroTitle">Zuhause ist, wo wir zusammen sind</h2>
+        <p class="hero-text" id="heroText">
           Höre zuerst die Legende oder drehe direkt die Kapitel-Trommel.
           Du kannst jede Seite einzeln anhören, alles nacheinander abspielen
           oder ein Kapitel in Schleife wiederholen.
@@ -756,7 +761,7 @@
           src="/assets/img/pigipegs-cover-stars.png"
           alt="Pigipegs-Familie unter dem Sternenhimmel vor ihrem Haus"
         />
-        <div class="cover-note">
+        <div class="cover-note" id="coverNote">
           Eine kleine Welt voller Sterne, Wärme, Geschichten und Geborgenheit.
         </div>
       </div>
@@ -764,7 +769,7 @@
 
     <section class="toolbar-grid">
       <div class="language">
-        <div class="eyebrow">Sprache auswählen</div>
+        <div class="eyebrow" id="languageTitle">Sprache auswählen</div>
         <div class="language-bar">
           <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
           <button type="button" data-lang="en">🇬🇧 English</button>
@@ -774,11 +779,11 @@
       </div>
 
       <div class="modes-panel">
-        <div class="eyebrow">Hörmodus</div>
+        <div class="eyebrow" id="modeTitle">Hörmodus</div>
         <div class="mode-bar">
-          <button type="button" class="active" data-mode="paint">🎨 Malen</button>
-          <button type="button" data-mode="continue">📖 Durchlesen</button>
-          <button type="button" data-mode="loop">🔁 Schleife</button>
+          <button type="button" class="active" data-mode="paint" id="modePaint">🎨 Malen</button>
+          <button type="button" data-mode="continue" id="modeContinue">📖 Durchlesen</button>
+          <button type="button" data-mode="loop" id="modeLoop">🔁 Schleife</button>
         </div>
         <div class="mode-help" id="modeHelp">
           Malen: stoppt nach jeder Seite, damit genug Zeit zum Ausmalen bleibt.
@@ -787,9 +792,9 @@
     </section>
 
     <section class="audio-stage">
-      <div class="eyebrow">Kapitel-Auswahl</div>
-      <h2 class="stage-title">Drehe die Trommel</h2>
-      <p class="stage-text">
+      <div class="eyebrow" id="stageEyebrow">Kapitel-Auswahl</div>
+      <h2 class="stage-title" id="stageTitle">Drehe die Trommel</h2>
+      <p class="stage-text" id="stageText">
         Ziehe mit dem Finger oder der Maus nach oben oder unten. Die mittlere
         Fläche ist die aktuell ausgewählte Geschichte.
       </p>
@@ -807,21 +812,21 @@
         </div>
 
         <div class="drum-hint" id="drumHint">
-          Tipp: Ziehen = drehen · Tippen = diese Seite auswählen
+          Ziehen = drehen · Tippen = abspielen
         </div>
       </div>
 
       <div class="player-area">
         <div class="player-header">
           <div>
-            <div class="eyebrow">Jetzt anhören</div>
-            <h3 class="player-title">Pigipegs Audio</h3>
+            <div class="eyebrow" id="playerEyebrow">Jetzt anhören</div>
+            <h3 class="player-title" id="playerTitle">Pigipegs Audio</h3>
           </div>
           <div class="status" id="statusBox">Noch nichts ausgewählt.</div>
         </div>
 
         <div class="player-language">
-          <div class="player-language-label">Sprache direkt wechseln</div>
+          <div class="player-language-label" id="playerLanguageLabel">Sprache direkt wechseln</div>
           <div class="player-language-bar">
             <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
             <button type="button" data-lang="en">🇬🇧 English</button>
@@ -846,6 +851,181 @@
   </div>
 
   <script>
+    const UI = {
+      de: {
+        brandEyebrow: "Pigipegs Hörwelt",
+        mainTitle: "Geschichten unterm Sternenhimmel",
+        mainSub: 'Wähle eine Sprache, drehe die Kapitel-Trommel und höre die Geschichten aus <strong>Buch 1</strong> so, wie es für euch am besten passt.',
+        navStart: "Start",
+        navBook: "Buch 01",
+        navHow: "So geht’s",
+        navImprint: "Impressum",
+        heroEyebrow: "Willkommen bei den Pigipegs",
+        heroTitle: "Zuhause ist, wo wir zusammen sind",
+        heroText: "Höre zuerst die Legende oder drehe direkt die Kapitel-Trommel. Du kannst jede Seite einzeln anhören, alles nacheinander abspielen oder ein Kapitel in Schleife wiederholen.",
+        heroLegendBtn: "🌙 Legende anhören",
+        heroBookBtn: "🎧 Buch 1 starten",
+        coverNote: "Eine kleine Welt voller Sterne, Wärme, Geschichten und Geborgenheit.",
+        languageTitle: "Sprache auswählen",
+        modeTitle: "Hörmodus",
+        modePaint: "🎨 Malen",
+        modeContinue: "📖 Durchlesen",
+        modeLoop: "🔁 Schleife",
+        stageEyebrow: "Kapitel-Auswahl",
+        stageTitle: "Drehe die Trommel",
+        stageText: "Ziehe mit dem Finger oder der Maus nach oben oder unten. Die mittlere Fläche ist die aktuell ausgewählte Geschichte.",
+        playerEyebrow: "Jetzt anhören",
+        playerTitle: "Pigipegs Audio",
+        playerLanguageLabel: "Sprache direkt wechseln",
+        prevBtn: "⟵ Zurück",
+        playBtn: "▶ Abspielen",
+        pauseBtn: "⏸ Pause",
+        nextBtn: "Weiter ⟶",
+        modeHelpPaint: "Malen: stoppt nach jeder Seite, damit genug Zeit zum Ausmalen bleibt.",
+        modeHelpContinue: "Durchlesen: spielt Seite für Seite automatisch weiter.",
+        modeHelpLoop: "Schleife: wiederholt das aktuelle Kapitel immer wieder.",
+        drumHint: "Ziehen = drehen · Tippen = abspielen",
+        drumDrag: "Ziehe weiter nach oben oder unten, um die Trommel zu drehen",
+        selectTap: "Antippen zum Abspielen",
+        legendSelected: "Jetzt ausgewählt: Die Pigipegs-Legende",
+        legendSwitched: "Sprache gewechselt: {lang} · Die Pigipegs-Legende",
+        selected: "Jetzt ausgewählt: {code} · {title} ({lang})",
+        switched: "Sprache gewechselt: {lang} · {code} · {title}",
+        legendEnded: "Die Legende ist zu Ende. Jetzt kannst du eine Buchseite auswählen.",
+        chapterEnded: "Kapitel beendet – Zeit zum Ausmalen 🎨",
+        loopActive: "Schleife aktiv – {title}"
+      },
+      en: {
+        brandEyebrow: "Pigipegs Audio World",
+        mainTitle: "Stories Under the Starlit Sky",
+        mainSub: 'Choose a language, spin the story drum, and listen to the stories from <strong>Book 1</strong> in the way that suits you best.',
+        navStart: "Home",
+        navBook: "Book 01",
+        navHow: "How it works",
+        navImprint: "Imprint",
+        heroEyebrow: "Welcome to the Pigipegs",
+        heroTitle: "Home Is Where We Are Together",
+        heroText: "Listen to the legend first or go straight to the story drum. You can listen to each page one by one, play everything in sequence, or loop a chapter.",
+        heroLegendBtn: "🌙 Listen to the legend",
+        heroBookBtn: "🎧 Start Book 1",
+        coverNote: "A little world full of stars, warmth, stories, and comfort.",
+        languageTitle: "Choose a language",
+        modeTitle: "Listening mode",
+        modePaint: "🎨 Coloring",
+        modeContinue: "📖 Read through",
+        modeLoop: "🔁 Loop",
+        stageEyebrow: "Chapter selection",
+        stageTitle: "Spin the drum",
+        stageText: "Drag up or down with your finger or mouse. The middle area is the currently selected story.",
+        playerEyebrow: "Listen now",
+        playerTitle: "Pigipegs Audio",
+        playerLanguageLabel: "Switch language directly",
+        prevBtn: "⟵ Previous",
+        playBtn: "▶ Play",
+        pauseBtn: "⏸ Pause",
+        nextBtn: "Next ⟶",
+        modeHelpPaint: "Coloring: stops after each page so there is enough time to color.",
+        modeHelpContinue: "Read through: automatically continues page by page.",
+        modeHelpLoop: "Loop: repeats the current chapter again and again.",
+        drumHint: "Drag = rotate · Tap = play",
+        drumDrag: "Keep dragging up or down to rotate the drum",
+        selectTap: "Tap to play",
+        legendSelected: "Selected: The Pigipegs Legend",
+        legendSwitched: "Language changed: {lang} · The Pigipegs Legend",
+        selected: "Selected: {code} · {title} ({lang})",
+        switched: "Language changed: {lang} · {code} · {title}",
+        legendEnded: "The legend has ended. Now you can choose a book page.",
+        chapterEnded: "Chapter finished – time for coloring 🎨",
+        loopActive: "Loop active – {title}"
+      },
+      es: {
+        brandEyebrow: "Mundo de audio Pigipegs",
+        mainTitle: "Historias bajo el cielo estrellado",
+        mainSub: 'Elige un idioma, gira el tambor de historias y escucha las historias del <strong>Libro 1</strong> de la manera que mejor te convenga.',
+        navStart: "Inicio",
+        navBook: "Libro 01",
+        navHow: "Cómo funciona",
+        navImprint: "Aviso legal",
+        heroEyebrow: "Bienvenido a los Pigipegs",
+        heroTitle: "El hogar está donde estamos juntos",
+        heroText: "Escucha primero la leyenda o ve directamente al tambor de historias. Puedes escuchar cada página por separado, reproducir todo seguido o repetir un capítulo en bucle.",
+        heroLegendBtn: "🌙 Escuchar la leyenda",
+        heroBookBtn: "🎧 Empezar Libro 1",
+        coverNote: "Un pequeño mundo lleno de estrellas, calidez, historias y cariño.",
+        languageTitle: "Elegir idioma",
+        modeTitle: "Modo de escucha",
+        modePaint: "🎨 Colorear",
+        modeContinue: "📖 Continuo",
+        modeLoop: "🔁 Bucle",
+        stageEyebrow: "Selección de capítulo",
+        stageTitle: "Gira el tambor",
+        stageText: "Arrastra hacia arriba o hacia abajo con el dedo o el ratón. La zona central es la historia actualmente seleccionada.",
+        playerEyebrow: "Escuchar ahora",
+        playerTitle: "Audio Pigipegs",
+        playerLanguageLabel: "Cambiar idioma directamente",
+        prevBtn: "⟵ Anterior",
+        playBtn: "▶ Reproducir",
+        pauseBtn: "⏸ Pausa",
+        nextBtn: "Siguiente ⟶",
+        modeHelpPaint: "Colorear: se detiene después de cada página para que haya tiempo suficiente para colorear.",
+        modeHelpContinue: "Continuo: sigue automáticamente página por página.",
+        modeHelpLoop: "Bucle: repite el capítulo actual una y otra vez.",
+        drumHint: "Arrastrar = girar · tocar = reproducir",
+        drumDrag: "Sigue arrastrando hacia arriba o abajo para girar el tambor",
+        selectTap: "Toca para reproducir",
+        legendSelected: "Seleccionado: La leyenda de los Pigipegs",
+        legendSwitched: "Idioma cambiado: {lang} · La leyenda de los Pigipegs",
+        selected: "Seleccionado: {code} · {title} ({lang})",
+        switched: "Idioma cambiado: {lang} · {code} · {title}",
+        legendEnded: "La leyenda ha terminado. Ahora puedes elegir una página del libro.",
+        chapterEnded: "Capítulo terminado – hora de colorear 🎨",
+        loopActive: "Bucle activo – {title}"
+      },
+      fr: {
+        brandEyebrow: "Univers audio Pigipegs",
+        mainTitle: "Histoires sous le ciel étoilé",
+        mainSub: 'Choisis une langue, fais tourner le tambour des histoires et écoute les histoires du <strong>Livre 1</strong> comme tu le préfères.',
+        navStart: "Accueil",
+        navBook: "Livre 01",
+        navHow: "Comment ça marche",
+        navImprint: "Mentions légales",
+        heroEyebrow: "Bienvenue chez les Pigipegs",
+        heroTitle: "La maison, c’est là où nous sommes ensemble",
+        heroText: "Écoute d’abord la légende ou passe directement au tambour des histoires. Tu peux écouter chaque page séparément, tout écouter à la suite ou répéter un chapitre en boucle.",
+        heroLegendBtn: "🌙 Écouter la légende",
+        heroBookBtn: "🎧 Démarrer le Livre 1",
+        coverNote: "Un petit monde rempli d’étoiles, de chaleur, d’histoires et de tendresse.",
+        languageTitle: "Choisir une langue",
+        modeTitle: "Mode d’écoute",
+        modePaint: "🎨 Coloriage",
+        modeContinue: "📖 Lecture continue",
+        modeLoop: "🔁 Boucle",
+        stageEyebrow: "Choix du chapitre",
+        stageTitle: "Fais tourner le tambour",
+        stageText: "Fais glisser vers le haut ou le bas avec le doigt ou la souris. La zone centrale correspond à l’histoire actuellement sélectionnée.",
+        playerEyebrow: "Écouter maintenant",
+        playerTitle: "Audio Pigipegs",
+        playerLanguageLabel: "Changer directement de langue",
+        prevBtn: "⟵ Précédent",
+        playBtn: "▶ Lecture",
+        pauseBtn: "⏸ Pause",
+        nextBtn: "Suivant ⟶",
+        modeHelpPaint: "Coloriage : s’arrête après chaque page pour laisser le temps de colorier.",
+        modeHelpContinue: "Lecture continue : passe automatiquement d’une page à l’autre.",
+        modeHelpLoop: "Boucle : répète le chapitre actuel encore et encore.",
+        drumHint: "Glisser = tourner · toucher = lire",
+        drumDrag: "Continue à faire glisser vers le haut ou le bas pour tourner le tambour",
+        selectTap: "Touchez pour lire",
+        legendSelected: "Sélectionné : La légende des Pigipegs",
+        legendSwitched: "Langue changée : {lang} · La légende des Pigipegs",
+        selected: "Sélectionné : {code} · {title} ({lang})",
+        switched: "Langue changée : {lang} · {code} · {title}",
+        legendEnded: "La légende est terminée. Tu peux maintenant choisir une page du livre.",
+        chapterEnded: "Chapitre terminé – place au coloriage 🎨",
+        loopActive: "Boucle active – {title}"
+      }
+    };
+
     const player = document.getElementById("player");
     const statusBox = document.getElementById("statusBox");
     const footerNote = document.getElementById("footerNote");
@@ -869,193 +1049,23 @@
     const drumDownBtn = document.getElementById("drumDownBtn");
 
     const tracks = [
-      {
-        id: "00",
-        code: "S00",
-        image: "/assets/img/S00.jpg",
-        titles: {
-          de: "Die Pigipegs",
-          en: "The Pigipegs",
-          es: "Los Pigipegs",
-          fr: "Les Pigipegs"
-        }
-      },
-      {
-        id: "02",
-        code: "S02",
-        image: "/assets/img/S03.jpg",
-        titles: {
-          de: "Das kleine Haus auf dem Berg",
-          en: "The Little House on the Hill",
-          es: "La pequeña casa en la colina",
-          fr: "La petite maison sur la colline"
-        }
-      },
-      {
-        id: "04",
-        code: "S04",
-        image: "/assets/img/S05.jpg",
-        titles: {
-          de: "Papa Pigipeg erzählt",
-          en: "Papa Pigipeg Tells a Story",
-          es: "Papá Pigipeg cuenta una historia",
-          fr: "Papa Pigipeg raconte"
-        }
-      },
-      {
-        id: "06",
-        code: "S06",
-        image: "/assets/img/S07.jpg",
-        titles: {
-          de: "Mama Pigipegs Gute-Nacht-Geschichten",
-          en: "Mama Pigipeg's Bedtime Stories",
-          es: "Los cuentos de buenas noches de Mamá Pigipeg",
-          fr: "Les histoires du soir de Maman Pigipeg"
-        }
-      },
-      {
-        id: "08",
-        code: "S08",
-        image: "/assets/img/S09.jpg",
-        titles: {
-          de: "Peet hat eine Idee",
-          en: "Peet Has an Idea",
-          es: "Peet tiene una idea",
-          fr: "Peet a une idée"
-        }
-      },
-      {
-        id: "10",
-        code: "S10",
-        image: "/assets/img/S11.jpg",
-        titles: {
-          de: "Amy findet einen Schatz",
-          en: "Amy Finds a Treasure",
-          es: "Amy encuentra un tesoro",
-          fr: "Amy trouve un trésor"
-        }
-      },
-      {
-        id: "12",
-        code: "S12",
-        image: "/assets/img/S13.jpg",
-        titles: {
-          de: "Baby Leo wird müde",
-          en: "Baby Leo Gets Sleepy",
-          es: "El bebé Leo tiene sueño",
-          fr: "Bébé Leo est fatigué"
-        }
-      },
-      {
-        id: "14",
-        code: "S14",
-        image: "/assets/img/S15.jpg",
-        titles: {
-          de: "Die Sterne leuchten hell",
-          en: "The Stars Shine Bright",
-          es: "Las estrellas brillan intensamente",
-          fr: "Les étoiles brillent fort"
-        }
-      },
-      {
-        id: "16",
-        code: "S16",
-        image: "/assets/img/S17.jpg",
-        titles: {
-          de: "Ein kleiner Wunsch",
-          en: "A Little Wish",
-          es: "Un pequeño deseo",
-          fr: "Un petit souhait"
-        }
-      },
-      {
-        id: "18",
-        code: "S18",
-        image: "/assets/img/S19.jpg",
-        titles: {
-          de: "Die Familie rückt zusammen",
-          en: "The Family Snuggles Close",
-          es: "La familia se acurruca junta",
-          fr: "La famille se rapproche"
-        }
-      },
-      {
-        id: "20",
-        code: "S20",
-        image: "/assets/img/S21.jpg",
-        titles: {
-          de: "Das Licht im Fenster",
-          en: "The Light in the Window",
-          es: "La luz en la ventana",
-          fr: "La lumière à la fenêtre"
-        }
-      },
-      {
-        id: "22",
-        code: "S22",
-        image: "/assets/img/S23.jpg",
-        titles: {
-          de: "Der Mond steigt höher",
-          en: "The Moon Climbs Higher",
-          es: "La luna sube más alto",
-          fr: "La lune monte plus haut"
-        }
-      },
-      {
-        id: "24",
-        code: "S24",
-        image: "/assets/img/S25.jpg",
-        titles: {
-          de: "Zeit für eine Geschichte",
-          en: "Time for a Story",
-          es: "Hora de un cuento",
-          fr: "L'heure d'une histoire"
-        }
-      },
-      {
-        id: "26",
-        code: "S26",
-        image: "/assets/img/S27.jpg",
-        titles: {
-          de: "Ein warmes Lachen",
-          en: "A Warm Laugh",
-          es: "Una risa cálida",
-          fr: "Un rire chaleureux"
-        }
-      },
-      {
-        id: "28",
-        code: "S28",
-        image: "/assets/img/S29.jpg",
-        titles: {
-          de: "Der Himmel voller Sterne",
-          en: "A Sky Full of Stars",
-          es: "Un cielo lleno de estrellas",
-          fr: "Un ciel plein d'étoiles"
-        }
-      },
-      {
-        id: "30",
-        code: "S30",
-        image: "/assets/img/S31.jpg",
-        titles: {
-          de: "Langsam wird es still",
-          en: "Slowly It Becomes Quiet",
-          es: "Poco a poco todo se calma",
-          fr: "Peu à peu, tout devient calme"
-        }
-      },
-      {
-        id: "32",
-        code: "S32",
-        image: "/assets/img/Die_Pigipegs_B01-Cover800x600.jpg",
-        titles: {
-          de: "Zuhause ist, wo wir zusammen sind",
-          en: "Home Is Where We Are Together",
-          es: "El hogar está donde estamos juntos",
-          fr: "La maison, c'est là où nous sommes ensemble"
-        }
-      }
+      { id: "00", code: "S00", image: "/assets/img/S00.jpg", titles: { de: "Die Pigipegs", en: "The Pigipegs", es: "Los Pigipegs", fr: "Les Pigipegs" } },
+      { id: "02", code: "S02", image: "/assets/img/S03.jpg", titles: { de: "Das kleine Haus auf dem Berg", en: "The Little House on the Hill", es: "La pequeña casa en la colina", fr: "La petite maison sur la colline" } },
+      { id: "04", code: "S04", image: "/assets/img/S05.jpg", titles: { de: "Papa Pigipeg erzählt", en: "Papa Pigipeg Tells a Story", es: "Papá Pigipeg cuenta una historia", fr: "Papa Pigipeg raconte" } },
+      { id: "06", code: "S06", image: "/assets/img/S07.jpg", titles: { de: "Mama Pigipegs Gute-Nacht-Geschichten", en: "Mama Pigipeg's Bedtime Stories", es: "Los cuentos de buenas noches de Mamá Pigipeg", fr: "Les histoires du soir de Maman Pigipeg" } },
+      { id: "08", code: "S08", image: "/assets/img/S09.jpg", titles: { de: "Peet hat eine Idee", en: "Peet Has an Idea", es: "Peet tiene una idea", fr: "Peet a une idée" } },
+      { id: "10", code: "S10", image: "/assets/img/S11.jpg", titles: { de: "Amy findet einen Schatz", en: "Amy Finds a Treasure", es: "Amy encuentra un tesoro", fr: "Amy trouve un trésor" } },
+      { id: "12", code: "S12", image: "/assets/img/S13.jpg", titles: { de: "Baby Leo wird müde", en: "Baby Leo Gets Sleepy", es: "El bebé Leo tiene sueño", fr: "Bébé Leo est fatigué" } },
+      { id: "14", code: "S14", image: "/assets/img/S15.jpg", titles: { de: "Die Sterne leuchten hell", en: "The Stars Shine Bright", es: "Las estrellas brillan intensamente", fr: "Les étoiles brillent fort" } },
+      { id: "16", code: "S16", image: "/assets/img/S17.jpg", titles: { de: "Ein kleiner Wunsch", en: "A Little Wish", es: "Un pequeño deseo", fr: "Un petit souhait" } },
+      { id: "18", code: "S18", image: "/assets/img/S19.jpg", titles: { de: "Die Familie rückt zusammen", en: "The Family Snuggles Close", es: "La familia se acurruca junta", fr: "La famille se rapproche" } },
+      { id: "20", code: "S20", image: "/assets/img/S21.jpg", titles: { de: "Das Licht im Fenster", en: "The Light in the Window", es: "La luz en la ventana", fr: "La lumière à la fenêtre" } },
+      { id: "22", code: "S22", image: "/assets/img/S23.jpg", titles: { de: "Der Mond steigt höher", en: "The Moon Climbs Higher", es: "La luna sube más alto", fr: "La lune monte plus haut" } },
+      { id: "24", code: "S24", image: "/assets/img/S25.jpg", titles: { de: "Zeit für eine Geschichte", en: "Time for a Story", es: "Hora de un cuento", fr: "L'heure d'une histoire" } },
+      { id: "26", code: "S26", image: "/assets/img/S27.jpg", titles: { de: "Ein warmes Lachen", en: "A Warm Laugh", es: "Una risa cálida", fr: "Un rire chaleureux" } },
+      { id: "28", code: "S28", image: "/assets/img/S29.jpg", titles: { de: "Der Himmel voller Sterne", en: "A Sky Full of Stars", es: "Un cielo lleno de estrellas", fr: "Un ciel plein d'étoiles" } },
+      { id: "30", code: "S30", image: "/assets/img/S31.jpg", titles: { de: "Langsam wird es still", en: "Slowly It Becomes Quiet", es: "Poco a poco todo se calma", fr: "Peu à peu, tout devient calme" } },
+      { id: "32", code: "S32", image: "/assets/img/Die_Pigipegs_B01-Cover800x600.jpg", titles: { de: "Zuhause ist, wo wir zusammen sind", en: "Home Is Where We Are Together", es: "El hogar está donde estamos juntos", fr: "La maison, c'est là où nous sommes ensemble" } }
     ];
 
     let currentLang = localStorage.getItem("pigipegs_lang") || "de";
@@ -1072,6 +1082,10 @@
 
     const stepAngle = 360 / tracks.length;
     const drumRadius = 360;
+
+    function t(key) {
+      return UI[currentLang][key] || UI.de[key] || key;
+    }
 
     function getLanguageLabel(lang) {
       switch (lang) {
@@ -1106,8 +1120,55 @@
       } catch (e) {}
     }
 
+    function replaceVars(str, vars = {}) {
+      let out = str;
+      Object.keys(vars).forEach(key => {
+        out = out.replaceAll(`{${key}}`, vars[key]);
+      });
+      return out;
+    }
+
+    function updateStaticTexts() {
+      document.documentElement.lang = currentLang;
+      document.title = t("brandEyebrow");
+
+      document.getElementById("brandEyebrow").textContent = t("brandEyebrow");
+      document.getElementById("mainTitle").textContent = t("mainTitle");
+      document.getElementById("mainSub").innerHTML = t("mainSub");
+
+      document.getElementById("navStart").textContent = t("navStart");
+      document.getElementById("navBook").textContent = t("navBook");
+      document.getElementById("navHow").textContent = t("navHow");
+      document.getElementById("navImprint").textContent = t("navImprint");
+
+      document.getElementById("heroEyebrow").textContent = t("heroEyebrow");
+      document.getElementById("heroTitle").textContent = t("heroTitle");
+      document.getElementById("heroText").textContent = t("heroText");
+      document.getElementById("heroLegendBtn").textContent = t("heroLegendBtn");
+      document.getElementById("heroBookBtn").textContent = t("heroBookBtn");
+      document.getElementById("coverNote").textContent = t("coverNote");
+
+      document.getElementById("languageTitle").textContent = t("languageTitle");
+      document.getElementById("modeTitle").textContent = t("modeTitle");
+      document.getElementById("modePaint").textContent = t("modePaint");
+      document.getElementById("modeContinue").textContent = t("modeContinue");
+      document.getElementById("modeLoop").textContent = t("modeLoop");
+
+      document.getElementById("stageEyebrow").textContent = t("stageEyebrow");
+      document.getElementById("stageTitle").textContent = t("stageTitle");
+      document.getElementById("stageText").textContent = t("stageText");
+      document.getElementById("drumHint").textContent = t("drumHint");
+
+      document.getElementById("playerEyebrow").textContent = t("playerEyebrow");
+      document.getElementById("playerTitle").textContent = t("playerTitle");
+      document.getElementById("playerLanguageLabel").textContent = t("playerLanguageLabel");
+
+      prevBtn.textContent = t("prevBtn");
+      nextBtn.textContent = t("nextBtn");
+    }
+
     function updatePlayPauseText() {
-      playPauseBtn.textContent = player.paused ? "▶ Abspielen" : "⏸ Pause";
+      playPauseBtn.textContent = player.paused ? t("playBtn") : t("pauseBtn");
     }
 
     function updateNavButtons() {
@@ -1128,20 +1189,26 @@
       });
 
       if (playMode === "paint") {
-        modeHelp.textContent = "Malen: stoppt nach jeder Seite, damit genug Zeit zum Ausmalen bleibt.";
+        modeHelp.textContent = t("modeHelpPaint");
       } else if (playMode === "continue") {
-        modeHelp.textContent = "Durchlesen: spielt Seite für Seite automatisch weiter.";
+        modeHelp.textContent = t("modeHelpContinue");
       } else {
-        modeHelp.textContent = "Schleife: wiederholt das aktuelle Kapitel immer wieder.";
+        modeHelp.textContent = t("modeHelpLoop");
       }
     }
 
     function updateStatusPreview() {
       const track = tracks[currentIndex];
       if (mode === "legend") {
-        statusBox.textContent = "Jetzt ausgewählt: Die Pigipegs-Legende (" + getLanguageLabel(currentLang) + ")";
+        statusBox.textContent = replaceVars(t("legendSelected"), {
+          lang: getLanguageLabel(currentLang)
+        }) + " (" + getLanguageLabel(currentLang) + ")";
       } else {
-        statusBox.textContent = "Jetzt ausgewählt: " + track.code + " · " + getTrackTitle(track) + " (" + getLanguageLabel(currentLang) + ")";
+        statusBox.textContent = replaceVars(t("selected"), {
+          code: track.code,
+          title: getTrackTitle(track),
+          lang: getLanguageLabel(currentLang)
+        });
       }
     }
 
@@ -1190,13 +1257,7 @@
 
         const sub = document.createElement("div");
         sub.className = "drum-sub";
-        sub.textContent = currentLang === "de"
-          ? "Antippen zum Auswählen"
-          : currentLang === "en"
-          ? "Tap to select"
-          : currentLang === "es"
-          ? "Toca para seleccionar"
-          : "Touchez pour sélectionner";
+        sub.textContent = t("selectTap");
 
         content.appendChild(code);
         content.appendChild(name);
@@ -1224,7 +1285,12 @@
             }
           });
 
-          loadBookTrackByStep(best, true);
+          currentStep = best;
+          syncFromStep();
+          renderDrum();
+          updateStatusPreview();
+          updateNavButtons();
+          loadBookTrackByStep(currentStep, true);
         });
 
         drumCylinder.appendChild(item);
@@ -1273,16 +1339,25 @@
     function setLanguage(lang) {
       currentLang = lang;
       localStorage.setItem("pigipegs_lang", lang);
+
+      updateStaticTexts();
       updateLanguageButtons();
+      updateModeButtons();
       renderDrum();
 
       if (mode === "legend") {
         player.src = getLegendPath();
-        statusBox.textContent = "Sprache gewechselt: " + getLanguageLabel(lang) + " · Die Pigipegs-Legende";
+        statusBox.textContent = replaceVars(t("legendSwitched"), {
+          lang: getLanguageLabel(lang)
+        });
       } else {
         const track = tracks[currentIndex];
         player.src = getTrackPath(track.id);
-        statusBox.textContent = "Sprache gewechselt: " + getLanguageLabel(lang) + " · " + track.code + " · " + getTrackTitle(track);
+        statusBox.textContent = replaceVars(t("switched"), {
+          lang: getLanguageLabel(lang),
+          code: track.code,
+          title: getTrackTitle(track)
+        });
       }
 
       player.currentTime = 0;
@@ -1308,11 +1383,7 @@
       dragStartY = getClientY(event);
       dragStartAngle = drumAngle;
       drumCylinder.style.transition = "none";
-      drumHint.textContent =
-        currentLang === "de" ? "Ziehe weiter nach oben oder unten, um die Trommel zu drehen" :
-        currentLang === "en" ? "Keep dragging up or down to rotate the wheel" :
-        currentLang === "es" ? "Sigue arrastrando hacia arriba o abajo para girar el tambor" :
-        "Continue à faire glisser vers le haut ou le bas pour tourner le tambour";
+      drumHint.textContent = t("drumDrag");
     }
 
     function moveDrag(event) {
@@ -1335,11 +1406,7 @@
       updateNavButtons();
       updateStatusPreview();
 
-      drumHint.textContent =
-        currentLang === "de" ? "Tipp: Ziehen = drehen · Tippen = diese Seite auswählen" :
-        currentLang === "en" ? "Tip: Drag = rotate · Tap = select this page" :
-        currentLang === "es" ? "Consejo: arrastrar = girar · tocar = seleccionar esta página" :
-        "Astuce : glisser = tourner · toucher = sélectionner cette page";
+      drumHint.textContent = t("drumHint");
     }
 
     drumWrap.addEventListener("mousedown", startDrag);
@@ -1391,32 +1458,21 @@
       updatePlayPauseText();
 
       if (mode === "legend") {
-        statusBox.textContent =
-          currentLang === "de" ? "Die Legende ist zu Ende. Jetzt kannst du eine Buchseite auswählen." :
-          currentLang === "en" ? "The legend has ended. Now you can choose a book page." :
-          currentLang === "es" ? "La leyenda ha terminado. Ahora puedes elegir una página del libro." :
-          "La légende est terminée. Tu peux maintenant choisir une page du livre.";
+        statusBox.textContent = t("legendEnded");
         return;
       }
 
       if (playMode === "paint") {
-        statusBox.textContent =
-          currentLang === "de" ? "Kapitel beendet – Zeit zum Ausmalen 🎨" :
-          currentLang === "en" ? "Chapter finished – time for coloring 🎨" :
-          currentLang === "es" ? "Capítulo terminado – hora de colorear 🎨" :
-          "Chapitre terminé – place au coloriage 🎨";
+        statusBox.textContent = t("chapterEnded");
         return;
       }
 
       if (playMode === "loop") {
         player.currentTime = 0;
         safePlay();
-        statusBox.textContent =
-          (currentLang === "de" ? "Schleife aktiv – " :
-           currentLang === "en" ? "Loop active – " :
-           currentLang === "es" ? "Bucle activo – " :
-           "Boucle active – ")
-          + getTrackTitle(tracks[currentIndex]);
+        statusBox.textContent = replaceVars(t("loopActive"), {
+          title: getTrackTitle(tracks[currentIndex])
+        });
         return;
       }
 
@@ -1436,6 +1492,7 @@
     }
 
     syncFromStep();
+    updateStaticTexts();
     updateLanguageButtons();
     updateModeButtons();
     updatePlayPauseText();
