@@ -58,7 +58,7 @@
     .page{
       max-width:var(--max);
       margin:0 auto;
-      padding:20px 16px 48px;
+      padding:20px 16px 30px;
       position:relative;
     }
 
@@ -283,10 +283,6 @@
       background:rgba(255,255,255,0.14);
       border:1px solid rgba(255,255,255,0.18);
       box-shadow:0 10px 22px rgba(0,0,0,0.12);
-    }
-
-    .drum-arrow:hover{
-      background:rgba(255,255,255,0.20);
     }
 
     .drum-wrap{
@@ -598,9 +594,20 @@
       position:relative;
       z-index:2;
       margin-top:18px;
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,0.10);
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
       text-align:center;
       color:var(--muted);
       font-size:14px;
+    }
+
+    .footer-note a{
+      color:var(--muted);
+      text-decoration:none;
     }
 
     @media (max-width: 980px){
@@ -733,6 +740,11 @@
       .controls{
         gap:8px;
       }
+
+      .footer-note{
+        gap:8px;
+        font-size:13px;
+      }
     }
   </style>
 </head>
@@ -758,7 +770,6 @@
         <a href="/index.html" id="navStart">Start</a>
         <a href="/book01/" id="navBook">Buch 01</a>
         <a href="/book01/so-gehts/" id="navHow">So geht’s</a>
-        <a href="/impressum/" id="navImprint">Impressum</a>
       </nav>
     </div>
 
@@ -854,8 +865,10 @@
       </div>
     </section>
 
-    <div class="footer-note" id="footerNote">
-      Pigipegs · Hörwelt · Deutsch
+    <div class="footer-note">
+      <span id="footerText">Pigipegs · Hörwelt · Deutsch</span>
+      <span>·</span>
+      <a href="/impressum/" id="footerImprint">Impressum</a>
     </div>
   </div>
 
@@ -868,7 +881,6 @@
         navStart: "Start",
         navBook: "Buch 01",
         navHow: "So geht’s",
-        navImprint: "Impressum",
         heroEyebrow: "Willkommen bei den Pigipegs",
         heroTitle: "Zuhause ist, wo wir zusammen sind",
         heroText: "Höre zuerst die Legende oder drehe direkt die Kapitel-Trommel. Du kannst jede Seite einzeln anhören, alles nacheinander abspielen oder ein Kapitel in Schleife wiederholen.",
@@ -901,7 +913,8 @@
         switched: "Sprache gewechselt: {lang} · {code} · {title}",
         legendEnded: "Die Legende ist zu Ende. Jetzt kannst du eine Buchseite auswählen.",
         chapterEnded: "Kapitel beendet – Zeit zum Ausmalen 🎨",
-        loopActive: "Schleife aktiv – {title}"
+        loopActive: "Schleife aktiv – {title}",
+        imprint: "Impressum"
       },
       en: {
         brandEyebrow: "Pigipegs Audio World",
@@ -910,7 +923,6 @@
         navStart: "Home",
         navBook: "Book 01",
         navHow: "How it works",
-        navImprint: "Imprint",
         heroEyebrow: "Welcome to the Pigipegs",
         heroTitle: "Home Is Where We Are Together",
         heroText: "Listen to the legend first or go straight to the story drum. You can listen to each page one by one, play everything in sequence, or loop a chapter.",
@@ -943,7 +955,8 @@
         switched: "Language changed: {lang} · {code} · {title}",
         legendEnded: "The legend has ended. Now you can choose a book page.",
         chapterEnded: "Chapter finished – time for coloring 🎨",
-        loopActive: "Loop active – {title}"
+        loopActive: "Loop active – {title}",
+        imprint: "Imprint"
       },
       es: {
         brandEyebrow: "Mundo de audio Pigipegs",
@@ -952,7 +965,6 @@
         navStart: "Inicio",
         navBook: "Libro 01",
         navHow: "Cómo funciona",
-        navImprint: "Aviso legal",
         heroEyebrow: "Bienvenido a los Pigipegs",
         heroTitle: "El hogar está donde estamos juntos",
         heroText: "Escucha primero la leyenda o ve directamente al tambor de historias. Puedes escuchar cada página por separado, reproducir todo seguido o repetir un capítulo en bucle.",
@@ -985,7 +997,8 @@
         switched: "Idioma cambiado: {lang} · {code} · {title}",
         legendEnded: "La leyenda ha terminado. Ahora puedes elegir una página del libro.",
         chapterEnded: "Capítulo terminado – hora de colorear 🎨",
-        loopActive: "Bucle activo – {title}"
+        loopActive: "Bucle activo – {title}",
+        imprint: "Aviso legal"
       },
       fr: {
         brandEyebrow: "Univers audio Pigipegs",
@@ -994,7 +1007,6 @@
         navStart: "Accueil",
         navBook: "Livre 01",
         navHow: "Comment ça marche",
-        navImprint: "Mentions légales",
         heroEyebrow: "Bienvenue chez les Pigipegs",
         heroTitle: "La maison, c’est là où nous sommes ensemble",
         heroText: "Écoute d’abord la légende ou passe directement au tambour des histoires. Tu peux écouter chaque page séparément, tout écouter à la suite ou répéter un chapitre en boucle.",
@@ -1027,13 +1039,13 @@
         switched: "Langue changée : {lang} · {code} · {title}",
         legendEnded: "La légende est terminée. Tu peux maintenant choisir une page du livre.",
         chapterEnded: "Chapitre terminé – place au coloriage 🎨",
-        loopActive: "Boucle active – {title}"
+        loopActive: "Boucle active – {title}",
+        imprint: "Mentions légales"
       }
     };
 
     const player = document.getElementById("player");
     const statusBox = document.getElementById("statusBox");
-    const footerNote = document.getElementById("footerNote");
     const modeHelp = document.getElementById("modeHelp");
 
     const heroLegendBtn = document.getElementById("heroLegendBtn");
@@ -1051,6 +1063,9 @@
     const drumHint = document.getElementById("drumHint");
     const drumUpBtn = document.getElementById("drumUpBtn");
     const drumDownBtn = document.getElementById("drumDownBtn");
+
+    const footerText = document.getElementById("footerText");
+    const footerImprint = document.getElementById("footerImprint");
 
     const tracks = [
       { id: "00", code: "S00", image: "/assets/img/S00.jpg", titles: { de: "Die Pigipegs", en: "The Pigipegs", es: "Los Pigipegs", fr: "Les Pigipegs" } },
@@ -1083,6 +1098,9 @@
     let dragStartY = 0;
     let dragStartAngle = 0;
     let isDragging = false;
+    let dragMoved = false;
+    let pointerStartX = 0;
+    let pointerStartY = 0;
 
     const stepAngle = 360 / tracks.length;
     const drumRadius = 360;
@@ -1144,7 +1162,6 @@
       document.getElementById("navStart").textContent = t("navStart");
       document.getElementById("navBook").textContent = t("navBook");
       document.getElementById("navHow").textContent = t("navHow");
-      document.getElementById("navImprint").textContent = t("navImprint");
 
       document.getElementById("heroEyebrow").textContent = t("heroEyebrow");
       document.getElementById("heroTitle").textContent = t("heroTitle");
@@ -1169,6 +1186,9 @@
 
       prevBtn.textContent = t("prevBtn");
       nextBtn.textContent = t("nextBtn");
+
+      footerText.textContent = "Pigipegs · Hörwelt · " + getLanguageLabel(currentLang);
+      footerImprint.textContent = t("imprint");
     }
 
     function updatePlayPauseText() {
@@ -1184,7 +1204,6 @@
       playerLanguageButtons.forEach(button => {
         button.classList.toggle("active", button.dataset.lang === currentLang);
       });
-      footerNote.textContent = "Pigipegs · Hörwelt · " + getLanguageLabel(currentLang);
     }
 
     function updateModeButtons() {
@@ -1232,6 +1251,19 @@
     function setPlayerSourceForCurrentTrack() {
       const track = tracks[currentIndex];
       player.src = getTrackPath(track.id);
+      player.load();
+    }
+
+    async function selectTrackAndPlay(step) {
+      mode = "book";
+      currentStep = step;
+      syncFromStep();
+      setPlayerSourceForCurrentTrack();
+      renderDrum();
+      updateStatusPreview();
+      updateNavButtons();
+      updatePlayPauseText();
+      await safePlay();
     }
 
     function renderDrum() {
@@ -1275,7 +1307,12 @@
         item.appendChild(thumb);
         item.appendChild(content);
 
-        item.addEventListener("click", async () => {
+        item.addEventListener("click", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          if (dragMoved) return;
+
           const base = Math.round(currentStep / tracks.length) * tracks.length;
           const candidates = [
             base + index,
@@ -1294,15 +1331,7 @@
             }
           });
 
-          currentStep = best;
-          mode = "book";
-          syncFromStep();
-          setPlayerSourceForCurrentTrack();
-          renderDrum();
-          updateStatusPreview();
-          updateNavButtons();
-          updatePlayPauseText();
-          await safePlay();
+          await selectTrackAndPlay(best);
         });
 
         drumCylinder.appendChild(item);
@@ -1314,11 +1343,10 @@
     function loadLegend(autoplay = true) {
       mode = "legend";
       player.src = getLegendPath();
+      player.load();
       updateStatusPreview();
       updatePlayPauseText();
-      if (autoplay) {
-        safePlay();
-      }
+      if (autoplay) safePlay();
     }
 
     function loadBookTrackByStep(step, autoplay = true) {
@@ -1360,6 +1388,7 @@
 
       if (mode === "legend") {
         player.src = getLegendPath();
+        player.load();
         statusBox.textContent = replaceVars(t("legendSwitched"), {
           lang: getLanguageLabel(lang)
         });
@@ -1391,10 +1420,19 @@
       return event.clientY;
     }
 
+    function getClientX(event) {
+      if (event.touches && event.touches.length) return event.touches[0].clientX;
+      if (event.changedTouches && event.changedTouches.length) return event.changedTouches[0].clientX;
+      return event.clientX;
+    }
+
     function startDrag(event) {
       isDragging = true;
+      dragMoved = false;
       dragStartY = getClientY(event);
       dragStartAngle = drumAngle;
+      pointerStartX = getClientX(event);
+      pointerStartY = getClientY(event);
       drumCylinder.style.transition = "none";
       drumHint.textContent = t("drumDrag");
     }
@@ -1402,7 +1440,15 @@
     function moveDrag(event) {
       if (!isDragging) return;
       const currentY = getClientY(event);
+      const currentX = getClientX(event);
       const deltaY = currentY - dragStartY;
+
+      if (
+        Math.abs(currentY - pointerStartY) > 8 ||
+        Math.abs(currentX - pointerStartX) > 8
+      ) {
+        dragMoved = true;
+      }
 
       drumAngle = dragStartAngle - (deltaY / 4);
       applyDrumRotation();
@@ -1420,6 +1466,10 @@
       updateStatusPreview();
 
       drumHint.textContent = t("drumHint");
+
+      setTimeout(() => {
+        dragMoved = false;
+      }, 60);
     }
 
     drumWrap.addEventListener("mousedown", startDrag);
@@ -1434,13 +1484,11 @@
     heroBookBtn.addEventListener("click", () => loadBookTrackByStep(currentStep, true));
 
     prevBtn.addEventListener("click", async () => {
-      loadBookTrackByStep(currentStep - 1, false);
-      await safePlay();
+      await selectTrackAndPlay(currentStep - 1);
     });
 
     nextBtn.addEventListener("click", async () => {
-      loadBookTrackByStep(currentStep + 1, false);
-      await safePlay();
+      await selectTrackAndPlay(currentStep + 1);
     });
 
     playPauseBtn.addEventListener("click", togglePlayback);
