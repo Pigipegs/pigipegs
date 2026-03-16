@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pigipegs – Bild hochladen</title>
+  <title>Pigipegs – Bild teilen</title>
 
   <style>
     :root{
@@ -26,6 +26,8 @@
 
       --shadow:0 16px 40px rgba(20,18,48,0.28);
       --radius-xl:30px;
+      --radius-lg:22px;
+      --radius-md:16px;
       --max:1120px;
     }
 
@@ -98,6 +100,8 @@
       display:flex;
       gap:14px;
       align-items:flex-start;
+      flex:1 1 620px;
+      min-width:280px;
     }
 
     .brand-figure{
@@ -138,10 +142,65 @@
       font-size:16px;
     }
 
+    .topbar-right{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:12px;
+      flex:0 0 auto;
+    }
+
+    .language-box{
+      text-align:right;
+    }
+
+    .language-eyebrow{
+      font-size:13px;
+      color:var(--soft);
+      margin:4px 0 8px;
+      letter-spacing:.03em;
+    }
+
+    .toolbar-buttons{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:0;
+      justify-content:flex-end;
+    }
+
+    .toolbar-buttons button{
+      border:none;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      font-size:15px;
+      background:rgba(255,255,255,0.14);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.16);
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+      transition:transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+
+    .toolbar-buttons button:hover,
+    .toolbar-buttons button:focus-visible{
+      transform:translateY(-1px);
+      outline:none;
+      border-color:rgba(255,255,255,0.34);
+    }
+
+    .toolbar-buttons .active{
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+      border-color:transparent;
+    }
+
     .nav{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
+      justify-content:flex-end;
     }
 
     .nav a{
@@ -155,11 +214,11 @@
       backdrop-filter:blur(8px);
     }
 
-    .toolbar,
     .hero,
-    .steps,
+    .upload-box,
     .rules,
-    .parents{
+    .parents,
+    .tech{
       position:relative;
       z-index:2;
       background:var(--panel);
@@ -171,127 +230,71 @@
       margin-bottom:18px;
     }
 
-    .toolbar-row{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:16px;
-      align-items:end;
-    }
-
-    .lang-buttons,
-    .speak-buttons{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:10px;
-    }
-
-    .lang-buttons button,
-    .speak-buttons button{
-      border:none;
-      border-radius:999px;
-      padding:12px 16px;
-      font-weight:bold;
-      font-size:15px;
-      background:rgba(255,255,255,0.14);
-      color:var(--text);
-      border:1px solid rgba(255,255,255,0.16);
-      cursor:pointer;
-      backdrop-filter:blur(8px);
-    }
-
-    .lang-buttons .active,
-    .speak-buttons .active{
-      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
-      color:#fff;
-      border-color:transparent;
-    }
-
     .hero h2,
-    .steps h2,
+    .upload-box h2,
     .rules h2,
-    .parents h2{
+    .parents h2,
+    .tech h2{
       margin:0 0 12px;
       font-size:clamp(28px,4vw,42px);
       line-height:1.1;
     }
 
     .hero p,
-    .parents p{
+    .upload-box p,
+    .parents p,
+    .tech p{
       margin:0;
       color:var(--muted);
       line-height:1.7;
       font-size:17px;
     }
 
-    .actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:20px;
-    }
-
-    .button{
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:15px 20px;
-      border-radius:18px;
-      font-weight:bold;
-      font-size:17px;
-      box-shadow:0 10px 22px rgba(0,0,0,0.14);
-      border:none;
-      cursor:pointer;
-    }
-
-    .button-primary{
-      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
-      color:#fff;
-    }
-
-    .button-secondary{
-      background:rgba(255,255,255,0.14);
-      color:var(--text);
-      border:1px solid rgba(255,255,255,0.16);
-    }
-
-    .step-grid,
-    .rule-grid{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:16px;
-      margin-top:16px;
-    }
-
-    .card{
-      background:rgba(255,255,255,0.10);
-      border:1px solid rgba(255,255,255,0.16);
-      border-radius:22px;
+    .read-box{
+      margin-top:18px;
       padding:18px;
-      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+      border-radius:22px;
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.16);
     }
 
-    .num{
-      display:inline-flex;
-      width:38px;
-      height:38px;
-      border-radius:50%;
-      align-items:center;
-      justify-content:center;
-      font-weight:bold;
-      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+    .read-box strong{
+      display:block;
+      font-size:24px;
+      margin-bottom:8px;
       color:#fff;
-      margin-bottom:12px;
     }
 
-    .card h3{
-      margin:0 0 8px;
-      font-size:22px;
+    .read-note{
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
     }
 
-    .card p{
-      margin:0;
+    .read-status{
+      margin-top:12px;
+      color:var(--soft);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .mail-box{
+      margin-top:18px;
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.16);
+    }
+
+    .mail-box strong{
+      display:block;
+      font-size:24px;
+      margin-bottom:8px;
+      color:#fff;
+    }
+
+    .mail-note{
+      margin-top:10px;
       color:var(--muted);
       line-height:1.6;
       font-size:15px;
@@ -308,10 +311,99 @@
       font-size:15px;
     }
 
-    .status{
-      margin-top:10px;
-      font-size:14px;
-      color:var(--soft);
+    .rule-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+    }
+
+    .card h3{
+      margin:0 0 8px;
+      font-size:22px;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    .consent-box{
+      margin-top:18px;
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+    }
+
+    .consent-box label{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      cursor:pointer;
+      line-height:1.6;
+      color:var(--text);
+      font-size:15px;
+    }
+
+    .consent-box input[type="checkbox"]{
+      margin-top:3px;
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+
+    .button,
+    .button-disabled{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:15px 20px;
+      border-radius:18px;
+      font-weight:bold;
+      font-size:17px;
+      box-shadow:0 10px 22px rgba(0,0,0,0.14);
+      border:none;
+      min-height:54px;
+    }
+
+    .button-primary{
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+      cursor:pointer;
+    }
+
+    .button-secondary{
+      background:rgba(255,255,255,0.14);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.16);
+      cursor:pointer;
+    }
+
+    .button-disabled{
+      background:rgba(255,255,255,0.10);
+      color:rgba(255,255,255,0.6);
+      border:1px solid rgba(255,255,255,0.12);
+      cursor:not-allowed;
+      box-shadow:none;
     }
 
     .footer-note{
@@ -335,19 +427,17 @@
     }
 
     @media (max-width: 900px){
-      .step-grid,
-      .rule-grid,
-      .toolbar-row{
+      .rule-grid{
         grid-template-columns:1fr;
       }
     }
 
     @media (max-width: 720px){
-      .toolbar,
       .hero,
-      .steps,
+      .upload-box,
       .rules,
-      .parents{
+      .parents,
+      .tech{
         padding:18px;
       }
 
@@ -370,8 +460,34 @@
         height:50px;
       }
 
-      .lang-buttons button,
-      .speak-buttons button{
+      .mail-box strong,
+      .read-box strong{
+        font-size:20px;
+      }
+
+      .actions{
+        flex-direction:column;
+      }
+
+      .topbar-right{
+        width:100%;
+        align-items:flex-start;
+      }
+
+      .language-box{
+        text-align:left;
+      }
+
+      .toolbar-buttons,
+      .nav{
+        justify-content:flex-start;
+      }
+
+      .toolbar-buttons{
+        gap:8px;
+      }
+
+      .toolbar-buttons button{
         padding:9px 12px;
         font-size:13px;
       }
@@ -388,502 +504,922 @@
           <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs" />
         </div>
         <div>
-          <div class="eyebrow" id="brandEyebrow">Pigipegs Hörwelt</div>
-          <h1 id="mainTitle">Bild hochladen – so geht’s</h1>
-          <p class="sub" id="mainSub">
-            Hier erfährst du, wie ein selbst gemaltes Pigipegs-Bild hochgeladen werden kann und was dabei zum Schutz von Kindern und Familien wichtig ist.
+          <div class="eyebrow" data-i18n="brandEyebrow">Pigipegs Bildbereich</div>
+          <h1 data-i18n="mainTitle">Teile dein Bild</h1>
+          <p class="sub" data-i18n="mainSub">
+            Hier kann ein selbst gemaltes Pigipegs-Bild aus Buch 1 eingesendet werden. Bitte nutze
+            den Bildbereich nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person.
           </p>
         </div>
       </div>
 
-      <nav class="nav">
-        <a href="/index.html" id="navStart">Start</a>
-        <a href="/book/" id="navBooks">Bücher</a>
-        <a href="/book01/audio.html" id="navAudio">Hörwelt</a>
-      </nav>
-    </div>
-
-    <section class="toolbar">
-      <div class="toolbar-row">
-        <div>
-          <div class="eyebrow" id="langEyebrow">Sprache auswählen</div>
-          <div class="lang-buttons">
-            <button type="button" data-lang="de" class="active">🇩🇪 Deutsch</button>
+      <div class="topbar-right">
+        <div class="language-box">
+          <div class="language-eyebrow" data-i18n="languageEyebrow">Sprache direkt wechseln</div>
+          <div class="toolbar-buttons language-bar" aria-label="Language switcher">
+            <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
             <button type="button" data-lang="en">🇬🇧 English</button>
             <button type="button" data-lang="es">🇪🇸 Español</button>
             <button type="button" data-lang="fr">🇫🇷 Français</button>
           </div>
         </div>
 
-        <div>
-          <div class="eyebrow" id="speakEyebrow">Vorlesen</div>
-          <div class="speak-buttons">
-            <button type="button" id="speakBtn">🔊 Vorlesen</button>
-            <button type="button" id="stopBtn">⏹ Stop</button>
-          </div>
-          <div class="status" id="speakStatus">Die Seite kann in der gewählten Sprache vorgelesen werden.</div>
-        </div>
+        <nav class="nav">
+          <a href="/index.html" data-i18n="navStart">Start</a>
+          <a href="/book/" data-i18n="navBooks">Bücher</a>
+          <a href="/book01/so-gehts/" data-i18n="navHow">Bild hochladen</a>
+        </nav>
       </div>
-    </section>
+    </div>
 
     <section class="hero">
-      <div class="eyebrow" id="heroEyebrow">Sicher und verständlich</div>
-      <h2 id="heroTitle">So kommt ein Bild zu uns</h2>
-      <p id="heroText">
+      <div class="eyebrow" data-i18n="heroEyebrow">Nur eigene Bilder</div>
+      <h2 data-i18n="heroTitle">So kommt dein Pigipegs-Bild zu uns</h2>
+      <p data-i18n="heroText">
         In Buch 1 gibt es eine Seite, auf der Kinder ihre eigenen Pigipegs malen können.
-        Genau dieses selbst gemalte Bild kann hier später hochgeladen werden. Vor einer möglichen
-        Veröffentlichung wird alles geprüft. Es findet keine automatische öffentliche Anzeige statt.
+        Genau dieses selbst gemalte Bild kann hier eingesendet werden. Vor einer möglichen
+        Veröffentlichung wird jedes Bild geprüft. Es erfolgt keine automatische öffentliche Anzeige.
       </p>
 
-      <div class="actions">
-        <a class="button button-primary" href="/teilen/" id="uploadBtn">Bild hochladen</a>
-        <a class="button button-secondary" href="/book01/audio.html" id="bookBtn">Zu Buch 1</a>
+      <div class="notice" data-i18n="heroNotice">
+        Bitte sende nur das selbst gemalte Pigipegs-Bild ein. Keine Fotos von Personen, keine fremden Bilder und keine persönlichen Daten im Bild oder Dateinamen.
       </div>
 
-      <div class="notice" id="heroNotice">
-        Es darf nur das eigene selbst gemalte Pigipegs-Bild hochgeladen werden. Bitte keine fremden Bilder,
-        keine Fotos anderer Personen und keine privaten Daten direkt in das Bild schreiben.
+      <div class="read-box">
+        <strong data-i18n="readLabel">Vorlesen</strong>
+        <div class="read-note" data-i18n="readNote">
+          Die Seite kann in der gewählten Sprache vorgelesen werden. Das hilft besonders Kindern beim Verstehen.
+        </div>
+
+        <div class="actions">
+          <button id="readToggleBtn" class="button button-primary" type="button" data-i18n="readStartBtn">🔊 Vorlesen starten</button>
+          <button id="readStopBtn" class="button button-secondary" type="button" data-i18n="readStopBtn">⏹ Vorlesen stoppen</button>
+        </div>
+
+        <div class="read-status" id="readStatus" aria-live="polite" data-i18n="readReady">
+          Bereit zum Vorlesen.
+        </div>
       </div>
     </section>
 
-    <section class="steps">
-      <div class="eyebrow" id="stepsEyebrow">Schritt für Schritt</div>
-      <h2 id="stepsTitle">So funktioniert der Upload</h2>
+    <section class="upload-box">
+      <div class="eyebrow" data-i18n="uploadEyebrow">Bild einsenden</div>
+      <h2 data-i18n="uploadTitle">Per E-Mail senden</h2>
+      <p data-i18n="uploadText">
+        Zurzeit kann das Bild per E-Mail eingesendet werden. Bitte sende nur das selbst gemalte
+        Pigipegs-Bild aus Buch 1 ein und nur mit Zustimmung eines Elternteils oder einer
+        erziehungsberechtigten Person.
+      </p>
 
-      <div class="step-grid">
-        <div class="card">
-          <div class="num">1</div>
-          <h3 id="step1Title">Bild malen</h3>
-          <p id="step1Text">
-            Das Kind malt sein eigenes Pigipegs-Bild auf der vorgesehenen Seite in Buch 1 aus oder gestaltet es selbst.
-          </p>
+      <div class="mail-box">
+        <strong data-i18n="mailLabel">E-Mail-Adresse</strong>
+        <div class="mail-note" data-i18n="mailNote">
+          Die E-Mail-Adresse wird erst nach Bestätigung der Hinweise freigeschaltet.
         </div>
+      </div>
 
-        <div class="card">
-          <div class="num">2</div>
-          <h3 id="step2Title">Foto machen</h3>
-          <p id="step2Text">
-            Ein Elternteil oder eine erziehungsberechtigte Person fotografiert das Bild oder wählt eine Bilddatei aus.
-          </p>
-        </div>
+      <div class="notice" data-i18n="consentNotice">
+        Mit dem Einsenden des Bildes bestätigt das absendende Elternteil bzw. die erziehungsberechtigte Person,
+        dass das eingereichte Bild vom Kind selbst gemalt oder rechtmäßig freigegeben ist, dass es keine Fotos
+        von Personen und keine sensiblen oder unnötigen persönlichen Daten enthält und dass Pigipegs das Bild
+        speichern, prüfen und – soweit ausdrücklich freigegeben – auf der Pigipegs-Website und gegebenenfalls
+        in weiteren Pigipegs-Materialien veröffentlichen darf. Die Einwilligung kann jederzeit mit Wirkung für
+        die Zukunft widerrufen werden. Im Fall eines Widerrufs werden wir das Bild und dazugehörige Angaben
+        löschen, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Nähere Informationen finden Sie
+        in unserer Datenschutzerklärung.
+      </div>
 
-        <div class="card">
-          <div class="num">3</div>
-          <h3 id="step3Title">Bild hochladen</h3>
-          <p id="step3Text">
-            Das Bild wird über die Upload-Seite an uns gesendet. Dabei sollten nur die wirklich nötigen Angaben gemacht werden.
-          </p>
-        </div>
+      <div class="consent-box">
+        <label for="consentCheck">
+          <input type="checkbox" id="consentCheck" />
+          <span data-i18n="consentText">
+            Ich bin Elternteil bzw. erziehungsberechtigte Person, habe die Hinweise gelesen und bin damit
+            einverstanden, dass das Bild im beschriebenen Rahmen eingesendet, geprüft, gespeichert und – soweit
+            ausdrücklich freigegeben – verwendet werden darf.
+          </span>
+        </label>
+      </div>
 
-        <div class="card">
-          <div class="num">4</div>
-          <h3 id="step4Title">Prüfung vor Anzeige</h3>
-          <p id="step4Text">
-            Das Bild wird zuerst geprüft. Eine Veröffentlichung erfolgt nicht automatisch und nur im freigegebenen Rahmen.
-          </p>
-        </div>
+      <div class="actions">
+        <a
+          id="mailButton"
+          class="button-disabled"
+          aria-disabled="true"
+          data-i18n="mailButton"
+        >
+          E-Mail öffnen
+        </a>
+
+        <a class="button button-secondary" href="/book01/so-gehts/" data-i18n="howButton">
+          Bild hochladen – so geht’s
+        </a>
+
+        <a class="button button-secondary" href="/book/" data-i18n="bookButton">
+          Zu Buch 1
+        </a>
       </div>
     </section>
 
     <section class="rules">
-      <div class="eyebrow" id="rulesEyebrow">Wichtige Hinweise</div>
-      <h2 id="rulesTitle">Zum Schutz von Kindern und Familien</h2>
+      <div class="eyebrow" data-i18n="rulesEyebrow">Wichtige Hinweise</div>
+      <h2 data-i18n="rulesTitle">Zum Schutz von Kindern und Familien</h2>
 
       <div class="rule-grid">
         <div class="card">
-          <h3 id="rule1Title">Nur mit Zustimmung</h3>
-          <p id="rule1Text">
-            Der Upload darf nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person erfolgen.
+          <h3 data-i18n="rule1Title">a) Kein Kinder-Account, keine Pflichtangaben</h3>
+          <p data-i18n="rule1Text">
+            Für das Einsenden eines Bildes ist kein eigenes Nutzerkonto des Kindes erforderlich.
+            Bitte geben Sie nur so wenige personenbezogene Daten wie möglich an. Name oder Alter
+            des Kindes sollten nur dann genannt werden, wenn dies ausdrücklich gewünscht ist.
           </p>
         </div>
 
         <div class="card">
-          <h3 id="rule2Title">Nur eigene Bilder</h3>
-          <p id="rule2Text">
-            Hochgeladen werden dürfen nur selbst gemalte Pigipegs-Bilder aus dem Buch, keine fremden Inhalte.
+          <h3 data-i18n="rule2Title">b) Klare Zweckbindung</h3>
+          <p data-i18n="rule2Text">
+            Soweit Sie der Veröffentlichung zustimmen, darf Pigipegs das Bild ausschließlich im
+            Zusammenhang mit Pigipegs verwenden, zum Beispiel auf dieser Website, in begleitenden
+            Materialien zum Buch und in Pigipegs-Kommunikationskanälen. Eine Weitergabe an Dritte
+            zu anderen Zwecken erfolgt nicht.
           </p>
         </div>
 
         <div class="card">
-          <h3 id="rule3Title">Keine automatische Veröffentlichung</h3>
-          <p id="rule3Text">
-            Bilder werden vor einer möglichen Anzeige geprüft. Ohne passende Freigabe werden sie nicht öffentlich gezeigt.
+          <h3 data-i18n="rule3Title">c) Widerruf, Löschung, Auskunft</h3>
+          <p data-i18n="rule3Text">
+            Eltern und Erziehungsberechtigte können jederzeit Auskunft über gespeicherte Bilder und
+            Angaben verlangen, deren Berichtigung verlangen oder die Einwilligung mit Wirkung für
+            die Zukunft widerrufen. In diesen Fällen löschen wir das betroffene Bild und dazugehörige
+            Daten, soweit keine gesetzlichen Pflichten entgegenstehen.
           </p>
         </div>
 
         <div class="card">
-          <h3 id="rule4Title">Wenig Daten, mehr Schutz</h3>
-          <p id="rule4Text">
-            Bitte möglichst sparsam mit Angaben sein. Ein Klarname des Kindes sollte nur genutzt werden, wenn das ausdrücklich gewünscht und freigegeben ist.
+          <h3 data-i18n="rule4Title">Keine automatische Veröffentlichung</h3>
+          <p data-i18n="rule4Text">
+            Jedes Bild wird vor einer möglichen Anzeige geprüft. Ohne passende Freigabe wird es nicht
+            öffentlich gezeigt. Es besteht kein Anspruch auf Veröffentlichung.
           </p>
         </div>
       </div>
     </section>
 
     <section class="parents">
-      <div class="eyebrow" id="parentsEyebrow">Für Eltern und Erziehungsberechtigte</div>
-      <h2 id="parentsTitle">Transparenz und Rechte</h2>
-      <p id="parentsText">
-        Wenn ein Bild hochgeladen wird, sollte klar sein, wofür es verwendet werden darf.
-        Eltern oder Erziehungsberechtigte können eine Einwilligung jederzeit widerrufen und die
-        Löschung des Bildes sowie der dazugehörigen Angaben verlangen. Außerdem können sie Auskunft
-        über gespeicherte Daten verlangen und unrichtige Angaben korrigieren lassen.
+      <div class="eyebrow" data-i18n="parentsEyebrow">Für Eltern und Erziehungsberechtigte</div>
+      <h2 data-i18n="parentsTitle">Transparenz und Kontrolle</h2>
+      <p data-i18n="parentsText">
+        Wenn ein Bild eingesendet wird, sollte klar sein, wofür es verwendet werden darf. Eltern oder
+        Erziehungsberechtigte können eine Einwilligung jederzeit widerrufen und die Löschung des Bildes
+        sowie der dazugehörigen Angaben verlangen. Auch Auskunft und Korrektur sollten möglich sein.
+        Sie können uns dazu jederzeit unter <strong><a href="mailto:fam@pigipegs.com">fam@pigipegs.com</a></strong> oder über die im Impressum
+        genannten Kontaktdaten erreichen.
+      </p>
+    </section>
+
+    <section class="tech">
+      <div class="eyebrow" data-i18n="techEyebrow">Technischer Betrieb</div>
+      <h2 data-i18n="techTitle">Hosting, Sicherheit und Datenschutz</h2>
+      <p data-i18n="techText">
+        Diese Website wird technisch über GitHub Pages bereitgestellt und über Cloudflare ausgeliefert
+        und geschützt. Dabei können technisch notwendige Verbindungs- und Logdaten verarbeitet werden,
+        zum Beispiel IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seiten sowie weitere
+        Informationen, die für den sicheren Betrieb, die Stabilität und die Sicherheit der Website
+        erforderlich sind.
       </p>
     </section>
 
     <div class="footer-note">
-      <span id="footerText">Pigipegs · Bild hochladen</span>
+      <span data-i18n="footerText">Pigipegs · Bild teilen</span>
       <span>·</span>
-      <a href="/impressum/" id="footerImprint">Impressum</a>
+      <a href="/impressum/" data-i18n="footerImprint">Impressum</a>
       <span>·</span>
-      <a href="/datenschutz/" id="footerPrivacy">Datenschutz</a>
+      <a href="/datenschutz/" data-i18n="footerPrivacy">Datenschutz</a>
     </div>
   </div>
 
   <script>
     const UI = {
       de: {
-        title: "Pigipegs – Bild hochladen",
-        brandEyebrow: "Pigipegs Hörwelt",
-        mainTitle: "Bild hochladen – so geht’s",
-        mainSub: "Hier erfährst du, wie ein selbst gemaltes Pigipegs-Bild hochgeladen werden kann und was dabei zum Schutz von Kindern und Familien wichtig ist.",
+        htmlLang: "de",
+        title: "Pigipegs – Bild teilen",
+        brandEyebrow: "Pigipegs Bildbereich",
+        mainTitle: "Teile dein Bild",
+        mainSub: "Hier kann ein selbst gemaltes Pigipegs-Bild aus Buch 1 eingesendet werden. Bitte nutze den Bildbereich nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person.",
+        languageEyebrow: "Sprache direkt wechseln",
         navStart: "Start",
         navBooks: "Bücher",
-        navAudio: "Hörwelt",
-        langEyebrow: "Sprache auswählen",
-        speakEyebrow: "Vorlesen",
-        speakBtn: "🔊 Vorlesen",
-        stopBtn: "⏹ Stop",
-        speakStatus: "Die Seite kann in der gewählten Sprache vorgelesen werden.",
-        heroEyebrow: "Sicher und verständlich",
-        heroTitle: "So kommt ein Bild zu uns",
-        heroText: "In Buch 1 gibt es eine Seite, auf der Kinder ihre eigenen Pigipegs malen können. Genau dieses selbst gemalte Bild kann hier später hochgeladen werden. Vor einer möglichen Veröffentlichung wird alles geprüft. Es findet keine automatische öffentliche Anzeige statt.",
-        uploadBtn: "Bild hochladen",
-        bookBtn: "Zu Buch 1",
-        heroNotice: "Es darf nur das eigene selbst gemalte Pigipegs-Bild hochgeladen werden. Bitte keine fremden Bilder, keine Fotos anderer Personen und keine privaten Daten direkt in das Bild schreiben.",
-        stepsEyebrow: "Schritt für Schritt",
-        stepsTitle: "So funktioniert der Upload",
-        step1Title: "Bild malen",
-        step1Text: "Das Kind malt sein eigenes Pigipegs-Bild auf der vorgesehenen Seite in Buch 1 aus oder gestaltet es selbst.",
-        step2Title: "Foto machen",
-        step2Text: "Ein Elternteil oder eine erziehungsberechtigte Person fotografiert das Bild oder wählt eine Bilddatei aus.",
-        step3Title: "Bild hochladen",
-        step3Text: "Das Bild wird über die Upload-Seite an uns gesendet. Dabei sollten nur die wirklich nötigen Angaben gemacht werden.",
-        step4Title: "Prüfung vor Anzeige",
-        step4Text: "Das Bild wird zuerst geprüft. Eine Veröffentlichung erfolgt nicht automatisch und nur im freigegebenen Rahmen.",
+        navHow: "Bild hochladen",
+
+        heroEyebrow: "Nur eigene Bilder",
+        heroTitle: "So kommt dein Pigipegs-Bild zu uns",
+        heroText: "In Buch 1 gibt es eine Seite, auf der Kinder ihre eigenen Pigipegs malen können. Genau dieses selbst gemalte Bild kann hier eingesendet werden. Vor einer möglichen Veröffentlichung wird jedes Bild geprüft. Es erfolgt keine automatische öffentliche Anzeige.",
+        heroNotice: "Bitte sende nur das selbst gemalte Pigipegs-Bild ein. Keine Fotos von Personen, keine fremden Bilder und keine persönlichen Daten im Bild oder Dateinamen.",
+
+        readLabel: "Vorlesen",
+        readNote: "Die Seite kann in der gewählten Sprache vorgelesen werden. Das hilft besonders Kindern beim Verstehen.",
+        readStartBtn: "🔊 Vorlesen starten",
+        readPauseBtn: "⏸ Pause",
+        readResumeBtn: "▶ Fortsetzen",
+        readStopBtn: "⏹ Vorlesen stoppen",
+        readReady: "Bereit zum Vorlesen.",
+        readPlaying: "Die Seite wird gerade vorgelesen.",
+        readPaused: "Das Vorlesen ist pausiert.",
+        readStopped: "Das Vorlesen wurde gestoppt.",
+        readFinished: "Das Vorlesen ist beendet.",
+        readNotSupported: "Dieses Gerät unterstützt das Browser-Vorlesen leider nicht.",
+        readLangChanged: "Sprache gewechselt. Das Vorlesen wurde angepasst.",
+
+        uploadEyebrow: "Bild einsenden",
+        uploadTitle: "Per E-Mail senden",
+        uploadText: "Zurzeit kann das Bild per E-Mail eingesendet werden. Bitte sende nur das selbst gemalte Pigipegs-Bild aus Buch 1 ein und nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person.",
+        mailLabel: "E-Mail-Adresse",
+        mailNote: "Die E-Mail-Adresse wird erst nach Bestätigung der Hinweise freigeschaltet.",
+        consentNotice: "Mit dem Einsenden des Bildes bestätigt das absendende Elternteil bzw. die erziehungsberechtigte Person, dass das eingereichte Bild vom Kind selbst gemalt oder rechtmäßig freigegeben ist, dass es keine Fotos von Personen und keine sensiblen oder unnötigen persönlichen Daten enthält und dass Pigipegs das Bild speichern, prüfen und – soweit ausdrücklich freigegeben – auf der Pigipegs-Website und gegebenenfalls in weiteren Pigipegs-Materialien veröffentlichen darf. Die Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden. Im Fall eines Widerrufs werden wir das Bild und dazugehörige Angaben löschen, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Nähere Informationen finden Sie in unserer Datenschutzerklärung.",
+        consentText: "Ich bin Elternteil bzw. erziehungsberechtigte Person, habe die Hinweise gelesen und bin damit einverstanden, dass das Bild im beschriebenen Rahmen eingesendet, geprüft, gespeichert und – soweit ausdrücklich freigegeben – verwendet werden darf.",
+        mailButton: "E-Mail öffnen",
+        howButton: "Bild hochladen – so geht’s",
+        bookButton: "Zu Buch 1",
+
         rulesEyebrow: "Wichtige Hinweise",
         rulesTitle: "Zum Schutz von Kindern und Familien",
-        rule1Title: "Nur mit Zustimmung",
-        rule1Text: "Der Upload darf nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person erfolgen.",
-        rule2Title: "Nur eigene Bilder",
-        rule2Text: "Hochgeladen werden dürfen nur selbst gemalte Pigipegs-Bilder aus dem Buch, keine fremden Inhalte.",
-        rule3Title: "Keine automatische Veröffentlichung",
-        rule3Text: "Bilder werden vor einer möglichen Anzeige geprüft. Ohne passende Freigabe werden sie nicht öffentlich gezeigt.",
-        rule4Title: "Wenig Daten, mehr Schutz",
-        rule4Text: "Bitte möglichst sparsam mit Angaben sein. Ein Klarname des Kindes sollte nur genutzt werden, wenn das ausdrücklich gewünscht und freigegeben ist.",
+        rule1Title: "a) Kein Kinder-Account, keine Pflichtangaben",
+        rule1Text: "Für das Einsenden eines Bildes ist kein eigenes Nutzerkonto des Kindes erforderlich. Bitte geben Sie nur so wenige personenbezogene Daten wie möglich an. Name oder Alter des Kindes sollten nur dann genannt werden, wenn dies ausdrücklich gewünscht ist.",
+        rule2Title: "b) Klare Zweckbindung",
+        rule2Text: "Soweit Sie der Veröffentlichung zustimmen, darf Pigipegs das Bild ausschließlich im Zusammenhang mit Pigipegs verwenden, zum Beispiel auf dieser Website, in begleitenden Materialien zum Buch und in Pigipegs-Kommunikationskanälen. Eine Weitergabe an Dritte zu anderen Zwecken erfolgt nicht.",
+        rule3Title: "c) Widerruf, Löschung, Auskunft",
+        rule3Text: "Eltern und Erziehungsberechtigte können jederzeit Auskunft über gespeicherte Bilder und Angaben verlangen, deren Berichtigung verlangen oder die Einwilligung mit Wirkung für die Zukunft widerrufen. In diesen Fällen löschen wir das betroffene Bild und dazugehörige Daten, soweit keine gesetzlichen Pflichten entgegenstehen.",
+        rule4Title: "Keine automatische Veröffentlichung",
+        rule4Text: "Jedes Bild wird vor einer möglichen Anzeige geprüft. Ohne passende Freigabe wird es nicht öffentlich gezeigt. Es besteht kein Anspruch auf Veröffentlichung.",
+
         parentsEyebrow: "Für Eltern und Erziehungsberechtigte",
-        parentsTitle: "Transparenz und Rechte",
-        parentsText: "Wenn ein Bild hochgeladen wird, sollte klar sein, wofür es verwendet werden darf. Eltern oder Erziehungsberechtigte können eine Einwilligung jederzeit widerrufen und die Löschung des Bildes sowie der dazugehörigen Angaben verlangen. Außerdem können sie Auskunft über gespeicherte Daten verlangen und unrichtige Angaben korrigieren lassen.",
-        footerText: "Pigipegs · Bild hochladen",
+        parentsTitle: "Transparenz und Kontrolle",
+        parentsText: 'Wenn ein Bild eingesendet wird, sollte klar sein, wofür es verwendet werden darf. Eltern oder Erziehungsberechtigte können eine Einwilligung jederzeit widerrufen und die Löschung des Bildes sowie der dazugehörigen Angaben verlangen. Auch Auskunft und Korrektur sollten möglich sein. Sie können uns dazu jederzeit unter <strong><a href="mailto:fam@pigipegs.com">fam@pigipegs.com</a></strong> oder über die im Impressum genannten Kontaktdaten erreichen.',
+
+        techEyebrow: "Technischer Betrieb",
+        techTitle: "Hosting, Sicherheit und Datenschutz",
+        techText: "Diese Website wird technisch über GitHub Pages bereitgestellt und über Cloudflare ausgeliefert und geschützt. Dabei können technisch notwendige Verbindungs- und Logdaten verarbeitet werden, zum Beispiel IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seiten sowie weitere Informationen, die für den sicheren Betrieb, die Stabilität und die Sicherheit der Website erforderlich sind.",
+
+        footerText: "Pigipegs · Bild teilen",
         footerImprint: "Impressum",
         footerPrivacy: "Datenschutz",
-        speechText: "Bild hochladen so geht's. Hier erfährst du, wie ein selbst gemaltes Pigipegs-Bild hochgeladen werden kann und was dabei zum Schutz von Kindern und Familien wichtig ist. So kommt ein Bild zu uns. In Buch 1 gibt es eine Seite, auf der Kinder ihre eigenen Pigipegs malen können. Genau dieses selbst gemalte Bild kann hier später hochgeladen werden. Vor einer möglichen Veröffentlichung wird alles geprüft. Es findet keine automatische öffentliche Anzeige statt. Es darf nur das eigene selbst gemalte Pigipegs-Bild hochgeladen werden. Bitte keine fremden Bilder, keine Fotos anderer Personen und keine privaten Daten direkt in das Bild schreiben. So funktioniert der Upload. Erstens: Bild malen. Das Kind malt sein eigenes Pigipegs-Bild auf der vorgesehenen Seite in Buch 1 aus oder gestaltet es selbst. Zweitens: Foto machen. Ein Elternteil oder eine erziehungsberechtigte Person fotografiert das Bild oder wählt eine Bilddatei aus. Drittens: Bild hochladen. Das Bild wird über die Upload-Seite an uns gesendet. Dabei sollten nur die wirklich nötigen Angaben gemacht werden. Viertens: Prüfung vor Anzeige. Das Bild wird zuerst geprüft. Eine Veröffentlichung erfolgt nicht automatisch und nur im freigegebenen Rahmen. Zum Schutz von Kindern und Familien. Nur mit Zustimmung. Der Upload darf nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person erfolgen. Nur eigene Bilder. Hochgeladen werden dürfen nur selbst gemalte Pigipegs-Bilder aus dem Buch, keine fremden Inhalte. Keine automatische Veröffentlichung. Bilder werden vor einer möglichen Anzeige geprüft. Ohne passende Freigabe werden sie nicht öffentlich gezeigt. Wenig Daten, mehr Schutz. Bitte möglichst sparsam mit Angaben sein. Ein Klarname des Kindes sollte nur genutzt werden, wenn das ausdrücklich gewünscht und freigegeben ist. Transparenz und Rechte. Wenn ein Bild hochgeladen wird, sollte klar sein, wofür es verwendet werden darf. Eltern oder Erziehungsberechtigte können eine Einwilligung jederzeit widerrufen und die Löschung des Bildes sowie der dazugehörigen Angaben verlangen. Außerdem können sie Auskunft über gespeicherte Daten verlangen und unrichtige Angaben korrigieren lassen."
+
+        mailSubject: "Pigipegs Bild Einsendung",
+        mailBody: `Ich bin Elternteil bzw. erziehungsberechtigte Person und stimme der Prüfung, Speicherung und – soweit ausdrücklich freigegeben – Veröffentlichung des eingesendeten Bildes im beschriebenen Rahmen zu.
+
+Angaben zum Bild:
+- Buch / Seite:
+- Optionaler Name oder Künstlername:
+- Veröffentlichung gewünscht: Ja / Nein
+
+Hinweis:
+Ich bestätige, dass das eingereichte Bild vom Kind selbst gemalt wurde oder rechtmäßig freigegeben ist und keine Fotos von Personen sowie keine sensiblen oder unnötigen persönlichen Daten enthält.
+
+Bitte Bild als Anhang beifügen.`,
+
+        readText: `Pigipegs Bildbereich.
+
+Teile dein Bild.
+
+Hier kann ein selbst gemaltes Pigipegs-Bild aus Buch 1 eingesendet werden. Bitte nutze den Bildbereich nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person.
+
+Nur eigene Bilder.
+
+So kommt dein Pigipegs-Bild zu uns.
+
+In Buch 1 gibt es eine Seite, auf der Kinder ihre eigenen Pigipegs malen können. Genau dieses selbst gemalte Bild kann hier eingesendet werden. Vor einer möglichen Veröffentlichung wird jedes Bild geprüft. Es erfolgt keine automatische öffentliche Anzeige.
+
+Bitte sende nur das selbst gemalte Pigipegs-Bild ein. Keine Fotos von Personen, keine fremden Bilder und keine persönlichen Daten im Bild oder Dateinamen.
+
+Bild einsenden.
+
+Per E-Mail senden.
+
+Zurzeit kann das Bild per E-Mail eingesendet werden. Bitte sende nur das selbst gemalte Pigipegs-Bild aus Buch 1 ein und nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person.
+
+Mit dem Einsenden des Bildes bestätigt das absendende Elternteil bzw. die erziehungsberechtigte Person, dass das eingereichte Bild vom Kind selbst gemalt oder rechtmäßig freigegeben ist, dass es keine Fotos von Personen und keine sensiblen oder unnötigen persönlichen Daten enthält und dass Pigipegs das Bild speichern, prüfen und, soweit ausdrücklich freigegeben, auf der Pigipegs-Website und gegebenenfalls in weiteren Pigipegs-Materialien veröffentlichen darf.
+
+Wichtige Hinweise.
+
+Zum Schutz von Kindern und Familien.
+
+Kein Kinder-Account, keine Pflichtangaben. Für das Einsenden eines Bildes ist kein eigenes Nutzerkonto des Kindes erforderlich. Bitte geben Sie nur so wenige personenbezogene Daten wie möglich an.
+
+Klare Zweckbindung. Soweit Sie der Veröffentlichung zustimmen, darf Pigipegs das Bild ausschließlich im Zusammenhang mit Pigipegs verwenden.
+
+Widerruf, Löschung, Auskunft. Eltern und Erziehungsberechtigte können jederzeit Auskunft verlangen, Berichtigung verlangen oder die Einwilligung mit Wirkung für die Zukunft widerrufen.
+
+Keine automatische Veröffentlichung. Jedes Bild wird vor einer möglichen Anzeige geprüft. Ohne passende Freigabe wird es nicht öffentlich gezeigt.
+
+Für Eltern und Erziehungsberechtigte.
+
+Transparenz und Kontrolle.
+
+Wenn ein Bild eingesendet wird, sollte klar sein, wofür es verwendet werden darf. Eltern oder Erziehungsberechtigte können eine Einwilligung jederzeit widerrufen und die Löschung des Bildes sowie der dazugehörigen Angaben verlangen.
+
+Technischer Betrieb.
+
+Hosting, Sicherheit und Datenschutz.
+
+Diese Website wird technisch über GitHub Pages bereitgestellt und über Cloudflare ausgeliefert und geschützt.`
       },
+
       en: {
-        title: "Pigipegs – Upload picture",
-        brandEyebrow: "Pigipegs Audio World",
-        mainTitle: "Upload picture – how it works",
-        mainSub: "Here you can learn how a self-drawn Pigipegs picture can be uploaded and what is important to protect children and families.",
+        htmlLang: "en",
+        title: "Pigipegs – Share your picture",
+        brandEyebrow: "Pigipegs Picture Area",
+        mainTitle: "Share your picture",
+        mainSub: "A hand-drawn Pigipegs picture from Book 1 can be submitted here. Please use this picture area only with the consent of a parent or legal guardian.",
+        languageEyebrow: "Switch language directly",
         navStart: "Home",
         navBooks: "Books",
-        navAudio: "Audio World",
-        langEyebrow: "Choose language",
-        speakEyebrow: "Read aloud",
-        speakBtn: "🔊 Read aloud",
-        stopBtn: "⏹ Stop",
-        speakStatus: "This page can be read aloud in the selected language.",
-        heroEyebrow: "Safe and easy to understand",
-        heroTitle: "How a picture reaches us",
-        heroText: "In Book 1 there is a page where children can draw their own Pigipegs. Exactly this self-drawn picture can later be uploaded here. Everything is checked before any possible publication. There is no automatic public display.",
-        uploadBtn: "Upload picture",
-        bookBtn: "To Book 1",
-        heroNotice: "Only your own self-drawn Pigipegs picture may be uploaded. Please do not upload чужие pictures, photos of other people, or private data written directly into the picture.",
-        stepsEyebrow: "Step by step",
-        stepsTitle: "How the upload works",
-        step1Title: "Draw the picture",
-        step1Text: "The child colors or designs their own Pigipegs picture on the intended page in Book 1.",
-        step2Title: "Take a photo",
-        step2Text: "A parent or legal guardian takes a photo of the picture or chooses an image file.",
-        step3Title: "Upload picture",
-        step3Text: "The picture is sent to us through the upload page. Only truly necessary information should be provided.",
-        step4Title: "Check before display",
-        step4Text: "The picture is checked first. Publication is not automatic and only happens within the approved scope.",
+        navHow: "Upload picture",
+
+        heroEyebrow: "Only original pictures",
+        heroTitle: "How your Pigipegs picture reaches us",
+        heroText: "Book 1 includes a page where children can draw their own Pigipegs pictures. That exact hand-drawn picture can be submitted here. Every picture is reviewed before any possible publication. There is no automatic public display.",
+        heroNotice: "Please send only the hand-drawn Pigipegs picture. No photos of people, no third-party images, and no personal data in the image or file name.",
+
+        readLabel: "Read aloud",
+        readNote: "The page can be read aloud in the selected language. This is especially helpful for children.",
+        readStartBtn: "🔊 Start reading",
+        readPauseBtn: "⏸ Pause",
+        readResumeBtn: "▶ Resume",
+        readStopBtn: "⏹ Stop reading",
+        readReady: "Ready to read aloud.",
+        readPlaying: "The page is being read aloud.",
+        readPaused: "Reading is paused.",
+        readStopped: "Reading has been stopped.",
+        readFinished: "Reading has finished.",
+        readNotSupported: "This device does not support browser text-to-speech.",
+        readLangChanged: "Language changed. Reading has been adjusted.",
+
+        uploadEyebrow: "Submit picture",
+        uploadTitle: "Send by email",
+        uploadText: "At the moment, the picture can be submitted by email. Please send only the hand-drawn Pigipegs picture from Book 1 and only with the consent of a parent or legal guardian.",
+        mailLabel: "Email address",
+        mailNote: "The email address will only be activated after the information has been confirmed.",
+        consentNotice: "By sending the picture, the parent or legal guardian confirms that the submitted picture was drawn by the child or is otherwise lawfully approved, that it does not contain photos of people and no sensitive or unnecessary personal data, and that Pigipegs may store, review and – where expressly approved – publish the picture on the Pigipegs website and, if applicable, in other Pigipegs materials. Consent may be withdrawn at any time with effect for the future. In the event of withdrawal, we will delete the picture and related information unless legal retention obligations prevent this. Further information can be found in our privacy policy.",
+        consentText: "I am a parent or legal guardian, I have read the information and I agree that the picture may be submitted, reviewed, stored and – where expressly approved – used within the described scope.",
+        mailButton: "Open email",
+        howButton: "Upload picture – how it works",
+        bookButton: "Go to Book 1",
+
         rulesEyebrow: "Important notes",
-        rulesTitle: "To protect children and families",
-        rule1Title: "Only with consent",
-        rule1Text: "The upload may only take place with the consent of a parent or legal guardian.",
-        rule2Title: "Only own pictures",
-        rule2Text: "Only self-drawn Pigipegs pictures from the book may be uploaded, no third-party content.",
-        rule3Title: "No automatic publication",
-        rule3Text: "Pictures are checked before any possible display. Without suitable approval they are not shown publicly.",
-        rule4Title: "Less data, more protection",
-        rule4Text: "Please share as little information as possible. A child's real name should only be used if this is explicitly desired and approved.",
+        rulesTitle: "For the protection of children and families",
+        rule1Title: "a) No child account, no mandatory personal details",
+        rule1Text: "No separate child user account is required to submit a picture. Please provide as little personal data as possible. The child's name or age should only be mentioned if this is expressly desired.",
+        rule2Title: "b) Clear purpose limitation",
+        rule2Text: "If you consent to publication, Pigipegs may use the picture only in connection with Pigipegs, for example on this website, in materials accompanying the book, and in Pigipegs communication channels. It will not be passed on to third parties for other purposes.",
+        rule3Title: "c) Withdrawal, deletion, access",
+        rule3Text: "Parents and legal guardians may request information about stored pictures and data at any time, request correction, or withdraw consent with effect for the future. In such cases, we will delete the relevant picture and related data unless legal obligations prevent this.",
+        rule4Title: "No automatic publication",
+        rule4Text: "Every picture is reviewed before any possible display. Without the appropriate approval, it will not be shown publicly. There is no entitlement to publication.",
+
         parentsEyebrow: "For parents and legal guardians",
-        parentsTitle: "Transparency and rights",
-        parentsText: "When a picture is uploaded, it should be clear what it may be used for. Parents or legal guardians can withdraw consent at any time and request deletion of the picture and related information. They can also request information about stored data and have incorrect information corrected.",
-        footerText: "Pigipegs · Upload picture",
+        parentsTitle: "Transparency and control",
+        parentsText: 'When a picture is submitted, it should be clear what it may be used for. Parents or legal guardians may withdraw consent at any time and request deletion of the picture and related information. Access and correction should also be possible. You can contact us at any time at <strong><a href="mailto:fam@pigipegs.com">fam@pigipegs.com</a></strong> or via the contact details listed in the imprint.',
+
+        techEyebrow: "Technical operation",
+        techTitle: "Hosting, security and privacy",
+        techText: "This website is technically provided via GitHub Pages and delivered and protected through Cloudflare. In the process, technically necessary connection and log data may be processed, for example IP address, date and time of access, pages accessed, and other information required for the secure operation, stability and security of the website.",
+
+        footerText: "Pigipegs · Share your picture",
         footerImprint: "Imprint",
-        footerPrivacy: "Privacy",
-        speechText: "Upload picture, how it works. Here you can learn how a self-drawn Pigipegs picture can be uploaded and what is important to protect children and families. How a picture reaches us. In Book 1 there is a page where children can draw their own Pigipegs. Exactly this self-drawn picture can later be uploaded here. Everything is checked before any possible publication. There is no automatic public display. Only your own self-drawn Pigipegs picture may be uploaded. Please do not upload other people's pictures, photos of other people, or private data written directly into the picture. How the upload works. First: draw the picture. The child colors or designs their own Pigipegs picture on the intended page in Book 1. Second: take a photo. A parent or legal guardian takes a photo of the picture or chooses an image file. Third: upload picture. The picture is sent to us through the upload page. Only truly necessary information should be provided. Fourth: check before display. The picture is checked first. Publication is not automatic and only happens within the approved scope. To protect children and families. Only with consent. The upload may only take place with the consent of a parent or legal guardian. Only own pictures. Only self-drawn Pigipegs pictures from the book may be uploaded, no third-party content. No automatic publication. Pictures are checked before any possible display. Without suitable approval they are not shown publicly. Less data, more protection. Please share as little information as possible. A child's real name should only be used if this is explicitly desired and approved. Transparency and rights. When a picture is uploaded, it should be clear what it may be used for. Parents or legal guardians can withdraw consent at any time and request deletion of the picture and related information. They can also request information about stored data and have incorrect information corrected."
+        footerPrivacy: "Privacy policy",
+
+        mailSubject: "Pigipegs picture submission",
+        mailBody: `I am a parent or legal guardian and I consent to the review, storage and – where expressly approved – publication of the submitted picture within the described scope.
+
+Picture details:
+- Book / page:
+- Optional name or artist name:
+- Publication desired: Yes / No
+
+Note:
+I confirm that the submitted picture was drawn by the child or is otherwise lawfully approved and does not contain photos of people or sensitive or unnecessary personal data.
+
+Please attach the picture to the email.`,
+
+        readText: `Pigipegs picture area.
+
+Share your picture.
+
+A hand-drawn Pigipegs picture from Book 1 can be submitted here. Please use this picture area only with the consent of a parent or legal guardian.
+
+Only original pictures.
+
+How your Pigipegs picture reaches us.
+
+Book 1 includes a page where children can draw their own Pigipegs pictures. That exact hand-drawn picture can be submitted here. Every picture is reviewed before any possible publication. There is no automatic public display.
+
+Please send only the hand-drawn Pigipegs picture. No photos of people, no third-party images, and no personal data in the image or file name.
+
+Submit picture.
+
+Send by email.
+
+At the moment, the picture can be submitted by email. Please send only the hand-drawn Pigipegs picture from Book 1 and only with the consent of a parent or legal guardian.
+
+By sending the picture, the parent or legal guardian confirms that the submitted picture was drawn by the child or is otherwise lawfully approved, that it does not contain photos of people and no sensitive or unnecessary personal data, and that Pigipegs may store, review and, where expressly approved, publish the picture on the Pigipegs website and, if applicable, in other Pigipegs materials.
+
+Important notes.
+
+For the protection of children and families.
+
+No child account, no mandatory personal details. No separate child user account is required to submit a picture. Please provide as little personal data as possible.
+
+Clear purpose limitation. If you consent to publication, Pigipegs may use the picture only in connection with Pigipegs.
+
+Withdrawal, deletion, access. Parents and legal guardians may request information, correction or future withdrawal of consent at any time.
+
+No automatic publication. Every picture is reviewed before any possible display. Without the appropriate approval, it will not be shown publicly.
+
+For parents and legal guardians.
+
+Transparency and control.
+
+When a picture is submitted, it should be clear what it may be used for. Parents or legal guardians may withdraw consent at any time and request deletion of the picture and related information.
+
+Technical operation.
+
+Hosting, security and privacy.
+
+This website is technically provided via GitHub Pages and delivered and protected through Cloudflare.`
       },
+
       es: {
-        title: "Pigipegs – Subir dibujo",
-        brandEyebrow: "Mundo de audio Pigipegs",
-        mainTitle: "Subir dibujo – así funciona",
-        mainSub: "Aquí puedes ver cómo se puede subir un dibujo de Pigipegs hecho por el propio niño y qué es importante para proteger a los niños y a las familias.",
+        htmlLang: "es",
+        title: "Pigipegs – Compartir tu imagen",
+        brandEyebrow: "Área de imágenes Pigipegs",
+        mainTitle: "Comparte tu imagen",
+        mainSub: "Aquí se puede enviar una imagen Pigipegs dibujada a mano del Libro 1. Utiliza esta sección solo con el consentimiento de un padre, madre o tutor legal.",
+        languageEyebrow: "Cambiar idioma directamente",
         navStart: "Inicio",
         navBooks: "Libros",
-        navAudio: "Mundo de audio",
-        langEyebrow: "Elegir idioma",
-        speakEyebrow: "Leer en voz alta",
-        speakBtn: "🔊 Leer",
-        stopBtn: "⏹ Detener",
-        speakStatus: "Esta página puede leerse en voz alta en el idioma seleccionado.",
-        heroEyebrow: "Seguro y fácil de entender",
-        heroTitle: "Así llega una imagen hasta nosotros",
-        heroText: "En el Libro 1 hay una página en la que los niños pueden dibujar sus propios Pigipegs. Exactamente ese dibujo hecho por ellos mismos puede subirse aquí más adelante. Todo se revisa antes de una posible publicación. No hay publicación pública automática.",
-        uploadBtn: "Subir dibujo",
-        bookBtn: "Ir al Libro 1",
-        heroNotice: "Solo se puede subir el dibujo de Pigipegs hecho por el propio niño. Por favor, no subas imágenes ajenas, fotos de otras personas ni datos privados escritos directamente en la imagen.",
-        stepsEyebrow: "Paso a paso",
-        stepsTitle: "Así funciona la subida",
-        step1Title: "Hacer el dibujo",
-        step1Text: "El niño colorea o diseña su propio dibujo de Pigipegs en la página prevista del Libro 1.",
-        step2Title: "Hacer una foto",
-        step2Text: "Un padre, madre o tutor legal hace una foto del dibujo o elige un archivo de imagen.",
-        step3Title: "Subir dibujo",
-        step3Text: "La imagen se envía a través de la página de subida. Solo deben darse los datos realmente necesarios.",
-        step4Title: "Revisión antes de mostrar",
-        step4Text: "La imagen se revisa primero. La publicación no es automática y solo se realiza dentro del marco autorizado.",
+        navHow: "Subir imagen",
+
+        heroEyebrow: "Solo imágenes propias",
+        heroTitle: "Así nos llega tu imagen Pigipegs",
+        heroText: "En el Libro 1 hay una página donde los niños pueden dibujar sus propias imágenes Pigipegs. Esa misma imagen dibujada a mano se puede enviar aquí. Cada imagen se revisa antes de cualquier posible publicación. No hay ninguna publicación pública automática.",
+        heroNotice: "Envía solo la imagen Pigipegs dibujada a mano. No fotos de personas, no imágenes ajenas y no datos personales en la imagen o en el nombre del archivo.",
+
+        readLabel: "Lectura en voz alta",
+        readNote: "La página se puede leer en voz alta en el idioma seleccionado. Esto ayuda especialmente a los niños.",
+        readStartBtn: "🔊 Iniciar lectura",
+        readPauseBtn: "⏸ Pausa",
+        readResumeBtn: "▶ Continuar",
+        readStopBtn: "⏹ Detener lectura",
+        readReady: "Listo para leer en voz alta.",
+        readPlaying: "La página se está leyendo en voz alta.",
+        readPaused: "La lectura está en pausa.",
+        readStopped: "La lectura se ha detenido.",
+        readFinished: "La lectura ha terminado.",
+        readNotSupported: "Este dispositivo no admite lectura del navegador.",
+        readLangChanged: "Idioma cambiado. La lectura se ha ajustado.",
+
+        uploadEyebrow: "Enviar imagen",
+        uploadTitle: "Enviar por correo electrónico",
+        uploadText: "Actualmente, la imagen puede enviarse por correo electrónico. Envía solo la imagen Pigipegs dibujada a mano del Libro 1 y solo con el consentimiento de un padre, madre o tutor legal.",
+        mailLabel: "Dirección de correo electrónico",
+        mailNote: "La dirección de correo electrónico solo se activará después de confirmar la información.",
+        consentNotice: "Al enviar la imagen, el padre, madre o tutor legal que la envía confirma que la imagen presentada fue dibujada por el niño o que cuenta con la autorización legal correspondiente, que no contiene fotos de personas ni datos personales sensibles o innecesarios, y que Pigipegs puede almacenar, revisar y – cuando se autorice expresamente – publicar la imagen en el sitio web de Pigipegs y, en su caso, en otros materiales de Pigipegs. El consentimiento puede revocarse en cualquier momento con efecto para el futuro. En caso de revocación, eliminaremos la imagen y la información relacionada, salvo que existan obligaciones legales de conservación. Puedes encontrar más información en nuestra política de privacidad.",
+        consentText: "Soy padre, madre o tutor legal, he leído la información y acepto que la imagen pueda enviarse, revisarse, almacenarse y – cuando se autorice expresamente – utilizarse dentro del marco descrito.",
+        mailButton: "Abrir correo",
+        howButton: "Subir imagen – así funciona",
+        bookButton: "Ir al Libro 1",
+
         rulesEyebrow: "Avisos importantes",
-        rulesTitle: "Para proteger a niños y familias",
-        rule1Title: "Solo con consentimiento",
-        rule1Text: "La subida solo puede hacerse con el consentimiento de un padre, madre o tutor legal.",
-        rule2Title: "Solo dibujos propios",
-        rule2Text: "Solo pueden subirse dibujos de Pigipegs hechos por el propio niño a partir del libro, no contenidos ajenos.",
-        rule3Title: "Sin publicación automática",
-        rule3Text: "Las imágenes se revisan antes de una posible publicación. Sin la autorización adecuada no se muestran públicamente.",
-        rule4Title: "Menos datos, más protección",
-        rule4Text: "Por favor, comparte la menor cantidad de datos posible. El nombre real del niño solo debe usarse si se desea y se autoriza expresamente.",
-        parentsEyebrow: "Para padres y tutores legales",
-        parentsTitle: "Transparencia y derechos",
-        parentsText: "Cuando se sube una imagen, debe quedar claro para qué puede utilizarse. Los padres o tutores legales pueden retirar su consentimiento en cualquier momento y solicitar la eliminación de la imagen y de la información relacionada. También pueden pedir información sobre los datos almacenados y corregir datos incorrectos.",
-        footerText: "Pigipegs · Subir dibujo",
+        rulesTitle: "Para la protección de niños y familias",
+        rule1Title: "a) Sin cuenta infantil, sin datos obligatorios",
+        rule1Text: "No es necesaria una cuenta propia del niño para enviar una imagen. Facilita la menor cantidad posible de datos personales. El nombre o la edad del niño solo deberían indicarse si se desea expresamente.",
+        rule2Title: "b) Finalidad claramente definida",
+        rule2Text: "Si autorizas la publicación, Pigipegs podrá usar la imagen exclusivamente en relación con Pigipegs, por ejemplo en este sitio web, en materiales relacionados con el libro y en canales de comunicación de Pigipegs. No se compartirá con terceros para otros fines.",
+        rule3Title: "c) Revocación, eliminación, acceso",
+        rule3Text: "Los padres, madres o tutores legales pueden solicitar en cualquier momento información sobre las imágenes y datos almacenados, solicitar correcciones o revocar el consentimiento con efecto para el futuro. En esos casos eliminaremos la imagen afectada y los datos relacionados, salvo que existan obligaciones legales que lo impidan.",
+        rule4Title: "Sin publicación automática",
+        rule4Text: "Cada imagen se revisa antes de cualquier posible publicación. Sin la autorización adecuada, no se mostrará públicamente. No existe derecho a la publicación.",
+
+        parentsEyebrow: "Para padres, madres y tutores legales",
+        parentsTitle: "Transparencia y control",
+        parentsText: 'Cuando se envía una imagen, debe quedar claro para qué puede utilizarse. Los padres, madres o tutores legales pueden revocar su consentimiento en cualquier momento y solicitar la eliminación de la imagen y de los datos relacionados. También debe ser posible solicitar acceso y corrección. Puedes contactarnos en cualquier momento en <strong><a href="mailto:fam@pigipegs.com">fam@pigipegs.com</a></strong> o mediante los datos de contacto indicados en el aviso legal.',
+
+        techEyebrow: "Funcionamiento técnico",
+        techTitle: "Alojamiento, seguridad y privacidad",
+        techText: "Este sitio web se proporciona técnicamente a través de GitHub Pages y se entrega y protege mediante Cloudflare. En este proceso pueden tratarse datos de conexión y de registro técnicamente necesarios, por ejemplo la dirección IP, la fecha y hora del acceso, las páginas consultadas y otra información necesaria para el funcionamiento seguro, la estabilidad y la seguridad del sitio web.",
+
+        footerText: "Pigipegs · Compartir tu imagen",
         footerImprint: "Aviso legal",
-        footerPrivacy: "Privacidad",
-        speechText: "Subir dibujo, así funciona. Aquí puedes ver cómo se puede subir un dibujo de Pigipegs hecho por el propio niño y qué es importante para proteger a los niños y a las familias. Así llega una imagen hasta nosotros. En el Libro 1 hay una página en la que los niños pueden dibujar sus propios Pigipegs. Exactamente ese dibujo hecho por ellos mismos puede subirse aquí más adelante. Todo se revisa antes de una posible publicación. No hay publicación pública automática. Solo se puede subir el dibujo de Pigipegs hecho por el propio niño. Por favor, no subas imágenes ajenas, fotos de otras personas ni datos privados escritos directamente en la imagen. Así funciona la subida. Primero: hacer el dibujo. El niño colorea o diseña su propio dibujo de Pigipegs en la página prevista del Libro 1. Segundo: hacer una foto. Un padre, madre o tutor legal hace una foto del dibujo o elige un archivo de imagen. Tercero: subir dibujo. La imagen se envía a través de la página de subida. Solo deben darse los datos realmente necesarios. Cuarto: revisión antes de mostrar. La imagen se revisa primero. La publicación no es automática y solo se realiza dentro del marco autorizado. Para proteger a niños y familias. Solo con consentimiento. La subida solo puede hacerse con el consentimiento de un padre, madre o tutor legal. Solo dibujos propios. Solo pueden subirse dibujos de Pigipegs hechos por el propio niño a partir del libro, no contenidos ajenos. Sin publicación automática. Las imágenes se revisan antes de una posible publicación. Sin la autorización adecuada no se muestran públicamente. Menos datos, más protección. Por favor, comparte la menor cantidad de datos posible. El nombre real del niño solo debe usarse si se desea y se autoriza expresamente. Transparencia y derechos. Cuando se sube una imagen, debe quedar claro para qué puede utilizarse. Los padres o tutores legales pueden retirar su consentimiento en cualquier momento y solicitar la eliminación de la imagen y de la información relacionada. También pueden pedir información sobre los datos almacenados y corregir datos incorrectos."
+        footerPrivacy: "Protección de datos",
+
+        mailSubject: "Envío de imagen Pigipegs",
+        mailBody: `Soy padre, madre o tutor legal y doy mi consentimiento para la revisión, el almacenamiento y – cuando se autorice expresamente – la publicación de la imagen enviada dentro del marco descrito.
+
+Datos de la imagen:
+- Libro / página:
+- Nombre opcional o nombre artístico:
+- ¿Se desea publicación?: Sí / No
+
+Nota:
+Confirmo que la imagen enviada fue dibujada por el niño o que cuenta con la autorización legal correspondiente y que no contiene fotos de personas ni datos personales sensibles o innecesarios.
+
+Adjunta la imagen al correo electrónico.`,
+
+        readText: `Área de imágenes Pigipegs.
+
+Comparte tu imagen.
+
+Aquí se puede enviar una imagen Pigipegs dibujada a mano del Libro 1. Utiliza esta sección solo con el consentimiento de un padre, madre o tutor legal.
+
+Solo imágenes propias.
+
+Así nos llega tu imagen Pigipegs.
+
+En el Libro 1 hay una página donde los niños pueden dibujar sus propias imágenes Pigipegs. Esa misma imagen dibujada a mano se puede enviar aquí. Cada imagen se revisa antes de cualquier posible publicación. No hay ninguna publicación pública automática.
+
+Envía solo la imagen Pigipegs dibujada a mano. No fotos de personas, no imágenes ajenas y no datos personales en la imagen o en el nombre del archivo.
+
+Enviar imagen.
+
+Enviar por correo electrónico.
+
+Actualmente, la imagen puede enviarse por correo electrónico. Envía solo la imagen Pigipegs dibujada a mano del Libro 1 y solo con el consentimiento de un padre, madre o tutor legal.
+
+Al enviar la imagen, el padre, madre o tutor legal confirma que la imagen fue dibujada por el niño o cuenta con autorización legal, que no contiene fotos de personas ni datos personales sensibles o innecesarios, y que Pigipegs puede almacenarla, revisarla y, cuando se autorice expresamente, publicarla.
+
+Avisos importantes.
+
+Para la protección de niños y familias.
+
+Sin cuenta infantil, sin datos obligatorios. No es necesaria una cuenta propia del niño para enviar una imagen.
+
+Finalidad claramente definida. Pigipegs solo podrá usar la imagen en relación con Pigipegs.
+
+Revocación, eliminación, acceso. Los padres, madres o tutores legales pueden solicitar información, correcciones o revocar el consentimiento para el futuro.
+
+Sin publicación automática. Cada imagen se revisa antes de cualquier posible publicación.
+
+Para padres, madres y tutores legales.
+
+Transparencia y control.
+
+Cuando se envía una imagen, debe quedar claro para qué puede utilizarse. Los padres, madres o tutores legales pueden revocar su consentimiento en cualquier momento y solicitar la eliminación de la imagen y de los datos relacionados.
+
+Funcionamiento técnico.
+
+Alojamiento, seguridad y privacidad.
+
+Este sitio web se proporciona técnicamente a través de GitHub Pages y se entrega y protege mediante Cloudflare.`
       },
+
       fr: {
-        title: "Pigipegs – Téléverser une image",
-        brandEyebrow: "Univers audio Pigipegs",
-        mainTitle: "Téléverser une image – voici comment faire",
-        mainSub: "Ici, tu peux découvrir comment une image Pigipegs dessinée par l'enfant lui-même peut être téléversée et ce qui est important pour protéger les enfants et les familles.",
+        htmlLang: "fr",
+        title: "Pigipegs – Partager ton image",
+        brandEyebrow: "Espace image Pigipegs",
+        mainTitle: "Partage ton image",
+        mainSub: "Une image Pigipegs dessinée à la main issue du Livre 1 peut être envoyée ici. Merci d’utiliser cet espace uniquement avec l’accord d’un parent ou représentant légal.",
+        languageEyebrow: "Changer directement de langue",
         navStart: "Accueil",
         navBooks: "Livres",
-        navAudio: "Univers audio",
-        langEyebrow: "Choisir la langue",
-        speakEyebrow: "Lecture",
-        speakBtn: "🔊 Lire",
-        stopBtn: "⏹ Arrêter",
-        speakStatus: "Cette page peut être lue à voix haute dans la langue choisie.",
-        heroEyebrow: "Sûr et facile à comprendre",
-        heroTitle: "Voici comment une image nous parvient",
-        heroText: "Dans le Livre 1, il y a une page où les enfants peuvent dessiner leurs propres Pigipegs. C'est précisément cette image dessinée par eux-mêmes qui pourra être téléversée ici plus tard. Tout est vérifié avant une éventuelle publication. Il n'y a pas d'affichage public automatique.",
-        uploadBtn: "Téléverser une image",
-        bookBtn: "Vers le Livre 1",
-        heroNotice: "Seule l'image Pigipegs dessinée par l'enfant lui-même peut être téléversée. Merci de ne pas envoyer d'images d'autres personnes, de photos d'autres personnes ou de données privées écrites directement sur l'image.",
-        stepsEyebrow: "Étape par étape",
-        stepsTitle: "Comment fonctionne le téléversement",
-        step1Title: "Dessiner l'image",
-        step1Text: "L'enfant colorie ou crée sa propre image Pigipegs sur la page prévue dans le Livre 1.",
-        step2Title: "Prendre une photo",
-        step2Text: "Un parent ou une personne responsable prend une photo de l'image ou choisit un fichier image.",
-        step3Title: "Téléverser l'image",
-        step3Text: "L'image est envoyée via la page de téléversement. Seules les informations vraiment nécessaires doivent être fournies.",
-        step4Title: "Vérification avant affichage",
-        step4Text: "L'image est d'abord vérifiée. La publication n'est pas automatique et n'a lieu que dans le cadre autorisé.",
+        navHow: "Téléverser une image",
+
+        heroEyebrow: "Seulement des images personnelles",
+        heroTitle: "Voici comment ton image Pigipegs nous parvient",
+        heroText: "Dans le Livre 1, il y a une page sur laquelle les enfants peuvent dessiner leurs propres images Pigipegs. C’est exactement cette image dessinée à la main qui peut être envoyée ici. Chaque image est vérifiée avant toute éventuelle publication. Il n’y a pas d’affichage public automatique.",
+        heroNotice: "Merci d’envoyer uniquement l’image Pigipegs dessinée à la main. Pas de photos de personnes, pas d’images de tiers et pas de données personnelles dans l’image ou dans le nom du fichier.",
+
+        readLabel: "Lecture à voix haute",
+        readNote: "La page peut être lue à voix haute dans la langue choisie. Cela aide particulièrement les enfants.",
+        readStartBtn: "🔊 Démarrer la lecture",
+        readPauseBtn: "⏸ Pause",
+        readResumeBtn: "▶ Reprendre",
+        readStopBtn: "⏹ Arrêter la lecture",
+        readReady: "Prêt pour la lecture.",
+        readPlaying: "La page est en cours de lecture.",
+        readPaused: "La lecture est en pause.",
+        readStopped: "La lecture a été arrêtée.",
+        readFinished: "La lecture est terminée.",
+        readNotSupported: "Cet appareil ne prend pas en charge la lecture du navigateur.",
+        readLangChanged: "Langue changée. La lecture a été ajustée.",
+
+        uploadEyebrow: "Envoyer l’image",
+        uploadTitle: "Envoyer par e-mail",
+        uploadText: "Pour le moment, l’image peut être envoyée par e-mail. Merci d’envoyer uniquement l’image Pigipegs dessinée à la main du Livre 1 et seulement avec l’accord d’un parent ou représentant légal.",
+        mailLabel: "Adresse e-mail",
+        mailNote: "L’adresse e-mail ne sera activée qu’après confirmation des informations.",
+        consentNotice: "En envoyant l’image, le parent ou représentant légal qui l’envoie confirme que l’image soumise a été dessinée par l’enfant ou qu’elle est autrement dûment autorisée, qu’elle ne contient pas de photos de personnes ni de données personnelles sensibles ou inutiles, et que Pigipegs peut stocker, vérifier et – lorsque cela est expressément autorisé – publier l’image sur le site web de Pigipegs et, le cas échéant, dans d’autres supports Pigipegs. Le consentement peut être retiré à tout moment pour l’avenir. En cas de retrait, nous supprimerons l’image et les informations associées, sauf si des obligations légales de conservation s’y opposent. Vous trouverez plus d’informations dans notre politique de confidentialité.",
+        consentText: "Je suis un parent ou représentant légal, j’ai lu les informations et j’accepte que l’image puisse être envoyée, vérifiée, stockée et – lorsque cela est expressément autorisé – utilisée dans le cadre décrit.",
+        mailButton: "Ouvrir l’e-mail",
+        howButton: "Téléverser une image – comment faire",
+        bookButton: "Aller au Livre 1",
+
         rulesEyebrow: "Informations importantes",
-        rulesTitle: "Pour protéger les enfants et les familles",
-        rule1Title: "Uniquement avec accord",
-        rule1Text: "Le téléversement ne peut se faire qu'avec l'accord d'un parent ou d'une personne responsable.",
-        rule2Title: "Uniquement ses propres images",
-        rule2Text: "Seules les images Pigipegs dessinées par l'enfant à partir du livre peuvent être téléversées, pas de contenus venant d'autres sources.",
-        rule3Title: "Aucune publication automatique",
-        rule3Text: "Les images sont vérifiées avant tout affichage éventuel. Sans autorisation adaptée, elles ne sont pas montrées publiquement.",
-        rule4Title: "Moins de données, plus de protection",
-        rule4Text: "Merci de communiquer le moins d'informations possible. Le vrai nom de l'enfant ne devrait être utilisé que si cela est expressément souhaité et autorisé.",
-        parentsEyebrow: "Pour les parents et responsables légaux",
-        parentsTitle: "Transparence et droits",
-        parentsText: "Lorsqu'une image est téléversée, il doit être clair à quoi elle peut servir. Les parents ou responsables légaux peuvent retirer leur consentement à tout moment et demander la suppression de l'image ainsi que des informations associées. Ils peuvent aussi demander des informations sur les données enregistrées et faire corriger des données inexactes.",
-        footerText: "Pigipegs · Téléverser une image",
+        rulesTitle: "Pour la protection des enfants et des familles",
+        rule1Title: "a) Pas de compte enfant, pas de données obligatoires",
+        rule1Text: "L’envoi d’une image ne nécessite pas de compte utilisateur propre à l’enfant. Merci de fournir le moins de données personnelles possible. Le nom ou l’âge de l’enfant ne devraient être indiqués que si cela est expressément souhaité.",
+        rule2Title: "b) Finalité clairement définie",
+        rule2Text: "Si vous acceptez la publication, Pigipegs ne pourra utiliser l’image qu’en lien avec Pigipegs, par exemple sur ce site web, dans des supports accompagnant le livre et dans les canaux de communication Pigipegs. Elle ne sera pas transmise à des tiers à d’autres fins.",
+        rule3Title: "c) Retrait, suppression, accès",
+        rule3Text: "Les parents et représentants légaux peuvent à tout moment demander des informations sur les images et données stockées, demander une correction ou retirer leur consentement pour l’avenir. Dans ce cas, nous supprimerons l’image concernée et les données associées, sauf si des obligations légales s’y opposent.",
+        rule4Title: "Pas de publication automatique",
+        rule4Text: "Chaque image est vérifiée avant toute éventuelle publication. Sans autorisation appropriée, elle ne sera pas montrée publiquement. Il n’existe aucun droit à la publication.",
+
+        parentsEyebrow: "Pour les parents et représentants légaux",
+        parentsTitle: "Transparence et contrôle",
+        parentsText: 'Lorsqu’une image est envoyée, il doit être clair dans quel but elle peut être utilisée. Les parents ou représentants légaux peuvent retirer leur consentement à tout moment et demander la suppression de l’image et des informations associées. L’accès et la correction doivent également être possibles. Vous pouvez nous contacter à tout moment à <strong><a href="mailto:fam@pigipegs.com">fam@pigipegs.com</a></strong> ou via les coordonnées indiquées dans les mentions légales.',
+
+        techEyebrow: "Fonctionnement technique",
+        techTitle: "Hébergement, sécurité et confidentialité",
+        techText: "Ce site web est techniquement fourni via GitHub Pages et distribué et protégé par Cloudflare. Dans ce cadre, des données de connexion et de journalisation techniquement nécessaires peuvent être traitées, par exemple l’adresse IP, la date et l’heure d’accès, les pages consultées ainsi que d’autres informations nécessaires au fonctionnement sécurisé, à la stabilité et à la sécurité du site web.",
+
+        footerText: "Pigipegs · Partager ton image",
         footerImprint: "Mentions légales",
-        footerPrivacy: "Confidentialité",
-        speechText: "Téléverser une image, voici comment faire. Ici, tu peux découvrir comment une image Pigipegs dessinée par l'enfant lui-même peut être téléversée et ce qui est important pour protéger les enfants et les familles. Voici comment une image nous parvient. Dans le Livre 1, il y a une page où les enfants peuvent dessiner leurs propres Pigipegs. C'est précisément cette image dessinée par eux-mêmes qui pourra être téléversée ici plus tard. Tout est vérifié avant une éventuelle publication. Il n'y a pas d'affichage public automatique. Seule l'image Pigipegs dessinée par l'enfant lui-même peut être téléversée. Merci de ne pas envoyer d'images d'autres personnes, de photos d'autres personnes ou de données privées écrites directement sur l'image. Comment fonctionne le téléversement. Première étape : dessiner l'image. L'enfant colorie ou crée sa propre image Pigipegs sur la page prévue dans le Livre 1. Deuxième étape : prendre une photo. Un parent ou une personne responsable prend une photo de l'image ou choisit un fichier image. Troisième étape : téléverser l'image. L'image est envoyée via la page de téléversement. Seules les informations vraiment nécessaires doivent être fournies. Quatrième étape : vérification avant affichage. L'image est d'abord vérifiée. La publication n'est pas automatique et n'a lieu que dans le cadre autorisé. Pour protéger les enfants et les familles. Uniquement avec accord. Le téléversement ne peut se faire qu'avec l'accord d'un parent ou d'une personne responsable. Uniquement ses propres images. Seules les images Pigipegs dessinées par l'enfant à partir du livre peuvent être téléversées, pas de contenus venant d'autres sources. Aucune publication automatique. Les images sont vérifiées avant tout affichage éventuel. Sans autorisation adaptée, elles ne sont pas montrées publiquement. Moins de données, plus de protection. Merci de communiquer le moins d'informations possible. Le vrai nom de l'enfant ne devrait être utilisé que si cela est expressément souhaité et autorisé. Transparence et droits. Lorsqu'une image est téléversée, il doit être clair à quoi elle peut servir. Les parents ou responsables légaux peuvent retirer leur consentement à tout moment et demander la suppression de l'image ainsi que des informations associées. Ils peuvent aussi demander des informations sur les données enregistrées et faire corriger des données inexactes."
+        footerPrivacy: "Protection des données",
+
+        mailSubject: "Envoi d’image Pigipegs",
+        mailBody: `Je suis un parent ou représentant légal et je consens à la vérification, au stockage et – lorsque cela est expressément autorisé – à la publication de l’image envoyée dans le cadre décrit.
+
+Informations sur l’image :
+- Livre / page :
+- Nom facultatif ou nom d’artiste :
+- Publication souhaitée : Oui / Non
+
+Remarque :
+Je confirme que l’image envoyée a été dessinée par l’enfant ou qu’elle est autrement dûment autorisée et qu’elle ne contient pas de photos de personnes ni de données personnelles sensibles ou inutiles.
+
+Merci de joindre l’image en pièce jointe.`,
+
+        readText: `Espace image Pigipegs.
+
+Partage ton image.
+
+Une image Pigipegs dessinée à la main issue du Livre 1 peut être envoyée ici. Merci d’utiliser cet espace uniquement avec l’accord d’un parent ou représentant légal.
+
+Seulement des images personnelles.
+
+Voici comment ton image Pigipegs nous parvient.
+
+Dans le Livre 1, il y a une page sur laquelle les enfants peuvent dessiner leurs propres images Pigipegs. C’est exactement cette image dessinée à la main qui peut être envoyée ici. Chaque image est vérifiée avant toute éventuelle publication. Il n’y a pas d’affichage public automatique.
+
+Merci d’envoyer uniquement l’image Pigipegs dessinée à la main. Pas de photos de personnes, pas d’images de tiers et pas de données personnelles dans l’image ou dans le nom du fichier.
+
+Envoyer l’image.
+
+Envoyer par e-mail.
+
+Pour le moment, l’image peut être envoyée par e-mail. Merci d’envoyer uniquement l’image Pigipegs dessinée à la main du Livre 1 et seulement avec l’accord d’un parent ou représentant légal.
+
+En envoyant l’image, le parent ou représentant légal confirme que l’image a été dessinée par l’enfant ou dûment autorisée, qu’elle ne contient pas de photos de personnes ni de données personnelles sensibles ou inutiles, et que Pigipegs peut la stocker, la vérifier et, lorsque cela est expressément autorisé, la publier.
+
+Informations importantes.
+
+Pour la protection des enfants et des familles.
+
+Pas de compte enfant, pas de données obligatoires. L’envoi d’une image ne nécessite pas de compte utilisateur propre à l’enfant.
+
+Finalité clairement définie. Pigipegs ne pourra utiliser l’image qu’en lien avec Pigipegs.
+
+Retrait, suppression, accès. Les parents et représentants légaux peuvent demander des informations, des corrections ou retirer leur consentement pour l’avenir.
+
+Pas de publication automatique. Chaque image est vérifiée avant toute éventuelle publication.
+
+Pour les parents et représentants légaux.
+
+Transparence et contrôle.
+
+Lorsqu’une image est envoyée, il doit être clair dans quel but elle peut être utilisée. Les parents ou représentants légaux peuvent retirer leur consentement à tout moment et demander la suppression de l’image et des informations associées.
+
+Fonctionnement technique.
+
+Hébergement, sécurité et confidentialité.
+
+Ce site web est techniquement fourni via GitHub Pages et distribué et protégé par Cloudflare.`
       }
     };
 
-    const languageButtons = document.querySelectorAll(".lang-buttons button");
-    const speakBtn = document.getElementById("speakBtn");
-    const stopBtn = document.getElementById("stopBtn");
-    const speakStatus = document.getElementById("speakStatus");
-    let currentLang = localStorage.getItem("pigipegs_lang") || "de";
+    const consentCheck = document.getElementById("consentCheck");
+    const mailButton = document.getElementById("mailButton");
+    const languageButtons = document.querySelectorAll(".language-bar button");
 
-    function applyLanguage(lang){
-      const t = UI[lang] || UI.de;
-      document.documentElement.lang = lang;
-      document.title = t.title;
+    const readToggleBtn = document.getElementById("readToggleBtn");
+    const readStopBtn = document.getElementById("readStopBtn");
+    const readStatus = document.getElementById("readStatus");
 
-      document.getElementById("brandEyebrow").textContent = t.brandEyebrow;
-      document.getElementById("mainTitle").textContent = t.mainTitle;
-      document.getElementById("mainSub").textContent = t.mainSub;
+    let currentLang = localStorage.getItem("pigipegs_share_lang_books") || "de";
+    let activeUtterance = null;
 
-      document.getElementById("navStart").textContent = t.navStart;
-      document.getElementById("navBooks").textContent = t.navBooks;
-      document.getElementById("navAudio").textContent = t.navAudio;
-
-      document.getElementById("langEyebrow").textContent = t.langEyebrow;
-      document.getElementById("speakEyebrow").textContent = t.speakEyebrow;
-      document.getElementById("speakBtn").textContent = t.speakBtn;
-      document.getElementById("stopBtn").textContent = t.stopBtn;
-      document.getElementById("speakStatus").textContent = t.speakStatus;
-
-      document.getElementById("heroEyebrow").textContent = t.heroEyebrow;
-      document.getElementById("heroTitle").textContent = t.heroTitle;
-      document.getElementById("heroText").textContent = t.heroText;
-      document.getElementById("uploadBtn").textContent = t.uploadBtn;
-      document.getElementById("bookBtn").textContent = t.bookBtn;
-      document.getElementById("heroNotice").textContent = t.heroNotice;
-
-      document.getElementById("stepsEyebrow").textContent = t.stepsEyebrow;
-      document.getElementById("stepsTitle").textContent = t.stepsTitle;
-      document.getElementById("step1Title").textContent = t.step1Title;
-      document.getElementById("step1Text").textContent = t.step1Text;
-      document.getElementById("step2Title").textContent = t.step2Title;
-      document.getElementById("step2Text").textContent = t.step2Text;
-      document.getElementById("step3Title").textContent = t.step3Title;
-      document.getElementById("step3Text").textContent = t.step3Text;
-      document.getElementById("step4Title").textContent = t.step4Title;
-      document.getElementById("step4Text").textContent = t.step4Text;
-
-      document.getElementById("rulesEyebrow").textContent = t.rulesEyebrow;
-      document.getElementById("rulesTitle").textContent = t.rulesTitle;
-      document.getElementById("rule1Title").textContent = t.rule1Title;
-      document.getElementById("rule1Text").textContent = t.rule1Text;
-      document.getElementById("rule2Title").textContent = t.rule2Title;
-      document.getElementById("rule2Text").textContent = t.rule2Text;
-      document.getElementById("rule3Title").textContent = t.rule3Title;
-      document.getElementById("rule3Text").textContent = t.rule3Text;
-      document.getElementById("rule4Title").textContent = t.rule4Title;
-      document.getElementById("rule4Text").textContent = t.rule4Text;
-
-      document.getElementById("parentsEyebrow").textContent = t.parentsEyebrow;
-      document.getElementById("parentsTitle").textContent = t.parentsTitle;
-      document.getElementById("parentsText").textContent = t.parentsText;
-
-      document.getElementById("footerText").textContent = t.footerText;
-      document.getElementById("footerImprint").textContent = t.footerImprint;
-      document.getElementById("footerPrivacy").textContent = t.footerPrivacy;
-
-      languageButtons.forEach(button => {
-        button.classList.toggle("active", button.dataset.lang === lang);
-      });
+    function t(key) {
+      return UI[currentLang][key] || UI.de[key] || "";
     }
 
-    function getVoiceForLang(lang){
+    function getSpeechLang(lang) {
+      switch (lang) {
+        case "de": return "de-DE";
+        case "en": return "en-GB";
+        case "es": return "es-ES";
+        case "fr": return "fr-FR";
+        default: return "de-DE";
+      }
+    }
+
+    function isSpeechSupported() {
+      return "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+    }
+
+    function pickVoice(langCode) {
       const voices = window.speechSynthesis.getVoices();
       if (!voices || !voices.length) return null;
 
-      const map = {
-        de: ["de-DE", "de_AT", "de-AT", "de"],
-        en: ["en-US", "en-GB", "en"],
-        es: ["es-ES", "es-MX", "es"],
-        fr: ["fr-FR", "fr-CA", "fr"]
-      };
+      let exact = voices.find(v => v.lang === langCode);
+      if (exact) return exact;
 
-      const wanted = map[lang] || [lang];
-
-      for (const code of wanted) {
-        const found = voices.find(v => v.lang && v.lang.toLowerCase().startsWith(code.toLowerCase()));
-        if (found) return found;
-      }
-      return voices[0] || null;
+      let primary = langCode.split("-")[0];
+      return voices.find(v => v.lang && v.lang.toLowerCase().startsWith(primary.toLowerCase())) || null;
     }
 
-    function speakPage(){
-      if (!("speechSynthesis" in window)) {
-        speakStatus.textContent = "Vorlesen wird von diesem Browser leider nicht unterstützt.";
+    function buildMailtoHref() {
+      return "mailto:fam@pigipegs.com" +
+        "?subject=" + encodeURIComponent(t("mailSubject")) +
+        "&body=" + encodeURIComponent(t("mailBody"));
+    }
+
+    function updateMailButton() {
+      if (consentCheck.checked) {
+        mailButton.className = "button button-primary";
+        mailButton.setAttribute("href", buildMailtoHref());
+        mailButton.removeAttribute("aria-disabled");
+      } else {
+        mailButton.className = "button-disabled";
+        mailButton.removeAttribute("href");
+        mailButton.setAttribute("aria-disabled", "true");
+      }
+    }
+
+    function updateReadButtons() {
+      if (!isSpeechSupported()) {
+        readToggleBtn.disabled = true;
+        readStopBtn.disabled = true;
+        readToggleBtn.className = "button-disabled";
+        readStopBtn.className = "button-disabled";
+        readStatus.textContent = t("readNotSupported");
+        return;
+      }
+
+      readToggleBtn.disabled = false;
+      readStopBtn.disabled = false;
+      readToggleBtn.className = "button button-primary";
+      readStopBtn.className = "button button-secondary";
+
+      if (window.speechSynthesis.speaking) {
+        readToggleBtn.textContent = window.speechSynthesis.paused ? t("readResumeBtn") : t("readPauseBtn");
+      } else {
+        readToggleBtn.textContent = t("readStartBtn");
+      }
+    }
+
+    function stopReading(setStatusText = true) {
+      if (!isSpeechSupported()) return;
+      window.speechSynthesis.cancel();
+      activeUtterance = null;
+      if (setStatusText) {
+        readStatus.textContent = t("readStopped");
+      }
+      updateReadButtons();
+    }
+
+    function startReading() {
+      if (!isSpeechSupported()) {
+        readStatus.textContent = t("readNotSupported");
+        updateReadButtons();
         return;
       }
 
       window.speechSynthesis.cancel();
 
-      const t = UI[currentLang] || UI.de;
-      const utterance = new SpeechSynthesisUtterance(t.speechText);
-      const voice = getVoiceForLang(currentLang);
+      const utterance = new SpeechSynthesisUtterance(t("readText"));
+      utterance.lang = getSpeechLang(currentLang);
+      utterance.rate = 0.95;
+      utterance.pitch = 1.0;
+      utterance.volume = 1.0;
 
-      utterance.lang = voice?.lang || currentLang;
+      const voice = pickVoice(utterance.lang);
       if (voice) utterance.voice = voice;
 
       utterance.onstart = () => {
-        speakStatus.textContent = currentLang === "de"
-          ? "Die Seite wird gerade vorgelesen."
-          : currentLang === "en"
-          ? "The page is being read aloud."
-          : currentLang === "es"
-          ? "La página se está leyendo en voz alta."
-          : "La page est en cours de lecture.";
+        readStatus.textContent = t("readPlaying");
+        updateReadButtons();
+      };
+
+      utterance.onpause = () => {
+        readStatus.textContent = t("readPaused");
+        updateReadButtons();
+      };
+
+      utterance.onresume = () => {
+        readStatus.textContent = t("readPlaying");
+        updateReadButtons();
       };
 
       utterance.onend = () => {
-        speakStatus.textContent = UI[currentLang]?.speakStatus || UI.de.speakStatus;
+        activeUtterance = null;
+        readStatus.textContent = t("readFinished");
+        updateReadButtons();
       };
 
       utterance.onerror = () => {
-        speakStatus.textContent = currentLang === "de"
-          ? "Das Vorlesen konnte leider nicht gestartet werden."
-          : currentLang === "en"
-          ? "Reading aloud could not be started."
-          : currentLang === "es"
-          ? "No se pudo iniciar la lectura en voz alta."
-          : "La lecture n'a pas pu démarrer.";
+        activeUtterance = null;
+        readStatus.textContent = t("readStopped");
+        updateReadButtons();
       };
 
+      activeUtterance = utterance;
       window.speechSynthesis.speak(utterance);
+      updateReadButtons();
     }
+
+    function toggleReading() {
+      if (!isSpeechSupported()) {
+        readStatus.textContent = t("readNotSupported");
+        updateReadButtons();
+        return;
+      }
+
+      if (!window.speechSynthesis.speaking) {
+        startReading();
+        return;
+      }
+
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      } else {
+        window.speechSynthesis.pause();
+      }
+
+      updateReadButtons();
+    }
+
+    function updateTexts() {
+      document.documentElement.lang = t("htmlLang");
+      document.title = t("title");
+
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (UI[currentLang][key]) {
+          el.innerHTML = UI[currentLang][key];
+        }
+      });
+
+      languageButtons.forEach(button => {
+        button.classList.toggle("active", button.dataset.lang === currentLang);
+      });
+
+      updateMailButton();
+
+      if (!window.speechSynthesis || !window.speechSynthesis.speaking) {
+        readStatus.textContent = isSpeechSupported() ? t("readReady") : t("readNotSupported");
+      }
+
+      updateReadButtons();
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("pigipegs_share_lang_books", lang);
+
+      if (isSpeechSupported() && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        activeUtterance = null;
+      }
+
+      updateTexts();
+      readStatus.textContent = isSpeechSupported() ? t("readLangChanged") : t("readNotSupported");
+    }
+
+    consentCheck.addEventListener("change", updateMailButton);
+    readToggleBtn.addEventListener("click", toggleReading);
+    readStopBtn.addEventListener("click", () => stopReading(true));
 
     languageButtons.forEach(button => {
       button.addEventListener("click", () => {
-        currentLang = button.dataset.lang;
-        localStorage.setItem("pigipegs_lang", currentLang);
-        window.speechSynthesis.cancel();
-        applyLanguage(currentLang);
+        setLanguage(button.dataset.lang);
       });
     });
 
-    speakBtn.addEventListener("click", speakPage);
-
-    stopBtn.addEventListener("click", () => {
-      if ("speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
+    if (isSpeechSupported()) {
+      if (typeof window.speechSynthesis.onvoiceschanged !== "undefined") {
+        window.speechSynthesis.onvoiceschanged = () => {
+          updateReadButtons();
+        };
       }
-      speakStatus.textContent = UI[currentLang]?.speakStatus || UI.de.speakStatus;
-    });
-
-    if ("speechSynthesis" in window) {
-      window.speechSynthesis.onvoiceschanged = () => {};
+      window.speechSynthesis.getVoices();
     }
 
-    applyLanguage(currentLang);
+    window.addEventListener("beforeunload", () => {
+      if (isSpeechSupported()) {
+        window.speechSynthesis.cancel();
+      }
+    });
+
+    updateTexts();
   </script>
 </body>
 </html>
