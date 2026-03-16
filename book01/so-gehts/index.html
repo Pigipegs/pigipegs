@@ -156,6 +156,7 @@
       backdrop-filter:blur(8px);
     }
 
+    .language-box,
     .hero,
     .steps,
     .rules,
@@ -169,6 +170,32 @@
       box-shadow:var(--shadow);
       backdrop-filter:blur(10px);
       margin-bottom:18px;
+    }
+
+    .language-buttons{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .language-buttons button{
+      border:none;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      font-size:15px;
+      background:rgba(255,255,255,0.14);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.16);
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+    }
+
+    .language-buttons .active{
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+      border-color:transparent;
     }
 
     .hero h2,
@@ -300,6 +327,7 @@
     }
 
     @media (max-width: 720px){
+      .language-box,
       .hero,
       .steps,
       .rules,
@@ -325,6 +353,15 @@
         width:50px;
         height:50px;
       }
+
+      .language-buttons{
+        gap:8px;
+      }
+
+      .language-buttons button{
+        padding:9px 12px;
+        font-size:13px;
+      }
     }
   </style>
 </head>
@@ -338,74 +375,84 @@
           <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs" />
         </div>
         <div>
-          <div class="eyebrow">Pigipegs Hörwelt</div>
-          <h1>Bild hochladen – so geht’s</h1>
-          <p class="sub">
+          <div class="eyebrow" id="brandEyebrow">Pigipegs Hörwelt</div>
+          <h1 id="mainTitle">Bild hochladen – so geht’s</h1>
+          <p class="sub" id="mainSub">
             Hier erfährst du, wie ein selbst gemaltes Pigipegs-Bild hochgeladen werden kann und was dabei zum Schutz von Kindern und Familien wichtig ist.
           </p>
         </div>
       </div>
 
       <nav class="nav">
-        <a href="/index.html">Start</a>
-        <a href="/book01/">Bücher</a>
-        <a href="/book01/audio.html">Hörwelt</a>
+        <a href="/index.html" id="navStart">Start</a>
+        <a href="/book/" id="navBooks">Bücher</a>
+        <a href="/book01/audio.html" id="navAudio">Hörwelt</a>
       </nav>
     </div>
 
+    <section class="language-box">
+      <div class="eyebrow" id="languageEyebrow">Sprache auswählen</div>
+      <div class="language-buttons">
+        <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
+        <button type="button" data-lang="en">🇬🇧 English</button>
+        <button type="button" data-lang="es">🇪🇸 Español</button>
+        <button type="button" data-lang="fr">🇫🇷 Français</button>
+      </div>
+    </section>
+
     <section class="hero">
-      <div class="eyebrow">Sicher und verständlich</div>
-      <h2>So kommt ein Bild zu uns</h2>
-      <p>
+      <div class="eyebrow" id="heroEyebrow">Sicher und verständlich</div>
+      <h2 id="heroTitle">So kommt ein Bild zu uns</h2>
+      <p id="heroText">
         In Buch 1 gibt es eine Seite, auf der Kinder ihre eigenen Pigipegs malen können.
         Genau dieses selbst gemalte Bild kann hier später hochgeladen werden. Vor einer möglichen
         Veröffentlichung wird alles geprüft. Es findet keine automatische öffentliche Anzeige statt.
       </p>
 
       <div class="actions">
-        <a class="button button-primary" href="/teilen/">Bild hochladen</a>
-        <a class="button button-secondary" href="/book01/audio.html">Zu Buch 1</a>
+        <a class="button button-primary" href="/teilen/" id="uploadBtn">Bild hochladen</a>
+        <a class="button button-secondary" href="/book01/audio.html" id="bookBtn">Zu Buch 1</a>
       </div>
 
-      <div class="notice">
+      <div class="notice" id="heroNotice">
         Es darf nur das eigene selbst gemalte Pigipegs-Bild hochgeladen werden. Bitte keine fremden Bilder,
         keine Fotos anderer Personen und keine privaten Daten direkt in das Bild schreiben.
       </div>
     </section>
 
     <section class="steps">
-      <div class="eyebrow">Schritt für Schritt</div>
-      <h2>So funktioniert der Upload</h2>
+      <div class="eyebrow" id="stepsEyebrow">Schritt für Schritt</div>
+      <h2 id="stepsTitle">So funktioniert der Upload</h2>
 
       <div class="step-grid">
         <div class="card">
           <div class="num">1</div>
-          <h3>Bild malen</h3>
-          <p>
+          <h3 id="step1Title">Bild malen</h3>
+          <p id="step1Text">
             Das Kind malt sein eigenes Pigipegs-Bild auf der vorgesehenen Seite in Buch 1 aus oder gestaltet es selbst.
           </p>
         </div>
 
         <div class="card">
           <div class="num">2</div>
-          <h3>Foto machen</h3>
-          <p>
+          <h3 id="step2Title">Foto machen</h3>
+          <p id="step2Text">
             Ein Elternteil oder eine erziehungsberechtigte Person fotografiert das Bild oder wählt eine Bilddatei aus.
           </p>
         </div>
 
         <div class="card">
           <div class="num">3</div>
-          <h3>Bild hochladen</h3>
-          <p>
+          <h3 id="step3Title">Bild hochladen</h3>
+          <p id="step3Text">
             Das Bild wird über die Upload-Seite an uns gesendet. Dabei sollten nur die wirklich nötigen Angaben gemacht werden.
           </p>
         </div>
 
         <div class="card">
           <div class="num">4</div>
-          <h3>Prüfung vor Anzeige</h3>
-          <p>
+          <h3 id="step4Title">Prüfung vor Anzeige</h3>
+          <p id="step4Text">
             Das Bild wird zuerst geprüft. Eine Veröffentlichung erfolgt nicht automatisch und nur im freigegebenen Rahmen.
           </p>
         </div>
@@ -413,34 +460,34 @@
     </section>
 
     <section class="rules">
-      <div class="eyebrow">Wichtige Hinweise</div>
-      <h2>Zum Schutz von Kindern und Familien</h2>
+      <div class="eyebrow" id="rulesEyebrow">Wichtige Hinweise</div>
+      <h2 id="rulesTitle">Zum Schutz von Kindern und Familien</h2>
 
       <div class="rule-grid">
         <div class="card">
-          <h3>Nur mit Zustimmung</h3>
-          <p>
+          <h3 id="rule1Title">Nur mit Zustimmung</h3>
+          <p id="rule1Text">
             Der Upload darf nur mit Zustimmung eines Elternteils oder einer erziehungsberechtigten Person erfolgen.
           </p>
         </div>
 
         <div class="card">
-          <h3>Nur eigene Bilder</h3>
-          <p>
+          <h3 id="rule2Title">Nur eigene Bilder</h3>
+          <p id="rule2Text">
             Hochgeladen werden dürfen nur selbst gemalte Pigipegs-Bilder aus dem Buch, keine fremden Inhalte.
           </p>
         </div>
 
         <div class="card">
-          <h3>Keine automatische Veröffentlichung</h3>
-          <p>
+          <h3 id="rule3Title">Keine automatische Veröffentlichung</h3>
+          <p id="rule3Text">
             Bilder werden vor einer möglichen Anzeige geprüft. Ohne passende Freigabe werden sie nicht öffentlich gezeigt.
           </p>
         </div>
 
         <div class="card">
-          <h3>Wenig Daten, mehr Schutz</h3>
-          <p>
+          <h3 id="rule4Title">Wenig Daten, mehr Schutz</h3>
+          <p id="rule4Text">
             Bitte möglichst sparsam mit Angaben sein. Ein Klarname des Kindes sollte nur genutzt werden, wenn das ausdrücklich gewünscht und freigegeben ist.
           </p>
         </div>
@@ -448,24 +495,45 @@
     </section>
 
     <section class="parents">
-      <div class="eyebrow">Für Eltern und Erziehungsberechtigte</div>
-      <h2>Transparenz und Rechte</h2>
-      <p>
+      <div class="eyebrow" id="parentsEyebrow">Für Eltern und Erziehungsberechtigte</div>
+      <h2 id="parentsTitle">Transparenz und Rechte</h2>
+      <p id="parentsText">
         Wenn ein Bild hochgeladen wird, sollte klar sein, wofür es verwendet werden darf.
         Eltern oder Erziehungsberechtigte können eine Einwilligung jederzeit widerrufen und die
         Löschung des Bildes sowie der dazugehörigen Angaben verlangen. Außerdem können sie Auskunft
         über gespeicherte Daten verlangen und unrichtige Angaben korrigieren lassen.
       </p>
-
-      </section>
+    </section>
 
     <div class="footer-note">
-      <span>Pigipegs · Bild hochladen</span>
+      <span id="footerText">Pigipegs · Bild hochladen</span>
       <span>·</span>
-      <a href="/impressum/">Impressum</a>
+      <a href="/impressum/" id="footerImprint">Impressum</a>
       <span>·</span>
-      <a href="/datenschutz/">Datenschutz</a>
+      <a href="/datenschutz/" id="footerPrivacy">Datenschutz</a>
     </div>
   </div>
-</body>
-</html>
+
+  <script>
+    const UI = {
+      de: {
+        brandEyebrow: "Pigipegs Hörwelt",
+        mainTitle: "Bild hochladen – so geht’s",
+        mainSub: "Hier erfährst du, wie ein selbst gemaltes Pigipegs-Bild hochgeladen werden kann und was dabei zum Schutz von Kindern und Familien wichtig ist.",
+        navStart: "Start",
+        navBooks: "Bücher",
+        navAudio: "Hörwelt",
+        languageEyebrow: "Sprache auswählen",
+        heroEyebrow: "Sicher und verständlich",
+        heroTitle: "So kommt ein Bild zu uns",
+        heroText: "In Buch 1 gibt es eine Seite, auf der Kinder ihre eigenen Pigipegs malen können. Genau dieses selbst gemalte Bild kann hier später hochgeladen werden. Vor einer möglichen Veröffentlichung wird alles geprüft. Es findet keine automatische öffentliche Anzeige statt.",
+        uploadBtn: "Bild hochladen",
+        bookBtn: "Zu Buch 1",
+        heroNotice: "Es darf nur das eigene selbst gemalte Pigipegs-Bild hochgeladen werden. Bitte keine fremden Bilder, keine Fotos anderer Personen und keine privaten Daten direkt in das Bild schreiben.",
+        stepsEyebrow: "Schritt für Schritt",
+        stepsTitle: "So funktioniert der Upload",
+        step1Title: "Bild malen",
+        step1Text: "Das Kind malt sein eigenes Pigipegs-Bild auf der vorgesehenen Seite in Buch 1 aus oder gestaltet es selbst.",
+        step2Title: "Foto machen",
+        step2Text: "Ein Elternteil oder eine erziehungsberechtigte Person fotografiert das Bild oder wählt eine Bilddatei aus.",
+       
