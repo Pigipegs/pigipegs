@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- 
+  <title>Pigipegs – Bücher</title>
+
   <style>
     :root{
       --night-1:#1f2559;
@@ -22,13 +23,9 @@
       --pink-dark:#ff6f94;
       --blue:#8fd0ef;
       --blue-dark:#5eb2de;
-      --green:#cfe89d;
-      --green-dark:#a8d76a;
 
       --shadow:0 16px 40px rgba(20,18,48,0.28);
       --radius-xl:30px;
-      --radius-lg:22px;
-      --radius-md:16px;
       --max:1120px;
     }
 
@@ -129,7 +126,7 @@
 
     h1{
       margin:0;
-      font-size:clamp(30px, 4vw, 52px);
+      font-size:clamp(30px,4vw,52px);
       line-height:1.04;
     }
 
@@ -470,9 +467,9 @@
           <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs" />
         </div>
         <div>
-          <div class="eyebrow">Pigipegs Hörwelt</div>
-          <h1>Geschichten unterm Sternenhimmel</h1>
-          <p class="sub">
+          <div class="eyebrow" id="brandEyebrow">Pigipegs Hörwelt</div>
+          <h1 id="mainTitle">Geschichten unterm Sternenhimmel</h1>
+          <p class="sub" id="mainSub">
             Hier kannst du die Pigipegs-Legende hören und danach die Bücher entdecken.
             Buch 1 ist bereits hörbar, weitere Bücher folgen nach und nach.
           </p>
@@ -480,25 +477,25 @@
       </div>
 
       <nav class="nav">
-        <a href="/index.html">Start</a>
-        <a href="/book/">Bücher</a>
-        <a href="/book01/so-gehts/">Bild hochladen</a>
-        <a href="/impressum/">Impressum</a>
+        <a href="/index.html" id="navStart">Start</a>
+        <a href="/book/" id="navBooks">Bücher</a>
+        <a href="/book01/so-gehts/" id="navUpload">Bild hochladen</a>
+        <a href="/impressum/" id="navImprint">Impressum</a>
       </nav>
     </div>
 
     <section class="hero">
       <div class="hero-panel">
-        <div class="eyebrow">Willkommen bei den Pigipegs</div>
-        <h2>Zuhause ist, wo wir zusammen sind</h2>
-        <p class="hero-text">
+        <div class="eyebrow" id="heroEyebrow">Willkommen bei den Pigipegs</div>
+        <h2 id="heroTitle">Zuhause ist, wo wir zusammen sind</h2>
+        <p class="hero-text" id="heroText">
           Höre zuerst die Legende oder gehe direkt zu den Hörbüchern.
           Jedes Kapitel kann einzeln abgespielt werden und Buch 1 ist schon bereit.
         </p>
 
         <div class="hero-actions">
-          <a class="cta cta-primary" href="/book01/audio.html">🌙 Legende anhören</a>
-          <a class="cta cta-secondary" href="/book01/">🎧 Buch 1 anhören</a>
+          <a class="cta cta-primary" href="/book01/audio.html" id="heroLegendBtn">🌙 Legende anhören</a>
+          <a class="cta cta-secondary" href="/book01/audio.html" id="heroBookBtn">🎧 Buch 1 anhören</a>
         </div>
       </div>
 
@@ -507,26 +504,26 @@
           src="/assets/img/pigipegs-cover-stars.png"
           alt="Pigipegs-Familie unter dem Sternenhimmel vor ihrem Haus"
         />
-        <div class="cover-note">
+        <div class="cover-note" id="coverNote">
           Eine kleine Welt voller Sterne, Wärme, Geschichten und Geborgenheit.
         </div>
       </div>
     </section>
 
     <section class="language-box">
-      <div class="eyebrow">Sprache auswählen</div>
+      <div class="eyebrow" id="languageEyebrow">Sprache auswählen</div>
       <div class="language-buttons">
-        <button class="active" type="button">🇩🇪 Deutsch</button>
-        <button type="button">🇬🇧 English</button>
-        <button type="button">🇪🇸 Español</button>
-        <button type="button">🇫🇷 Français</button>
+        <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
+        <button type="button" data-lang="en">🇬🇧 English</button>
+        <button type="button" data-lang="es">🇪🇸 Español</button>
+        <button type="button" data-lang="fr">🇫🇷 Français</button>
       </div>
     </section>
 
     <section class="books-section">
-      <div class="eyebrow">Hörgeschichten</div>
-      <h2 class="books-title">Wähle ein Buch</h2>
-      <p class="books-text">
+      <div class="eyebrow" id="booksEyebrow">Hörgeschichten</div>
+      <h2 class="books-title" id="booksTitle">Wähle ein Buch</h2>
+      <p class="books-text" id="booksText">
         Die Legende und die Kapitel aus Buch 1 kannst du direkt anhören.
         Weitere Bücher folgen nach und nach.
       </p>
@@ -536,37 +533,251 @@
           <div class="book-cover">
             <img src="/assets/img/Die_Pigipegs_B01-Cover800x600.jpg" alt="Buch 1 Cover" />
           </div>
-          <div class="book-pill">JETZT HÖRBAR</div>
-          <div class="book-name">Buch 1</div>
-          <div class="book-sub">Zuhause ist, wo wir zusammen sind</div>
-          <a class="book-btn primary" href="/book01/audio.html">🎧 Buch 1 anhören</a>
+          <div class="book-pill" id="book1Pill">JETZT HÖRBAR</div>
+          <div class="book-name" id="book1Name">Buch 1</div>
+          <div class="book-sub" id="book1Sub">Zuhause ist, wo wir zusammen sind</div>
+          <a class="book-btn primary" href="/book01/audio.html" id="book1Btn">🎧 Buch 1 anhören</a>
         </article>
 
         <article class="book-card">
-          <div class="book-cover placeholder">Buch 2</div>
-          <div class="book-pill soon">FOLGT BALD</div>
-          <div class="book-name">Buch 2</div>
-          <div class="book-sub">Folgt in Kürze</div>
-          <span class="book-btn disabled">⏳ Bald verfügbar</span>
+          <div class="book-cover placeholder" id="book2Cover">Buch 2</div>
+          <div class="book-pill soon" id="book2Pill">FOLGT BALD</div>
+          <div class="book-name" id="book2Name">Buch 2</div>
+          <div class="book-sub" id="book2Sub">Folgt in Kürze</div>
+          <span class="book-btn disabled" id="book2Btn">⏳ Bald verfügbar</span>
         </article>
 
         <article class="book-card">
-          <div class="book-cover placeholder">Buch 3</div>
-          <div class="book-pill soon">FOLGT BALD</div>
-          <div class="book-name">Buch 3</div>
-          <div class="book-sub">Folgt in Kürze</div>
-          <span class="book-btn disabled">⏳ Bald verfügbar</span>
+          <div class="book-cover placeholder" id="book3Cover">Buch 3</div>
+          <div class="book-pill soon" id="book3Pill">FOLGT BALD</div>
+          <div class="book-name" id="book3Name">Buch 3</div>
+          <div class="book-sub" id="book3Sub">Folgt in Kürze</div>
+          <span class="book-btn disabled" id="book3Btn">⏳ Bald verfügbar</span>
         </article>
       </div>
     </section>
 
     <div class="footer-note">
-      <span>Pigipegs · Hörwelt · Deutsch</span>
+      <span id="footerText">Pigipegs · Hörwelt · Deutsch</span>
       <span>·</span>
-      <a href="/impressum/">Impressum</a>
+      <a href="/impressum/" id="footerImprint">Impressum</a>
       <span>·</span>
-      <a href="/datenschutz/">Datenschutz</a>
+      <a href="/datenschutz/" id="footerPrivacy">Datenschutz</a>
     </div>
   </div>
+
+  <script>
+    const UI = {
+      de: {
+        brandEyebrow: "Pigipegs Hörwelt",
+        mainTitle: "Geschichten unterm Sternenhimmel",
+        mainSub: "Hier kannst du die Pigipegs-Legende hören und danach die Bücher entdecken. Buch 1 ist bereits hörbar, weitere Bücher folgen nach und nach.",
+        navStart: "Start",
+        navBooks: "Bücher",
+        navUpload: "Bild hochladen",
+        navImprint: "Impressum",
+        heroEyebrow: "Willkommen bei den Pigipegs",
+        heroTitle: "Zuhause ist, wo wir zusammen sind",
+        heroText: "Höre zuerst die Legende oder gehe direkt zu den Hörbüchern. Jedes Kapitel kann einzeln abgespielt werden und Buch 1 ist schon bereit.",
+        heroLegendBtn: "🌙 Legende anhören",
+        heroBookBtn: "🎧 Buch 1 anhören",
+        coverNote: "Eine kleine Welt voller Sterne, Wärme, Geschichten und Geborgenheit.",
+        languageEyebrow: "Sprache auswählen",
+        booksEyebrow: "Hörgeschichten",
+        booksTitle: "Wähle ein Buch",
+        booksText: "Die Legende und die Kapitel aus Buch 1 kannst du direkt anhören. Weitere Bücher folgen nach und nach.",
+        book1Pill: "JETZT HÖRBAR",
+        book1Name: "Buch 1",
+        book1Sub: "Zuhause ist, wo wir zusammen sind",
+        book1Btn: "🎧 Buch 1 anhören",
+        book2Cover: "Buch 2",
+        book2Pill: "FOLGT BALD",
+        book2Name: "Buch 2",
+        book2Sub: "Folgt in Kürze",
+        book2Btn: "⏳ Bald verfügbar",
+        book3Cover: "Buch 3",
+        book3Pill: "FOLGT BALD",
+        book3Name: "Buch 3",
+        book3Sub: "Folgt in Kürze",
+        book3Btn: "⏳ Bald verfügbar",
+        footerText: "Pigipegs · Hörwelt · Deutsch",
+        footerImprint: "Impressum",
+        footerPrivacy: "Datenschutz"
+      },
+      en: {
+        brandEyebrow: "Pigipegs Audio World",
+        mainTitle: "Stories Under the Starlit Sky",
+        mainSub: "Here you can listen to the Pigipegs legend and then discover the books. Book 1 is already available, more books will follow over time.",
+        navStart: "Home",
+        navBooks: "Books",
+        navUpload: "Upload picture",
+        navImprint: "Imprint",
+        heroEyebrow: "Welcome to the Pigipegs",
+        heroTitle: "Home Is Where We Are Together",
+        heroText: "Listen to the legend first or go directly to the audiobooks. Each chapter can be played individually and Book 1 is already ready.",
+        heroLegendBtn: "🌙 Listen to the legend",
+        heroBookBtn: "🎧 Listen to Book 1",
+        coverNote: "A little world full of stars, warmth, stories and comfort.",
+        languageEyebrow: "Choose language",
+        booksEyebrow: "Audio stories",
+        booksTitle: "Choose a book",
+        booksText: "You can listen directly to the legend and the chapters from Book 1. More books will follow over time.",
+        book1Pill: "AVAILABLE NOW",
+        book1Name: "Book 1",
+        book1Sub: "Home Is Where We Are Together",
+        book1Btn: "🎧 Listen to Book 1",
+        book2Cover: "Book 2",
+        book2Pill: "COMING SOON",
+        book2Name: "Book 2",
+        book2Sub: "Coming soon",
+        book2Btn: "⏳ Available soon",
+        book3Cover: "Book 3",
+        book3Pill: "COMING SOON",
+        book3Name: "Book 3",
+        book3Sub: "Coming soon",
+        book3Btn: "⏳ Available soon",
+        footerText: "Pigipegs · Audio World · English",
+        footerImprint: "Imprint",
+        footerPrivacy: "Privacy"
+      },
+      es: {
+        brandEyebrow: "Mundo de audio Pigipegs",
+        mainTitle: "Historias bajo el cielo estrellado",
+        mainSub: "Aquí puedes escuchar la leyenda de los Pigipegs y después descubrir los libros. El Libro 1 ya está disponible y llegarán más libros poco a poco.",
+        navStart: "Inicio",
+        navBooks: "Libros",
+        navUpload: "Subir dibujo",
+        navImprint: "Aviso legal",
+        heroEyebrow: "Bienvenido a los Pigipegs",
+        heroTitle: "El hogar está donde estamos juntos",
+        heroText: "Escucha primero la leyenda o ve directamente a los audiolibros. Cada capítulo puede reproducirse por separado y el Libro 1 ya está listo.",
+        heroLegendBtn: "🌙 Escuchar la leyenda",
+        heroBookBtn: "🎧 Escuchar Libro 1",
+        coverNote: "Un pequeño mundo lleno de estrellas, calidez, historias y cariño.",
+        languageEyebrow: "Elegir idioma",
+        booksEyebrow: "Audiocuentos",
+        booksTitle: "Elige un libro",
+        booksText: "Puedes escuchar directamente la leyenda y los capítulos del Libro 1. Más libros llegarán poco a poco.",
+        book1Pill: "YA DISPONIBLE",
+        book1Name: "Libro 1",
+        book1Sub: "El hogar está donde estamos juntos",
+        book1Btn: "🎧 Escuchar Libro 1",
+        book2Cover: "Libro 2",
+        book2Pill: "PRÓXIMAMENTE",
+        book2Name: "Libro 2",
+        book2Sub: "Muy pronto",
+        book2Btn: "⏳ Disponible pronto",
+        book3Cover: "Libro 3",
+        book3Pill: "PRÓXIMAMENTE",
+        book3Name: "Libro 3",
+        book3Sub: "Muy pronto",
+        book3Btn: "⏳ Disponible pronto",
+        footerText: "Pigipegs · Audio · Español",
+        footerImprint: "Aviso legal",
+        footerPrivacy: "Privacidad"
+      },
+      fr: {
+        brandEyebrow: "Univers audio Pigipegs",
+        mainTitle: "Histoires sous le ciel étoilé",
+        mainSub: "Ici, tu peux écouter la légende des Pigipegs puis découvrir les livres. Le Livre 1 est déjà disponible et d'autres livres suivront petit à petit.",
+        navStart: "Accueil",
+        navBooks: "Livres",
+        navUpload: "Téléverser le dessin",
+        navImprint: "Mentions légales",
+        heroEyebrow: "Bienvenue chez les Pigipegs",
+        heroTitle: "La maison, c’est là où nous sommes ensemble",
+        heroText: "Écoute d’abord la légende ou va directement aux livres audio. Chaque chapitre peut être lu séparément et le Livre 1 est déjà prêt.",
+        heroLegendBtn: "🌙 Écouter la légende",
+        heroBookBtn: "🎧 Écouter le Livre 1",
+        coverNote: "Un petit monde rempli d’étoiles, de chaleur, d’histoires et de tendresse.",
+        languageEyebrow: "Choisir la langue",
+        booksEyebrow: "Histoires audio",
+        booksTitle: "Choisis un livre",
+        booksText: "Tu peux écouter directement la légende et les chapitres du Livre 1. D’autres livres suivront peu à peu.",
+        book1Pill: "DISPONIBLE",
+        book1Name: "Livre 1",
+        book1Sub: "La maison, c’est là où nous sommes ensemble",
+        book1Btn: "🎧 Écouter le Livre 1",
+        book2Cover: "Livre 2",
+        book2Pill: "BIENTÔT",
+        book2Name: "Livre 2",
+        book2Sub: "Arrive bientôt",
+        book2Btn: "⏳ Bientôt disponible",
+        book3Cover: "Livre 3",
+        book3Pill: "BIENTÔT",
+        book3Name: "Livre 3",
+        book3Sub: "Arrive bientôt",
+        book3Btn: "⏳ Bientôt disponible",
+        footerText: "Pigipegs · Audio · Français",
+        footerImprint: "Mentions légales",
+        footerPrivacy: "Confidentialité"
+      }
+    };
+
+    const languageButtons = document.querySelectorAll(".language-buttons button");
+    let currentLang = localStorage.getItem("pigipegs_lang") || "de";
+
+    function applyLanguage(lang) {
+      const t = UI[lang] || UI.de;
+      document.documentElement.lang = lang;
+
+      document.getElementById("brandEyebrow").textContent = t.brandEyebrow;
+      document.getElementById("mainTitle").textContent = t.mainTitle;
+      document.getElementById("mainSub").textContent = t.mainSub;
+
+      document.getElementById("navStart").textContent = t.navStart;
+      document.getElementById("navBooks").textContent = t.navBooks;
+      document.getElementById("navUpload").textContent = t.navUpload;
+      document.getElementById("navImprint").textContent = t.navImprint;
+
+      document.getElementById("heroEyebrow").textContent = t.heroEyebrow;
+      document.getElementById("heroTitle").textContent = t.heroTitle;
+      document.getElementById("heroText").textContent = t.heroText;
+      document.getElementById("heroLegendBtn").textContent = t.heroLegendBtn;
+      document.getElementById("heroBookBtn").textContent = t.heroBookBtn;
+
+      document.getElementById("coverNote").textContent = t.coverNote;
+      document.getElementById("languageEyebrow").textContent = t.languageEyebrow;
+
+      document.getElementById("booksEyebrow").textContent = t.booksEyebrow;
+      document.getElementById("booksTitle").textContent = t.booksTitle;
+      document.getElementById("booksText").textContent = t.booksText;
+
+      document.getElementById("book1Pill").textContent = t.book1Pill;
+      document.getElementById("book1Name").textContent = t.book1Name;
+      document.getElementById("book1Sub").textContent = t.book1Sub;
+      document.getElementById("book1Btn").textContent = t.book1Btn;
+
+      document.getElementById("book2Cover").textContent = t.book2Cover;
+      document.getElementById("book2Pill").textContent = t.book2Pill;
+      document.getElementById("book2Name").textContent = t.book2Name;
+      document.getElementById("book2Sub").textContent = t.book2Sub;
+      document.getElementById("book2Btn").textContent = t.book2Btn;
+
+      document.getElementById("book3Cover").textContent = t.book3Cover;
+      document.getElementById("book3Pill").textContent = t.book3Pill;
+      document.getElementById("book3Name").textContent = t.book3Name;
+      document.getElementById("book3Sub").textContent = t.book3Sub;
+      document.getElementById("book3Btn").textContent = t.book3Btn;
+
+      document.getElementById("footerText").textContent = t.footerText;
+      document.getElementById("footerImprint").textContent = t.footerImprint;
+      document.getElementById("footerPrivacy").textContent = t.footerPrivacy;
+
+      languageButtons.forEach(button => {
+        button.classList.toggle("active", button.dataset.lang === lang);
+      });
+    }
+
+    languageButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        currentLang = button.dataset.lang;
+        localStorage.setItem("pigipegs_lang", currentLang);
+        applyLanguage(currentLang);
+      });
+    });
+
+    applyLanguage(currentLang);
+  </script>
 </body>
 </html>
