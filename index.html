@@ -15,6 +15,7 @@
 
   --text:#fffaf7;
   --muted:#efe7ff;
+  --soft:#d9d0f3;
   --panel:rgba(255,255,255,0.15);
   --border:rgba(255,255,255,0.20);
 
@@ -108,6 +109,54 @@ header p{
   margin:0;
 }
 
+.language-wrap{
+  text-align:center;
+  margin:18px 0 8px;
+  position:relative;
+  z-index:2;
+}
+
+.language-label{
+  font-size:13px;
+  color:var(--soft);
+  margin-bottom:8px;
+  letter-spacing:.03em;
+}
+
+.language-bar{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.language-bar button{
+  border:none;
+  border-radius:999px;
+  padding:12px 16px;
+  font-weight:bold;
+  font-size:15px;
+  background:rgba(255,255,255,0.14);
+  color:var(--text);
+  border:1px solid rgba(255,255,255,0.16);
+  cursor:pointer;
+  backdrop-filter:blur(8px);
+  transition:transform .15s ease, background .15s ease, border-color .15s ease;
+}
+
+.language-bar button:hover,
+.language-bar button:focus-visible{
+  transform:translateY(-1px);
+  outline:none;
+  border-color:rgba(255,255,255,0.34);
+}
+
+.language-bar .active{
+  background:linear-gradient(135deg,var(--pink),var(--pink-dark));
+  color:#fff;
+  border-color:transparent;
+}
+
 .cover{
   text-align:center;
   margin-bottom:46px;
@@ -178,10 +227,31 @@ footer{
   margin-top:60px;
   text-align:center;
   font-size:14px;
-  opacity:0.85;
+  opacity:0.9;
   color:var(--muted);
   position:relative;
   z-index:2;
+}
+
+.footer-text{
+  margin-bottom:12px;
+}
+
+.footer-links{
+  display:flex;
+  justify-content:center;
+  gap:10px 14px;
+  flex-wrap:wrap;
+}
+
+.footer-links a{
+  color:var(--muted);
+  text-decoration:none;
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:999px;
+  padding:10px 14px;
+  backdrop-filter:blur(8px);
 }
 
 @media (max-width: 720px){
@@ -204,6 +274,15 @@ footer{
   .card{
     padding:22px;
   }
+
+  .language-bar{
+    gap:8px;
+  }
+
+  .language-bar button{
+    padding:9px 12px;
+    font-size:13px;
+  }
 }
 </style>
 </head>
@@ -218,14 +297,24 @@ footer{
     <div class="brand-figure">
       <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs">
     </div>
-    <h1>Die Pigipegs</h1>
+    <h1 id="mainTitle">Die Pigipegs</h1>
   </div>
 
-  <p>
+  <p id="mainSubtitle">
     Zuhause ist, wo wir zusammen sind.
   </p>
 
 </header>
+
+<div class="language-wrap">
+  <div class="language-label" id="languageLabel">Sprache direkt wechseln</div>
+  <div class="language-bar" aria-label="Language switcher">
+    <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
+    <button type="button" data-lang="en">🇬🇧 English</button>
+    <button type="button" data-lang="es">🇪🇸 Español</button>
+    <button type="button" data-lang="fr">🇫🇷 Français</button>
+  </div>
+</div>
 
 <div class="cover">
   <img src="/assets/img/pigipegs-cover-stars.png" alt="Pigipegs Cover">
@@ -234,39 +323,212 @@ footer{
 <div class="grid">
 
   <div class="card">
-    <h2>🌙 Die Pigipegs-Legende</h2>
-    <p>
+    <h2 id="card1Title">🌙 Die Pigipegs-Legende</h2>
+    <p id="card1Text">
       Höre die Geschichte darüber, wie die Pigipegs
       zu ihrem Haus auf dem Berg gekommen sind.
     </p>
-    <a class="button" href="/book01/audio.html">Zur Hörwelt</a>
+    <a class="button" href="/book01/audio.html" id="card1Button">Zur Hörwelt</a>
   </div>
 
   <div class="card">
-    <h2>📚 Bücher</h2>
-    <p>
+    <h2 id="card2Title">📚 Bücher</h2>
+    <p id="card2Text">
       Entdecke die Geschichten der Pigipegs
       und tauche in ihre warme, liebevolle Welt ein.
     </p>
-    <a class="button blue" href="/book/">Bücher entdecken</a>
+    <a class="button blue" href="/book/" id="card2Button">Bücher entdecken</a>
   </div>
 
   <div class="card">
-    <h2>✨ So funktioniert es</h2>
-    <p>
+    <h2 id="card3Title">✨ So funktioniert es</h2>
+    <p id="card3Text">
       Scanne den QR-Code im Buch, wähle eine Sprache
       und höre dir die passende Geschichte in Ruhe an.
     </p>
-    <a class="button green" href="/book01/so-gehts/">Anleitung ansehen</a>
+    <a class="button green" href="/book01/so-gehts/" id="card3Button">Anleitung ansehen</a>
   </div>
 
 </div>
 
 <footer>
-  Pigipegs · Geschichten zum Anhören und Ausmalen
+  <div class="footer-text" id="footerText">Pigipegs · Geschichten zum Anhören und Ausmalen</div>
+
+  <div class="footer-links">
+    <a href="/impressum/" id="footerImprint">Impressum</a>
+    <a href="/datenschutz/" id="footerPrivacy">Datenschutz</a>
+    <a href="/teilen/" id="footerShare">Bild teilen</a>
+    <a href="/book/" id="footerBooks">Bücher</a>
+    <a href="/book01/audio.html" id="footerAudio">Hörwelt</a>
+  </div>
 </footer>
 
 </div>
+
+<script>
+const UI = {
+  de: {
+    htmlLang: "de",
+    title: "Pigipegs – Zuhause ist, wo wir zusammen sind",
+    languageLabel: "Sprache direkt wechseln",
+    mainTitle: "Die Pigipegs",
+    mainSubtitle: "Zuhause ist, wo wir zusammen sind.",
+
+    card1Title: "🌙 Die Pigipegs-Legende",
+    card1Text: "Höre die Geschichte darüber, wie die Pigipegs zu ihrem Haus auf dem Berg gekommen sind.",
+    card1Button: "Zur Hörwelt",
+
+    card2Title: "📚 Bücher",
+    card2Text: "Entdecke die Geschichten der Pigipegs und tauche in ihre warme, liebevolle Welt ein.",
+    card2Button: "Bücher entdecken",
+
+    card3Title: "✨ So funktioniert es",
+    card3Text: "Scanne den QR-Code im Buch, wähle eine Sprache und höre dir die passende Geschichte in Ruhe an.",
+    card3Button: "Anleitung ansehen",
+
+    footerText: "Pigipegs · Geschichten zum Anhören und Ausmalen",
+    footerImprint: "Impressum",
+    footerPrivacy: "Datenschutz",
+    footerShare: "Bild teilen",
+    footerBooks: "Bücher",
+    footerAudio: "Hörwelt"
+  },
+
+  en: {
+    htmlLang: "en",
+    title: "Pigipegs – Home is where we are together",
+    languageLabel: "Switch language directly",
+    mainTitle: "The Pigipegs",
+    mainSubtitle: "Home is where we are together.",
+
+    card1Title: "🌙 The Pigipegs Legend",
+    card1Text: "Listen to the story of how the Pigipegs came to their house on the mountain.",
+    card1Button: "Go to audio world",
+
+    card2Title: "📚 Books",
+    card2Text: "Discover the stories of the Pigipegs and dive into their warm and loving world.",
+    card2Button: "Discover books",
+
+    card3Title: "✨ How it works",
+    card3Text: "Scan the QR code in the book, choose a language, and listen to the matching story in peace.",
+    card3Button: "View instructions",
+
+    footerText: "Pigipegs · Stories to listen to and color",
+    footerImprint: "Legal Notice",
+    footerPrivacy: "Privacy",
+    footerShare: "Share picture",
+    footerBooks: "Books",
+    footerAudio: "Audio world"
+  },
+
+  es: {
+    htmlLang: "es",
+    title: "Pigipegs – El hogar está donde estamos juntos",
+    languageLabel: "Cambiar idioma directamente",
+    mainTitle: "Los Pigipegs",
+    mainSubtitle: "El hogar está donde estamos juntos.",
+
+    card1Title: "🌙 La leyenda de los Pigipegs",
+    card1Text: "Escucha la historia de cómo los Pigipegs llegaron a su casa en la montaña.",
+    card1Button: "Ir al mundo de audio",
+
+    card2Title: "📚 Libros",
+    card2Text: "Descubre las historias de los Pigipegs y sumérgete en su mundo cálido y cariñoso.",
+    card2Button: "Descubrir libros",
+
+    card3Title: "✨ Cómo funciona",
+    card3Text: "Escanea el código QR del libro, elige un idioma y escucha la historia correspondiente con calma.",
+    card3Button: "Ver instrucciones",
+
+    footerText: "Pigipegs · Historias para escuchar y colorear",
+    footerImprint: "Aviso legal",
+    footerPrivacy: "Privacidad",
+    footerShare: "Compartir imagen",
+    footerBooks: "Libros",
+    footerAudio: "Mundo de audio"
+  },
+
+  fr: {
+    htmlLang: "fr",
+    title: "Pigipegs – La maison, c’est là où nous sommes ensemble",
+    languageLabel: "Changer directement de langue",
+    mainTitle: "Les Pigipegs",
+    mainSubtitle: "La maison, c’est là où nous sommes ensemble.",
+
+    card1Title: "🌙 La légende des Pigipegs",
+    card1Text: "Écoute l’histoire de la façon dont les Pigipegs sont arrivés à leur maison sur la montagne.",
+    card1Button: "Aller à l’univers audio",
+
+    card2Title: "📚 Livres",
+    card2Text: "Découvre les histoires des Pigipegs et plonge dans leur univers chaleureux et plein de tendresse.",
+    card2Button: "Découvrir les livres",
+
+    card3Title: "✨ Comment ça marche",
+    card3Text: "Scanne le QR code dans le livre, choisis une langue et écoute tranquillement l’histoire correspondante.",
+    card3Button: "Voir les instructions",
+
+    footerText: "Pigipegs · Histoires à écouter et à colorier",
+    footerImprint: "Mentions légales",
+    footerPrivacy: "Confidentialité",
+    footerShare: "Partager une image",
+    footerBooks: "Livres",
+    footerAudio: "Univers audio"
+  }
+};
+
+const languageButtons = document.querySelectorAll(".language-bar button");
+let currentLang = localStorage.getItem("pigipegs_index_lang") || "de";
+
+function t(key) {
+  return UI[currentLang][key] || UI.de[key] || "";
+}
+
+function updateTexts() {
+  document.documentElement.lang = t("htmlLang");
+  document.title = t("title");
+
+  document.getElementById("languageLabel").textContent = t("languageLabel");
+  document.getElementById("mainTitle").textContent = t("mainTitle");
+  document.getElementById("mainSubtitle").textContent = t("mainSubtitle");
+
+  document.getElementById("card1Title").textContent = t("card1Title");
+  document.getElementById("card1Text").textContent = t("card1Text");
+  document.getElementById("card1Button").textContent = t("card1Button");
+
+  document.getElementById("card2Title").textContent = t("card2Title");
+  document.getElementById("card2Text").textContent = t("card2Text");
+  document.getElementById("card2Button").textContent = t("card2Button");
+
+  document.getElementById("card3Title").textContent = t("card3Title");
+  document.getElementById("card3Text").textContent = t("card3Text");
+  document.getElementById("card3Button").textContent = t("card3Button");
+
+  document.getElementById("footerText").textContent = t("footerText");
+  document.getElementById("footerImprint").textContent = t("footerImprint");
+  document.getElementById("footerPrivacy").textContent = t("footerPrivacy");
+  document.getElementById("footerShare").textContent = t("footerShare");
+  document.getElementById("footerBooks").textContent = t("footerBooks");
+  document.getElementById("footerAudio").textContent = t("footerAudio");
+
+  languageButtons.forEach(button => {
+    button.classList.toggle("active", button.dataset.lang === currentLang);
+  });
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem("pigipegs_index_lang", lang);
+  updateTexts();
+}
+
+languageButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    setLanguage(button.dataset.lang);
+  });
+});
+
+updateTexts();
+</script>
 
 </body>
 </html>
