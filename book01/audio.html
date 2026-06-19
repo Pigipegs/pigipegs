@@ -1273,12 +1273,12 @@
     }
 
     function getNearestStepFromAngle() {
-      return Math.round((-drumAngle) / stepAngle);
+      return Math.round((drumAngle) / stepAngle);
     }
 
     function syncFromStep() {
       currentIndex = wrapIndex(currentStep);
-      drumAngle = -(currentStep * stepAngle);
+      drumAngle = currentStep * stepAngle;
     }
 
     function setPlayerSourceForCurrentTrack() {
