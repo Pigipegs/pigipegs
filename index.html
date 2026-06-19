@@ -289,7 +289,7 @@ footer{
 </div>
 
 <div class="cover">
-  <img src="/assets/img/pigipegs-cover-stars.png" alt="Pigipegs Cover">
+  <img src="/assets/img/pigipegs-cover-stars.png?v=stars" alt="Pigipegs Cover">
 </div>
 
 <div class="grid">
@@ -324,6 +324,14 @@ footer{
       Entdecke T-Shirts, Tassen und weitere Produkte mit deinen Lieblingsfiguren.
     </p>
     <a class="button shop" href="https://shop.pigipegs.com" target="_blank" rel="noopener noreferrer" id="card4Button">Zum Shop</a>
+  </div>
+
+  <div class="card">
+    <h2 id="card5Title">📖 Buch bei Amazon</h2>
+    <p id="card5Text">
+      Sobald Buch 1 freigegeben ist, findest du hier den direkten Amazon-Link.
+    </p>
+    <a class="button amazon" href="/book/" id="card5Button">Buch ansehen</a>
   </div>
 
 </div>
@@ -369,6 +377,10 @@ const UI = {
     card4Text: "Entdecke T-Shirts, Tassen und weitere Produkte mit deinen Lieblingsfiguren.",
     card4Button: "Zum Shop",
 
+    card5Title: "📖 Buch bei Amazon",
+    card5Text: "Sobald Buch 1 freigegeben ist, findest du hier den direkten Amazon-Link.",
+    card5Button: "Buch ansehen",
+
     footerText: "Pigipegs · Geschichten zum Anhören und Ausmalen",
     footerImprint: "Impressum",
     footerPrivacy: "Datenschutz",
@@ -401,6 +413,10 @@ const UI = {
     card4Title: "🛍️ Pigipegs Shop",
     card4Text: "Discover T-shirts, mugs and more featuring your favourite Pigipegs characters.",
     card4Button: "Visit Shop",
+
+    card5Title: "📖 Book on Amazon",
+    card5Text: "As soon as Book 1 is approved, you will find the direct Amazon link here.",
+    card5Button: "View book",
 
     footerText: "Pigipegs · Stories to listen to and color",
     footerImprint: "Legal Notice",
@@ -435,6 +451,10 @@ const UI = {
     card4Text: "Descubre camisetas, tazas y mucho más con tus personajes favoritos de Pigipegs.",
     card4Button: "Ir a la tienda",
 
+    card5Title: "📖 Libro en Amazon",
+    card5Text: "Cuando el Libro 1 esté aprobado, encontrarás aquí el enlace directo a Amazon.",
+    card5Button: "Ver libro",
+
     footerText: "Pigipegs · Historias para escuchar y colorear",
     footerImprint: "Aviso legal",
     footerPrivacy: "Privacidad",
@@ -467,6 +487,10 @@ const UI = {
     card4Title: "🛍️ Boutique Pigipegs",
     card4Text: "Découvre des t-shirts, des tasses et bien plus encore avec tes personnages Pigipegs préférés.",
     card4Button: "Visiter la boutique",
+
+    card5Title: "📖 Livre sur Amazon",
+    card5Text: "Dès que le Livre 1 sera approuvé, tu trouveras ici le lien direct vers Amazon.",
+    card5Button: "Voir le livre",
 
     footerText: "Pigipegs · Histoires à écouter et à colorier",
     footerImprint: "Mentions légales",
@@ -509,6 +533,10 @@ function updateTexts() {
   document.getElementById("card4Title").textContent = t("card4Title");
   document.getElementById("card4Text").textContent = t("card4Text");
   document.getElementById("card4Button").textContent = t("card4Button");
+
+  document.getElementById("card5Title").textContent = t("card5Title");
+  document.getElementById("card5Text").textContent = t("card5Text");
+  document.getElementById("card5Button").textContent = t("card5Button");
 
   document.getElementById("footerText").textContent = t("footerText");
   document.getElementById("footerImprint").textContent = t("footerImprint");
