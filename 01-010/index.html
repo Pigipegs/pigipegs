@@ -1,44 +1,573 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=/book01/audio.html?s=10">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pigipegs – Weiterleitung</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      font-family: Arial, sans-serif;
-      color: #fffaf7;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,.9) 0 1px, transparent 2px),
-        radial-gradient(circle at 70% 30%, rgba(255,255,255,.7) 0 1px, transparent 2px),
-        linear-gradient(180deg, #1f2559 0%, #3a3f88 45%, #6f66b8 100%);
-    }
-    .box {
-      text-align: center;
-      padding: 28px 24px;
-      border-radius: 24px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 16px 40px rgba(20,18,48,.28);
-      backdrop-filter: blur(10px);
-      max-width: 520px;
-    }
-    h1 { margin: 0 0 10px; font-size: 32px; }
-    p { margin: 0; color: #efe7ff; line-height: 1.5; }
-  </style>
-  <script>
-    window.location.replace("/book01/audio.html?s=10");
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pigipegs – Zuhause ist, wo wir zusammen sind</title>
+
+<style>
+:root{
+  --night-1:#1b1f4a;
+  --night-2:#343c91;
+  --night-3:#6f6bc1;
+  --night-4:#dba3c7;
+
+  --text:#fffaf7;
+  --muted:#efe7ff;
+  --soft:#d9d0f3;
+  --panel:rgba(255,255,255,0.15);
+  --border:rgba(255,255,255,0.20);
+
+  --pink:#ff8faa;
+  --pink-dark:#ff6f91;
+  --blue:#8ecae6;
+  --blue-dark:#5aa9d6;
+  --green:#cde990;
+  --green-dark:#a9d85d;
+
+  --shadow:0 16px 40px rgba(0,0,0,0.22);
+  --radius:22px;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.95) 0 1px, transparent 2px),
+    radial-gradient(circle at 70% 30%, rgba(255,255,255,0.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 40% 70%, rgba(255,255,255,0.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 80% 60%, rgba(255,255,255,0.85) 0 1px, transparent 2px),
+    linear-gradient(180deg,var(--night-1) 0%,var(--night-2) 40%,var(--night-3) 70%,var(--night-4) 100%);
+  overflow-x:hidden;
+}
+
+.page{
+  max-width:1100px;
+  margin:auto;
+  padding:30px 20px 50px;
+  position:relative;
+}
+
+header{
+  text-align:center;
+  margin-bottom:34px;
+  position:relative;
+  z-index:2;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
+.brand-figure{
+  width:78px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.brand-figure img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:100px;
+  object-fit:contain;
+  filter:drop-shadow(0 10px 18px rgba(0,0,0,0.18));
+}
+
+header h1{
+  font-size:48px;
+  margin:10px 0;
+}
+
+header p{
+  font-size:18px;
+  opacity:0.92;
+  color:var(--muted);
+  margin:0;
+}
+
+.language-wrap{
+  text-align:center;
+  margin:18px 0 8px;
+  position:relative;
+  z-index:2;
+}
+
+.language-label{
+  font-size:13px;
+  color:var(--soft);
+  margin-bottom:8px;
+  letter-spacing:.03em;
+}
+
+.language-bar{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.language-bar button{
+  border:none;
+  border-radius:999px;
+  padding:12px 16px;
+  font-weight:bold;
+  font-size:15px;
+  background:rgba(255,255,255,0.14);
+  color:var(--text);
+  border:1px solid rgba(255,255,255,0.16);
+  cursor:pointer;
+  backdrop-filter:blur(8px);
+  transition:transform .15s ease, background .15s ease, border-color .15s ease;
+}
+
+.language-bar button:hover,
+.language-bar button:focus-visible{
+  transform:translateY(-1px);
+  outline:none;
+  border-color:rgba(255,255,255,0.34);
+}
+
+.language-bar .active{
+  background:linear-gradient(135deg,var(--pink),var(--pink-dark));
+  color:#fff;
+  border-color:transparent;
+}
+
+.cover{
+  text-align:center;
+  margin-bottom:46px;
+  position:relative;
+  z-index:2;
+}
+
+.cover img{
+  max-width:700px;
+  width:100%;
+  border-radius:24px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+  position:relative;
+  z-index:2;
+}
+
+.card{
+  background:var(--panel);
+  padding:28px;
+  border-radius:22px;
+  backdrop-filter:blur(10px);
+  border:1px solid var(--border);
+  text-align:center;
+  box-shadow:var(--shadow);
+}
+
+.card h2{
+  margin-top:0;
+  margin-bottom:12px;
+  font-size:20px;
+}
+
+.card p{
+  opacity:0.95;
+  color:var(--muted);
+  line-height:1.65;
+  margin:0;
+}
+
+.button{
+  display:inline-block;
+  margin-top:18px;
+  padding:14px 20px;
+  border-radius:16px;
+  text-decoration:none;
+  font-weight:bold;
+  color:white;
+  background:linear-gradient(135deg,#ff8faa,#ff6f91);
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+.button.blue{
+  background:linear-gradient(135deg,#8ecae6,#5aa9d6);
+}
+
+.button.green{
+  background:linear-gradient(135deg,#cde990,#a9d85d);
+  color:#243400;
+}
+
+.button.shop{
+  background:linear-gradient(135deg,#f9c74f,#f3722c);
+  color:#fff;
+}
+
+footer{
+  margin-top:60px;
+  text-align:center;
+  font-size:14px;
+  opacity:0.9;
+  color:var(--muted);
+  position:relative;
+  z-index:2;
+}
+
+.footer-text{
+  margin-bottom:12px;
+}
+
+.footer-links{
+  display:flex;
+  justify-content:center;
+  gap:10px 14px;
+  flex-wrap:wrap;
+}
+
+.footer-links a{
+  color:var(--muted);
+  text-decoration:none;
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:999px;
+  padding:10px 14px;
+  backdrop-filter:blur(8px);
+}
+
+@media (max-width:720px){
+  .page{padding:22px 16px 40px}
+  .brand-figure{width:62px}
+  header h1{font-size:36px}
+  header p{font-size:16px}
+  .card{padding:22px}
+  .language-bar{gap:8px}
+  .language-bar button{padding:9px 12px;font-size:13px}
+}
+</style>
 </head>
+
 <body>
-  <div class="box">
-    <h1>🐷 Pigipegs</h1>
-    <p>Deine Hörgeschichte für Seite 10 wird geöffnet …</p>
+
+<div class="page">
+
+<header>
+  <div class="brand">
+    <div class="brand-figure">
+      <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs">
+    </div>
+    <h1 id="mainTitle">Die Pigipegs</h1>
   </div>
+
+  <p id="mainSubtitle">Zuhause ist, wo wir zusammen sind.</p>
+</header>
+
+<div class="language-wrap">
+  <div class="language-label" id="languageLabel">Sprache direkt wechseln</div>
+  <div class="language-bar" aria-label="Language switcher">
+    <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
+    <button type="button" data-lang="en">🇬🇧 English</button>
+    <button type="button" data-lang="es">🇪🇸 Español</button>
+    <button type="button" data-lang="fr">🇫🇷 Français</button>
+  </div>
+</div>
+
+<div class="cover">
+  <img src="/assets/img/pigipegs-cover-stars.png?v=stars" alt="Pigipegs Cover">
+</div>
+
+<div class="grid">
+
+  <div class="card">
+    <h2 id="card1Title">🎧 Pigipegs Hörwelten</h2>
+    <p id="card1Text">
+      Höre Geschichten aus der Welt der Pigipegs – später in mehreren Sprachen.
+    </p>
+    <a class="button" href="/book01/audio.html" id="card1Button">Zur Hörwelt</a>
+  </div>
+
+  <div class="card">
+    <h2 id="card2Title">📚 Bücher</h2>
+    <p id="card2Text">
+      Entdecke die Bücher der Pigipegs und finde die passenden Inhalte zum Lesen, Hören und Ausmalen.
+    </p>
+    <a class="button blue" href="/book/" id="card2Button">Bücher entdecken</a>
+  </div>
+
+  <div class="card">
+    <h2 id="card3Title">🎨 Bild teilen</h2>
+    <p id="card3Text">
+      Male dein Pigipegs-Bild aus und teile es mit uns – ohne Namensnennung.
+    </p>
+    <a class="button green" href="/teilen/" id="card3Button">Bild einsenden</a>
+  </div>
+
+  <div class="card">
+    <h2 id="card4Title">🛍️ Pigipegs Shop</h2>
+    <p id="card4Text">
+      Entdecke T-Shirts, Tassen und weitere Produkte mit deinen Lieblingsfiguren.
+    </p>
+    <a class="button shop" href="https://shop.pigipegs.com" target="_blank" rel="noopener noreferrer" id="card4Button">Zum Shop</a>
+  </div>
+
+  <div class="card">
+    <h2 id="card5Title">📖 Buch bei Amazon</h2>
+    <p id="card5Text">
+      Sobald Buch 1 freigegeben ist, findest du hier den direkten Amazon-Link.
+    </p>
+    <a class="button amazon" href="/book/" id="card5Button">Buch ansehen</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-text" id="footerText">Pigipegs · Geschichten zum Anhören und Ausmalen</div>
+
+  <div class="footer-links">
+    <a href="/impressum/" id="footerImprint">Impressum</a>
+    <a href="/datenschutz/" id="footerPrivacy">Datenschutz</a>
+    <a href="/teilen/" id="footerShare">Bild teilen</a>
+    <a href="/book/" id="footerBooks">Bücher</a>
+    <a href="/book01/audio.html" id="footerAudio">Hörwelt</a>
+    <a href="/nutzungsbedingungen/" id="footerTerms">Nutzungsbedingungen</a>
+    <a href="https://shop.pigipegs.com" target="_blank" rel="noopener noreferrer" id="footerShop">Shop</a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+const UI = {
+  de: {
+    htmlLang: "de",
+    title: "Pigipegs – Zuhause ist, wo wir zusammen sind",
+    languageLabel: "Sprache direkt wechseln",
+    mainTitle: "Die Pigipegs",
+    mainSubtitle: "Zuhause ist, wo wir zusammen sind.",
+
+    card1Title: "🎧 Pigipegs Hörwelten",
+    card1Text: "Höre Geschichten aus der Welt der Pigipegs – später in mehreren Sprachen.",
+    card1Button: "Zur Hörwelt",
+
+    card2Title: "📚 Bücher",
+    card2Text: "Entdecke die Bücher der Pigipegs und finde die passenden Inhalte zum Lesen, Hören und Ausmalen.",
+    card2Button: "Bücher entdecken",
+
+    card3Title: "🎨 Bild teilen",
+    card3Text: "Male dein Pigipegs-Bild aus und teile es mit uns – ohne Namensnennung.",
+    card3Button: "Bild einsenden",
+
+    card4Title: "🛍️ Pigipegs Shop",
+    card4Text: "Entdecke T-Shirts, Tassen und weitere Produkte mit deinen Lieblingsfiguren.",
+    card4Button: "Zum Shop",
+
+    card5Title: "📖 Buch bei Amazon",
+    card5Text: "Sobald Buch 1 freigegeben ist, findest du hier den direkten Amazon-Link.",
+    card5Button: "Buch ansehen",
+
+    footerText: "Pigipegs · Geschichten zum Anhören und Ausmalen",
+    footerImprint: "Impressum",
+    footerPrivacy: "Datenschutz",
+    footerShare: "Bild teilen",
+    footerBooks: "Bücher",
+    footerAudio: "Hörwelt",
+    footerTerms: "Nutzungsbedingungen",
+    footerShop: "Shop"
+  },
+
+  en: {
+    htmlLang: "en",
+    title: "Pigipegs – Home is where we are together",
+    languageLabel: "Switch language directly",
+    mainTitle: "The Pigipegs",
+    mainSubtitle: "Home is where we are together.",
+
+    card1Title: "🎧 Pigipegs Audio Worlds",
+    card1Text: "Listen to stories from the world of the Pigipegs – later in several languages.",
+    card1Button: "Go to audio world",
+
+    card2Title: "📚 Books",
+    card2Text: "Discover the Pigipegs books and find matching content for reading, listening and coloring.",
+    card2Button: "Discover books",
+
+    card3Title: "🎨 Share your picture",
+    card3Text: "Color your Pigipegs picture and share it with us – without naming you.",
+    card3Button: "Send picture",
+
+    card4Title: "🛍️ Pigipegs Shop",
+    card4Text: "Discover T-shirts, mugs and more featuring your favourite Pigipegs characters.",
+    card4Button: "Visit Shop",
+
+    card5Title: "📖 Book on Amazon",
+    card5Text: "As soon as Book 1 is approved, you will find the direct Amazon link here.",
+    card5Button: "View book",
+
+    footerText: "Pigipegs · Stories to listen to and color",
+    footerImprint: "Legal Notice",
+    footerPrivacy: "Privacy",
+    footerShare: "Share picture",
+    footerBooks: "Books",
+    footerAudio: "Audio world",
+    footerTerms: "Terms for submissions",
+    footerShop: "Shop"
+  },
+
+  es: {
+    htmlLang: "es",
+    title: "Pigipegs – El hogar está donde estamos juntos",
+    languageLabel: "Cambiar idioma directamente",
+    mainTitle: "Los Pigipegs",
+    mainSubtitle: "El hogar está donde estamos juntos.",
+
+    card1Title: "🎧 Mundos de audio Pigipegs",
+    card1Text: "Escucha historias del mundo de los Pigipegs, más adelante en varios idiomas.",
+    card1Button: "Ir al mundo de audio",
+
+    card2Title: "📚 Libros",
+    card2Text: "Descubre los libros de Pigipegs y encuentra contenidos para leer, escuchar y colorear.",
+    card2Button: "Descubrir libros",
+
+    card3Title: "🎨 Comparte tu dibujo",
+    card3Text: "Colorea tu imagen de Pigipegs y compártela con nosotros, sin mencionar tu nombre.",
+    card3Button: "Enviar dibujo",
+
+    card4Title: "🛍️ Tienda Pigipegs",
+    card4Text: "Descubre camisetas, tazas y mucho más con tus personajes favoritos de Pigipegs.",
+    card4Button: "Ir a la tienda",
+
+    card5Title: "📖 Libro en Amazon",
+    card5Text: "Cuando el Libro 1 esté aprobado, encontrarás aquí el enlace directo a Amazon.",
+    card5Button: "Ver libro",
+
+    footerText: "Pigipegs · Historias para escuchar y colorear",
+    footerImprint: "Aviso legal",
+    footerPrivacy: "Privacidad",
+    footerShare: "Compartir imagen",
+    footerBooks: "Libros",
+    footerAudio: "Mundo de audio",
+    footerTerms: "Condiciones de envío",
+    footerShop: "Tienda"
+  },
+
+  fr: {
+    htmlLang: "fr",
+    title: "Pigipegs – La maison, c’est là où nous sommes ensemble",
+    languageLabel: "Changer directement de langue",
+    mainTitle: "Les Pigipegs",
+    mainSubtitle: "La maison, c’est là où nous sommes ensemble.",
+
+    card1Title: "🎧 Mondes audio Pigipegs",
+    card1Text: "Écoute des histoires du monde des Pigipegs, plus tard en plusieurs langues.",
+    card1Button: "Aller à l’univers audio",
+
+    card2Title: "📚 Livres",
+    card2Text: "Découvre les livres Pigipegs et retrouve les contenus pour lire, écouter et colorier.",
+    card2Button: "Découvrir les livres",
+
+    card3Title: "🎨 Partage ton dessin",
+    card3Text: "Colorie ton image Pigipegs et partage-la avec nous, sans mention de ton nom.",
+    card3Button: "Envoyer le dessin",
+
+    card4Title: "🛍️ Boutique Pigipegs",
+    card4Text: "Découvre des t-shirts, des tasses et bien plus encore avec tes personnages Pigipegs préférés.",
+    card4Button: "Visiter la boutique",
+
+    card5Title: "📖 Livre sur Amazon",
+    card5Text: "Dès que le Livre 1 sera approuvé, tu trouveras ici le lien direct vers Amazon.",
+    card5Button: "Voir le livre",
+
+    footerText: "Pigipegs · Histoires à écouter et à colorier",
+    footerImprint: "Mentions légales",
+    footerPrivacy: "Confidentialité",
+    footerShare: "Partager une image",
+    footerBooks: "Livres",
+    footerAudio: "Univers audio",
+    footerTerms: "Conditions d’envoi",
+    footerShop: "Boutique"
+  }
+};
+
+const languageButtons = document.querySelectorAll(".language-bar button");
+let currentLang = localStorage.getItem("pigipegs_index_lang") || "de";
+
+function t(key) {
+  return UI[currentLang][key] || UI.de[key] || "";
+}
+
+function updateTexts() {
+  document.documentElement.lang = t("htmlLang");
+  document.title = t("title");
+
+  document.getElementById("languageLabel").textContent = t("languageLabel");
+  document.getElementById("mainTitle").textContent = t("mainTitle");
+  document.getElementById("mainSubtitle").textContent = t("mainSubtitle");
+
+  document.getElementById("card1Title").textContent = t("card1Title");
+  document.getElementById("card1Text").textContent = t("card1Text");
+  document.getElementById("card1Button").textContent = t("card1Button");
+
+  document.getElementById("card2Title").textContent = t("card2Title");
+  document.getElementById("card2Text").textContent = t("card2Text");
+  document.getElementById("card2Button").textContent = t("card2Button");
+
+  document.getElementById("card3Title").textContent = t("card3Title");
+  document.getElementById("card3Text").textContent = t("card3Text");
+  document.getElementById("card3Button").textContent = t("card3Button");
+
+  document.getElementById("card4Title").textContent = t("card4Title");
+  document.getElementById("card4Text").textContent = t("card4Text");
+  document.getElementById("card4Button").textContent = t("card4Button");
+
+  document.getElementById("card5Title").textContent = t("card5Title");
+  document.getElementById("card5Text").textContent = t("card5Text");
+  document.getElementById("card5Button").textContent = t("card5Button");
+
+  document.getElementById("footerText").textContent = t("footerText");
+  document.getElementById("footerImprint").textContent = t("footerImprint");
+  document.getElementById("footerPrivacy").textContent = t("footerPrivacy");
+  document.getElementById("footerShare").textContent = t("footerShare");
+  document.getElementById("footerBooks").textContent = t("footerBooks");
+  document.getElementById("footerAudio").textContent = t("footerAudio");
+  document.getElementById("footerTerms").textContent = t("footerTerms");
+  document.getElementById("footerShop").textContent = t("footerShop");
+
+  languageButtons.forEach(button => {
+    button.classList.toggle("active", button.dataset.lang === currentLang);
+  });
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem("pigipegs_index_lang", lang);
+  updateTexts();
+}
+
+languageButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    setLanguage(button.dataset.lang);
+  });
+});
+
+updateTexts();
+</script>
+
 </body>
 </html>
+```
+

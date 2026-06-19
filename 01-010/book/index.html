@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pigipegs – Bücher</title>
+
+  <style>
+    :root{
+      --night-1:#1f2559;
+      --night-2:#3a3f88;
+      --night-3:#6f66b8;
+      --night-4:#f1bfd0;
+
+      --text:#fffaf7;
+      --muted:#efe7ff;
+      --soft:#d9d0f3;
+
+      --panel:rgba(255,255,255,0.12);
+      --border:rgba(255,255,255,0.20);
+
+      --pink:#ff8faa;
+      --pink-dark:#ff6f94;
+      --blue:#8fd0ef;
+      --blue-dark:#5eb2de;
+
+      --shadow:0 16px 40px rgba(20,18,48,0.28);
+      --radius-xl:30px;
+      --max:1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; }
+
+    body{
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 10% 14%, rgba(255,255,255,0.95) 0 1.5px, transparent 2px),
+        radial-gradient(circle at 18% 30%, rgba(255,255,255,0.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle at 25% 8%, rgba(255,255,255,0.85) 0 1.4px, transparent 2px),
+        radial-gradient(circle at 34% 22%, rgba(255,240,190,0.9) 0 1.7px, transparent 2.3px),
+        radial-gradient(circle at 44% 12%, rgba(255,255,255,0.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle at 52% 28%, rgba(255,255,255,0.85) 0 1.3px, transparent 2px),
+        radial-gradient(circle at 60% 10%, rgba(255,240,190,0.95) 0 1.8px, transparent 2.5px),
+        radial-gradient(circle at 68% 22%, rgba(255,255,255,0.9) 0 1.2px, transparent 1.9px),
+        radial-gradient(circle at 77% 8%, rgba(255,255,255,0.85) 0 1.4px, transparent 2px),
+        radial-gradient(circle at 86% 18%, rgba(255,240,190,0.95) 0 1.8px, transparent 2.5px),
+        linear-gradient(180deg, var(--night-1) 0%, var(--night-2) 38%, var(--night-3) 72%, var(--night-4) 100%);
+      overflow-x:hidden;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:20px 16px 40px;
+      position:relative;
+    }
+
+    .moon{
+      position:fixed;
+      top:26px;
+      right:34px;
+      width:74px;
+      height:74px;
+      border-radius:50%;
+      background:#fff0b0;
+      box-shadow:0 0 30px rgba(255,240,176,0.55);
+      opacity:.95;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .moon::after{
+      content:"";
+      position:absolute;
+      top:8px;
+      left:22px;
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      background:linear-gradient(180deg, var(--night-2), var(--night-3));
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+      position:relative;
+      z-index:2;
+    }
+
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+
+    .brand-figure{
+      width:126px;
+      flex:0 0 126px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
+
+    .brand-figure img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height:150px;
+      object-fit:contain;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,0.18));
+    }
+
+    .eyebrow{
+      font-size:13px;
+      color:var(--soft);
+      margin:4px 0 8px;
+      letter-spacing:.03em;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(30px,4vw,52px);
+      line-height:1.04;
+    }
+
+    .sub{
+      margin:12px 0 0;
+      max-width:760px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:16px;
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color:var(--text);
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      backdrop-filter:blur(8px);
+    }
+
+    .hero{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:20px;
+      margin-bottom:18px;
+      align-items:stretch;
+    }
+
+    .hero-panel,
+    .cover-box,
+    .language-box,
+    .books-section{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      padding:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+    }
+
+    .hero-panel h2{
+      margin:0 0 10px;
+      font-size:clamp(30px,4vw,48px);
+      line-height:1.05;
+    }
+
+    .hero-text{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.65;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .cta{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:15px 20px;
+      border-radius:18px;
+      font-weight:bold;
+      font-size:17px;
+      box-shadow:0 10px 22px rgba(0,0,0,0.14);
+      border:none;
+      cursor:pointer;
+    }
+
+    .cta-primary{
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+    }
+
+    .cta-secondary{
+      background:rgba(255,255,255,0.14);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.16);
+    }
+
+    .cover-box img{
+      display:block;
+      width:100%;
+      height:auto;
+      border-radius:24px;
+      box-shadow:0 12px 26px rgba(0,0,0,0.16);
+    }
+
+    .cover-note{
+      margin:12px 6px 2px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .language-box{
+      position:relative;
+      z-index:2;
+      margin-bottom:18px;
+    }
+
+    .language-buttons{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .language-buttons button{
+      border:none;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:bold;
+      font-size:15px;
+      background:rgba(255,255,255,0.14);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.16);
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+    }
+
+    .language-buttons .active{
+      background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .books-section{
+      position:relative;
+      z-index:2;
+      margin-bottom:18px;
+    }
+
+    .books-title{
+      margin:0 0 8px;
+      font-size:32px;
+    }
+
+    .books-text{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .book-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:16px;
+    }
+
+    .book-card{
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:24px;
+      padding:14px;
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .book-cover{
+      width:100%;
+      aspect-ratio:1 / 1;
+      border-radius:18px;
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .book-cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .book-cover.placeholder{
+      color:var(--soft);
+      font-weight:bold;
+      font-size:26px;
+    }
+
+    .book-pill{
+      display:inline-flex;
+      width:max-content;
+      align-items:center;
+      justify-content:center;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:bold;
+      letter-spacing:.04em;
+      background:rgba(200,240,255,0.88);
+      color:#26485a;
+    }
+
+    .book-pill.soon{
+      background:rgba(255,255,255,0.18);
+      color:var(--soft);
+    }
+
+    .book-name{
+      font-size:18px;
+      font-weight:bold;
+      line-height:1.25;
+      color:#fff;
+    }
+
+    .book-sub{
+      font-size:15px;
+      line-height:1.5;
+      color:var(--muted);
+      min-height:42px;
+    }
+
+    .book-btn{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+      border-radius:18px;
+      font-weight:bold;
+      font-size:17px;
+      border:none;
+      padding:14px 16px;
+      margin-top:auto;
+    }
+
+    .book-btn.primary{
+      background:linear-gradient(135deg, var(--blue), var(--blue-dark));
+      color:#fff;
+      box-shadow:0 10px 22px rgba(0,0,0,0.14);
+    }
+
+    .book-btn.disabled{
+      background:rgba(255,255,255,0.14);
+      color:rgba(255,255,255,0.75);
+      border:1px solid rgba(255,255,255,0.12);
+      cursor:not-allowed;
+    }
+
+    .footer-note{
+      position:relative;
+      z-index:2;
+      margin-top:18px;
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,0.10);
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .footer-note a{
+      color:var(--muted);
+      text-decoration:none;
+    }
+
+    @media (max-width: 980px){
+      .hero,
+      .book-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 720px){
+      .hero-panel,
+      .cover-box,
+      .language-box,
+      .books-section{
+        padding:18px;
+      }
+
+      .brand-figure{
+        width:88px;
+        flex:0 0 88px;
+      }
+
+      .moon{
+        width:58px;
+        height:58px;
+        top:18px;
+        right:16px;
+      }
+
+      .moon::after{
+        top:6px;
+        left:18px;
+        width:50px;
+        height:50px;
+      }
+
+      .language-buttons{
+        gap:8px;
+      }
+
+      .language-buttons button{
+        padding:9px 12px;
+        font-size:13px;
+      }
+
+      .book-name{
+        font-size:20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="moon"></div>
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-figure">
+          <img src="/assets/img/amy-pigipegs.png" alt="Amy Pigipegs" />
+        </div>
+        <div>
+          <div class="eyebrow" id="brandEyebrow">Pigipegs Hörwelt</div>
+          <h1 id="mainTitle">Geschichten unterm Sternenhimmel</h1>
+          <p class="sub" id="mainSub">
+            Hier kannst du die Pigipegs-Legende hören und danach die Bücher entdecken.
+            Buch 1 ist bereits hörbar, weitere Bücher folgen nach und nach.
+          </p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="/index.html" id="navStart">Start</a>
+        <a href="/book/" id="navBooks">Bücher</a>
+        <a href="/book01/so-gehts/" id="navUpload">Bild hochladen</a>
+        <a href="/impressum/" id="navImprint">Impressum</a>
+        <a href="https://shop.pigipegs.com" target="_blank" rel="noopener noreferrer" id="navShop">Shop</a>
+      </nav>
+    </div>
+
+    <section class="hero">
+      <div class="hero-panel">
+        <div class="eyebrow" id="heroEyebrow">Willkommen bei den Pigipegs</div>
+        <h2 id="heroTitle">Zuhause ist, wo wir zusammen sind</h2>
+        <p class="hero-text" id="heroText">
+          Höre zuerst die Legende oder gehe direkt zu den Hörbüchern.
+          Jedes Kapitel kann einzeln abgespielt werden und Buch 1 ist schon bereit.
+        </p>
+
+        <div class="hero-actions">
+          <a class="cta cta-primary" href="/book01/audio.html" id="heroLegendBtn">🌙 Legende anhören</a>
+          <a class="cta cta-secondary" href="/book01/audio.html" id="heroBookBtn">🎧 Buch 1 anhören</a>
+        </div>
+      </div>
+
+      <div class="cover-box">
+        <img
+          src="/assets/img/pigipegs-cover-stars.png"
+          alt="Pigipegs-Familie unter dem Sternenhimmel vor ihrem Haus"
+        />
+        <div class="cover-note" id="coverNote">
+          Eine kleine Welt voller Sterne, Wärme, Geschichten und Geborgenheit.
+        </div>
+      </div>
+    </section>
+
+    <section class="language-box">
+      <div class="eyebrow" id="languageEyebrow">Sprache auswählen</div>
+      <div class="language-buttons">
+        <button class="active" type="button" data-lang="de">🇩🇪 Deutsch</button>
+        <button type="button" data-lang="en">🇬🇧 English</button>
+        <button type="button" data-lang="es">🇪🇸 Español</button>
+        <button type="button" data-lang="fr">🇫🇷 Français</button>
+      </div>
+    </section>
+
+    <section class="books-section">
+      <div class="eyebrow" id="booksEyebrow">Hörgeschichten</div>
+      <h2 class="books-title" id="booksTitle">Wähle ein Buch</h2>
+      <p class="books-text" id="booksText">
+        Die Legende und die Kapitel aus Buch 1 kannst du direkt anhören.
+        Weitere Bücher folgen nach und nach.
+      </p>
+
+      <div class="book-grid">
+        <article class="book-card">
+          <div class="book-cover">
+            <img src="/assets/img/Die_Pigipegs_B01-Cover800x600.jpg" alt="Buch 1 Cover" />
+          </div>
+          <div class="book-pill" id="book1Pill">JETZT HÖRBAR</div>
+          <div class="book-name" id="book1Name">Buch 1</div>
+          <div class="book-sub" id="book1Sub">Zuhause ist, wo wir zusammen sind</div>
+          <a class="book-btn primary" href="/book01/audio.html" id="book1Btn">🎧 Buch 1 anhören</a>
+        </article>
+
+        <article class="book-card">
+          <div class="book-cover placeholder" id="book2Cover">Buch 2</div>
+          <div class="book-pill soon" id="book2Pill">FOLGT BALD</div>
+          <div class="book-name" id="book2Name">Buch 2</div>
+          <div class="book-sub" id="book2Sub">Folgt in Kürze</div>
+          <span class="book-btn disabled" id="book2Btn">⏳ Bald verfügbar</span>
+        </article>
+
+        <article class="book-card">
+          <div class="book-cover placeholder" id="book3Cover">Buch 3</div>
+          <div class="book-pill soon" id="book3Pill">FOLGT BALD</div>
+          <div class="book-name" id="book3Name">Buch 3</div>
+          <div class="book-sub" id="book3Sub">Folgt in Kürze</div>
+          <span class="book-btn disabled" id="book3Btn">⏳ Bald verfügbar</span>
+        </article>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      <span id="footerText">Pigipegs · Hörwelt · Deutsch</span>
+      <span>·</span>
+      <a href="/impressum/" id="footerImprint">Impressum</a>
+      <span>·</span>
+      <a href="/datenschutz/" id="footerPrivacy">Datenschutz</a>
+    </div>
+  </div>
+
+  <script>
+    const UI = {
+      de: {
+        brandEyebrow: "Pigipegs Hörwelt",
+        mainTitle: "Geschichten unterm Sternenhimmel",
+        mainSub: "Hier kannst du die Pigipegs-Legende hören und danach die Bücher entdecken. Buch 1 ist bereits hörbar, weitere Bücher folgen nach und nach.",
+        navStart: "Start",
+        navBooks: "Bücher",
+        navUpload: "Bild hochladen",
+        navImprint: "Impressum",
+        navShop: "Shop",
+        heroEyebrow: "Willkommen bei den Pigipegs",
+        heroTitle: "Zuhause ist, wo wir zusammen sind",
+        heroText: "Höre zuerst die Legende oder gehe direkt zu den Hörbüchern. Jedes Kapitel kann einzeln abgespielt werden und Buch 1 ist schon bereit.",
+        heroLegendBtn: "🌙 Legende anhören",
+        heroBookBtn: "🎧 Buch 1 anhören",
+        coverNote: "Eine kleine Welt voller Sterne, Wärme, Geschichten und Geborgenheit.",
+        languageEyebrow: "Sprache auswählen",
+        booksEyebrow: "Hörgeschichten",
+        booksTitle: "Wähle ein Buch",
+        booksText: "Die Legende und die Kapitel aus Buch 1 kannst du direkt anhören. Weitere Bücher folgen nach und nach.",
+        book1Pill: "JETZT HÖRBAR",
+        book1Name: "Buch 1",
+        book1Sub: "Zuhause ist, wo wir zusammen sind",
+        book1Btn: "🎧 Buch 1 anhören",
+        book2Cover: "Buch 2",
+        book2Pill: "FOLGT BALD",
+        book2Name: "Buch 2",
+        book2Sub: "Folgt in Kürze",
+        book2Btn: "⏳ Bald verfügbar",
+        book3Cover: "Buch 3",
+        book3Pill: "FOLGT BALD",
+        book3Name: "Buch 3",
+        book3Sub: "Folgt in Kürze",
+        book3Btn: "⏳ Bald verfügbar",
+        footerText: "Pigipegs · Hörwelt · Deutsch",
+        footerImprint: "Impressum",
+        footerPrivacy: "Datenschutz"
+      },
+      en: {
+        brandEyebrow: "Pigipegs Audio World",
+        mainTitle: "Stories Under the Starlit Sky",
+        mainSub: "Here you can listen to the Pigipegs legend and then discover the books. Book 1 is already available, more books will follow over time.",
+        navStart: "Home",
+        navBooks: "Books",
+        navUpload: "Upload picture",
+        navImprint: "Imprint",
+        navShop: "Shop",
+        heroEyebrow: "Welcome to the Pigipegs",
+        heroTitle: "Home Is Where We Are Together",
+        heroText: "Listen to the legend first or go directly to the audiobooks. Each chapter can be played individually and Book 1 is already ready.",
+        heroLegendBtn: "🌙 Listen to the legend",
+        heroBookBtn: "🎧 Listen to Book 1",
+        coverNote: "A little world full of stars, warmth, stories and comfort.",
+        languageEyebrow: "Choose language",
+        booksEyebrow: "Audio stories",
+        booksTitle: "Choose a book",
+        booksText: "You can listen directly to the legend and the chapters from Book 1. More books will follow over time.",
+        book1Pill: "AVAILABLE NOW",
+        book1Name: "Book 1",
+        book1Sub: "Home Is Where We Are Together",
+        book1Btn: "🎧 Listen to Book 1",
+        book2Cover: "Book 2",
+        book2Pill: "COMING SOON",
+        book2Name: "Book 2",
+        book2Sub: "Coming soon",
+        book2Btn: "⏳ Available soon",
+        book3Cover: "Book 3",
+        book3Pill: "COMING SOON",
+        book3Name: "Book 3",
+        book3Sub: "Coming soon",
+        book3Btn: "⏳ Available soon",
+        footerText: "Pigipegs · Audio World · English",
+        footerImprint: "Imprint",
+        footerPrivacy: "Privacy"
+      },
+      es: {
+        brandEyebrow: "Mundo de audio Pigipegs",
+        mainTitle: "Historias bajo el cielo estrellado",
+        mainSub: "Aquí puedes escuchar la leyenda de los Pigipegs y después descubrir los libros. El Libro 1 ya está disponible y llegarán más libros poco a poco.",
+        navStart: "Inicio",
+        navBooks: "Libros",
+        navUpload: "Subir dibujo",
+        navImprint: "Aviso legal",
+        navShop: "Tienda",
+        heroEyebrow: "Bienvenido a los Pigipegs",
+        heroTitle: "El hogar está donde estamos juntos",
+        heroText: "Escucha primero la leyenda o ve directamente a los audiolibros. Cada capítulo puede reproducirse por separado y el Libro 1 ya está listo.",
+        heroLegendBtn: "🌙 Escuchar la leyenda",
+        heroBookBtn: "🎧 Escuchar Libro 1",
+        coverNote: "Un pequeño mundo lleno de estrellas, calidez, historias y cariño.",
+        languageEyebrow: "Elegir idioma",
+        booksEyebrow: "Audiocuentos",
+        booksTitle: "Elige un libro",
+        booksText: "Puedes escuchar directamente la leyenda y los capítulos del Libro 1. Más libros llegarán poco a poco.",
+        book1Pill: "YA DISPONIBLE",
+        book1Name: "Libro 1",
+        book1Sub: "El hogar está donde estamos juntos",
+        book1Btn: "🎧 Escuchar Libro 1",
+        book2Cover: "Libro 2",
+        book2Pill: "PRÓXIMAMENTE",
+        book2Name: "Libro 2",
+        book2Sub: "Muy pronto",
+        book2Btn: "⏳ Disponible pronto",
+        book3Cover: "Libro 3",
+        book3Pill: "PRÓXIMAMENTE",
+        book3Name: "Libro 3",
+        book3Sub: "Muy pronto",
+        book3Btn: "⏳ Disponible pronto",
+        footerText: "Pigipegs · Audio · Español",
+        footerImprint: "Aviso legal",
+        footerPrivacy: "Privacidad"
+      },
+      fr: {
+        brandEyebrow: "Univers audio Pigipegs",
+        mainTitle: "Histoires sous le ciel étoilé",
+        mainSub: "Ici, tu peux écouter la légende des Pigipegs puis découvrir les livres. Le Livre 1 est déjà disponible et d'autres livres suivront petit à petit.",
+        navStart: "Accueil",
+        navBooks: "Livres",
+        navUpload: "Téléverser le dessin",
+        navImprint: "Mentions légales",
+        navShop: "Boutique",
+        heroEyebrow: "Bienvenue chez les Pigipegs",
+        heroTitle: "La maison, c’est là où nous sommes ensemble",
+        heroText: "Écoute d’abord la légende ou va directement aux livres audio. Chaque chapitre peut être lu séparément et le Livre 1 est déjà prêt.",
+        heroLegendBtn: "🌙 Écouter la légende",
+        heroBookBtn: "🎧 Écouter le Livre 1",
+        coverNote: "Un petit monde rempli d’étoiles, de chaleur, d’histoires et de tendresse.",
+        languageEyebrow: "Choisir la langue",
+        booksEyebrow: "Histoires audio",
+        booksTitle: "Choisis un livre",
+        booksText: "Tu peux écouter directement la légende et les chapitres du Livre 1. D’autres livres suivront peu à peu.",
+        book1Pill: "DISPONIBLE",
+        book1Name: "Livre 1",
+        book1Sub: "La maison, c’est là où nous sommes ensemble",
+        book1Btn: "🎧 Écouter le Livre 1",
+        book2Cover: "Livre 2",
+        book2Pill: "BIENTÔT",
+        book2Name: "Livre 2",
+        book2Sub: "Arrive bientôt",
+        book2Btn: "⏳ Bientôt disponible",
+        book3Cover: "Livre 3",
+        book3Pill: "BIENTÔT",
+        book3Name: "Livre 3",
+        book3Sub: "Arrive bientôt",
+        book3Btn: "⏳ Bientôt disponible",
+        footerText: "Pigipegs · Audio · Français",
+        footerImprint: "Mentions légales",
+        footerPrivacy: "Confidentialité"
+      }
+    };
+
+    const languageButtons = document.querySelectorAll(".language-buttons button");
+    let currentLang = localStorage.getItem("pigipegs_lang") || "de";
+
+    function applyLanguage(lang) {
+      const t = UI[lang] || UI.de;
+      document.documentElement.lang = lang;
+
+      document.getElementById("brandEyebrow").textContent = t.brandEyebrow;
+      document.getElementById("mainTitle").textContent = t.mainTitle;
+      document.getElementById("mainSub").textContent = t.mainSub;
+
+      document.getElementById("navStart").textContent = t.navStart;
+      document.getElementById("navBooks").textContent = t.navBooks;
+      document.getElementById("navUpload").textContent = t.navUpload;
+      document.getElementById("navImprint").textContent = t.navImprint;
+      document.getElementById("navShop").textContent = t.navShop;
+
+      document.getElementById("heroEyebrow").textContent = t.heroEyebrow;
+      document.getElementById("heroTitle").textContent = t.heroTitle;
+      document.getElementById("heroText").textContent = t.heroText;
+      document.getElementById("heroLegendBtn").textContent = t.heroLegendBtn;
+      document.getElementById("heroBookBtn").textContent = t.heroBookBtn;
+
+      document.getElementById("coverNote").textContent = t.coverNote;
+      document.getElementById("languageEyebrow").textContent = t.languageEyebrow;
+
+      document.getElementById("booksEyebrow").textContent = t.booksEyebrow;
+      document.getElementById("booksTitle").textContent = t.booksTitle;
+      document.getElementById("booksText").textContent = t.booksText;
+
+      document.getElementById("book1Pill").textContent = t.book1Pill;
+      document.getElementById("book1Name").textContent = t.book1Name;
+      document.getElementById("book1Sub").textContent = t.book1Sub;
+      document.getElementById("book1Btn").textContent = t.book1Btn;
+
+      document.getElementById("book2Cover").textContent = t.book2Cover;
+      document.getElementById("book2Pill").textContent = t.book2Pill;
+      document.getElementById("book2Name").textContent = t.book2Name;
+      document.getElementById("book2Sub").textContent = t.book2Sub;
+      document.getElementById("book2Btn").textContent = t.book2Btn;
+
+      document.getElementById("book3Cover").textContent = t.book3Cover;
+      document.getElementById("book3Pill").textContent = t.book3Pill;
+      document.getElementById("book3Name").textContent = t.book3Name;
+      document.getElementById("book3Sub").textContent = t.book3Sub;
+      document.getElementById("book3Btn").textContent = t.book3Btn;
+
+      document.getElementById("footerText").textContent = t.footerText;
+      document.getElementById("footerImprint").textContent = t.footerImprint;
+      document.getElementById("footerPrivacy").textContent = t.footerPrivacy;
+
+      languageButtons.forEach(button => {
+        button.classList.toggle("active", button.dataset.lang === lang);
+      });
+    }
+
+    languageButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        currentLang = button.dataset.lang;
+        localStorage.setItem("pigipegs_lang", currentLang);
+        applyLanguage(currentLang);
+      });
+    });
+
+    applyLanguage(currentLang);
+  </script>
+</body>
+</html>

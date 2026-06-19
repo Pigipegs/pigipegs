@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pigipegs – Buch 1</title>
+  <style>
+    :root{
+      --bg1:#ffe6ef; --bg2:#eaf2ff; --card:#ffffffcc; --text:#1f2937;
+      --pink:#ff4fa3; --shadow:0 10px 30px rgba(0,0,0,.08);
+      --radius:18px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    body{ margin:0; min-height:100vh; background:linear-gradient(120deg,var(--bg1),var(--bg2)); color:var(--text); }
+    .wrap{ max-width:980px; margin:0 auto; padding:28px 18px 40px; }
+    .top{ display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+    .logo{ width:44px; height:44px; border-radius:14px; background:#ffd1e6; display:grid; place-items:center; box-shadow:var(--shadow); }
+    .logo span{ font-size:22px; }
+    .brand{ line-height:1.1; }
+    .brand b{ font-size:18px; display:block; }
+    .brand small{ opacity:.75; }
+    .grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:16px; }
+    @media(max-width:860px){ .grid{ grid-template-columns:1fr; } }
+    .card{ background:var(--card); backdrop-filter: blur(8px); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px; }
+    h1{ margin:6px 0 10px; font-size:38px; letter-spacing:-.02em; }
+    h1 .pink{ color:var(--pink); }
+    p{ margin:0 0 12px; opacity:.9; }
+    .btnrow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+    a.btn{
+      text-decoration:none; font-weight:700; padding:10px 14px; border-radius:999px;
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid rgba(0,0,0,.08); background:#fff; color:var(--text);
+    }
+    a.btn.primary{ background:var(--pink); color:white; border-color:transparent; }
+    .mini{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+    @media(max-width:520px){ .mini{ grid-template-columns:1fr; } }
+    .pill{ border-radius:14px; padding:12px; background:#fff; border:1px solid rgba(0,0,0,.06); }
+    .pill b{ display:block; margin-bottom:4px; }
+    .side h2{ margin:0 0 10px; font-size:18px; }
+    .input{ display:flex; gap:8px; }
+    input{
+      flex:1; padding:11px 12px; border-radius:12px; border:1px solid rgba(0,0,0,.12);
+      font-size:16px;
+    }
+    button{
+      padding:11px 14px; border-radius:12px; border:0; background:var(--pink); color:#fff; font-weight:800;
+      cursor:pointer;
+    }
+    .hint{ font-size:13px; opacity:.7; margin-top:10px; }
+    footer{ margin-top:18px; display:flex; justify-content:space-between; opacity:.7; font-size:13px; }
+    footer a{ color:inherit; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="logo"><span>🐷</span></div>
+      <div class="brand">
+        <b>Pigipegs</b>
+        <small>Offizielle Buchseite</small>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h1>Willkommen bei <span class="pink">Pigipegs</span> 🐽</h1>
+        <p>Hier findest du alle Inhalte zu <b>Buch 1</b> – später auch Hörversionen.</p>
+        <p>Scanne den QR-Code im Buch oder gib den Code ein (z.B. <code>01-032</code>).</p>
+
+        <div class="btnrow">
+          <a class="btn primary" href="/book01/audio.html">🎧 Hörbereich</a>
+          <a class="btn" href="/book01/so-gehts/">❓ So funktioniert’s</a>
+        </div>
+
+        <div class="mini">
+          <div class="pill">
+            <b>🔎 Schnell finden</b>
+            QR-Code scannen oder Code eingeben (z.B. <code>01-032</code>).
+          </div>
+          <div class="pill">
+            <b>👶 Kinderfreundlich</b>
+            Große Buttons, klarer Aufbau, optimiert für Handy & Tablet.
+          </div>
+          <div class="pill">
+            <b>🔒 Sicher</b>
+            Hosted über GitHub Pages + Cloudflare (HTTPS).
+          </div>
+          <div class="pill">
+            <b>🌍 Mehrsprachig</b>
+            Deutsch • Englisch • Français • Español
+          </div>
+        </div>
+      </div>
+
+      <div class="card side">
+        <h2>📘 Buch 1 – Schnellzugriff</h2>
+        <p style="margin-bottom:10px;opacity:.85;">Wenn du aus dem Buch kommst: Code eingeben und öffnen.</p>
+        <div class="input">
+          <input id="code" placeholder="z.B. 01-032" inputmode="text" />
+          <button onclick="go()">Öffnen</button>
+        </div>
+        <div class="hint">
+          Tipp: Du kannst direkte Links nutzen wie <code>/01-032</code>.
+        </div>
+
+        <div class="btnrow" style="margin-top:14px;">
+          <a class="btn" href="/book01/so-gehts/">📄 Anleitung ansehen</a>
+          <a class="btn" href="/impressum/">✉️ Kontakt</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>© 2026 Pigipegs</span>
+      <span><a href="/">Start</a> · <a href="/book/">Buch 1</a> · <a href="/book01/so-gehts/">Hilfe</a> · <a href="https://shop.pigipegs.com" target="_blank" rel="noopener noreferrer">Shop</a></span>
+    </footer>
+  </div>
+
+  <script>
+    function go(){
+      const v = (document.getElementById('code').value || '').trim();
+      if(!v) return;
+
+      const match = v.match(/^(\d{2})-(\d{3})$/);
+      if(!match){
+        alert('Bitte Code im Format 01-032 eingeben.');
+        return;
+      }
+
+      const book = match[1];
+      const page = match[2];
+
+      if(book !== '01'){
+        alert('Aktuell ist nur Buch 01 verfügbar.');
+        return;
+      }
+
+      const chapter = page.slice(-2);
+      location.href = '/book01/audio.html?s=' + chapter;
+    }
+  </script>
+</body>
+</html>
