@@ -1,8 +1,0 @@
-title: Pigipegs
-description: Pigipegs – Kinderbücher mit Vorlese-Audio in mehreren Sprachen.
-url: "https://pigipegs.com"
-# Falls du es über pigipegs.github.io/pigipegs testest, setze baseurl auf "/pigipegs"
-baseurl: ""
-
-markdown: kramdown
-plugins: []
