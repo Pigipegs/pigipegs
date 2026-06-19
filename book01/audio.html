@@ -1306,7 +1306,7 @@
         const item = document.createElement("div");
         item.className = "drum-item" + (index === currentIndex ? " active" : "");
 
-        const angle = index * stepAngle;
+        const angle = -index * stepAngle;
         item.style.transform = `translate(-50%, -50%) rotateX(${angle}deg) translateZ(${drumRadius}px)`;
 
         const thumb = document.createElement("div");
@@ -1478,7 +1478,7 @@
         dragMoved = true;
       }
 
-      drumAngle = dragStartAngle + (deltaY / 4);
+      drumAngle = dragStartAngle - (deltaY / 4);
       applyDrumRotation();
     }
 
@@ -1586,3 +1586,4 @@
   </script>
 </body>
 </html>
+
